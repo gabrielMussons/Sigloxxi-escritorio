@@ -1,0 +1,41 @@
+﻿<mah:MetroWindow x:Name="wdAuthent" x:Class="CapaDePresentacion.MainWindow"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CapaDePresentacion"
+        mc:Ignorable="d"
+        Title="Siglo XXI" 
+        Height="580"
+        Width="779"
+        MinHeight="580" 
+        MinWidth="779" 
+        Icon="img/idea_logo.ico" 
+        WindowStartupLocation="CenterScreen" mah:ValidationHelper.ShowValidationErrorOnMouseOver="True" mah:ValidationHelper.CloseOnMouseLeftButtonDown="True" mah:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" Height="406"  VerticalAlignment="Center" Width="242"   >
+            <Image  Margin="10" Source="img/idea_logo.png" Stretch="Fill"/>
+            <TextBox TextAlignment="Left" 
+                     x:Name="txtUsuario" 
+                     Height="23" 
+                     Margin="10" 
+                     mah:TextBoxHelper.Watermark="Ingrese Usuario" 
+                     mah:TextBoxHelper.HasText="True" 
+                     mah:TextBoxHelper.IsSpellCheckContextMenuEnabled="False" 
+                     mah:ControlsHelper.FocusBorderBrush="#FF212121"/>
+                     
+            <PasswordBox  x:Name="pbContrasena" 
+                          Height="23"  
+                          Margin="10" 
+                          mah:TextBoxHelper.Watermark="Ingrese Contraseña" />
+            <Button x:Name="btnIniciarSesion" 
+                    Content="Iniciar Sesión" 
+                    Margin="10" 
+                    mah:ControlsHelper.FocusBorderBrush="#FF474747" 
+                    mah:ControlsHelper.FocusBorderThickness="1.5" 
+                    Click="BtnIniciarSesion_Click_1" />
+            <TextBlock Margin="10" TextAlignment="Center"><Hyperlink  x:Name="hlRecuperarContrasena" NavigateUri="http://algo.com"><Run Text="Recuperar Contraseña"/></Hyperlink></TextBlock>
+        </StackPanel>
+    </Grid>
+</mah:MetroWindow>
