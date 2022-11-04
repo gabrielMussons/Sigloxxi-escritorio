@@ -375,7 +375,7 @@ namespace CapaDePresentacion.ViewsAdmin
                     txtContrasenia.Text = "";
                     MessageBox.Show("Usuario eliminado correctamente.");
                     BtnEliminarUsuario.IsEnabled = false;
-                }
+                } 
                 catch (Exception ex)
                 {
 
