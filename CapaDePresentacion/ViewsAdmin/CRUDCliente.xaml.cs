@@ -25,6 +25,8 @@ namespace CapaDePresentacion.ViewsAdmin
         readonly CN_RS_COMUNA objeto_CN_RS_COMUNA = new CN_RS_COMUNA();
         readonly CN_RS_USUARIO objeto_CN_RS_USUARIO = new CN_RS_USUARIO();
         readonly CE_RS_USUARIO objeto_CE_RS_USUARIO = new CE_RS_USUARIO();
+        readonly CN_RS_MESA objeto_CN_RS_MESA = new CN_RS_MESA();
+        readonly CE_RS_MESA objeto_CE_RS_MESA = new CE_RS_MESA();
 
         byte[] data_imagen; // VARIABLE DE TIPO BYTE QUE CONTIENE EL FLUJO BINARIO DE LA IMAGEN SELECCIONADA POR EL USUARIO.
 
@@ -37,6 +39,7 @@ namespace CapaDePresentacion.ViewsAdmin
             CargarCbxTipoUsuario();
             CargarCbxEstado();
             CargarCbxComuna();
+            
         }
         //------------------------------------------------------------------------
         private void BtnRegresar_Click(object sender, RoutedEventArgs e)
@@ -78,9 +81,22 @@ namespace CapaDePresentacion.ViewsAdmin
         {
             try
             {
-                Eliminar();
+                EliminarCliente();
                 MessageBox.Show("Eliminado correctamente.");
                 Content = new MantenedorClientes();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
+        private void BtnEliminarUsuario_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                EliminarUsuario();
+                               
             }
             catch (Exception ex)
             {
@@ -125,7 +141,7 @@ namespace CapaDePresentacion.ViewsAdmin
             try
             {
                 var x = objeto_CN_RS_ENTIDAD.Consultar(rse_id);
-                var usuario = objeto_CN_RS_USUARIO.Consultar(x.CE_RSE_ID);
+                
 
                 var estado = objeto_CN_RS_ESTADO.ObtenerRSES_DESCRIPCION(x.CE_RS_ESTADO_RSES_ID);
                 var comuna = objeto_CN_RS_COMUNA.ObtenerRSC_DESCRIPCION(x.CE_RS_COMUNA_RSC_ID);
@@ -143,11 +159,18 @@ namespace CapaDePresentacion.ViewsAdmin
                 txtDireccion.Text = x.CE_RSE_DIRECCION.ToString();
                 txtEmail.Text = x.CE_RSE_EMAIL.ToString();
                 txtRazonSocial.Text = x.CE_RSE_RAZON_SOCIAL.ToString();
+                try
+                {
+                    var usuario = objeto_CN_RS_USUARIO.Consultar(x.CE_RSE_ID);
+                    txtUsuario.Text = usuario.CE_RSU_USUARIO.ToString();
+                    txtContrasenia.Text = usuario.CE_RSU_PASS.ToString();
+                }
+                catch (Exception ex)
+                {
 
-                txtUsuario.Text = usuario.CE_RSU_USUARIO.ToString();
-                txtContrasenia.Text = usuario.CE_RSU_PASS.ToString();
-
-
+                    throw ex;
+                }
+               
                 if (x.CE_RSE_IMAGEN != null)
                 {
                     ImageSourceConverter img = new ImageSourceConverter();
@@ -157,7 +180,7 @@ namespace CapaDePresentacion.ViewsAdmin
             catch (Exception ex)
             {
 
-                throw ex;
+                MessageBox.Show(ex.Message.ToString());
             }
             
             
@@ -291,17 +314,47 @@ namespace CapaDePresentacion.ViewsAdmin
         #endregion
 
         #region ELIMINAR
-        private void Eliminar()
+        private void EliminarCliente()
         {
             try
             {
+                objeto_CN_RS_MESA.LiberarMesasIdCliente(rse_id);
                 objeto_CE_RS_ENTIDAD.CE_RSE_ID = rse_id;
-                objeto_CE_RS_USUARIO.CE_RS_ENTIDAD_RSE_ID = rse_id;
-
-                objeto_CN_RS_USUARIO.Eliminar(objeto_CE_RS_USUARIO);
+                objeto_CN_RS_ENTIDAD.Eliminar(objeto_CE_RS_ENTIDAD);
+            }
+            catch (Exception ex)
+            {
                 try
                 {
-                    objeto_CN_RS_ENTIDAD.Eliminar(objeto_CE_RS_ENTIDAD);
+                    var usuario = objeto_CN_RS_USUARIO.Consultar(rse_id);
+                    throw new Exception("No se puede eliminar, registra usuario en el sistema.");
+                    
+                }
+                catch (Exception)
+                {
+
+                    throw new Exception("No se puede eliminar,  registra documentos en el sistema."); ;
+                }
+
+                throw ex;
+            }
+        }
+
+
+        #endregion
+
+        #region ELIMINAR USUARIO
+        private void EliminarUsuario()
+        {
+            if (txtUsuario.Text!="")
+            {
+                try
+                {
+                    objeto_CE_RS_USUARIO.CE_RS_ENTIDAD_RSE_ID = rse_id;
+                    objeto_CN_RS_USUARIO.Eliminar(objeto_CE_RS_USUARIO);
+                    txtUsuario.Text = "";
+                    txtContrasenia.Text = "";
+                    MessageBox.Show("Usuario eliminado correctamente.");
                 }
                 catch (Exception ex)
                 {
@@ -309,15 +362,16 @@ namespace CapaDePresentacion.ViewsAdmin
                     throw ex;
                 }
             }
-            catch (Exception ex)
+            else
             {
-
-                throw ex;
+                MessageBox.Show("No registra usuario.");
             }
+           
         }
+
 
         #endregion
 
-        
+
     }
 }

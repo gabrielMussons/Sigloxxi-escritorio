@@ -25,13 +25,28 @@ namespace CapaDePresentacion.ViewsAdmin
         public MantenedorClientes()
         {
             InitializeComponent();
-            CargarDatosClientes();
-            
+            try
+            {
+                CargarDatosClientes();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message.ToString());
+            }
         }
 
         void CargarDatosClientes() {
+            try
+            {
+                GridDatos.ItemsSource = objeto_CN_RS_ENTIDAD.CargarClientes().DefaultView;
+            }
+            catch (Exception ex)
+            {
 
-            GridDatos.ItemsSource = objeto_CN_RS_ENTIDAD.CargarClientes().DefaultView;
+                throw ex;
+            }
+            
 
         }
 
@@ -42,6 +57,7 @@ namespace CapaDePresentacion.ViewsAdmin
 
             ventana.BtnEliminar.IsEnabled = false;
             ventana.BtnActualizar.IsEnabled = false;
+            ventanaCRUDCliente.txtBtnEliminarUsuario.IsEnabled = false;
 
             FrameAgregarCliente.Content = ventana;
             btnAgregarCliente.IsEnabled = false;
@@ -63,6 +79,7 @@ namespace CapaDePresentacion.ViewsAdmin
             ventanaCRUDCliente.BtnActualizar.IsEnabled = false;
             ventanaCRUDCliente.BtnEliminar.IsEnabled = false;
             ventanaCRUDCliente.BtnCrear.IsEnabled = false;
+            ventanaCRUDCliente.txtBtnEliminarUsuario.IsEnabled = false;
 
             InhabilitarCamposCRUD(ventanaCRUDCliente);
             
@@ -118,6 +135,14 @@ namespace CapaDePresentacion.ViewsAdmin
             ventana.txtEmail.IsEnabled = false;
             ventana.txtTelefono.IsEnabled = false;
             ventana.cbxTipoUsuario.IsEnabled = false;
+            ventana.txtUsuario.IsEnabled = false;
+            ventana.txtContrasenia.IsEnabled = false;
+            ventana.txtDireccion.IsEnabled = false;
+            ventana.cbxComuna.IsEnabled = false;
+            ventana.cbxEstado.IsEnabled = false;
+            ventana.txtRazonSocial.IsEnabled = false;
+            ventana.txtContrasenia2.IsEnabled = false;
+            
         }
     }
 }

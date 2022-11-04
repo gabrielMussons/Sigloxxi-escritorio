@@ -121,6 +121,25 @@ namespace CapaDAL
         }
         #endregion
 
+        #region ACTUALIZAR RS_MESA.RS_ENTIDAD_RSE_ID
+        public void CD_LIBERAR_MESAS_ID_CLIENTE(int rse_id)
+        {
+            OracleCommand cmd = new OracleCommand()
+            {
+                Connection = con.AbrirConexion(),
+                CommandText = "SP_ACTUALIZAR_RS_MESA_ID_ENTIDAD",
+                CommandType = CommandType.StoredProcedure,
+            };
+
+            cmd.Parameters.Add("v_rse_id", OracleDbType.Int32).Value = rse_id;
+
+            cmd.ExecuteNonQuery();
+            cmd.Parameters.Clear();
+            con.CerrarConexion();
+
+        }
+        #endregion
+
 
     }
 }

@@ -461,6 +461,21 @@
                       Margin="0"
                       mah:TextBoxHelper.Watermark="Seleccione"
                       />
+            <TextBlock Grid.Column="1"
+                       Grid.Row="12"
+                       Margin="5,0,0,0"
+                       Text="ID cliente"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"/>
+            <TextBox x:Name="txtIdEntidad"
+                      Grid.Row="12"
+                      Grid.Column="2"
+                      VerticalAlignment="Center"
+                      HorizontalAlignment="Stretch"
+                      Padding="0"
+                      Margin="0"
+                      mah:TextBoxHelper.Watermark="Ingrese ID cliente"
+                      />
             
 
 

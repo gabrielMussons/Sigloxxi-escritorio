@@ -256,6 +256,9 @@
                     <DataGridTextColumn Header="Estado"
                                         Width="*"
                                         Binding="{Binding RSES_DESCRIPCION}"/>
+                    <DataGridTextColumn Header="Id cliente"
+                                        Width="*"
+                                        Binding="{Binding RS_ENTIDAD_RSE_ID}"/>
                     <DataGridTemplateColumn Header="Opciones"
                                             Width="234"
                                             >

@@ -93,6 +93,7 @@ namespace CapaDePresentacion.ViewsAdmin
             txtIdMesa.Text = x.CE_RSM_ID.ToString();
             txtDescripcion.Text = x.CE_RSM_DESCRIPCION;
             txtSillas.Text = x.CE_RSM_SILLAS.ToString();
+            txtIdEntidad.Text = x.CE_RS_ENTIDAD_RSE_ID.ToString();
             
 
         }

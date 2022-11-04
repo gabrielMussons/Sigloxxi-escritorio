@@ -57,5 +57,12 @@ namespace CapaLogicaNegocio
         }
         #endregion
 
+        #region ACTUALIZAR RS_MESA.RS_ENTIDAD_RSE_ID
+        public void LiberarMesasIdCliente(int rse_id)
+        {
+            objDatos.CD_LIBERAR_MESAS_ID_CLIENTE(rse_id);
+        }
+        #endregion
+
     }
 }

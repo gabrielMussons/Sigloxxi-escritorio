@@ -16,20 +16,38 @@ namespace CapaDAL
 
         public OracleConnection AbrirConexion()
         {
-            if (con.State==ConnectionState.Closed)
+            try
             {
-                con.Open();
+                if (con.State == ConnectionState.Closed)
+                {
+                    con.Open();
+                }
+                return con;
             }
-            return con;
+            catch (Exception ex)
+            {
+
+                throw new Exception("No se puede establecer conexión con el servidor.",ex);
+            }
+            
         }
 
         public OracleConnection CerrarConexion()
         {
-            if (con.State == ConnectionState.Open)
+            try
             {
-                con.Close();
+                if (con.State == ConnectionState.Open)
+                {
+                    con.Close();
+                }
+                return con;
             }
-            return con;
+            catch (Exception ex)
+            {
+
+                throw new Exception("No se puede terminar conexión con el servidor.", ex); ;
+            }
+            
         }
     }
 }

@@ -51,7 +51,15 @@ namespace CapaLogicaNegocio
         #region DATOS TABLA VISTA MANTENEDOR CLIENTES
         public DataTable CargarClientes()
         {
-            return objDatos.CargarEntidad();
+            try
+            {
+                return objDatos.CargarEntidad();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
         #endregion
 
