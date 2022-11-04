@@ -163,15 +163,15 @@ namespace CapaDAL
 
         //---------------------------------------------------------------------
 
-        #region CARGAR DATOS VISTA MANTENEDOR CLIENTES
-        public DataTable CargarEntidad()
+        #region CARGAR DATOS Y BUSCAR VISTA MANTENEDOR CLIENTES
+        public DataTable CargarEntidad(string texto)
         {
             try
             {
                 OracleCommand cmd = new OracleCommand("SELECT * FROM RS_ENTIDAD JOIN RS_TIPO_ENTIDAD ON " +
                     "rs_tipo_entidad.rste_id = rs_entidad.rs_tipo_entidad_rste_id JOIN RS_COMUNA ON rs_comuna.rsc_id = rs_entidad.rs_comuna_rsc_id " +
                     "JOIN RS_ESTADO ON rs_estado.rses_id = rs_entidad.rs_estado_rses_id " +
-                    "LEFT JOIN RS_USUARIO ON rs_usuario.RS_ENTIDAD_RSE_ID = rs_entidad.rse_id ORDER BY RSE_ID", con.AbrirConexion());
+                    "LEFT JOIN RS_USUARIO ON rs_usuario.RS_ENTIDAD_RSE_ID = rs_entidad.rse_id WHERE RSE_ID LIKE '"+texto+"%'"+ " OR RSE_RUT LIKE '" + texto + "%'" + " ORDER BY RSE_ID", con.AbrirConexion());
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 ds.Clear();
@@ -186,7 +186,7 @@ namespace CapaDAL
 
                 throw ex;
             }
-            
+
         }
         #endregion
 

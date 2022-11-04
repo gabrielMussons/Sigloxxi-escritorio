@@ -49,11 +49,11 @@ namespace CapaLogicaNegocio
         //---------------------------------------------------------------
 
         #region DATOS TABLA VISTA MANTENEDOR CLIENTES
-        public DataTable CargarClientes()
+        public DataTable CargarClientes(string texto)
         {
             try
             {
-                return objDatos.CargarEntidad();
+                return objDatos.CargarEntidad(texto);
             }
             catch (Exception ex)
             {

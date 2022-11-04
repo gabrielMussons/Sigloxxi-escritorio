@@ -39,7 +39,7 @@ namespace CapaDePresentacion.ViewsAdmin
         void CargarDatosClientes() {
             try
             {
-                GridDatos.ItemsSource = objeto_CN_RS_ENTIDAD.CargarClientes().DefaultView;
+                GridDatos.ItemsSource = objeto_CN_RS_ENTIDAD.CargarClientes(txtBuscar.Text.ToString()).DefaultView;
             }
             catch (Exception ex)
             {
@@ -52,15 +52,15 @@ namespace CapaDePresentacion.ViewsAdmin
 
         private void Button_Click_Agregar_Cliente(object sender, RoutedEventArgs e)
         {
-            CRUDCliente ventana = new CRUDCliente();
+            
             FrameAgregarCliente.SetValue(Panel.ZIndexProperty,0);
 
-            ventana.BtnEliminar.IsEnabled = false;
-            ventana.BtnActualizar.IsEnabled = false;
-            ventanaCRUDCliente.txtBtnEliminarUsuario.IsEnabled = false;
+            ventanaCRUDCliente.BtnEliminar.IsEnabled = false;
+            ventanaCRUDCliente.BtnActualizar.IsEnabled = false;
+            ventanaCRUDCliente.BtnEliminarUsuario.IsEnabled = false;
 
-            FrameAgregarCliente.Content = ventana;
-            btnAgregarCliente.IsEnabled = false;
+            FrameAgregarCliente.Content = ventanaCRUDCliente;
+            
         }
 
         private void BtnConsultar_Click(object sender, RoutedEventArgs e)
@@ -78,6 +78,7 @@ namespace CapaDePresentacion.ViewsAdmin
             ventanaCRUDCliente.btnSeleccionarImagen.IsEnabled = false;
             ventanaCRUDCliente.BtnActualizar.IsEnabled = false;
             ventanaCRUDCliente.BtnEliminar.IsEnabled = false;
+            ventanaCRUDCliente.BtnEliminarUsuario.IsEnabled = false;
             ventanaCRUDCliente.BtnCrear.IsEnabled = false;
             ventanaCRUDCliente.txtBtnEliminarUsuario.IsEnabled = false;
 
@@ -90,38 +91,37 @@ namespace CapaDePresentacion.ViewsAdmin
         {
             String ru = (((Button)sender).CommandParameter).ToString();
             int idEntidad = int.Parse(ru);
-            CRUDCliente ventana = new CRUDCliente();
             
 
             FrameAgregarCliente.SetValue(Panel.ZIndexProperty, 0);
-            ventana.Titulo.Text = "Eliminar cliente";
+            ventanaCRUDCliente.Titulo.Text = "Eliminar cliente";
 
-            ventana.BtnCrear.IsEnabled = false;
-            ventana.BtnActualizar.IsEnabled = false;
-            ventana.btnSeleccionarImagen.IsEnabled = false;
+            ventanaCRUDCliente.BtnCrear.IsEnabled = false;
+            ventanaCRUDCliente.BtnActualizar.IsEnabled = false;
+            ventanaCRUDCliente.btnSeleccionarImagen.IsEnabled = false;
 
-            InhabilitarCamposCRUD(ventana);
+            InhabilitarCamposCRUD(ventanaCRUDCliente);
 
-            ventana.rse_id = idEntidad;
-            ventana.Consultar();
-            FrameAgregarCliente.Content = ventana;
+            ventanaCRUDCliente.rse_id = idEntidad;
+            ventanaCRUDCliente.Consultar();
+            FrameAgregarCliente.Content = ventanaCRUDCliente;
         }
 
         private void BtnModificar_Click(object sender, RoutedEventArgs e)
         {
             String ru = (((Button)sender).CommandParameter).ToString();
             int idEntidad = int.Parse(ru);
-            CRUDCliente ventana = new CRUDCliente();
             FrameAgregarCliente.SetValue(Panel.ZIndexProperty, 0);
-            ventana.Titulo.Text = "Modificar cliente";
+            ventanaCRUDCliente.Titulo.Text = "Modificar cliente";
 
-            ventana.BtnCrear.IsEnabled = false;
-            ventana.BtnEliminar.IsEnabled = false;
+            ventanaCRUDCliente.BtnCrear.IsEnabled = false;
+            ventanaCRUDCliente.BtnEliminar.IsEnabled = false;
+            ventanaCRUDCliente.BtnEliminarUsuario.IsEnabled = false;
 
-            ventana.rse_id = idEntidad;
-            ventana.Consultar();
+            ventanaCRUDCliente.rse_id = idEntidad;
+            ventanaCRUDCliente.Consultar();
 
-            FrameAgregarCliente.Content = ventana;
+            FrameAgregarCliente.Content = ventanaCRUDCliente;
         }
 
         public void InhabilitarCamposCRUD(CRUDCliente ventana) {
@@ -143,6 +143,11 @@ namespace CapaDePresentacion.ViewsAdmin
             ventana.txtRazonSocial.IsEnabled = false;
             ventana.txtContrasenia2.IsEnabled = false;
             
+        }
+
+        private void TxtBuscar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CargarDatosClientes();
         }
     }
 }

@@ -72,7 +72,7 @@ namespace CapaDAL
             catch (Exception ex)
             {
 
-                throw new Exception("No registra usuario."+Environment.NewLine+ex.Message.ToString(),ex);
+                throw new Exception("No registra usuario.");
             }
             con.CerrarConexion();
             return ce_rs_usuario;

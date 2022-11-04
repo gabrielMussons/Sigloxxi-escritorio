@@ -8,6 +8,7 @@ using System;
 using CapaEntidad;
 using CapaLogicaNegocio;
 
+
 namespace CapaDePresentacion.ViewsAdmin
 {
     /// <summary>
@@ -38,8 +39,7 @@ namespace CapaDePresentacion.ViewsAdmin
             InitializeComponent();
             CargarCbxTipoUsuario();
             CargarCbxEstado();
-            CargarCbxComuna();
-            
+            CargarCbxComuna();            
         }
         //------------------------------------------------------------------------
         private void BtnRegresar_Click(object sender, RoutedEventArgs e)
@@ -134,7 +134,7 @@ namespace CapaDePresentacion.ViewsAdmin
             }
         }
         #endregion
-
+        bool tieneUsuario;
         #region CONSULTAR
         public void Consultar()
         {
@@ -164,10 +164,13 @@ namespace CapaDePresentacion.ViewsAdmin
                     var usuario = objeto_CN_RS_USUARIO.Consultar(x.CE_RSE_ID);
                     txtUsuario.Text = usuario.CE_RSU_USUARIO.ToString();
                     txtContrasenia.Text = usuario.CE_RSU_PASS.ToString();
+                    tieneUsuario = true;
+                    
                 }
                 catch (Exception ex)
                 {
-
+                    tieneUsuario = false;
+                    BtnEliminarUsuario.IsEnabled = false;
                     throw ex;
                 }
                
@@ -272,6 +275,7 @@ namespace CapaDePresentacion.ViewsAdmin
             
             try
             {
+                
                 int estado = objeto_CN_RS_ESTADO.ObtenerRSES_ID(cbxEstado.Text);
                 int tipoEntidad = objeto_CN_RS_TIPO_ENTIDAD.ObtenerRSTE_ID(cbxTipoUsuario.Text);
                 int comuna = objeto_CN_RS_COMUNA.ObtenerRSC_ID(cbxComuna.Text);
@@ -283,8 +287,8 @@ namespace CapaDePresentacion.ViewsAdmin
                 objeto_CE_RS_ENTIDAD.CE_RSE_AP_MAT = txtApellidoM.Text;
                 objeto_CE_RS_ENTIDAD.CE_RSE_RAZON_SOCIAL = txtRazonSocial.Text;
                 objeto_CE_RS_ENTIDAD.CE_RSE_TELEFONO = txtTelefono.Text;
-                objeto_CE_RS_ENTIDAD.CE_RSE_EMAIL = txtRut.Text;
-                objeto_CE_RS_ENTIDAD.CE_RSE_DIRECCION = txtRut.Text;
+                objeto_CE_RS_ENTIDAD.CE_RSE_EMAIL = txtEmail.Text;
+                objeto_CE_RS_ENTIDAD.CE_RSE_DIRECCION = txtDireccion.Text;
                 objeto_CE_RS_ENTIDAD.CE_RS_TIPO_ENTIDAD_RSTE_ID = tipoEntidad;
                 objeto_CE_RS_ENTIDAD.CE_RS_ESTADO_RSES_ID = estado;
                 objeto_CE_RS_ENTIDAD.CE_RS_COMUNA_RSC_ID = comuna;
@@ -292,12 +296,20 @@ namespace CapaDePresentacion.ViewsAdmin
 
                 objeto_CE_RS_USUARIO.CE_RSU_PASS = txtContrasenia.Text;
                 objeto_CE_RS_USUARIO.CE_RSU_USUARIO = txtUsuario.Text;
-                objeto_CE_RS_USUARIO.CE_RS_ENTIDAD_RSE_ID = objeto_CE_RS_ENTIDAD.CE_RSE_ID;
+                objeto_CE_RS_USUARIO.CE_RS_ENTIDAD_RSE_ID = rse_id;
 
                 objeto_CN_RS_ENTIDAD.Actualizar(objeto_CE_RS_ENTIDAD);
                 try
                 {
-                    objeto_CN_RS_USUARIO.Actualizar(objeto_CE_RS_USUARIO);                    
+                    if (tieneUsuario==true)
+                    {
+                        objeto_CN_RS_USUARIO.Actualizar(objeto_CE_RS_USUARIO);
+                    }
+                    else
+                    {
+                        objeto_CN_RS_USUARIO.Insertar(objeto_CE_RS_USUARIO);
+                    }
+                                 
                 }
                 catch (Exception ex)
                 {
@@ -316,27 +328,34 @@ namespace CapaDePresentacion.ViewsAdmin
         #region ELIMINAR
         private void EliminarCliente()
         {
-            try
+            if (txtUsuario.Text != "" )
             {
-                objeto_CN_RS_MESA.LiberarMesasIdCliente(rse_id);
-                objeto_CE_RS_ENTIDAD.CE_RSE_ID = rse_id;
-                objeto_CN_RS_ENTIDAD.Eliminar(objeto_CE_RS_ENTIDAD);
+                throw new Exception("No se puede eliminar, registra usuario en el sistema.");
             }
-            catch (Exception ex)
+            else
             {
-                try
-                {
-                    var usuario = objeto_CN_RS_USUARIO.Consultar(rse_id);
-                    throw new Exception("No se puede eliminar, registra usuario en el sistema.");
-                    
+                string message = "Se eliminaran las reservas asociadas."+Environment.NewLine+" Desea seguir ?";
+                System.Windows.Forms.MessageBoxButtons buttons = System.Windows.Forms.MessageBoxButtons.YesNo;
+                System.Windows.Forms.DialogResult result = System.Windows.Forms.MessageBox.Show(message, null,buttons);
+                if (result == System.Windows.Forms.DialogResult.Yes)
+                {                    
+                    try
+                    {
+                        objeto_CN_RS_MESA.LiberarMesasIdCliente(rse_id);
+                        objeto_CE_RS_ENTIDAD.CE_RSE_ID = rse_id;
+                        objeto_CN_RS_ENTIDAD.Eliminar(objeto_CE_RS_ENTIDAD);
+                    }
+                    catch (Exception)
+                    {
+                        throw new Exception("No se puede eliminar, registra documentos en el sistema.");
+                        
+                    }                    
                 }
-                catch (Exception)
+                else
                 {
-
-                    throw new Exception("No se puede eliminar,  registra documentos en el sistema."); ;
+                    MessageBox.Show("No se ah podido eliminado.");
                 }
-
-                throw ex;
+                
             }
         }
 
@@ -355,6 +374,7 @@ namespace CapaDePresentacion.ViewsAdmin
                     txtUsuario.Text = "";
                     txtContrasenia.Text = "";
                     MessageBox.Show("Usuario eliminado correctamente.");
+                    BtnEliminarUsuario.IsEnabled = false;
                 }
                 catch (Exception ex)
                 {
