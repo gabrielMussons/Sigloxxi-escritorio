@@ -341,7 +341,15 @@ namespace CapaDePresentacion.ViewsAdmin
                 {                    
                     try
                     {
-                        
+                        try
+                        {
+                            objeto_CN_RS_MESA.LiberarMesasIdCliente(rse_id);
+                        }
+                        catch (Exception ex)
+                        {
+
+                            throw new Exception("No se pueden liberar reservas asociadas.");
+                        } 
                         
                         objeto_CE_RS_ENTIDAD.CE_RSE_ID = rse_id;
                         objeto_CN_RS_ENTIDAD.Eliminar(objeto_CE_RS_ENTIDAD);

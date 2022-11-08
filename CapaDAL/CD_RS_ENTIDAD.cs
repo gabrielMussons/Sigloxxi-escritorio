@@ -45,15 +45,17 @@ namespace CapaDAL
                 cmd.Parameters.Add("V_RS_ESTADO_RSES_ID", OracleDbType.Int32).Value = RS_ENTIDAD.CE_RS_ESTADO_RSES_ID;
                 cmd.Parameters.Add("V_RSE_IMAGEN", OracleDbType.Blob).Value = RS_ENTIDAD.CE_RSE_IMAGEN;
                 cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
+                con.CerrarConexion();
             }
             catch (Exception ex)
             {
-                
-                throw new Exception("Error al insertar entidad."+Environment.NewLine+ex.Message.ToString(),ex);
+                cmd.Parameters.Clear();
+                con.CerrarConexion();
+                throw ex;
             }
             
-            cmd.Parameters.Clear();
-            con.CerrarConexion();
+            
 
         }
         #endregion
@@ -88,14 +90,14 @@ namespace CapaDAL
                 {
                     ce_rs_entidad.CE_RSE_IMAGEN = (byte[])row[12];
                 }
+                con.CerrarConexion();
+                return ce_rs_entidad;
             }
             catch (Exception ex)
             {
-
+                con.CerrarConexion();
                 throw ex;
             }
-            con.CerrarConexion();
-            return ce_rs_entidad;
 
         }
         #endregion
@@ -125,14 +127,16 @@ namespace CapaDAL
                 cmd.Parameters.Add("V_RS_ESTADO_RSES_ID", OracleDbType.Int32).Value = RS_ENTIDAD.CE_RS_ESTADO_RSES_ID;
                 cmd.Parameters.Add("V_RSE_IMAGEN", OracleDbType.Blob).Value = RS_ENTIDAD.CE_RSE_IMAGEN;
                 cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
+                con.CerrarConexion();
             }
             catch (Exception ex)
             {
-
-                throw new Exception("Error al actualizar entidad." + Environment.NewLine + ex.Message.ToString(), ex); 
+                cmd.Parameters.Clear();
+                con.CerrarConexion();
+                throw ex; 
             }
-            cmd.Parameters.Clear();
-            con.CerrarConexion();
+            
         }
         #endregion
 
@@ -146,16 +150,18 @@ namespace CapaDAL
                 CommandType = CommandType.StoredProcedure,
             };
             try
-            {
+            {                
                 cmd.Parameters.Add("v_rse_id", ce_rs_entidad.CE_RSE_ID);
                 cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
+                con.CerrarConexion();
             }
             catch (Exception ex)
             {
-                throw new Exception("Error al eliminar entidad." + Environment.NewLine + ex.Message.ToString(), ex);
+                con.CerrarConexion();
+                throw ex;
             }
-            cmd.Parameters.Clear();
-            con.CerrarConexion();
+            
 
         }
 
@@ -183,7 +189,7 @@ namespace CapaDAL
             }
             catch (Exception ex)
             {
-
+                con.CerrarConexion();
                 throw ex;
             }
 
@@ -193,27 +199,34 @@ namespace CapaDAL
         #region OBTENER ID RS_ENTIDAD
         public int ObtenerRSE_ID(string rse_rut)
         {
-            OracleCommand cmd = new OracleCommand()
+            try
             {
-                Connection = con.AbrirConexion(),
-                CommandText = "SP_OBTENER_RSE_ID",
-                CommandType = CommandType.StoredProcedure
-            };
+                OracleCommand cmd = new OracleCommand()
+                {
+                    Connection = con.AbrirConexion(),
+                    CommandText = "SP_OBTENER_RSE_ID",
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add("v_rse_rut", rse_rut);
+                cmd.Parameters.Add("v_rse_id", OracleDbType.Int32, ParameterDirection.Output);
 
+                cmd.ExecuteNonQuery();
 
-            cmd.Parameters.Add("v_rse_rut", rse_rut);
-            cmd.Parameters.Add("v_rse_id", OracleDbType.Int32, ParameterDirection.Output);
+                string valor = cmd.Parameters["v_rse_id"].Value.ToString();
 
-            cmd.ExecuteNonQuery();
+                int v_rse_id = int.Parse(valor);
 
-            string valor = cmd.Parameters["v_rse_id"].Value.ToString();
+                cmd.Parameters.Clear();
+                con.CerrarConexion();
 
-            int v_rse_id = int.Parse(valor);
-
-            cmd.Parameters.Clear();
-            con.CerrarConexion();
-
-            return v_rse_id;
+                return v_rse_id;
+            }
+            catch (Exception ex)
+            {
+                con.CerrarConexion();
+                throw ex;
+            }
+                       
         }
         #endregion
 

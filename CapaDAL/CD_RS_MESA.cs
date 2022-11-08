@@ -96,20 +96,20 @@ namespace CapaDAL
                 cmd.Parameters.Add("v_rsm_descripcion", OracleDbType.Varchar2).Value = RS_MESA.CE_RSM_DESCRIPCION;
                 cmd.Parameters.Add("v_rs_estado_rses_id", OracleDbType.Int32).Value = RS_MESA.CE_RS_ESTADO_RSES_ID;
                 cmd.Parameters.Add("v_rsm_sillas", OracleDbType.Int32).Value = RS_MESA.CE_RSM_SILLAS;
-                if (RS_MESA.CE_RS_ENTIDAD_RSE_ID == 0)
+                /*if (RS_MESA.CE_RS_ENTIDAD_RSE_ID == 0)
                 {
                     cmd.Parameters.Add("v_rs_entidad_rse_id", OracleDbType.Int32).Value = null;
                 }
                 else
                 {
                     cmd.Parameters.Add("v_rs_entidad_rse_id", OracleDbType.Int32).Value = RS_MESA.CE_RS_ENTIDAD_RSE_ID;
-                }
+                }*/
 
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
-
+                con.CerrarConexion();
                 throw ex;
             }
             
