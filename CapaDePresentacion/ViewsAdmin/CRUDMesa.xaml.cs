@@ -49,9 +49,17 @@ namespace CapaDePresentacion.ViewsAdmin
         #region BOTON CREAR
         private void BtnCrear_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                Crear();
+                Content = new MantenedorMesas();
+            }
+            catch (Exception ex)
+            {
 
-            Crear();
-            Content = new MantenedorMesas();
+                MessageBox.Show(ex.Message.ToString());
+            }
+            
         }
 
         #endregion
@@ -131,23 +139,23 @@ namespace CapaDePresentacion.ViewsAdmin
         private void Crear()
         {
             int rses_id = objeto_CN_RS_ESTADO.ObtenerRSES_ID(cbxEstado.Text);
-            int entidad = 82;
 
             objeto_CE_RS_MESA.CE_RSM_DESCRIPCION = txtDescripcion.Text;
-            objeto_CE_RS_MESA.CE_RS_ENTIDAD_RSE_ID = entidad;
+            if (txtIdEntidad.Text != "")
+            {
+                objeto_CE_RS_MESA.CE_RS_ENTIDAD_RSE_ID = int.Parse(txtIdEntidad.Text);
+            }
             objeto_CE_RS_MESA.CE_RS_ESTADO_RSES_ID = rses_id;
             objeto_CE_RS_MESA.CE_RSM_SILLAS = int.Parse(txtSillas.Text);
-
-
             try
-            {
+            {               
                 objeto_CN_RS_MESA.Insertar(objeto_CE_RS_MESA);
                 MessageBox.Show("Creado correctamente");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                MessageBox.Show("Error al Agregar");
+                throw ex;
             }
         }
         #endregion

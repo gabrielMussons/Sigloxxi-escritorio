@@ -86,9 +86,9 @@ namespace CapaDAL
                 ce_rs_entidad.CE_RS_TIPO_ENTIDAD_RSTE_ID = Convert.ToInt32(row[9]);
                 ce_rs_entidad.CE_RS_COMUNA_RSC_ID = Convert.ToInt32(row[10]);
                 ce_rs_entidad.CE_RS_ESTADO_RSES_ID = Convert.ToInt32(row[11]);
-                if (ce_rs_entidad.CE_RSE_IMAGEN != null)
+                if ((row[12]) != null)
                 {
-                    ce_rs_entidad.CE_RSE_IMAGEN = (byte[])row[12];
+                    ce_rs_entidad.CE_RSE_IMAGEN =(byte[])row[12];
                 }
                 con.CerrarConexion();
                 return ce_rs_entidad;
@@ -164,7 +164,6 @@ namespace CapaDAL
             
 
         }
-
         #endregion
 
         //---------------------------------------------------------------------
@@ -192,7 +191,6 @@ namespace CapaDAL
                 con.CerrarConexion();
                 throw ex;
             }
-
         }
         #endregion
 
