@@ -39,6 +39,8 @@ namespace CapaDePresentacion.ViewsAdmin
         {
             InitializeComponent();
             CargarCbxEstado();
+            
+
         }
         #endregion
 
@@ -57,8 +59,17 @@ namespace CapaDePresentacion.ViewsAdmin
         #region BOTON ACTUALIZAR
         private void BtnActualizar_Click(object sender, RoutedEventArgs e)
         {
-            Actualizar();
-            Content = new MantenedorMesas();
+            try
+            {
+                Actualizar();
+                Content = new MantenedorMesas();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message.ToString());
+            }
+            
         }
 
         #endregion
@@ -81,10 +92,13 @@ namespace CapaDePresentacion.ViewsAdmin
         #endregion
 
         //--------------------------------------------------------------------
-         
+
+        
+
         #region CONSULTAR
         public void Consultar()
         {
+
             var x = objeto_CN_RS_MESA.Consultar(rsm_id);
 
             var xx = objeto_CN_RS_ESTADO.ObtenerRSES_DESCRIPCION(x.CE_RS_ESTADO_RSES_ID);
@@ -93,9 +107,11 @@ namespace CapaDePresentacion.ViewsAdmin
             txtIdMesa.Text = x.CE_RSM_ID.ToString();
             txtDescripcion.Text = x.CE_RSM_DESCRIPCION;
             txtSillas.Text = x.CE_RSM_SILLAS.ToString();
-            txtIdEntidad.Text = x.CE_RS_ENTIDAD_RSE_ID.ToString();
-            
-
+            if (x.CE_RS_ENTIDAD_RSE_ID!=0)
+            {
+                txtIdEntidad.Text = x.CE_RS_ENTIDAD_RSE_ID.ToString();
+                
+            }
         }
 
         #endregion
@@ -140,12 +156,13 @@ namespace CapaDePresentacion.ViewsAdmin
         private void Actualizar()
         {
             int rses_id = objeto_CN_RS_ESTADO.ObtenerRSES_ID(cbxEstado.Text);
-            int idEntidad = 82;
-            int id = 101;
 
             objeto_CE_RS_MESA.CE_RSM_ID = rsm_id;
             objeto_CE_RS_MESA.CE_RSM_DESCRIPCION = txtDescripcion.Text;
-            objeto_CE_RS_MESA.CE_RS_ENTIDAD_RSE_ID = idEntidad;
+            if (txtIdEntidad.Text!="")
+            {
+                objeto_CE_RS_MESA.CE_RS_ENTIDAD_RSE_ID = int.Parse(txtIdEntidad.Text);
+            }            
             objeto_CE_RS_MESA.CE_RS_ESTADO_RSES_ID = rses_id;
             objeto_CE_RS_MESA.CE_RSM_SILLAS = int.Parse(txtSillas.Text);
 
@@ -154,10 +171,10 @@ namespace CapaDePresentacion.ViewsAdmin
                 objeto_CN_RS_MESA.Actualizar(objeto_CE_RS_MESA);
                 MessageBox.Show("Actualizado correctamente");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                MessageBox.Show("Error al actualizar");
+                throw ex;
             }
         }
         #endregion

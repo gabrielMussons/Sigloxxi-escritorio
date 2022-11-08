@@ -341,7 +341,8 @@ namespace CapaDePresentacion.ViewsAdmin
                 {                    
                     try
                     {
-                        objeto_CN_RS_MESA.LiberarMesasIdCliente(rse_id);
+                        
+                        
                         objeto_CE_RS_ENTIDAD.CE_RSE_ID = rse_id;
                         objeto_CN_RS_ENTIDAD.Eliminar(objeto_CE_RS_ENTIDAD);
                     }

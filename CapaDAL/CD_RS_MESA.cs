@@ -41,20 +41,38 @@ namespace CapaDAL
         #region CONSULTAR RS_MESA
         public CE_RS_MESA CD_CONSULTAR(int rsm_id)
         {
-            OracleCommand cmd = new OracleCommand("SELECT * FROM RS_MESA WHERE RSM_ID ="+rsm_id, con.AbrirConexion());
-            OracleDataAdapter da = new OracleDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            ds.Clear();
-            da.Fill(ds);
-            DataTable dt;
-            dt = ds.Tables[0];
-            DataRow row = dt.Rows[0];
+            try
+            {
+                OracleCommand cmd = new OracleCommand("SELECT * FROM RS_MESA WHERE RSM_ID =" + rsm_id, con.AbrirConexion());
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                ds.Clear();
+                da.Fill(ds);
+                DataTable dt;
+                dt = ds.Tables[0];
+                DataRow row = dt.Rows[0];
 
-            ce_rs_mesa.CE_RSM_ID = Convert.ToInt32(row[0]);
-            ce_rs_mesa.CE_RSM_DESCRIPCION = Convert.ToString(row[1]);
-            ce_rs_mesa.CE_RS_ENTIDAD_RSE_ID = Convert.ToInt32(row[2]);
-            ce_rs_mesa.CE_RS_ESTADO_RSES_ID = Convert.ToInt32(row[3]);
-            ce_rs_mesa.CE_RSM_SILLAS = Convert.ToInt32(row[4]);
+                ce_rs_mesa.CE_RSM_ID = Convert.ToInt32(row[0]);
+                ce_rs_mesa.CE_RSM_DESCRIPCION = Convert.ToString(row[1]);
+                try
+                {
+                    ce_rs_mesa.CE_RS_ENTIDAD_RSE_ID = Convert.ToInt32(row[2]);
+                    ce_rs_mesa.CE_RS_ESTADO_RSES_ID = Convert.ToInt32(row[3]);
+                    ce_rs_mesa.CE_RSM_SILLAS = Convert.ToInt32(row[4]);
+                }
+                catch (Exception)
+                {
+                    ce_rs_mesa.CE_RS_ESTADO_RSES_ID = Convert.ToInt32(row[3]);
+                    ce_rs_mesa.CE_RSM_SILLAS = Convert.ToInt32(row[4]);
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
 
             con.CerrarConexion();
 
@@ -72,14 +90,30 @@ namespace CapaDAL
                 CommandText = "SP_ACTUALIZAR_RS_MESA",
                 CommandType = CommandType.StoredProcedure,
             };
+            try
+            {
+                cmd.Parameters.Add("v_rsm_id", OracleDbType.Int32).Value = RS_MESA.CE_RSM_ID;
+                cmd.Parameters.Add("v_rsm_descripcion", OracleDbType.Varchar2).Value = RS_MESA.CE_RSM_DESCRIPCION;
+                cmd.Parameters.Add("v_rs_estado_rses_id", OracleDbType.Int32).Value = RS_MESA.CE_RS_ESTADO_RSES_ID;
+                cmd.Parameters.Add("v_rsm_sillas", OracleDbType.Int32).Value = RS_MESA.CE_RSM_SILLAS;
+                if (RS_MESA.CE_RS_ENTIDAD_RSE_ID == 0)
+                {
+                    cmd.Parameters.Add("v_rs_entidad_rse_id", OracleDbType.Int32).Value = null;
+                }
+                else
+                {
+                    cmd.Parameters.Add("v_rs_entidad_rse_id", OracleDbType.Int32).Value = RS_MESA.CE_RS_ENTIDAD_RSE_ID;
+                }
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
             
-            cmd.Parameters.Add("v_rsm_id", OracleDbType.Int32).Value = RS_MESA.CE_RSM_ID;
-            cmd.Parameters.Add("v_rsm_descripcion", OracleDbType.Varchar2).Value = RS_MESA.CE_RSM_DESCRIPCION;
-            cmd.Parameters.Add("v_rs_entidad_rse_id", OracleDbType.Int32).Value = RS_MESA.CE_RS_ENTIDAD_RSE_ID;
-            cmd.Parameters.Add("v_rs_estado_rses_id", OracleDbType.Int32).Value = RS_MESA.CE_RS_ESTADO_RSES_ID;
-            cmd.Parameters.Add("v_rsm_sillas", OracleDbType.Int32).Value = RS_MESA.CE_RSM_SILLAS;
             
-            cmd.ExecuteNonQuery();
             cmd.Parameters.Clear();
             con.CerrarConexion();
 

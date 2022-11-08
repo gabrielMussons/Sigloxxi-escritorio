@@ -55,11 +55,11 @@ namespace CapaDePresentacion.ViewsAdmin
             ventanaCRUDMesa.Titulo.Text = "Consulta mesa";
 
             ventanaCRUDMesa.BtnCrear.IsEnabled = false;
-            ventanaCRUDMesa.BtnEliminar.IsEnabled = false;
             ventanaCRUDMesa.BtnActualizar.IsEnabled = false;
-            ventanaCRUDMesa.txtDescripcion.IsEnabled = false;
-            ventanaCRUDMesa.txtSillas.IsEnabled = false;
-            ventanaCRUDMesa.cbxEstado.IsEnabled = false;
+            ventanaCRUDMesa.BtnEliminar.IsEnabled = false;
+            ventanaCRUDMesa.btnSeleccionarImagen.IsEnabled = false;
+
+            DeshabilitarInput();
 
             ventanaCRUDMesa.rsm_id = rsm_id;
 
@@ -79,9 +79,7 @@ namespace CapaDePresentacion.ViewsAdmin
             ventanaCRUDMesa.BtnActualizar.IsEnabled = false;
             ventanaCRUDMesa.btnSeleccionarImagen.IsEnabled = false;
 
-            ventanaCRUDMesa.txtSillas.IsEnabled = false;
-            ventanaCRUDMesa.txtIdMesa.IsEnabled = false;
-            ventanaCRUDMesa.txtDescripcion.IsEnabled = false;
+            DeshabilitarInput();
 
             ventanaCRUDMesa.rsm_id = rsm_id;
             ventanaCRUDMesa.Consultar();
@@ -98,13 +96,19 @@ namespace CapaDePresentacion.ViewsAdmin
 
             ventanaCRUDMesa.BtnCrear.IsEnabled = false;
             ventanaCRUDMesa.BtnEliminar.IsEnabled = false;
-            ventanaCRUDMesa.btnSeleccionarImagen.IsEnabled = false;
-
-
+            
             ventanaCRUDMesa.rsm_id = rsm_id;
             ventanaCRUDMesa.Consultar();
             FrameAgregarMesa.Content = ventanaCRUDMesa;
 
+        }
+        private void DeshabilitarInput()
+        {
+            ventanaCRUDMesa.txtIdMesa.IsEnabled = false;
+            ventanaCRUDMesa.txtIdEntidad.IsEnabled = false;
+            ventanaCRUDMesa.txtSillas.IsEnabled = false;
+            ventanaCRUDMesa.txtDescripcion.IsEnabled = false;
+            ventanaCRUDMesa.cbxEstado.IsEnabled = false;
         }
     }
 }

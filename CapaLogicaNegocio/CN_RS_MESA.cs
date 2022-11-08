@@ -23,28 +23,64 @@ namespace CapaLogicaNegocio
         #region CONSULTAR RS_MESA
         public CE_RS_MESA Consultar(int rsm_id)
         {
-            return objDatos.CD_CONSULTAR(rsm_id);
+            
+            try
+            {
+                return objDatos.CD_CONSULTAR(rsm_id);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
         #endregion
 
         #region INSERTAR RS_MESA
         public void Insertar(CE_RS_MESA rs_mesa)
         {
-            objDatos.CD_INSERTAR(rs_mesa);
+            
+            try
+            {
+                objDatos.CD_INSERTAR(rs_mesa);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
         #endregion
 
         #region ELIMINAR RS_MESA
         public void Eliminar(CE_RS_MESA rs_mesa)
         {
-            objDatos.CD_ELIMINAR_RS_MESA(rs_mesa);
+            
+            try
+            {
+                objDatos.CD_ELIMINAR_RS_MESA(rs_mesa);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
         #endregion
 
         #region ACTUALIZAR RS_MESA
         public void Actualizar(CE_RS_MESA rs_mesa)
         {
-            objDatos.CD_ACTUALIZAR(rs_mesa);
+            try
+            {
+                objDatos.CD_ACTUALIZAR(rs_mesa);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
         }
         #endregion
 
