@@ -222,9 +222,6 @@
     <Compile Include="ViewsAdmin\CRUDMesa.xaml.cs">
       <DependentUpon>CRUDMesa.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewsAdmin\CRUDReserva.xaml.cs">
-      <DependentUpon>CRUDReserva.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewsAdmin\MantenedorClientes.xaml.cs">
       <DependentUpon>MantenedorClientes.xaml</DependentUpon>
     </Compile>
@@ -233,9 +230,6 @@
     </Compile>
     <Compile Include="ViewsAdmin\MantenedorMesas.xaml.cs">
       <DependentUpon>MantenedorMesas.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewsAdmin\MantenedorReservas.xaml.cs">
-      <DependentUpon>MantenedorReservas.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -273,10 +267,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ViewsAdmin\CRUDReserva.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ViewsAdmin\MantenedorClientes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -286,10 +276,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewsAdmin\MantenedorMesas.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ViewsAdmin\MantenedorReservas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

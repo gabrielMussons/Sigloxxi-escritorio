@@ -247,7 +247,7 @@
                     Margin="0"
                     Style="{DynamicResource BTNMENU}"
                     Foreground="White"
-                    Padding="0" >
+                    Padding="0" Click="BtnCrear_Click" >
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -288,7 +288,7 @@
                     BorderThickness="1.3"
                     Margin="0"
                     Style="{DynamicResource BTNMENU}"
-                    Foreground="White"
+                    Foreground="White" Click="BtnActualizar_Click"
                     
                     >
                 <!-- Color para boton agregar nuevo mas oscuro = #7fba00 o  claro = #78b000 -->
@@ -331,7 +331,7 @@
                     BorderThickness="1.3"
                     Margin="0"
                     Style="{DynamicResource BTNMENU}"
-                    Foreground="White"
+                    Foreground="White" Click="BtnEliminar_Click"
                     
                     >
                 <!-- Color para boton agregar nuevo mas oscuro = #7fba00 o  claro = #78b000 -->
@@ -377,7 +377,7 @@
                     Width="220"
                     Style="{DynamicResource BTNMENU}"
                     Foreground="White"
-                    Padding="0" 
+                    Padding="0" Click="BtnSeleccionarImagen_Click" 
                     
                     >
                 <!-- Color para boton agregar nuevo mas oscuro = #7fba00 o  claro = #78b000 -->

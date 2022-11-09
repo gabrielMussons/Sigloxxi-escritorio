@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CapaLogicaNegocio;
+using CapaEntidad;
 
 namespace CapaDePresentacion.ViewsAdmin
 {
@@ -20,6 +22,7 @@ namespace CapaDePresentacion.ViewsAdmin
     /// </summary>
     public partial class CRUDInventario : Page
     {
+        
         public CRUDInventario()
         {
             InitializeComponent();
@@ -31,6 +34,25 @@ namespace CapaDePresentacion.ViewsAdmin
             MantenedorInventario ventana = new MantenedorInventario();
         }
 
-       
+        private void BtnCrear_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnActualizar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnEliminar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnSeleccionarImagen_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        //---------------------------------------------------------------------------------------
     }
 }

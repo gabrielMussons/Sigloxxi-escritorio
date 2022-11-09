@@ -41,11 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CE_RS_BODEGA.cs" />
     <Compile Include="CE_RS_COMUNA.cs" />
     <Compile Include="CE_RS_ENTIDAD.cs" />
     <Compile Include="CE_RS_ESTADO.cs" />
+    <Compile Include="CE_RS_IMPUESTO.cs" />
     <Compile Include="CE_RS_MESA.cs" />
+    <Compile Include="CE_RS_PRODUCTO.cs" />
     <Compile Include="CE_RS_TIPO_ENTIDAD.cs" />
+    <Compile Include="CE_RS_UN_MEDIDA.cs" />
     <Compile Include="CE_RS_USUARIO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -61,7 +61,6 @@ namespace CapaDAL
 
             return ce_rs_estado;
         }
-
         #endregion
 
         #region LISTAR RSES_DESCRIPCION
@@ -80,8 +79,6 @@ namespace CapaDAL
             return lista_rses_descripcion;
 
         }
-
-
         #endregion
     }
 }
