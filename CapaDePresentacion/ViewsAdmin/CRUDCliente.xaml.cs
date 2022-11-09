@@ -91,6 +91,7 @@ namespace CapaDePresentacion.ViewsAdmin
                 MessageBox.Show(ex.Message.ToString());
             }
         }
+
         private void BtnEliminarUsuario_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -117,6 +118,7 @@ namespace CapaDePresentacion.ViewsAdmin
                 MessageBox.Show(ex.Message.ToString());
             }
         }
+
         //-------------------------------------------------------------------------------------------------
         #region SUBIR IMAGEN
         private void SubirImagen()
@@ -367,8 +369,6 @@ namespace CapaDePresentacion.ViewsAdmin
                 
             }
         }
-
-
         #endregion
 
         #region ELIMINAR USUARIO
@@ -397,8 +397,6 @@ namespace CapaDePresentacion.ViewsAdmin
             }
            
         }
-
-
         #endregion
 
 

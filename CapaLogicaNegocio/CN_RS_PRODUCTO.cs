@@ -51,7 +51,7 @@ namespace CapaLogicaNegocio
         #region DATOS TABLA VISTA MANTENEDOR PRODUCTO
         public DataTable CargarListaProducto(string texto)
         {
-            try
+            try 
             {
                 return objDatos.CargarListaProducto(texto);
             }
@@ -64,7 +64,7 @@ namespace CapaLogicaNegocio
         #endregion
 
         #region OBTENER 
-        public int obtenerRSP_ID(string v_rsp_descripcion)
+        public int ObtenerRSP_ID(string v_rsp_descripcion)
         {
             return objDatos.ObtenerRSP_ID(v_rsp_descripcion);
         }

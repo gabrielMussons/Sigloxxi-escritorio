@@ -562,49 +562,6 @@
                         </ListViewItem>
                         <!--#endregion-->
 
-                        <!--#region GESTION DISPONIBILIDAD-->
-                        <ListViewItem Height="70"
-                                      Background="Transparent" 
-                                      Padding="0"
-                                      Margin="0"
-                                      Style="{DynamicResource LISTITEMVIEWSTYLE}">
-                            <Button x:Name="BtnGestionDisponibilidad"
-                                    Height="70"
-                                    Width="200"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    Cursor="Hand"
-                                    Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    Style="{DynamicResource BTNMENU}"
-                                    Margin="0"
-                                    Padding="0"
-                                    Foreground="White" Click="BtnGestionDisponibilidad_Click"
-                                    
-                                    >
-                                <Grid Width="200"
-                                      Margin="0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="80" />
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <iconPack:PackIconMaterial  Kind="TableAccount"
-                                                                Width="50"
-                                                                Grid.Column="0"
-                                                                HorizontalAlignment="Center"
-                                                                VerticalAlignment="Center"
-                                                                Margin="0"
-                                                                />
-                                    <TextBlock Grid.Column="1"
-                                               Text="Disponibilidad"
-                                               FontWeight="SemiBold"
-                                               FontSize="15"
-                                               VerticalAlignment="Center"
-                                               HorizontalAlignment="Center"/>
-                                </Grid>
-                            </Button>
-                        </ListViewItem>
-                        <!--#endregion-->
 
                         <!--#region GESTION MESAS-->
                         <ListViewItem Height="70"

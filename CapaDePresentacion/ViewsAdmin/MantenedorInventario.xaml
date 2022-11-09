@@ -155,14 +155,15 @@
                        Margin="0"
                        />
 
-            <TextBox Grid.Row="1"
+            <TextBox x:Name="txtBuscar"
+                     Grid.Row="1"
                      Grid.Column="1"
                      HorizontalAlignment="Stretch"
                      VerticalAlignment="Bottom"
                      Height="20"
                      Margin="0"
                      BorderBrush="#a5b2bd"
-                     mah:TextBoxHelper.Watermark="Ingrese ID producto"
+                     mah:TextBoxHelper.Watermark="Ingrese ID producto" TextChanged="TxtBuscar_TextChanged"
                      
                      
                      
@@ -245,7 +246,7 @@
                 <DataGrid.Columns >
 
                     <DataGridTextColumn Header="ID producto"
-                                        Width="100"
+                                        Width="auto"
                                         Binding="{Binding RSP_ID}"/>
                     <DataGridTextColumn Header="Descripción"
                                         Width="*"
@@ -256,6 +257,9 @@
                     <DataGridTextColumn Header="Precio venta"
                                         Width="*"
                                         Binding="{Binding RSP_PVENTA}"/>
+                    <DataGridTextColumn Header="Medida"
+                                        Width="*"
+                                        Binding="{Binding RSUM_DESCRIPCION}"/>
                     <DataGridTextColumn Header="Stock min"
                                         Width="*"
                                         Binding="{Binding RSP_STOCK_MIN}"/>
@@ -278,7 +282,7 @@
                                             mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
                                             Margin="0" 
                                             HorizontalAlignment="Center"
-                                            CommandParameter="{Binding RUT}"
+                                            CommandParameter="{Binding RSP_ID}" Click="BtnConsultar_Click"
                                         />
                                     <Button x:Name="btnModificar"
                                             Width="70"
@@ -289,7 +293,7 @@
                                             HorizontalAlignment="Center"
                                             mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
                                             Margin="5,0,5,0" 
-                                            CommandParameter="{Binding RUT}" 
+                                            CommandParameter="{Binding RSP_ID}" Click="BtnModificar_Click" 
                                         />
                                     <Button x:Name="btnEliminar"
                                             Width="70"
@@ -300,7 +304,7 @@
                                             Cursor="Hand" 
                                             mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
                                             Margin="0" 
-                                            CommandParameter="{Binding RUT}" 
+                                            CommandParameter="{Binding RSP_ID}" Click="BtnEliminar_Click" 
                                         />
                                 </DockPanel>
                             </DataTemplate>

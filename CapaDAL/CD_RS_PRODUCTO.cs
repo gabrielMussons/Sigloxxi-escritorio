@@ -159,10 +159,10 @@ namespace CapaDAL
         {
             try
             {
-                OracleCommand cmd = new OracleCommand("SELECT * FROM RS_PRODUCTO JOIN RS_TIPO_ENTIDAD ON " +
-                    "rs_tipo_entidad.rste_id = rs_entidad.rs_tipo_entidad_rste_id JOIN RS_COMUNA ON rs_comuna.rsc_id = rs_entidad.rs_comuna_rsc_id " +
-                    "JOIN RS_ESTADO ON rs_estado.rses_id = rs_entidad.rs_estado_rses_id " +
-                    "LEFT JOIN RS_USUARIO ON rs_usuario.RS_ENTIDAD_RSE_ID = rs_entidad.rse_id WHERE RSE_ID LIKE '" + texto + "%'" + " OR RSE_RUT LIKE '" + texto + "%'" + " ORDER BY RSE_ID", con.AbrirConexion());
+                OracleCommand cmd = new OracleCommand("SELECT * FROM RS_PRODUCTO " +
+                    "JOIN RS_IMPUESTO ON rs_producto.rs_impuesto_rsi_id = rs_impuesto.rsi_id " +
+                    "JOIN RS_UN_MEDIDA ON rs_producto.rs_un_medida_rsum_id = rs_un_medida.rsum_id " +
+                    "JOIN RS_BODEGA ON rs_bodega.rsb_id = rs_producto.rs_bodega_rsb_id WHERE RSP_ID LIKE '" + texto + "%'" + " OR RSP_DESCRIPCION LIKE '" + texto + "%'" + " ORDER BY RSP_ID", con.AbrirConexion());
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 ds.Clear();

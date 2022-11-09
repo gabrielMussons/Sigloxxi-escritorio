@@ -36,12 +36,7 @@ namespace CapaDePresentacion
 
         #endregion
 
-        private void PackIconMaterial_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-
-        }
-
-        private void TBShow(object sender, RoutedEventArgs e)
+       private void TBShow(object sender, RoutedEventArgs e)
         {
             GridContent.Opacity = 0.5;
         }
@@ -70,10 +65,7 @@ namespace CapaDePresentacion
             DataContext = new MantenedorMesas();
         }
 
-        private void BtnGestionDisponibilidad_Click(object sender, RoutedEventArgs e)
-        {
-            DataContext = new MantenedorReservas();
-        }
+       
 
         private void BtnGestionInventario_Click(object sender, RoutedEventArgs e)
         {

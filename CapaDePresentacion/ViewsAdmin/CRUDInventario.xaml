@@ -163,7 +163,9 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="20"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="25"/>
             </Grid.RowDefinitions>
             <!--#endregion-->
 
@@ -235,7 +237,7 @@
 
             <Button x:Name="BtnCrear"
                     Grid.Column="1"
-                    Grid.Row="20"
+                    Grid.Row="22"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Center"
                     Cursor="Hand"
@@ -277,7 +279,7 @@
             <!--#region BOTON ACTUALIZAR-->
             <Button x:Name="BtnActualizar"
                     Grid.Column="1"
-                    Grid.Row="22"
+                    Grid.Row="24"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Center"
                     Cursor="Hand"
@@ -320,7 +322,7 @@
             <!--#region BOTON ELIMINAR-->
             <Button x:Name="BtnEliminar"
                     Grid.Column="1"
-                    Grid.Row="24"
+                    Grid.Row="26"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Center"
                     Cursor="Hand"
@@ -412,12 +414,25 @@
             <TextBlock Grid.Column="1"
                        Grid.Row="4"
                        Margin="5,0,0,0"
+                       Text="Id producto"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       />
+            <TextBox x:Name="txtIdProducto"
+                     Grid.Row="4"
+                     Grid.Column="2"
+                     VerticalAlignment="Center"
+                     IsEnabled="False"/>
+            
+            <TextBlock Grid.Column="1"
+                       Grid.Row="20"
+                       Margin="5,0,0,0"
                        Text="Descripción"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
                        />
             <TextBox x:Name="txtDescripcion"
-                     Grid.Row="4"
+                     Grid.Row="20"
                      Grid.Column="2"
                      VerticalAlignment="Center"
                      mah:TextBoxHelper.Watermark="Descripción o nombre de producto"/>
@@ -449,7 +464,7 @@
                        Text="Stock mínimo "
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"/>
-            <TextBox x:Name="txtStocMin"
+            <TextBox x:Name="txtStockMin"
                      Grid.Row="10"
                      Grid.Column="2"
                      VerticalAlignment="Center"
