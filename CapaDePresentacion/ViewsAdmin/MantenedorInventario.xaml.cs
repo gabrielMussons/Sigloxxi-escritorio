@@ -128,7 +128,7 @@ namespace CapaDePresentacion.ViewsAdmin
             InhabilitarCamposCRUD(ventanaCRUDInventario);
             ventanaCRUDInventario.id_producto = id_producto;
             ventanaCRUDInventario.Consultar();
-            ventanaCRUDInventario.Content = ventanaCRUDInventario;
+            FrameAgregarProducto.Content = ventanaCRUDInventario;
         }
 
         private void TxtBuscar_TextChanged(object sender, TextChangedEventArgs e)

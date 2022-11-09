@@ -76,7 +76,7 @@ namespace CapaDAL
         {
             try
             {
-                OracleCommand cmd = new OracleCommand("SELECT RSB_DESCRIPCION FROM RSB_ESTADO", con.AbrirConexion());
+                OracleCommand cmd = new OracleCommand("SELECT RSB_DESCRIPCION FROM RS_BODEGA", con.AbrirConexion());
                 OracleDataReader rdr = cmd.ExecuteReader();
                 List<string> lista = new List<string>();
                 while (rdr.Read())

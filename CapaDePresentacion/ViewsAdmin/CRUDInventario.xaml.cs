@@ -34,6 +34,9 @@ namespace CapaDePresentacion.ViewsAdmin
         public CRUDInventario()
         {
             InitializeComponent();
+            CargarCbxBodega();
+            CargarCbxImpuesto();
+            CargarCbxUnidadMedida();
         }
 
         private void BtnRegresar_Click(object sender, RoutedEventArgs e)
@@ -48,7 +51,7 @@ namespace CapaDePresentacion.ViewsAdmin
             {
                 Crear();
                 MessageBox.Show("Registrado correctamente");
-                Content = new MantenedorClientes();
+                Content = new MantenedorInventario();
             }
             catch (Exception ex)
             {
@@ -63,7 +66,7 @@ namespace CapaDePresentacion.ViewsAdmin
             {
                 Actualizar();
                 MessageBox.Show("Actualizado correctamente");
-                Content = new MantenedorClientes();
+                Content = new MantenedorInventario();
             }
             catch (Exception ex)
             {
@@ -77,8 +80,8 @@ namespace CapaDePresentacion.ViewsAdmin
             try
             {
                 Eliminar();
-                MessageBox.Show("Eliminado correctamente.");
-                Content = new MantenedorClientes();
+                
+                Content = new MantenedorInventario();
             }
             catch (Exception ex)
             {
@@ -133,6 +136,7 @@ namespace CapaDePresentacion.ViewsAdmin
                 cbxImpuesto.Text = impuesto.CE_RSI_DESCRIPCION;
                 cbxUnidadMedida.Text = un_medida.CE_RSUM_DESCRIPCION;
 
+                txtIdProducto.Text = id_producto.ToString();
                 txtDescripcion.Text=producto.CE_RSP_DESCRIPCION;
                 txtPCompra.Text= producto.CE_RSP_PCOMPRA.ToString();
                 txtPVenta.Text=producto.RSP_PVENTA.ToString();
