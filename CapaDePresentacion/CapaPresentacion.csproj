@@ -213,6 +213,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MenuCocina.xaml.cs">
+      <DependentUpon>MenuCocina.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewsAdmin\CRUDCliente.xaml.cs">
       <DependentUpon>CRUDCliente.xaml</DependentUpon>
     </Compile>
@@ -231,6 +234,9 @@
     <Compile Include="ViewsAdmin\MantenedorMesas.xaml.cs">
       <DependentUpon>MantenedorMesas.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewsCocina\MantenedorRecetas.xaml.cs">
+      <DependentUpon>MantenedorRecetas.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -244,6 +250,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MenuAdministrador.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenuCocina.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -276,6 +286,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewsAdmin\MantenedorMesas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewsCocina\MantenedorRecetas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -162,7 +162,8 @@ namespace CapaDAL
         {
             try
             {
-                OracleCommand cmd = new OracleCommand("SELECT * FROM RS_MESA JOIN RS_ESTADO ON RS_MESA.RS_ESTADO_RSES_ID = RS_ESTADO.RSES_ID", con.AbrirConexion());
+                OracleCommand cmd = new OracleCommand("SELECT * FROM RS_MESA JOIN RS_ESTADO ON RS_MESA.RS_ESTADO_RSES_ID = RS_ESTADO.RSES_ID " +
+                    "ORDER BY RSM_ID", con.AbrirConexion());
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 ds.Clear();
