@@ -246,28 +246,19 @@
 
                     <DataGridTextColumn Header="ID"
                                         Width="auto"
-                                        Binding="{Binding RSE_ID}"/>
-                    <DataGridTextColumn Header="Rut"
+                                        Binding="{Binding RSPL_ID}"/>
+                    <DataGridTextColumn Header="Descripción"
                                         Width="*"
-                                        Binding="{Binding RSE_RUT}"/>
-                    <DataGridTextColumn Header="Nombre"
+                                        Binding="{Binding RSPL_DESCRIPCION}"/>
+                    <DataGridTextColumn Header="Valor"
                                         Width="*"
-                                        Binding="{Binding RSE_NOMBRE}"/>
-                    <DataGridTextColumn Header="Apellido P"
+                                        Binding="{Binding RSPL_PVENTA}"/>
+                    <DataGridTextColumn Header="Observaciones"
                                         Width="*"
-                                        Binding="{Binding RSE_AP_PAT}"/>
-                    <DataGridTextColumn Header="Teléfono"
+                                        Binding="{Binding RSPL_OBS}"/>
+                    <DataGridTextColumn Header="Unidad medida"
                                         Width="*"
-                                        Binding="{Binding RSE_TELEFONO}"/>
-                    <DataGridTextColumn Header="Correo"
-                                        Width="*"
-                                        Binding="{Binding RSE_EMAIL}"/>
-                    <DataGridTextColumn Header="Dirección"
-                                        Width="*"
-                                        Binding="{Binding RSE_DIRECCION}"/>
-                    <DataGridTextColumn Header="Usuario"
-                                        Width="*"
-                                        Binding="{Binding RSU_USUARIO}"/>
+                                        Binding="{Binding RS_UN_MEDIDA_RSUM_DESCRIPCION}"/>
                     <DataGridTemplateColumn Header="Opciones"
                                             Width="233"
                                             >
@@ -285,7 +276,7 @@
                                             Margin="0" 
                                             HorizontalAlignment="Center"
                                             Click="BtnConsultar_Click"
-                                            CommandParameter="{Binding RSE_ID}"
+                                            CommandParameter="{Binding RSPL_ID}"
                                         />
                                     <Button x:Name="btnModificar"
                                             Width="70"
@@ -296,7 +287,7 @@
                                             HorizontalAlignment="Center"
                                             mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
                                             Margin="5,0,5,0" 
-                                            CommandParameter="{Binding RSE_ID}"
+                                            CommandParameter="{Binding RSPL_ID}"
                                             Click="BtnModificar_Click"
                                         />
                                     <Button x:Name="btnEliminar"
@@ -308,7 +299,7 @@
                                             Cursor="Hand" 
                                             mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
                                             Margin="0" 
-                                            CommandParameter="{Binding RSE_ID}"
+                                            CommandParameter="{Binding RSPL_ID}"
                                             Click="BtnEliminar_Click"
                                         />
 
