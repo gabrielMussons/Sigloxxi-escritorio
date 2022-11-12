@@ -153,8 +153,8 @@ namespace CapaDAL
             }           
         }
 
-        #endregion
-
+        #endregion 
+        
         //---------------------------------------------------------------------
 
         #region CARGAR DATOS VISTA MANTENEDOR MESAS
