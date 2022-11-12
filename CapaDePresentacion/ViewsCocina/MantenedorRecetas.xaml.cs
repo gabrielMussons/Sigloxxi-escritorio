@@ -36,7 +36,7 @@ namespace CapaDePresentacion.ViewsCocina
             GridDatos.ItemsSource = objeto_CN_RS_PLATO.CargarPlatos().DefaultView;
         }
 
-        //----------------------------------------------------------------------------------------------------------------
+        //---------------------------------------------------------------------------------------------------------------
 
 
         private void BtnAgregarNuevo_Click(object sender, RoutedEventArgs e)
@@ -49,7 +49,7 @@ namespace CapaDePresentacion.ViewsCocina
             FrameGestionReceta.Content = ventanaCRUDReceta;
             btnAgregarNuevo.IsEnabled = false;
         }
-
+        
         private void BtnConsultar_Click(object sender, RoutedEventArgs e)
         {
             int id_plato = int.Parse(((Button)sender).CommandParameter.ToString());
