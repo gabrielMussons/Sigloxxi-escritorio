@@ -53,7 +53,7 @@ namespace CapaDAL
         {
             try
             {
-                OracleCommand cmd = new OracleCommand("SELECT * FROM RS_PLATO WHERE RSM_ID =" + id, con.AbrirConexion());
+                OracleCommand cmd = new OracleCommand("SELECT * FROM RS_PLATO WHERE RSPL_ID =" + id, con.AbrirConexion());
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 ds.Clear();
@@ -151,8 +151,7 @@ namespace CapaDAL
         {
             try
             {
-                OracleCommand cmd = new OracleCommand("SELECT * FROM RS_PLATO JOIN RS_DET_PLATO " +
-                    "ON RS_PLATO.RSPL_ID = RS_DET_PLATO.RS_PLATO_RSPL_ID " +
+                OracleCommand cmd = new OracleCommand("SELECT * FROM RS_PLATO JOIN RS_UN_MEDIDA ON rs_un_medida.rsum_id = rs_plato.rs_un_medida_rsum_id " +
                     "ORDER BY RSPL_ID", con.AbrirConexion());
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 DataSet ds = new DataSet();
@@ -176,4 +175,4 @@ namespace CapaDAL
 
     }
 }
-}
+

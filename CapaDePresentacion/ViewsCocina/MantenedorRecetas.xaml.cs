@@ -101,7 +101,7 @@ namespace CapaDePresentacion.ViewsCocina
 
             ventanaCRUDReceta.id_plato = id_plato;
             ventanaCRUDReceta.Consultar();
-            ventanaCRUDReceta.Content = ventanaCRUDReceta;
+            FrameGestionReceta.Content = ventanaCRUDReceta;
 
         }
         private void DeshabilitarInput()

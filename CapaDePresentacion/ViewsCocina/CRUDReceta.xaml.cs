@@ -33,16 +33,16 @@ namespace CapaDePresentacion.ViewsCocina
         readonly CN_RS_UN_MEDIDA objeto_CN_UN_MEDIDA = new CN_RS_UN_MEDIDA();
 
 
-        public int rsm_id;
+        public int id_plato;
         #endregion
 
         //--------------------------------------------------------------------
 
         #region INICIALIZACION
-        public CRUDMesa()
+        public CRUDReceta()
         {
             InitializeComponent();
-            CargarCbxEstado();
+            CargarCbxUnidadMedida();
 
 
         }
@@ -56,7 +56,7 @@ namespace CapaDePresentacion.ViewsCocina
             try
             {
                 Crear();
-                Content = new MantenedorMesas();
+                Content = new MantenedorRecetas();
             }
             catch (Exception ex)
             {
@@ -74,7 +74,7 @@ namespace CapaDePresentacion.ViewsCocina
             try
             {
                 Actualizar();
-                Content = new MantenedorMesas();
+                Content = new MantenedorRecetas();
             }
             catch (Exception ex)
             {
@@ -90,14 +90,14 @@ namespace CapaDePresentacion.ViewsCocina
         private void BtnEliminar_Click(object sender, RoutedEventArgs e)
         {
             Eliminar();
-            Content = new MantenedorMesas();
+            Content = new MantenedorRecetas();
         }
         #endregion
 
         #region BOTON REGRESAR
         private void BtnRegresar_Click(object sender, RoutedEventArgs e)
         {
-            Content = new MantenedorMesas();
+            Content = new MantenedorRecetas();
         }
 
 
@@ -111,30 +111,26 @@ namespace CapaDePresentacion.ViewsCocina
         public void Consultar()
         {
 
-            var x = objeto_CN_RS_MESA.Consultar(rsm_id);
+            var plato = objeto_CN_RS_PLATO.Consultar(id_plato);
 
-            var xx = objeto_CN_RS_ESTADO.ObtenerRSES_DESCRIPCION(x.CE_RS_ESTADO_RSES_ID);
-            cbxEstado.Text = xx.CE_RSES_DESCRIPCION;
-
-            txtIdMesa.Text = x.CE_RSM_ID.ToString();
-            txtDescripcion.Text = x.CE_RSM_DESCRIPCION;
-            txtSillas.Text = x.CE_RSM_SILLAS.ToString();
-            if (x.CE_RS_ENTIDAD_RSE_ID != 0)
-            {
-                txtIdEntidad.Text = x.CE_RS_ENTIDAD_RSE_ID.ToString();
-
-            }
+            var unidad_medida = objeto_CN_UN_MEDIDA.ObtenerRSUM_DESCRIPCION(plato.RS_UN_MEDIDA_RSUM_ID);
+            cbxUnidadMedida.Text = unidad_medida.CE_RSUM_DESCRIPCION;
+            txtIdPlato.Text = plato.RSPL_ID.ToString();
+            txtDescripcion.Text = plato.RSPL_DESCRIPCION.ToString();
+            txtObservaciones.Text = plato.RSPL_OBS.ToString();
+            txtPVenta.Text = plato.RSPL_PVENTA.ToString();
+            
         }
 
         #endregion
 
-        #region CARGAR CBX ESTADO
-        private void CargarCbxEstado()
+        #region CARGAR CBX 
+        private void CargarCbxUnidadMedida()
         {
-            List<string> lista_estados = objeto_CN_RS_ESTADO.ListarRSES_DESCRIPCION();
-            for (int i = 0; i < lista_estados.Count; i++)
+            List<string> lista = objeto_CN_UN_MEDIDA.ListarRSUM_DESCRIPCION();
+            for (int i = 0; i < lista.Count; i++)
             {
-                cbxEstado.Items.Add(lista_estados[i]);
+                cbxUnidadMedida.Items.Add(lista[i]);
             }
         }
         #endregion
@@ -142,19 +138,13 @@ namespace CapaDePresentacion.ViewsCocina
         #region CREAR
         private void Crear()
         {
-            int rses_id = objeto_CN_RS_ESTADO.ObtenerRSES_ID(cbxEstado.Text);
-
-            objeto_CE_RS_MESA.CE_RSM_DESCRIPCION = txtDescripcion.Text;
-            if (txtIdEntidad.Text != "")
-            {
-                objeto_CE_RS_MESA.CE_RS_ENTIDAD_RSE_ID = int.Parse(txtIdEntidad.Text);
-            }
-            objeto_CE_RS_MESA.CE_RS_ESTADO_RSES_ID = rses_id;
-            objeto_CE_RS_MESA.CE_RSM_SILLAS = int.Parse(txtSillas.Text);
             try
             {
-                objeto_CN_RS_MESA.Insertar(objeto_CE_RS_MESA);
-                MessageBox.Show("Creado correctamente");
+                objeto_CE_RS_PLATO.RSPL_DESCRIPCION = txtDescripcion.Text.ToString();
+                objeto_CE_RS_PLATO.RSPL_PVENTA = int.Parse(txtPVenta.Text);
+                objeto_CE_RS_PLATO.RSPL_OBS = txtObservaciones.Text.ToString();
+                objeto_CE_RS_PLATO.RS_UN_MEDIDA_RSUM_ID = objeto_CN_UN_MEDIDA.ObtenerRSUM_ID(cbxUnidadMedida.Text);
+                objeto_CN_RS_PLATO.Insertar(objeto_CE_RS_PLATO);
             }
             catch (Exception ex)
             {
@@ -167,21 +157,14 @@ namespace CapaDePresentacion.ViewsCocina
         #region ACTUALIZAR
         private void Actualizar()
         {
-            int rses_id = objeto_CN_RS_ESTADO.ObtenerRSES_ID(cbxEstado.Text);
-
-            objeto_CE_RS_MESA.CE_RSM_ID = rsm_id;
-            objeto_CE_RS_MESA.CE_RSM_DESCRIPCION = txtDescripcion.Text;
-            if (txtIdEntidad.Text != "")
-            {
-                objeto_CE_RS_MESA.CE_RS_ENTIDAD_RSE_ID = int.Parse(txtIdEntidad.Text);
-            }
-            objeto_CE_RS_MESA.CE_RS_ESTADO_RSES_ID = rses_id;
-            objeto_CE_RS_MESA.CE_RSM_SILLAS = int.Parse(txtSillas.Text);
-
             try
             {
-                objeto_CN_RS_MESA.Actualizar(objeto_CE_RS_MESA);
-                MessageBox.Show("Actualizado correctamente");
+                objeto_CE_RS_PLATO.RSPL_ID = id_plato;
+                objeto_CE_RS_PLATO.RSPL_DESCRIPCION = txtDescripcion.Text.ToString();
+                objeto_CE_RS_PLATO.RSPL_PVENTA = int.Parse(txtPVenta.Text);
+                objeto_CE_RS_PLATO.RSPL_OBS = txtObservaciones.Text.ToString();
+                objeto_CE_RS_PLATO.RS_UN_MEDIDA_RSUM_ID = objeto_CN_UN_MEDIDA.ObtenerRSUM_ID(cbxUnidadMedida.Text);
+                objeto_CN_RS_PLATO.Actualizar(objeto_CE_RS_PLATO);
             }
             catch (Exception ex)
             {
@@ -194,17 +177,14 @@ namespace CapaDePresentacion.ViewsCocina
         #region ELIMINAR
         private void Eliminar()
         {
-            objeto_CE_RS_MESA.CE_RSM_ID = rsm_id;
-
             try
             {
-                objeto_CN_RS_MESA.Eliminar(objeto_CE_RS_MESA);
-                MessageBox.Show("Eliminado correctamente");
+                objeto_CE_RS_PLATO.RSPL_ID = id_plato;
+                objeto_CN_RS_PLATO.Eliminar(objeto_CE_RS_PLATO);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                MessageBox.Show("Error al eliminar");
+                throw ex;
             }
         }
         #endregion

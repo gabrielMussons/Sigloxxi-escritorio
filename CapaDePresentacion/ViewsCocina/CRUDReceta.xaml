@@ -249,7 +249,8 @@
                     Margin="0"
                     Style="{DynamicResource BTNMENU}"
                     Foreground="White"
-                    Padding="0" Click="BtnCrear_Click" >
+                    Padding="0" 
+                    Click="BtnCrear_Click" >
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -379,7 +380,7 @@
                     Width="220"
                     Style="{DynamicResource BTNMENU}"
                     Foreground="White"
-                    Padding="0" Click="BtnSeleccionarImagen_Click" 
+                    Padding="0"
                     
                     >
                 <!-- Color para boton agregar nuevo mas oscuro = #7fba00 o  claro = #78b000 -->
@@ -558,7 +559,6 @@
                                             mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
                                             Margin="0" 
                                             HorizontalAlignment="Center"
-                                            Click="BtnConsultar_Click"
                                             CommandParameter="{Binding RSP_ID}"
                                         />
                                     <Button x:Name="btnEliminarDetalle"
@@ -570,7 +570,6 @@
                                             mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
                                             Margin="0" 
                                             HorizontalAlignment="Center"
-                                            Click="BtnConsultar_Click"
                                             CommandParameter="{Binding RSP_ID}"
                                         />
 

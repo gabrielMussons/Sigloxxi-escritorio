@@ -34,7 +34,7 @@
                     Margin="10" 
                     mah:ControlsHelper.FocusBorderBrush="#FF474747" 
                     mah:ControlsHelper.FocusBorderThickness="1.5" 
-                    Click="BtnIniciarSesion_Click_1" />
+                    Click="BtnIniciarSesion_Click" />
             <TextBlock Margin="10" TextAlignment="Center"><Hyperlink  x:Name="hlRecuperarContrasena" NavigateUri="http://algo.com"><Run Text="Recuperar Contraseña"/></Hyperlink></TextBlock>
         </StackPanel>
     </Grid>

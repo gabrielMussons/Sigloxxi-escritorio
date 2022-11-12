@@ -259,7 +259,7 @@
                                         Binding="{Binding RSPL_OBS}"/>
                     <DataGridTextColumn Header="Unidad medida"
                                         Width="*"
-                                        Binding="{Binding RS_UN_MEDIDA_RSUM_DESCRIPCION}"/>
+                                        Binding="{Binding RSUM_DESCRIPCION}"/>
                     <DataGridTemplateColumn Header="Opciones"
                                             Width="233"
                                             >

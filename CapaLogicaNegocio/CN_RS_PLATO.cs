@@ -20,7 +20,7 @@ namespace CapaLogicaNegocio
 
         //---------------------------------------------------------------
 
-        #region CONSULTAR RS_PRODUCTO
+        #region CONSULTAR 
         public CE_RS_PLATO Consultar(int id)
         {
 
@@ -36,7 +36,7 @@ namespace CapaLogicaNegocio
         }
         #endregion
 
-        #region INSERTAR RS_MESA
+        #region INSERTAR 
         public void Insertar(CE_RS_PLATO rs_plato)
         {
 
@@ -52,7 +52,7 @@ namespace CapaLogicaNegocio
         }
         #endregion
 
-        #region ELIMINAR RS_MESA
+        #region ELIMINAR 
         public void Eliminar(CE_RS_PLATO rs_plato)
         {
 
@@ -68,7 +68,7 @@ namespace CapaLogicaNegocio
         }
         #endregion
 
-        #region ACTUALIZAR RS_MESA
+        #region ACTUALIZAR 
         public void Actualizar(CE_RS_PLATO rs_plato)
         {
             try

@@ -537,7 +537,7 @@
                                     Style="{DynamicResource BTNMENU}"
                                     Margin="0"
                                     Padding="0" 
-                                    Foreground="White"
+                                    Foreground="White" Click="BtnGestionRecetas_Click"
                                     >
                                 <Grid Width="200"
                                       Margin="0">
@@ -581,7 +581,7 @@
                                     Style="{DynamicResource BTNMENU}"
                                     Margin="0"
                                     Padding="0"
-                                    Foreground="White"
+                                    Foreground="White" Click="BtnGestionPedidos_Click"
                                     >
                                 <Grid Width="200"
                                       Margin="0">

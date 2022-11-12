@@ -29,10 +29,10 @@ namespace CapaDePresentacion
         }
 
 
-        private void BtnIniciarSesion_Click_1(object sender, RoutedEventArgs e)
+        private void BtnIniciarSesion_Click(object sender, RoutedEventArgs e)
         {
-            MenuAdministrador.GetInstance().Show();
-            MenuAdministrador.GetInstance().Activate();
+            MenuCocina.GetInstance().Show();
+            MenuCocina.GetInstance().Activate();
             this.Close();
         }
     }
