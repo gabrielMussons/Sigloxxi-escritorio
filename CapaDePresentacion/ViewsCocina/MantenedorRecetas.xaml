@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:iconPack="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material" 
-             x:Class="CapaDePresentacion.ViewsAdmin.MantenedorClientes" 
+             x:Class="CapaDePresentacion.ViewsCocina.MantenedorRecetas" 
              mc:Ignorable="d" 
              d:DesignHeight="565"
              d:DesignWidth="920"
@@ -162,7 +162,7 @@
                      Height="20"
                      Margin="0"
                      BorderBrush="#a5b2bd"
-                     mah:TextBoxHelper.Watermark="Ingrese codigo o nombre producto" 
+                     mah:TextBoxHelper.Watermark="Ingrese codigo o descripción" 
                      
                      
                      
@@ -173,7 +173,7 @@
             <!--#region BOTONES-->
 
             <!--#region AGREGAR CLIENTE-->
-            <Button x:Name="btnAgregarReceta"
+            <Button x:Name="btnAgregarNuevo"
                     Grid.Column="4"
                     Grid.Row="1"
                     HorizontalAlignment="Stretch"
@@ -187,6 +187,7 @@
                     Style="{DynamicResource BTNMENU}"
                     Foreground="White"
                     Padding="0" 
+                    Click="BtnAgregarNuevo_Click" 
                     
                     >
                 <!-- Color para boton agregar nuevo mas oscuro = #7fba00 o  claro = #78b000 -->
@@ -314,7 +315,7 @@
             <!--#endregion-->
 
             <!--#region FRAMEAGREGARCLIENTE (PARA VISUALIZAR CRUDCliente.xaml)-->
-            <Frame x:Name="FrameAgregarCliente"
+            <Frame x:Name="FrameGestionReceta"
                    Grid.Column="0"
                    Grid.Row="0"
                    Grid.RowSpan="8"

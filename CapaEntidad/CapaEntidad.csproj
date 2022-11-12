@@ -43,10 +43,12 @@
   <ItemGroup>
     <Compile Include="CE_RS_BODEGA.cs" />
     <Compile Include="CE_RS_COMUNA.cs" />
+    <Compile Include="CE_RS_DET_PLATO.cs" />
     <Compile Include="CE_RS_ENTIDAD.cs" />
     <Compile Include="CE_RS_ESTADO.cs" />
     <Compile Include="CE_RS_IMPUESTO.cs" />
     <Compile Include="CE_RS_MESA.cs" />
+    <Compile Include="CE_RS_PLATO.cs" />
     <Compile Include="CE_RS_PRODUCTO.cs" />
     <Compile Include="CE_RS_TIPO_ENTIDAD.cs" />
     <Compile Include="CE_RS_UN_MEDIDA.cs" />

@@ -76,12 +76,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CD_DET_PLATO.cs" />
     <Compile Include="CD_RS_BODEGA.cs" />
     <Compile Include="CD_RS_COMUNA.cs" />
     <Compile Include="CD_RS_ENTIDAD.cs" />
     <Compile Include="CD_RS_ESTADO.cs" />
     <Compile Include="CD_RS_IMPUESTO.cs" />
     <Compile Include="CD_RS_MESA.cs" />
+    <Compile Include="CD_RS_PLATO.cs" />
     <Compile Include="CD_RS_PRODUCTO.cs" />
     <Compile Include="CD_RS_TIPO_ENTIDAD.cs" />
     <Compile Include="CD_RS_UN_MEDIDA.cs" />
