@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CapaDAL;
 using CapaEntidad;
+
 
 namespace CapaLogicaNegocio
 {
@@ -13,14 +15,14 @@ namespace CapaLogicaNegocio
         //---------------------------------------------------------------
 
         #region VARIABLES
-        private readonly  objDatos = new CD_RS_PLATO();
+        private readonly  CD_DET_PLATO objDatos = new CD_DET_PLATO();
         private readonly CE_RS_PLATO objEntidad = new CE_RS_PLATO();
         #endregion
-
+        //DETALLE PLATO
         //---------------------------------------------------------------
 
-        #region CONSULTAR RS_PRODUCTO
-        public CE_RS_PLATO Consultar(int id)
+        #region CONSULTAR 
+        public CE_RS_DET_PLATO Consultar(int id)
         {
 
             try
@@ -35,13 +37,13 @@ namespace CapaLogicaNegocio
         }
         #endregion
 
-        #region INSERTAR RS_MESA
-        public void Insertar(CE_RS_PLATO rs_plato)
+        #region INSERTAR 
+        public void Insertar(CE_RS_DET_PLATO det_plato)
         {
 
             try
             {
-                objDatos.CD_INSERTAR(rs_plato);
+                objDatos.CD_INSERTAR(det_plato);
             }
             catch (Exception ex)
             {
@@ -52,12 +54,12 @@ namespace CapaLogicaNegocio
         #endregion
 
         #region ELIMINAR RS_MESA
-        public void Eliminar(CE_RS_PLATO rs_plato)
+        public void Eliminar(CE_RS_DET_PLATO det_plato)
         {
 
             try
             {
-                objDatos.CD_ELIMINAR(rs_plato);
+                objDatos.CD_ELIMINAR(det_plato);
             }
             catch (Exception ex)
             {
@@ -67,12 +69,12 @@ namespace CapaLogicaNegocio
         }
         #endregion
 
-        #region ACTUALIZAR RS_MESA
-        public void Actualizar(CE_RS_PLATO rs_plato)
+        #region ACTUALIZAR 
+        public void Actualizar(CE_RS_DET_PLATO det_plato)
         {
             try
             {
-                objDatos.CD_ACTUALIZAR(rs_plato);
+                objDatos.CD_ACTUALIZAR(det_plato);
             }
             catch (Exception ex)
             {
@@ -86,9 +88,9 @@ namespace CapaLogicaNegocio
         //---------------------------------------------------------------
 
         #region DATOS TABLA VISTA MANTENEDOR MESAS
-        public DataTable CargarPlatos()
+        public DataTable CargarPlatos(int id_plato)
         {
-            return objDatos.CargarPlatos();
+            return objDatos.CargarDetPlato(id_plato);
         }
         #endregion
     }

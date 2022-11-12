@@ -28,9 +28,9 @@ namespace CapaDePresentacion.ViewsCocina
         readonly CE_RS_DET_PLATO objeto_CE_RS_DET_PLATO = new CE_RS_DET_PLATO();
         readonly CE_RS_PLATO objeto_CE_RS_PLATO = new CE_RS_PLATO();
         readonly CE_RS_UN_MEDIDA objeto_CE_UN_MEDIDA = new CE_RS_UN_MEDIDA();
-        readonly cndet objeto_CE_RS_DET_PLATO = new CE_RS_DET_PLATO();
-        readonly CE_RS_PLATO objeto_CE_RS_PLATO = new CE_RS_PLATO();
-        readonly CE_RS_UN_MEDIDA objeto_CE_UN_MEDIDA = new CE_RS_UN_MEDIDA();
+        readonly CN_RS_DET_PLATO objeto_CN_RS_DET_PLATO = new CN_RS_DET_PLATO();
+        readonly CN_RS_PLATO objeto_CN_RS_PLATO = new CN_RS_PLATO();
+        readonly CN_RS_UN_MEDIDA objeto_CN_UN_MEDIDA = new CN_RS_UN_MEDIDA();
 
 
         public int rsm_id;
