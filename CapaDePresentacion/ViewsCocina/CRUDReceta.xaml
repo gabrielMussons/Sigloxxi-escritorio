@@ -12,7 +12,39 @@
       d:DesignWidth="920"
       Title="CRUDReceta">
     <Page.Resources>
+        <!--#region StyleDataGrid-->
+        <Style TargetType="{x:Type DataGridCell}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Cursor" Value="Pen"/>
+            <Setter Property="IsEditing" Value="False"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Padding" Value="0"/>
 
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="true">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.DataGrid.Selection.Text}"/>
+
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Opacity" Value="0.8"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="Background" Value="#876eb0"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+
+        <!--#endregion-->
         <!--#region BTNMENU-->
         <Style x:Key="BTNMENU" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="#78b000"/>
@@ -504,15 +536,22 @@
                       Margin="0"
                       mah:TextBoxHelper.Watermark="Seleccione unidad de medida"
                       />
+            <TextBox x:Name="txtBuscarProducto"
+                        Grid.Column="4"
+                       Grid.Row="16"
+                       Margin="5,0"
+                       mah:TextBoxHelper.Watermark="Buscar producto"
+                       HorizontalAlignment="Stretch"
+                       VerticalAlignment="Center" TextChanged="TxtBuscarProducto_TextChanged"/>
             <!--#endregion-->
             
             <!--#region DATAGRID-->
             <DataGrid x:Name="GridDatos"
                       Grid.Row="16"
                       Grid.Column="1"
-                      Grid.RowSpan="10"
+                      Grid.RowSpan="11"
                       Grid.ColumnSpan="3"
-                      Margin="0,15,0,0"
+                      Margin="0,2"
                       AutoGenerateColumns="False"
                       Background="WhiteSmoke"
                       FontSize="14"
@@ -535,44 +574,46 @@
                                         Width="auto"
                                         Binding="{Binding RSP_ID}"/>
                     <DataGridTextColumn Header="Descripción"
-                                        Width="auto"
+                                        Width="*"
                                         Binding="{Binding RSP_DESCRIPCION}"/>
                     <DataGridTextColumn Header="Medida"
                                         Width="*"
-                                        Binding="{Binding RS_UN_MEDIDA_RSUM_DESCRIPCION}"/>
+                                        Binding="{Binding RSUM_DESCRIPCION}"/>
                     <DataGridTextColumn Header="Cantidad"
                                         Width="*"
                                         Binding="{Binding }"/>
                     <DataGridTemplateColumn Header="Opciones"
-                                            Width="90"
+                                            Width="80"
                                             >
                         <DataGridTemplateColumn.CellTemplate >
                             <DataTemplate>
                                 <DockPanel >
-
-                                    <Button x:Name="btnAgregarDetalle"
-                                            Width="70"
-                                            Height="20"
+                                    <Button x:Name="btnAgregarProducto"
+                                            Width="auto"
+                                            Height="auto"
                                             FontWeight="SemiBold"
-                                            Content="Consultar" 
+                                            
                                             Cursor="Hand" 
                                             mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
                                             Margin="0" 
                                             HorizontalAlignment="Center"
-                                            CommandParameter="{Binding RSP_ID}"
-                                        />
-                                    <Button x:Name="btnEliminarDetalle"
-                                            Width="70"
-                                            Height="20"
+                                            CommandParameter="{Binding RSP_ID}" 
+                                            Click="BtnAgregarProducto_Click">
+                                        <iconPack:Material Kind="PlusCircle" 
+                                                           />
+                                    </Button>
+                                    <Button x:Name="btnEliminarProducto"
+                                            Width="auto"
+                                            Height="auto"
                                             FontWeight="SemiBold"
-                                            Content="Consultar" 
+                                            
                                             Cursor="Hand" 
                                             mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
                                             Margin="0" 
                                             HorizontalAlignment="Center"
-                                            CommandParameter="{Binding RSP_ID}"
-                                        />
-
+                                            CommandParameter="{Binding RSP_ID}" Click="BtnEliminarProducto_Click">
+                                        <iconPack:Material Kind="MinusCircle"/>
+                                    </Button>
                                 </DockPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

@@ -171,6 +171,35 @@ namespace CapaDAL
         }
         #endregion
 
+        #region OBTENER ID        
+        public int ObtenerRSPL_ID(string rspl_descripcion)
+        {
+            OracleCommand cmd = new OracleCommand()
+            {
+                Connection = con.AbrirConexion(),
+                CommandText = "SP_OBTENER_RSPL_ID",
+                CommandType = CommandType.StoredProcedure
+            };
+            try
+            {
+                cmd.Parameters.Add("v_rspl_descripcion", rspl_descripcion);
+                cmd.Parameters.Add("v_rspl_id", OracleDbType.Int32, ParameterDirection.Output);
+                cmd.ExecuteNonQuery();
+                string valor = cmd.Parameters["v_rspl_id"].Value.ToString();
+                int v_rspl_id = int.Parse(valor);
+                cmd.Parameters.Clear();
+                con.CerrarConexion();
+                return v_rspl_id;
+            }
+            catch (Exception ex)
+            {
+                cmd.Parameters.Clear();
+                con.CerrarConexion();
+                throw ex;
+            }
+        }
+        #endregion
+
 
 
     }

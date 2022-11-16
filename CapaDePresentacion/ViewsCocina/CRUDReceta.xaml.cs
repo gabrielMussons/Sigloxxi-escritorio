@@ -32,6 +32,7 @@ namespace CapaDePresentacion.ViewsCocina
         readonly CN_RS_PLATO objeto_CN_RS_PLATO = new CN_RS_PLATO();
         readonly CN_RS_UN_MEDIDA objeto_CN_UN_MEDIDA = new CN_RS_UN_MEDIDA();
 
+        Dictionary<int, int> DetalleReceta = new Dictionary<int, int>();
 
         public int id_plato;
         #endregion
@@ -43,8 +44,9 @@ namespace CapaDePresentacion.ViewsCocina
         {
             InitializeComponent();
             CargarCbxUnidadMedida();
-
-
+            CargarDatosProductos();
+            DetalleReceta.Clear();
+            
         }
         #endregion
 
@@ -56,6 +58,7 @@ namespace CapaDePresentacion.ViewsCocina
             try
             {
                 Crear();
+                CrearDetalle(DetalleReceta, txtDescripcion.Text);
                 Content = new MantenedorRecetas();
             }
             catch (Exception ex)
@@ -105,7 +108,13 @@ namespace CapaDePresentacion.ViewsCocina
 
         //--------------------------------------------------------------------
 
-
+        #region CARGAR DATOS GRID
+        void CargarDatosProductos()
+        {
+            CN_RS_PRODUCTO obj_CN_RS_PRODUCTO = new CN_RS_PRODUCTO();
+            GridDatos.ItemsSource = obj_CN_RS_PRODUCTO.CargarListaProducto(txtBuscarProducto.Text.ToString()).DefaultView;
+        }
+        #endregion
 
         #region CONSULTAR
         public void Consultar()
@@ -153,6 +162,27 @@ namespace CapaDePresentacion.ViewsCocina
             }
         }
         #endregion
+        #region CREAR DETALLE
+        private void CrearDetalle(Dictionary<int,int> Detalle, string NombrePlato)
+        {
+            try
+            {
+                foreach (var producto in Detalle)
+                {
+                    objeto_CE_RS_DET_PLATO.RSDPL_CANTIDAD = producto.Value;
+                    objeto_CE_RS_DET_PLATO.RS_PLATO_RSPL_ID = objeto_CN_RS_PLATO.ObtenerRSPL_ID(NombrePlato);
+                    objeto_CE_RS_DET_PLATO.RS_PRODUCTO_RSP_ID = producto.Key;
+                    objeto_CN_RS_DET_PLATO.Insertar(objeto_CE_RS_DET_PLATO);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
+        }
+        #endregion
 
         #region ACTUALIZAR
         private void Actualizar()
@@ -188,5 +218,46 @@ namespace CapaDePresentacion.ViewsCocina
             }
         }
         #endregion
+
+        
+        
+
+        private void BtnAgregarProducto_Click(object sender, RoutedEventArgs e)
+        {
+            int id_producto = int.Parse(((Button)sender).CommandParameter.ToString());
+            if (DetalleReceta.ContainsKey(id_producto))
+            {
+                DetalleReceta[id_producto] = DetalleReceta[id_producto]+1;
+                Console.WriteLine(DetalleReceta[id_producto]);
+            }
+            else
+            {
+                DetalleReceta.Add(id_producto, +1);
+                Console.WriteLine(DetalleReceta[id_producto]);
+            }
+            
+        }
+
+        private void BtnEliminarProducto_Click(object sender, RoutedEventArgs e)
+        {
+            int id_producto = int.Parse(((Button)sender).CommandParameter.ToString());
+            if (DetalleReceta.ContainsKey(id_producto))
+            {
+                if (DetalleReceta[id_producto] == 1)
+                {
+                    DetalleReceta.Remove(id_producto);
+                }
+                else
+                {
+                    DetalleReceta[id_producto] = DetalleReceta[id_producto] - 1;
+                    Console.WriteLine(DetalleReceta[id_producto]);
+                }
+            }
+        }
+
+        private void TxtBuscarProducto_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CargarDatosProductos();
+        }
     }
 }

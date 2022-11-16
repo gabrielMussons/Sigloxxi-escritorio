@@ -9,24 +9,24 @@ using CapaEntidad;
 
 namespace CapaLogicaNegocio
 {
-    public class CN_RS_PLATO
+    public class CN_RS_DOCTO
     {
         //---------------------------------------------------------------
 
         #region VARIABLES
-        private readonly CD_RS_PLATO objDatos = new CD_RS_PLATO();
-        private readonly CE_RS_PLATO objEntidad = new CE_RS_PLATO();
+        private readonly CD_RS_DOCTO objDatos = new CD_RS_DOCTO();
+        private readonly CE_RS_DOCTO objEntidad = new CE_RS_DOCTO();
         #endregion
 
         //---------------------------------------------------------------
 
         #region CONSULTAR 
-        public CE_RS_PLATO Consultar(int id)
+        public CE_RS_DOCTO Consultar(int id)
         {
 
             try
             {
-                return objDatos.CD_CONSULTAR(id);
+                return objDatos.(id);
             }
             catch (Exception ex)
             {
@@ -37,12 +37,12 @@ namespace CapaLogicaNegocio
         #endregion
 
         #region INSERTAR 
-        public void Insertar(CE_RS_PLATO rs_plato)
+        public void Insertar(CE_RS_DOCTO rs_docto)
         {
 
             try
             {
-                objDatos.CD_INSERTAR(rs_plato);
+                objDatos.CD_INSERTAR(rs_docto);
             }
             catch (Exception ex)
             {
@@ -53,12 +53,12 @@ namespace CapaLogicaNegocio
         #endregion
 
         #region ELIMINAR 
-        public void Eliminar(CE_RS_PLATO rs_plato)
+        public void Eliminar(CE_RS_DOCTO rs_docto)
         {
 
             try
             {
-                objDatos.CD_ELIMINAR(rs_plato);
+                objDatos.CD_ELIMINAR(rs_docto);
             }
             catch (Exception ex)
             {
@@ -69,38 +69,28 @@ namespace CapaLogicaNegocio
         #endregion
 
         #region ACTUALIZAR 
-        public void Actualizar(CE_RS_PLATO rs_plato)
+        public void Actualizar(CE_RS_DOCTO rs_docto)
         {
             try
             {
-                objDatos.CD_ACTUALIZAR(rs_plato);
+                objDatos.CD_ACTUALIZAR(rs_docto);
             }
             catch (Exception ex)
             {
 
                 throw ex;
             }
-
         }
         #endregion
 
         //---------------------------------------------------------------
 
-        #region DATOS TABLA VISTA MANTENEDOR MESAS
-        public DataTable CargarPlatos()
+        #region DATOS TABLA 
+        public DataTable CargarDatosDocto()
         {
-            return objDatos.CargarPlatos();
+            return objDatos.CargarDoctos();
         }
         #endregion
-
-        #region OBTENER RSPL_ID
-        public int ObtenerRSPL_ID(string rspl_descripcion)
-        {
-            return objDatos.ObtenerRSPL_ID(rspl_descripcion);
-        }
-        #endregion
-
-
-
+        
     }
 }
