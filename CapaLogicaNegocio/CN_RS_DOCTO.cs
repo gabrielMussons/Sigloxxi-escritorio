@@ -26,7 +26,7 @@ namespace CapaLogicaNegocio
 
             try
             {
-                return objDatos.(id);
+                return objDatos.CD_CONSULTAR(id);
             }
             catch (Exception ex)
             {

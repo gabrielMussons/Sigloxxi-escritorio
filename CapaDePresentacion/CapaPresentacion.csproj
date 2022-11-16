@@ -237,9 +237,6 @@
     <Compile Include="ViewsCocina\CRUDReceta.xaml.cs">
       <DependentUpon>CRUDReceta.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewsCocina\MantenedorPedidos.xaml.cs">
-      <DependentUpon>MantenedorPedidos.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewsCocina\MantenedorRecetas.xaml.cs">
       <DependentUpon>MantenedorRecetas.xaml</DependentUpon>
     </Compile>
@@ -299,13 +296,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ViewsCocina\MantenedorPedidos.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="ViewsCocina\MantenedorRecetas.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
