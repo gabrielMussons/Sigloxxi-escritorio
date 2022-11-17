@@ -193,6 +193,9 @@
                     <DataGridTextColumn Header="Estado"
                                         Width="*"
                                         Binding="{Binding RSES_DESCRIPCION}"/>
+                    <DataGridTextColumn Header="Id detalle"
+                                        Width="*"
+                                        Binding="{Binding RSDET_ID}"/>
                     <DataGridTemplateColumn Header="Opciones"
                                             Width="80"
                                             >

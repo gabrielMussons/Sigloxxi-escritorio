@@ -162,8 +162,8 @@ namespace CapaDAL
         {
             try
             {
-                OracleCommand cmd = new OracleCommand("select rs_docto.rsd_id, rs_plato.rspl_descripcion, rs_entidad.rse_nombre, rs_docto.rs_mesa_rsm_id, rs_estado.rses_descripcion" +
-                    "from rs_docto join rs_entidad on rs_docto.rs_entidad_rse_id = rs_entidad.rse_id  " +
+                OracleCommand cmd = new OracleCommand("select rs_docto.rsd_id,rs_plato.rspl_descripcion,rs_entidad.rse_nombre,rs_docto.rs_mesa_rsm_id,rs_estado.rses_descripcion,rs_det_docto.rsdet_id " +
+                    "from rs_docto join rs_entidad on rs_docto.rs_entidad_rse_id = rs_entidad.rse_id " +
                     "join rs_det_docto on rs_docto.rsd_id = rs_det_docto.rs_docto_rsd_id " +
                     "join rs_plato on rs_det_docto.rs_plato_rspl_id = rs_plato.rspl_id " +
                     "join rs_estado on rs_det_docto.rs_estado_rses_id = rs_estado.rses_id " +
@@ -185,6 +185,55 @@ namespace CapaDAL
 
         }
         #endregion
-        
+
+        #region ACTUALIZAR ESTADO DETALLE PEDIDO
+        public void CD_ACTUALIZAR_ESTADO_DET_PED(int id_detalle)
+        {
+            OracleCommand cmd = new OracleCommand
+            {
+                Connection = con.AbrirConexion(),
+                CommandText = "actualizar_estado_detalle_docto",
+                CommandType = CommandType.StoredProcedure,
+            };
+            try
+            {
+                cmd.Parameters.Add("V_RSDET_ID", id_detalle);
+                cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
+                con.CerrarConexion();
+            }
+            catch (Exception ex)
+            {
+                cmd.Parameters.Clear();
+                con.CerrarConexion();
+                throw ex;
+            }
+        }
+        #endregion
+        #region RETRASAR ESTADO DETALLE PEDIDO
+        public void CD_RETRASAR_ESTADO_DET_PED(int id_detalle)
+        {
+            OracleCommand cmd = new OracleCommand
+            {
+                Connection = con.AbrirConexion(),
+                CommandText = "retrasar_estado_detalle_docto",
+                CommandType = CommandType.StoredProcedure,
+            };
+            try
+            {
+                cmd.Parameters.Add("V_RSDET_ID", id_detalle);
+                cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
+                con.CerrarConexion();
+            }
+            catch (Exception ex)
+            {
+                cmd.Parameters.Clear();
+                con.CerrarConexion();
+                throw ex;
+            }
+        }
+        #endregion
+
     }
 }

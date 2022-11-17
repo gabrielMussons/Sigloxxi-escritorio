@@ -91,6 +91,33 @@ namespace CapaLogicaNegocio
             return objDatos.CargarPedidos();
         }
         #endregion
-        
+        #region ACTUALIZAR ESTADO DETALLE PEDIDO
+        public void ActualizarEstadoDetPedido(int id_detalle)
+        {
+            try
+            {
+                objDatos.CD_ACTUALIZAR_ESTADO_DET_PED(id_detalle);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        #endregion
+        #region RETRASAR ESTADO DETALLE PEDIDO
+        public void RetrasarEstadoDetPedido(int id_detalle)
+        {
+            try
+            {
+                objDatos.CD_RETRASAR_ESTADO_DET_PED(id_detalle);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        #endregion
     }
 }

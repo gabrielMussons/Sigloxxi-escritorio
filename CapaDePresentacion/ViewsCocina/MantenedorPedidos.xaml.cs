@@ -37,13 +37,59 @@ namespace CapaDePresentacion.ViewsCocina
 
         private void BtnRetroceder_Click(object sender, RoutedEventArgs e)
         {
-            int id_detalle = int.Parse(((Button)sender).CommandParameter.ToString());
-            Console.WriteLine(id_detalle);
+            try
+            {
+                int id_detalle = int.Parse(((Button)sender).CommandParameter.ToString());
+                Console.WriteLine(id_detalle);
+                RetrasarEstadoPedido(id_detalle);
+                CargarDatosPedidos();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
 
         private void BtnAvanzar_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                int id_detalle = int.Parse(((Button)sender).CommandParameter.ToString());
+                Console.WriteLine(id_detalle);
+                ActualizarEstadoPedido(id_detalle);
+                CargarDatosPedidos();
+            }
+            catch (Exception ex)
+            {
 
+                throw ex;
+            }
+        }
+
+        private void ActualizarEstadoPedido(int id_detalle)
+        {
+            try
+            {
+                objeto_CN_RS_DOCTO.ActualizarEstadoDetPedido(id_detalle);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        private void RetrasarEstadoPedido(int id_detalle)
+        {
+            try
+            {
+                objeto_CN_RS_DOCTO.RetrasarEstadoDetPedido(id_detalle);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
     }
 }
