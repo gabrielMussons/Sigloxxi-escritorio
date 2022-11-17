@@ -86,9 +86,9 @@ namespace CapaLogicaNegocio
         //---------------------------------------------------------------
 
         #region DATOS TABLA 
-        public DataTable CargarDatosDocto()
+        public DataTable CargarDatosPedidos()
         {
-            return objDatos.CargarDoctos();
+            return objDatos.CargarPedidos();
         }
         #endregion
         

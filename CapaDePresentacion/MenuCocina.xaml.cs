@@ -65,7 +65,7 @@ namespace CapaDePresentacion
 
         private void BtnGestionPedidos_Click(object sender, RoutedEventArgs e)
         {
-
+            DataContext = new MantenedorPedidos();
         }
 
         private void BtnGestionRecetas_Click(object sender, RoutedEventArgs e)

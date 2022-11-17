@@ -350,7 +350,7 @@ namespace CapaDePresentacion.ViewsAdmin
                         catch (Exception ex)
                         {
 
-                            throw new Exception("No se pueden liberar reservas asociadas.");
+                            throw new Exception("No se pueden liberar reservas asociadas.",ex);
                         } 
                         
                         objeto_CE_RS_ENTIDAD.CE_RSE_ID = rse_id;

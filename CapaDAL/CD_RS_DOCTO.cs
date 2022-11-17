@@ -158,11 +158,17 @@ namespace CapaDAL
         //---------------------------------------------------------------------
 
         #region OBTENER DATATABLE
-        public DataTable CargarDoctos()
+        public DataTable CargarPedidos()
         {
             try
             {
-                OracleCommand cmd = new OracleCommand("SELECT * FROM RS_DOCTO ORDER BY RSD_ID", con.AbrirConexion());
+                OracleCommand cmd = new OracleCommand("select rs_docto.rsd_id, rs_plato.rspl_descripcion, rs_entidad.rse_nombre, rs_docto.rs_mesa_rsm_id, rs_estado.rses_descripcion" +
+                    "from rs_docto join rs_entidad on rs_docto.rs_entidad_rse_id = rs_entidad.rse_id  " +
+                    "join rs_det_docto on rs_docto.rsd_id = rs_det_docto.rs_docto_rsd_id " +
+                    "join rs_plato on rs_det_docto.rs_plato_rspl_id = rs_plato.rspl_id " +
+                    "join rs_estado on rs_det_docto.rs_estado_rses_id = rs_estado.rses_id " +
+                    "where rs_det_docto.rs_estado_rses_id = 61 or rs_det_docto.rs_estado_rses_id = 62 " +
+                    "or rs_det_docto.rs_estado_rses_id = 63 order by rs_det_docto.rs_estado_rses_id desc", con.AbrirConexion());
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 ds.Clear();
