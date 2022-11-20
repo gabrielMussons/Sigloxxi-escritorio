@@ -45,7 +45,12 @@ namespace CapaLogicaNegocio
             objDAL.CD_ACTUALIZAR(rs_usuario);
         }
         #endregion
-
         //---------------------------------------------------------------
+        #region AUTENTICAR RS_USUARIO
+        public CE_RS_USUARIO Autenticar(string user, string pass)
+        {
+            return objDAL.CD_AUTENTICAR(user,pass);
+        }
+        #endregion
     }
 }

@@ -161,12 +161,12 @@
             <!--#region  COLS AND ROWS-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="30"/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="120"/>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="20"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="30"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
@@ -341,7 +341,7 @@
                                                 />
                     <TextBlock x:Name="txtBotonActualizar"
                                Grid.Column="1"
-                               Text="Actualizar cliente"
+                               Text="Actualizar producto"
                                FontWeight="Normal"
                                FontSize="12.5"
                                VerticalAlignment="Center"
@@ -384,7 +384,7 @@
                                                 />
                     <TextBlock x:Name="txtBotonEliminar"
                                Grid.Column="1"
-                               Text="Eliminar cliente"
+                               Text="Eliminar producto "
                                FontWeight="Normal"
                                FontSize="12.5"
                                VerticalAlignment="Center"
@@ -394,8 +394,7 @@
                 </Grid>
             </Button>
             <!--#endregion-->
-
-            <!--#region BOTON SELECCIONAR IMAGEN-->
+<!--
             <Button x:Name="btnSeleccionarImagen"
                     Grid.Column="4"
                     Grid.Row="14"
@@ -412,10 +411,8 @@
                     Width="220"
                     Style="{DynamicResource BTNMENU}"
                     Foreground="White"
-                    Padding="0"
-                    
-                    >
-                <!-- Color para boton agregar nuevo mas oscuro = #7fba00 o  claro = #78b000 -->
+                    Padding="0" >
+                
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -438,11 +435,7 @@
                                FontFamily="Segoe UI"/>
                 </Grid>
             </Button>
-
-            <!--#endregion-->
-
-            <!--#endregion-->
-
+-->
             <!--#region CONTENIDO-->
             <TextBlock Grid.Column="1"
                        Grid.Row="4"
@@ -492,7 +485,8 @@
                      Margin="0,2"
                      mah:TextBoxHelper.Watermark="Observaciones"/>
             
-            <!--#region IMAGEN-->
+            
+            <!--
             <Border 
                     Grid.Column="4"
                     Grid.Row="4"
@@ -502,12 +496,12 @@
                     HorizontalAlignment="Center"
                     BorderBrush="DarkGray"
                     BorderThickness="1"
-                
-                    Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
-                <!--<Image 
+
+                Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+                <Image 
                        x:Name="imagenCliente"
                        Source="/img/profileImage.png"
-                       />-->
+                       />
                 <iconPack:PackIconMaterial  Kind="Camera"
                                             Grid.Column="0"
                                             HorizontalAlignment="Center"
@@ -519,7 +513,8 @@
                                             Background="#876eb0"
                                                 />
             </Border>
-            <!--#endregion-->
+                -->
+            
             <TextBlock Grid.Column="1"
                        Grid.Row="14"
                        Margin="5,0,0,0"
@@ -538,8 +533,7 @@
                       />
             <TextBox x:Name="txtBuscarProducto"
                         Grid.Column="4"
-                       Grid.Row="16"
-                       Margin="5,0"
+                       Grid.Row="4"
                        mah:TextBoxHelper.Watermark="Buscar producto"
                        HorizontalAlignment="Stretch"
                        VerticalAlignment="Center" TextChanged="TxtBuscarProducto_TextChanged"/>
@@ -547,10 +541,10 @@
             
             <!--#region DATAGRID-->
             <DataGrid x:Name="GridDatos"
-                      Grid.Row="16"
-                      Grid.Column="1"
-                      Grid.RowSpan="11"
-                      Grid.ColumnSpan="3"
+                      Grid.Row="6"
+                      Grid.Column="4"
+                      Grid.RowSpan="9"
+                      Grid.ColumnSpan="2"
                       Margin="0,2"
                       AutoGenerateColumns="False"
                       Background="WhiteSmoke"
@@ -579,9 +573,6 @@
                     <DataGridTextColumn Header="Medida"
                                         Width="*"
                                         Binding="{Binding RSUM_DESCRIPCION}"/>
-                    <DataGridTextColumn Header="Cantidad"
-                                        Width="*"
-                                        Binding="{Binding }"/>
                     <DataGridTemplateColumn Header="Opciones"
                                             Width="80"
                                             >

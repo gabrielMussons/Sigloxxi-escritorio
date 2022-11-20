@@ -59,7 +59,7 @@ namespace CapaDePresentacion.ViewsCocina
             ventanaCRUDReceta.BtnCrear.IsEnabled = false;
             ventanaCRUDReceta.BtnActualizar.IsEnabled = false;
             ventanaCRUDReceta.BtnEliminar.IsEnabled = false;
-            ventanaCRUDReceta.btnSeleccionarImagen.IsEnabled = false;
+            //ventanaCRUDReceta.btnSeleccionarImagen.IsEnabled = false;
 
             DeshabilitarInput();
 
@@ -79,7 +79,7 @@ namespace CapaDePresentacion.ViewsCocina
 
             ventanaCRUDReceta.BtnCrear.IsEnabled = false;
             ventanaCRUDReceta.BtnActualizar.IsEnabled = false;
-            ventanaCRUDReceta.btnSeleccionarImagen.IsEnabled = false;
+            //ventanaCRUDReceta.btnSeleccionarImagen.IsEnabled = false;
 
             DeshabilitarInput();
 

@@ -63,7 +63,6 @@ namespace CapaDAL
                 DataTable dt;
                 dt = ds.Tables[0];
                 DataRow row = dt.Rows[0];
-
                 ce_rs_usuario.CE_RS_ENTIDAD_RSE_ID = Convert.ToInt32(row[0]);
                 ce_rs_usuario.CE_RSU_USUARIO = Convert.ToString(row[1]);
                 ce_rs_usuario.CE_RSU_PASS = Convert.ToString(row[2]);
@@ -72,13 +71,14 @@ namespace CapaDAL
             catch (Exception ex)
             {
 
-                throw new Exception("No registra usuario.",ex);
+                throw ex;
             }
             con.CerrarConexion();
             return ce_rs_usuario;
 
         }
         #endregion
+
 
         #region ACTUALIZAR RS_USUARIO
         public void CD_ACTUALIZAR(CE_RS_USUARIO RS_USUARIO)
@@ -134,5 +134,66 @@ namespace CapaDAL
         #endregion
 
         //---------------------------------------------------------------------
+
+        #region AUTENTICAR USUARIO
+        public CE_RS_USUARIO CD_AUTENTICAR1(string user, string pass)
+        {
+            try
+            {
+                OracleCommand cmd = new OracleCommand("SELECT * FROM RS_USUARIO WHERE RSU_USUARIO ="+user.ToString()+" AND RSU_PASS ="+pass.ToString()+"", con.AbrirConexion());
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                ds.Clear();
+                da.Fill(ds);
+                DataTable dt;
+                dt = ds.Tables[0];
+                DataRow row = dt.Rows[0];
+                ce_rs_usuario.CE_RS_ENTIDAD_RSE_ID = Convert.ToInt32(row[0]);
+                ce_rs_usuario.CE_RSU_USUARIO = Convert.ToString(row[1]);
+                ce_rs_usuario.CE_RSU_PASS = Convert.ToString(row[2]);
+                ce_rs_usuario.CE_RS_ENTIDAD_RSE_ID = Convert.ToInt32(row[3]);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            con.CerrarConexion();
+            return ce_rs_usuario;
+
+        }
+        #endregion
+        #region AUTENTICAR RS_USUARIO
+        public CE_RS_USUARIO CD_AUTENTICAR(string user, string pass)
+        {
+            try
+            {
+                OracleCommand cmd = new OracleCommand("SELECT * FROM RS_USUARIO WHERE RSU_USUARIO = '"+user+"' AND RSU_PASS = '"+pass+"'", con.AbrirConexion());
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                ds.Clear();
+                da.Fill(ds);
+                DataTable dt;
+                dt = ds.Tables[0];
+                DataRow row = dt.Rows[0];
+                ce_rs_usuario.CE_RS_ENTIDAD_RSE_ID = Convert.ToInt32(row[0]);
+                ce_rs_usuario.CE_RSU_USUARIO = Convert.ToString(row[1]);
+                ce_rs_usuario.CE_RSU_PASS = Convert.ToString(row[2]);
+                ce_rs_usuario.CE_RS_ENTIDAD_RSE_ID = Convert.ToInt32(row[3]);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            con.CerrarConexion();
+            return ce_rs_usuario;
+
+        }
+        #endregion
+
+
+
+
     }
 }

@@ -5,8 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local="clr-namespace:CapaDePresentacion"
-    xmlns:viemodels="clr-namespace:CapaDePresentacion.ViewsAdmin"
+    xmlns:viemodels="clr-namespace:CapaDePresentacion.ViewsCocina"
     mc:Ignorable="d"
     Title="Siglo XXI" 
     Height="600"    
@@ -255,9 +254,9 @@
         <!--#endregion-->
 
         <!--#region DATATEMPLATE MANTENEDOR CLIENTES (REDIRECCIÓN A VENTANA MANTENEDOR CLIENTE)-->
-        <DataTemplate x:Name="MantenedorClientes"
-                      DataType="{x:Type viemodels:MantenedorClientes}">
-            <viemodels:MantenedorClientes DataContext="{Binding}"/>
+        <DataTemplate x:Name="MantenedorRecetas"
+                      DataType="{x:Type viemodels:MantenedorRecetas}">
+            <viemodels:MantenedorRecetas DataContext="{Binding}"/>
         </DataTemplate>
 
         <!--#endregion-->
@@ -295,7 +294,7 @@
                                FontWeight="SemiBold"
                                FontSize="11"
                                />
-                    
+
                     <!--#endregion-->
 
                     <!--#region MI CUENTA-->
@@ -641,4 +640,3 @@
     </Border>
 
 </mah:MetroWindow>
-

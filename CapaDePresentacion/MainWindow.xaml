@@ -8,9 +8,9 @@
         mc:Ignorable="d"
         Title="Siglo XXI" 
         Height="580"
-        Width="779"
+        Width="400"
         MinHeight="580" 
-        MinWidth="779" 
+        MinWidth="400" 
         Icon="img/idea_logo.ico" 
         WindowStartupLocation="CenterScreen" mah:ValidationHelper.ShowValidationErrorOnMouseOver="True" mah:ValidationHelper.CloseOnMouseLeftButtonDown="True" mah:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True">
     <Grid>
@@ -25,7 +25,7 @@
                      mah:TextBoxHelper.IsSpellCheckContextMenuEnabled="False" 
                      mah:ControlsHelper.FocusBorderBrush="#FF212121"/>
                      
-            <PasswordBox  x:Name="pbContrasena" 
+            <TextBox  x:Name="txtPass" 
                           Height="23"  
                           Margin="10" 
                           mah:TextBoxHelper.Watermark="Ingrese Contraseña" />
