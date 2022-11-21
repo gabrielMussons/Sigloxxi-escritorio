@@ -23,11 +23,12 @@ namespace CapaDePresentacion.ViewsCocina
     public partial class MantenedorPedidos : UserControl
     {
         readonly CN_RS_DOCTO objeto_CN_RS_DOCTO = new CN_RS_DOCTO();
-
+        
         public MantenedorPedidos()
         {
             InitializeComponent();
             CargarDatosPedidos();
+            
         }
 
         void CargarDatosPedidos()

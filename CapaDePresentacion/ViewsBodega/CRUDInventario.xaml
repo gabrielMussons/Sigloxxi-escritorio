@@ -6,45 +6,13 @@
       xmlns:local="clr-namespace:CapaDePresentacion.ViewsAdmin"
       xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
       xmlns:iconPack="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material" 
-      x:Class="CapaDePresentacion.ViewsCocina.CRUDReceta"
+      x:Class="CapaDePresentacion.ViewsBodega.CRUDInventario"
       mc:Ignorable="d" 
       d:DesignHeight="565"
       d:DesignWidth="920"
-      Title="CRUDReceta">
+      >
     <Page.Resources>
-        <!--#region StyleDataGrid-->
-        <Style TargetType="{x:Type DataGridCell}">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Cursor" Value="Pen"/>
-            <Setter Property="IsEditing" Value="False"/>
-            <Setter Property="FontFamily" Value="Segoe UI"/>
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="Padding" Value="0"/>
 
-            <Style.Triggers>
-                <Trigger Property="IsSelected" Value="true">
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="BorderBrush" Value="Transparent"/>
-                    <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.DataGrid.Selection.Text}"/>
-
-                </Trigger>
-                <Trigger Property="IsMouseOver" Value="true">
-                    <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="Opacity" Value="0.8"/>
-                    <Setter Property="BorderBrush" Value="Transparent"/>
-                    <Setter Property="Foreground" Value="Black"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style TargetType="{x:Type DataGridColumnHeader}">
-            <Setter Property="Background" Value="#876eb0"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontWeight" Value="Normal"/>
-            <Setter Property="FontSize" Value="14"/>
-        </Style>
-
-        <!--#endregion-->
         <!--#region BTNMENU-->
         <Style x:Key="BTNMENU" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="#78b000"/>
@@ -161,12 +129,12 @@
             <!--#region  COLS AND ROWS-->
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="120"/>
+                <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="20"/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="20"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
@@ -203,7 +171,7 @@
 
             <!--#region TITULO-->
             <TextBlock x:Name="Titulo"
-                       Text="Nueva receta"
+                       Text="Nuevo producto"
                        Grid.Column="1"
                        Grid.Row="1"
                        Grid.RowSpan="2"
@@ -268,8 +236,8 @@
             <!--#region CREAR-->
 
             <Button x:Name="BtnCrear"
-                    Grid.Column="5"
-                    Grid.Row="18"
+                    Grid.Column="1"
+                    Grid.Row="22"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Center"
                     Cursor="Hand"
@@ -281,8 +249,7 @@
                     Margin="0"
                     Style="{DynamicResource BTNMENU}"
                     Foreground="White"
-                    Padding="0" 
-                    Click="BtnCrear_Click" >
+                    Padding="0" Click="BtnCrear_Click" >
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -297,7 +264,7 @@
                                                 />
                     <TextBlock x:Name="txtBtnCrear"
                                Grid.Column="1"
-                               Text="Crear receta"
+                               Text="Crear producto"
                                FontWeight="Normal"
                                FontSize="12.5"
                                VerticalAlignment="Center"
@@ -311,8 +278,8 @@
 
             <!--#region BOTON ACTUALIZAR-->
             <Button x:Name="BtnActualizar"
-                    Grid.Column="5"
-                    Grid.Row="20"
+                    Grid.Column="1"
+                    Grid.Row="24"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Center"
                     Cursor="Hand"
@@ -341,7 +308,7 @@
                                                 />
                     <TextBlock x:Name="txtBotonActualizar"
                                Grid.Column="1"
-                               Text="Actualizar receta"
+                               Text="Actualizar cliente"
                                FontWeight="Normal"
                                FontSize="12.5"
                                VerticalAlignment="Center"
@@ -354,8 +321,8 @@
 
             <!--#region BOTON ELIMINAR-->
             <Button x:Name="BtnEliminar"
-                    Grid.Column="5"
-                    Grid.Row="22"
+                    Grid.Column="1"
+                    Grid.Row="26"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Center"
                     Cursor="Hand"
@@ -384,7 +351,7 @@
                                                 />
                     <TextBlock x:Name="txtBotonEliminar"
                                Grid.Column="1"
-                               Text="Eliminar receta "
+                               Text="Eliminar cliente"
                                FontWeight="Normal"
                                FontSize="12.5"
                                VerticalAlignment="Center"
@@ -394,7 +361,8 @@
                 </Grid>
             </Button>
             <!--#endregion-->
-<!--
+
+            <!--#region BOTON SELECCIONAR IMAGEN-->
             <Button x:Name="btnSeleccionarImagen"
                     Grid.Column="4"
                     Grid.Row="14"
@@ -411,8 +379,10 @@
                     Width="220"
                     Style="{DynamicResource BTNMENU}"
                     Foreground="White"
-                    Padding="0" >
-                
+                    Padding="0" Click="BtnSeleccionarImagen_Click" 
+                    
+                    >
+                <!-- Color para boton agregar nuevo mas oscuro = #7fba00 o  claro = #78b000 -->
                 <Grid Margin="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -435,31 +405,48 @@
                                FontFamily="Segoe UI"/>
                 </Grid>
             </Button>
--->
+
+            <!--#endregion-->
+
+            <!--#endregion-->
+
             <!--#region CONTENIDO-->
             <TextBlock Grid.Column="1"
                        Grid.Row="4"
                        Margin="5,0,0,0"
-                       Text="Id plato"
+                       Text="Id producto"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
                        />
-            <TextBox x:Name="txtIdPlato"
+            <TextBox x:Name="txtIdProducto"
                      Grid.Row="4"
                      Grid.Column="2"
                      VerticalAlignment="Center"
                      IsEnabled="False"/>
+
             <TextBlock Grid.Column="1"
-                       Grid.Row="6"
+                       Grid.Row="20"
                        Margin="5,0,0,0"
                        Text="Descripción"
                        HorizontalAlignment="Left"
-                       VerticalAlignment="Center"/>
+                       VerticalAlignment="Center"
+                       />
             <TextBox x:Name="txtDescripcion"
+                     Grid.Row="20"
+                     Grid.Column="2"
+                     VerticalAlignment="Center"
+                     mah:TextBoxHelper.Watermark="Descripción o nombre de producto"/>
+            <TextBlock Grid.Column="1"
+                       Grid.Row="6"
+                       Margin="5,0,0,0"
+                       Text="Precio compra"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"/>
+            <TextBox x:Name="txtPCompra"
                      Grid.Row="6"
                      Grid.Column="2"
                      VerticalAlignment="Center"
-                     mah:TextBoxHelper.Watermark="Ingrese descripción"/>
+                     mah:TextBoxHelper.Watermark="Ingrese precio compra"/>
             <TextBlock Grid.Column="1"
                        Grid.Row="8"
                        Margin="5,0,0,0"
@@ -474,19 +461,31 @@
             <TextBlock Grid.Column="1"
                        Grid.Row="10"
                        Margin="5,0,0,0"
-                       Text="Observaciones"
+                       Text="Stock mínimo "
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"/>
-            <TextBox x:Name="txtObservaciones"
+            <TextBox x:Name="txtStockMin"
                      Grid.Row="10"
                      Grid.Column="2"
-                     Grid.RowSpan="3"
-                     VerticalAlignment="Stretch"
-                     Margin="0,2"
-                     mah:TextBoxHelper.Watermark="Observaciones"/>
-            
-            
-            <!--
+                     VerticalAlignment="Center"
+                     mah:TextBoxHelper.Watermark="Stock mínimo"/>
+            <TextBlock Grid.Column="1"
+                       Grid.Row="12"
+                       Margin="5,0,0,0"
+                       Text="Stock máximo"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"/>
+            <TextBox x:Name="txtStockMax"
+                     Grid.Row="12"
+                     Grid.Column="2"
+                     VerticalAlignment="Center"
+                     mah:TextBoxHelper.Watermark="Stock máximo"/>
+
+
+
+
+
+            <!--#region IMAGEN-->
             <Border 
                     Grid.Column="4"
                     Grid.Row="4"
@@ -496,12 +495,12 @@
                     HorizontalAlignment="Center"
                     BorderBrush="DarkGray"
                     BorderThickness="1"
-
-                Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
-                <Image 
+                
+                    Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+                <!--<Image 
                        x:Name="imagenCliente"
                        Source="/img/profileImage.png"
-                       />
+                       />-->
                 <iconPack:PackIconMaterial  Kind="Camera"
                                             Grid.Column="0"
                                             HorizontalAlignment="Center"
@@ -513,8 +512,7 @@
                                             Background="#876eb0"
                                                 />
             </Border>
-                -->
-            
+            <!--#endregion-->
             <TextBlock Grid.Column="1"
                        Grid.Row="14"
                        Margin="5,0,0,0"
@@ -531,87 +529,41 @@
                       Margin="0"
                       mah:TextBoxHelper.Watermark="Seleccione unidad de medida"
                       />
-            <TextBox x:Name="txtBuscarProducto"
-                        Grid.Column="4"
-                       Grid.Row="4"
-                       mah:TextBoxHelper.Watermark="Buscar producto"
-                       HorizontalAlignment="Stretch"
-                       VerticalAlignment="Center" TextChanged="TxtBuscarProducto_TextChanged"/>
-            <!--#endregion-->
-            
-            <!--#region DATAGRID-->
-            <DataGrid x:Name="GridDatos"
-                      Grid.Row="6"
-                      Grid.Column="4"
-                      Grid.RowSpan="9"
-                      Grid.ColumnSpan="2"
-                      Margin="0,2"
-                      AutoGenerateColumns="False"
-                      Background="WhiteSmoke"
-                      FontSize="14"
-                      CanUserSortColumns="True"
-                      CanUserAddRows="False"
-                      CanUserDeleteRows="False"
-                      CanUserResizeColumns="True"
-                      CanUserResizeRows="False"
-                      HeadersVisibility="Column"
-                      GridLinesVisibility="All"
-                      VerticalGridLinesBrush="LightGray"
-                      HorizontalGridLinesBrush="LightGray"
-                      BorderBrush="#a5b2bd"
-                      BorderThickness="1"
-                      Foreground="Black" 
-                      >
-                <DataGrid.Columns >
+            <TextBlock Grid.Column="1"
+                       Grid.Row="16"
+                       Margin="5,0,0,0"
+                       Text="Bodega"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"/>
 
-                    <DataGridTextColumn Header="ID"
-                                        Width="auto"
-                                        Binding="{Binding RSP_ID}"/>
-                    <DataGridTextColumn Header="Descripción"
-                                        Width="*"
-                                        Binding="{Binding RSP_DESCRIPCION}"/>
-                    <DataGridTextColumn Header="Medida"
-                                        Width="*"
-                                        Binding="{Binding RSUM_DESCRIPCION}"/>
-                    <DataGridTemplateColumn Header="Opciones"
-                                            Width="80"
-                                            >
-                        <DataGridTemplateColumn.CellTemplate >
-                            <DataTemplate>
-                                <DockPanel >
-                                    <Button x:Name="btnAgregarProducto"
-                                            Width="auto"
-                                            Height="auto"
-                                            FontWeight="SemiBold"
-                                            Cursor="Hand" 
-                                            mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
-                                            Margin="0" 
-                                            HorizontalAlignment="Center"
-                                            CommandParameter="{Binding RSP_ID}" 
-                                            Click="BtnAgregarProducto_Click">
-                                        <iconPack:Material Kind="PlusCircle" />
-                                    </Button>
-                                    <Button x:Name="btnEliminarProducto"
-                                            Width="auto"
-                                            Height="auto"
-                                            FontWeight="SemiBold"
-                                            
-                                            Cursor="Hand" 
-                                            mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
-                                            Margin="0" 
-                                            HorizontalAlignment="Center"
-                                            CommandParameter="{Binding RSP_ID}" 
-                                            Click="BtnEliminarProducto_Click">
-                                        <iconPack:Material Kind="MinusCircle"/>
-                                    </Button>
-                                </DockPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
+            <ComboBox x:Name="cbxBodega"
+                      Grid.Row="16"
+                      Grid.Column="2"
+                      VerticalAlignment="Center"
+                      HorizontalAlignment="Stretch"
+                      Padding="0"
+                      Margin="0"
+                      mah:TextBoxHelper.Watermark="Seleccione bodega"
+                      />
+            <TextBlock Grid.Column="1"
+                       Grid.Row="18"
+                       Margin="5,0,0,0"
+                       Text="Impuesto"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"/>
+
+            <ComboBox x:Name="cbxImpuesto"
+                      Grid.Row="18"
+                      Grid.Column="2"
+                      VerticalAlignment="Center"
+                      HorizontalAlignment="Stretch"
+                      Padding="0"
+                      Margin="0"
+                      mah:TextBoxHelper.Watermark="Seleccione tipo de impuesto"
+                      />
 
 
-            </DataGrid>
+
             <!--#endregion-->
 
         </Grid>

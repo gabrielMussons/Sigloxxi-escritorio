@@ -1,4 +1,5 @@
-﻿using CapaDePresentacion.ViewsCocina;
+﻿using CapaDePresentacion.ViewsBodega;
+using CapaEntidad;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
@@ -13,21 +14,19 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using CapaDePresentacion;
-using CapaEntidad;
 
 namespace CapaDePresentacion
 {
     /// <summary>
-    /// Lógica de interacción para MenuCocina.xaml
+    /// Lógica de interacción para MenuBodega.xaml
     /// </summary>
-    public partial class MenuCocina : MetroWindow
+    public partial class MenuBodega : MetroWindow
     {
         public CE_RS_USUARIO usuario = new CE_RS_USUARIO();
         public CE_RS_ENTIDAD entidad = new CE_RS_ENTIDAD();
         public CE_RS_TIPO_ENTIDAD tipo_entidad = new CE_RS_TIPO_ENTIDAD();
 
-        public MenuCocina()
+        public MenuBodega()
         {
             InitializeComponent();
             GridMenu.Width = 80;
@@ -36,15 +35,15 @@ namespace CapaDePresentacion
         #region SINGLETON 
         //PATRON SINGLETON
         //1.Creamos una variable estatica de la ventana
-        public static MenuCocina ventanaMB;
+        public static MenuBodega ventanaMB;
 
         //2.Creamos un metodo para obtener la instancia
-        public static MenuCocina GetInstance()
+        public static MenuBodega GetInstance()
         {
 
             if (ventanaMB == null)
             {
-                ventanaMB = new MenuCocina();
+                ventanaMB = new MenuBodega();
             }
             return ventanaMB;
 
@@ -69,14 +68,9 @@ namespace CapaDePresentacion
             }
         }
 
-        private void BtnGestionPedidos_Click(object sender, RoutedEventArgs e)
+        private void BtnGestionInventario_Click(object sender, RoutedEventArgs e)
         {
-            DataContext = new MantenedorPedidos();
-        }
-
-        private void BtnGestionRecetas_Click(object sender, RoutedEventArgs e)
-        {
-            DataContext = new MantenedorRecetas();
+            DataContext = new MantenedorInventario();
         }
 
         private void BtnSalir_Click(object sender, RoutedEventArgs e)
@@ -87,7 +81,7 @@ namespace CapaDePresentacion
             entidad = new CE_RS_ENTIDAD();
             tipo_entidad = new CE_RS_TIPO_ENTIDAD();
             this.Close();
-            
+
         }
     }
 }

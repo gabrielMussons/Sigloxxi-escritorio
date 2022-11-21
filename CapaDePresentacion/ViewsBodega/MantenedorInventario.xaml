@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:iconPack="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material" 
-             x:Class="CapaDePresentacion.ViewsAdmin.MantenedorInventario" 
+             x:Class="CapaDePresentacion.ViewsBodega.MantenedorInventario" 
              mc:Ignorable="d" 
              d:DesignHeight="565"
              d:DesignWidth="920"
@@ -263,14 +263,11 @@
                     <DataGridTextColumn Header="Stock min"
                                         Width="*"
                                         Binding="{Binding RSP_STOCK_MIN}"/>
-                    <DataGridTextColumn Header="Stock max"
-                                        Width="*"
-                                        Binding="{Binding RSP_STOCK_MAX}"/>
                     <DataGridTextColumn Header="Stock"
                                         Width="*"
                                         Binding="{Binding RSP_STOCK}"/>
                     <DataGridTemplateColumn Header="Opciones"
-                                            Width="234"
+                                            Width="284"
                                             >
                         <DataGridTemplateColumn.CellTemplate >
                             <DataTemplate>
@@ -309,6 +306,20 @@
                                             Margin="0" 
                                             CommandParameter="{Binding RSP_ID}" Click="BtnEliminar_Click" 
                                         />
+                                    <Button x:Name="btnReponer"
+                                            Width="50"
+                                            FontWeight="SemiBold"
+                                            Height="20"
+                                            HorizontalAlignment="Center"
+                                            Cursor="Hand" 
+                                            mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
+                                            Margin="0" 
+                                            CommandParameter="{Binding RSP_ID}" Click="BtnReponer_Click" 
+                                            ToolTip="Reponer stock"
+                                            >
+                                        
+                                        <iconPack:Material Kind="PenPlus"/>
+                                    </Button>
                                 </DockPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

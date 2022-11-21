@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using MahApps.Metro.Controls;
 using CapaDePresentacion.ViewsAdmin;
+using CapaEntidad;
 
 namespace CapaDePresentacion
 {
@@ -10,6 +11,10 @@ namespace CapaDePresentacion
     /// </summary>
     public partial class MenuAdministrador : MetroWindow
     {
+        public CE_RS_USUARIO usuario = new CE_RS_USUARIO();
+        public CE_RS_ENTIDAD entidad = new CE_RS_ENTIDAD();
+        public CE_RS_TIPO_ENTIDAD tipo_entidad = new CE_RS_TIPO_ENTIDAD();
+
         public MenuAdministrador()
         {
             InitializeComponent();
@@ -70,6 +75,17 @@ namespace CapaDePresentacion
         private void BtnGestionInventario_Click(object sender, RoutedEventArgs e)
         {
             DataContext = new MantenedorInventario();
+        }
+
+        private void BtnSalir_Click(object sender, RoutedEventArgs e)
+        {
+
+            new MainWindow().Show();
+            usuario = new CE_RS_USUARIO();
+            entidad = new CE_RS_ENTIDAD();
+            tipo_entidad = new CE_RS_TIPO_ENTIDAD();
+            this.Close();
+
         }
     }
 }

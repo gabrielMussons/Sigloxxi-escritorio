@@ -162,6 +162,7 @@ namespace CapaDePresentacion.ViewsCocina
             }
         }
         #endregion
+
         #region CREAR DETALLE
         private void CrearDetalle(Dictionary<int,int> Detalle, string NombrePlato)
         {
@@ -219,8 +220,6 @@ namespace CapaDePresentacion.ViewsCocina
         }
         #endregion
 
-        
-        
 
         private void BtnAgregarProducto_Click(object sender, RoutedEventArgs e)
         {
@@ -229,6 +228,7 @@ namespace CapaDePresentacion.ViewsCocina
             {
                 DetalleReceta[id_producto] = DetalleReceta[id_producto]+1;
                 Console.WriteLine(DetalleReceta[id_producto]);
+                this.ToolTip = (DetalleReceta[id_producto]).ToString();  
             }
             else
             {

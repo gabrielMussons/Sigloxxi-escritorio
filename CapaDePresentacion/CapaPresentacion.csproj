@@ -213,6 +213,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MenuBodega.xaml.cs">
+      <DependentUpon>MenuBodega.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MenuCocina.xaml.cs">
       <DependentUpon>MenuCocina.xaml</DependentUpon>
     </Compile>
@@ -233,6 +236,12 @@
     </Compile>
     <Compile Include="ViewsAdmin\MantenedorMesas.xaml.cs">
       <DependentUpon>MantenedorMesas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewsBodega\CRUDInventario.xaml.cs">
+      <DependentUpon>CRUDInventario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewsBodega\MantenedorInventario.xaml.cs">
+      <DependentUpon>MantenedorInventario.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewsCocina\CRUDReceta.xaml.cs">
       <DependentUpon>CRUDReceta.xaml</DependentUpon>
@@ -256,6 +265,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MenuAdministrador.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenuBodega.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -292,6 +305,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewsAdmin\MantenedorMesas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewsBodega\CRUDInventario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewsBodega\MantenedorInventario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -366,8 +387,6 @@
       <Name>CapaLogicaNegocio</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="VewsBodega\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
