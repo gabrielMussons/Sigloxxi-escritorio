@@ -62,6 +62,20 @@ namespace CapaLogicaNegocio
             }
         }
         #endregion
+        #region DATOS TABLA VISTA MANTENEDOR CONTROL STOCK
+        public DataTable CargarListaProductoCritico(string texto)
+        {
+            try
+            {
+                return objDatos.CargarListaProductoCritico(texto);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        #endregion
 
         #region OBTENER 
         public int ObtenerRSP_ID(string v_rsp_descripcion)

@@ -194,7 +194,7 @@ namespace CapaDAL
                 OracleCommand cmd = new OracleCommand("SELECT * FROM RS_PRODUCTO " +
                     "JOIN RS_IMPUESTO ON rs_producto.rs_impuesto_rsi_id = rs_impuesto.rsi_id " +
                     "JOIN RS_UN_MEDIDA ON rs_producto.rs_un_medida_rsum_id = rs_un_medida.rsum_id " +
-                    "JOIN RS_BODEGA ON rs_bodega.rsb_id = rs_producto.rs_bodega_rsb_id WHERE RSP_ID LIKE '" + texto + "%'" + " OR RSP_DESCRIPCION LIKE '" + texto + "%'" + " ORDER BY RSP_ID", con.AbrirConexion());
+                    "JOIN RS_BODEGA ON rs_bodega.rsb_id = rs_producto.rs_bodega_rsb_id WHERE rs_producto.rsp_stock <= (rs_producto.rsp_stock_min * 1.10) and (RSP_DESCRIPCION LIKE  '"+texto+"%' or RSP_ID LIKE '"+texto+"%' ) ORDER BY RSP_ID", con.AbrirConexion());
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 ds.Clear();

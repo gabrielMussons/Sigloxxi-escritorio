@@ -263,6 +263,9 @@
                     <DataGridTextColumn Header="Stock min"
                                         Width="*"
                                         Binding="{Binding RSP_STOCK_MIN}"/>
+                    <DataGridTextColumn Header="Stock max"
+                                        Width="*"
+                                        Binding="{Binding RSP_STOCK_MAX}"/>
                     <DataGridTextColumn Header="Stock"
                                         Width="*"
                                         Binding="{Binding RSP_STOCK}"/>

@@ -49,7 +49,7 @@ namespace CapaDePresentacion.ViewsBodega
 
                 txtIdProducto.Text = id_producto.ToString();
                 txtDescripcion.Text = objeto_CE_RS_PRODUCTO.CE_RSP_DESCRIPCION;
-                txtStockMax.Text = objeto_CE_RS_PRODUCTO.CE_RSP_STOCK_MIN.ToString();
+                txtStockMax.Text = objeto_CE_RS_PRODUCTO.CE_RSP_STOCK_MAX.ToString();
                 txtStock.Text = objeto_CE_RS_PRODUCTO.CE_RSP_STOCK.ToString();
             }
             catch (Exception ex)
