@@ -12,7 +12,9 @@
         MinHeight="580" 
         MinWidth="400" 
         Icon="img/idea_logo.ico" 
-        WindowStartupLocation="CenterScreen" mah:ValidationHelper.ShowValidationErrorOnMouseOver="True" mah:ValidationHelper.CloseOnMouseLeftButtonDown="True" mah:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True">
+        WindowStartupLocation="CenterScreen" mah:ValidationHelper.ShowValidationErrorOnMouseOver="True" mah:ValidationHelper.CloseOnMouseLeftButtonDown="True" mah:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True"
+                 ResizeMode="NoResize">
+    
     <Grid>
         <StackPanel HorizontalAlignment="Center" Height="406"  VerticalAlignment="Center" Width="242"   >
             <Image  Margin="10" Source="img/idea_logo.png" Stretch="Fill"/>

@@ -187,7 +187,7 @@
                     Margin="0,0,0,0"
                     Style="{DynamicResource BTNMENU}"
                     Foreground="White"
-                    Padding="0" 
+                    Padding="0" Click="BtnGenerarSolicitud_Click" 
                     
                     >
                 <!-- Color para boton agregar nuevo mas oscuro = #7fba00 o  claro = #78b000 -->

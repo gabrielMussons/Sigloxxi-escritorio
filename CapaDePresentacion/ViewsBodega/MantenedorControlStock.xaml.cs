@@ -47,5 +47,12 @@ namespace CapaDePresentacion.ViewsBodega
         {
             CargarListaProductoCritico();
         }
+
+        private void BtnGenerarSolicitud_Click(object sender, RoutedEventArgs e)
+        {
+            SolicitudStock.GetInstance().Show();
+            SolicitudStock.GetInstance().Activate();
+            
+        }
     }
 }

@@ -249,6 +249,9 @@
     <Compile Include="ViewsBodega\ReposicionStock.xaml.cs">
       <DependentUpon>ReposicionStock.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewsBodega\SolicitudStock.xaml.cs">
+      <DependentUpon>SolicitudStock.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewsCocina\CRUDReceta.xaml.cs">
       <DependentUpon>CRUDReceta.xaml</DependentUpon>
     </Compile>
@@ -327,6 +330,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewsBodega\ReposicionStock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewsBodega\SolicitudStock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
