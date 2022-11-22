@@ -17,6 +17,7 @@ namespace CapaEntidad
         private int _CE_RS_UN_MEDIDA_RSUM_ID;
         private int _CE_RS_BODEGA_RSB_ID;
         private int _CE_RS_IMPUESTO_RSI_ID;
+        private int _CE_RSP_STOCK;
 
         public int CE_RSP_ID
         {
@@ -63,5 +64,6 @@ namespace CapaEntidad
             get => _CE_RS_IMPUESTO_RSI_ID; 
             set => _CE_RS_IMPUESTO_RSI_ID = value; 
         }
+        public int CE_RSP_STOCK { get => _CE_RSP_STOCK; set => _CE_RSP_STOCK = value; }
     }
 }

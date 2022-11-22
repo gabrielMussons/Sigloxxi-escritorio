@@ -240,8 +240,14 @@
     <Compile Include="ViewsBodega\CRUDInventario.xaml.cs">
       <DependentUpon>CRUDInventario.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewsBodega\MantenedorControlStock.xaml.cs">
+      <DependentUpon>MantenedorControlStock.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewsBodega\MantenedorInventario.xaml.cs">
       <DependentUpon>MantenedorInventario.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewsBodega\ReposicionStock.xaml.cs">
+      <DependentUpon>ReposicionStock.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewsCocina\CRUDReceta.xaml.cs">
       <DependentUpon>CRUDReceta.xaml</DependentUpon>
@@ -312,7 +318,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ViewsBodega\MantenedorControlStock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ViewsBodega\MantenedorInventario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewsBodega\ReposicionStock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

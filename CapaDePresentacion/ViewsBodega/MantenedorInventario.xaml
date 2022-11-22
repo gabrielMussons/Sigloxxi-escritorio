@@ -314,7 +314,8 @@
                                             Cursor="Hand" 
                                             mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
                                             Margin="0" 
-                                            CommandParameter="{Binding RSP_ID}" Click="BtnReponer_Click" 
+                                            CommandParameter="{Binding RSP_ID}" 
+                                            Click="BtnReponer_Click" 
                                             ToolTip="Reponer stock"
                                             >
                                         

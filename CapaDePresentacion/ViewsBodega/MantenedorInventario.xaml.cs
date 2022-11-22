@@ -24,6 +24,7 @@ namespace CapaDePresentacion.ViewsBodega
     {
         readonly CN_RS_PRODUCTO objeto_CN_RS_PRODUCTO = new CN_RS_PRODUCTO();
         readonly CRUDInventario ventanaCRUDInventario = new CRUDInventario();
+        readonly ReposicionStock ventanaReposicion = new ReposicionStock();
 
         public MantenedorInventario()
         {
@@ -138,7 +139,17 @@ namespace CapaDePresentacion.ViewsBodega
 
         private void BtnReponer_Click(object sender, RoutedEventArgs e)
         {
+            String dato = (((Button)sender).CommandParameter).ToString();
+            int id_producto = int.Parse(dato);
+            FrameAgregarProducto.SetValue(Panel.ZIndexProperty, 0);
+            ventanaReposicion.txtIdProducto.IsEnabled = false;
+            ventanaReposicion.txtStockMax.IsEnabled = false;
+            ventanaReposicion.txtDescripcion.IsEnabled = false;
+            ventanaReposicion.txtStock.IsEnabled = false;
+            ventanaReposicion.id_producto = id_producto;
+            ventanaReposicion.Consultar();
 
+            FrameAgregarProducto.Content = ventanaReposicion;
         }
     }
 }

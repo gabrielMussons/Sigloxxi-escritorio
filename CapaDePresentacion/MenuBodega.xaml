@@ -570,7 +570,7 @@
                                       Padding="0"
                                       Margin="0" 
                                       Style="{DynamicResource LISTITEMVIEWSTYLE}">
-                            <Button x:Name="BtnGestio"
+                            <Button x:Name="BtnControlStock"
                                     Height="70"
                                     Width="200"
                                     HorizontalAlignment="Left"
@@ -581,7 +581,7 @@
                                     Style="{DynamicResource BTNMENU}"
                                     Margin="0"
                                     Padding="0" 
-                                    Foreground="White" Click="BtnGestionInventario_Click" 
+                                    Foreground="White" Click="BtnControlStock_Click" 
                                     >
                                 <Grid Width="200"
                                       Margin="0">

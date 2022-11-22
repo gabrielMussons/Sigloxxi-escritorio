@@ -75,6 +75,7 @@ namespace CapaDAL
                 ce_rs_producto.CE_RS_UN_MEDIDA_RSUM_ID = Convert.ToInt32(row[6]);
                 ce_rs_producto.CE_RS_BODEGA_RSB_ID = Convert.ToInt32(row[7]);
                 ce_rs_producto.CE_RS_IMPUESTO_RSI_ID = Convert.ToInt32(row[8]);
+                ce_rs_producto.CE_RSP_STOCK = Convert.ToInt32(row[9]);
                 /*if ((row[12]) != null)
                 {
                     ce_rs_producto.CE_RSP_IMAGEN = (byte[])row[12];
@@ -111,6 +112,11 @@ namespace CapaDAL
                 cmd.Parameters.Add("V_RS_UN_MEDIDA_RSUM_ID", OracleDbType.Int32).Value = RS_PRODUCTO.CE_RS_UN_MEDIDA_RSUM_ID;
                 cmd.Parameters.Add("V_RS_BODEGA_RSB_ID", OracleDbType.Int32).Value = RS_PRODUCTO.CE_RS_BODEGA_RSB_ID;
                 cmd.Parameters.Add("V_RS_IMPUESTO_RSI_ID", OracleDbType.Int32).Value = RS_PRODUCTO.CE_RS_IMPUESTO_RSI_ID;
+                if (RS_PRODUCTO.CE_RSP_STOCK > 0 )
+                {
+                    cmd.Parameters.Add("V_RSP_STOCK", OracleDbType.Int32).Value = RS_PRODUCTO.CE_RSP_STOCK;
+                }
+                
                 cmd.ExecuteNonQuery();
                 cmd.Parameters.Clear();
                 con.CerrarConexion();

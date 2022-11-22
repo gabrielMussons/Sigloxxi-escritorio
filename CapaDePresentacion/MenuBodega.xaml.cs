@@ -83,5 +83,10 @@ namespace CapaDePresentacion
             this.Close();
 
         }
+
+        private void BtnControlStock_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = new MantenedorControlStock();
+        }
     }
 }
