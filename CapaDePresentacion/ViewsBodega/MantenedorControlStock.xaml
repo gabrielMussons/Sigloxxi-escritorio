@@ -204,7 +204,7 @@
                                                 Margin="0,0,10,0"
                                                 />
                     <TextBlock Grid.Column="1"
-                               Text="Generar solicitud"
+                               Text="Solicitud de stock"
                                FontWeight="Normal"
                                FontSize="12.5"
                                VerticalAlignment="Center"
@@ -242,7 +242,7 @@
                       BorderBrush="#a5b2bd"
                       BorderThickness="1"
                       Foreground="Black" 
-                      ToolTip="En esta lista se despliegan productos en los cuales el stock es un 110% del stock mínimo."
+                      ToolTip="En esta lista se despliegan productos en los cuales el stock es hasta un 110% del stock mínimo."
                       >
                 <DataGrid.Columns >
 

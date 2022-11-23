@@ -50,10 +50,10 @@
         </Grid.RowDefinitions>
         <!--#endregion-->
 
-        <Label Content="Solicitud de stock"
+        <Label Content="Solicitud de stock crítico"
                Grid.Row="1"
-               Grid.Column="3"
-               Grid.ColumnSpan="2"
+               Grid.Column="2"
+               Grid.ColumnSpan="4"
                HorizontalAlignment="Center"
                VerticalAlignment="Center"
                FontSize="20"
@@ -64,7 +64,6 @@
                Grid.Column="6"
                HorizontalAlignment="Center"
                VerticalAlignment="Center"
-               Height="40"
                />
 
         <Label Content="Nombre solicitante:"
@@ -152,23 +151,27 @@
                    />
         </Grid>
         
-        <Label Content="A continuación se presenta una lista que contiene los insumos con stock critico."
-               Grid.Column="1"
+        
+        <TextBlock
+            Grid.Column="1"
                Grid.Row="5"
+               Grid.RowSpan="2"
                Grid.ColumnSpan="6"
                FontSize="13"
-               HorizontalAlignment="Left"
-               VerticalAlignment="Bottom"
+               Margin="0,20"
+               HorizontalAlignment="Stretch"
+               VerticalAlignment="Top"
                FontFamily="Arial"
-               />
+            TextWrapping="WrapWithOverflow">
+            A continuación se presenta una lista de insumos que presentan un stock igual o menor al 110% del stock mínimo."
+        </TextBlock>
 
         <!--#region DATAGRID-->
         <DataGrid x:Name="GridDatos"
-                      Grid.Row="6"
+                      Grid.Row="7"
                       Grid.Column="1"
-                      Grid.RowSpan="8"
+                      Grid.RowSpan="7"
                       Grid.ColumnSpan="6"
-                      Margin="0,15,0,0"
                       AutoGenerateColumns="False"
                       Background="WhiteSmoke"
                       FontSize="12"
@@ -191,10 +194,10 @@
                 <DataGridTextColumn Header="ID"
                                         Width="auto"
                                         Binding="{Binding RSP_ID}"/>
-                <DataGridTextColumn Header="Descripcion"
+                <DataGridTextColumn Header="Descripción"
                                         Width="auto"
                                         Binding="{Binding RSP_DESCRIPCION}"/>
-                <DataGridTextColumn Header="Precio comp"
+                <DataGridTextColumn Header="Precio compra"
                                         Width="auto"
                                         Binding="{Binding RSP_PCOMPRA}"/>
                 <DataGridTextColumn Header="Medida"
@@ -222,6 +225,7 @@
                 Width="auto"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center" Click="BtnPrint_Click" 
+                ToolTip="Imprimir solicitud"
                 >
             <iconPack:Material Kind="Printer"/>
         </Button>

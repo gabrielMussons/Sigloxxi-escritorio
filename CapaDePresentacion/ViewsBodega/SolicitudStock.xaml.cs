@@ -71,7 +71,7 @@ namespace CapaDePresentacion.ViewsBodega
         {
             ventana = null;
         }
-        string aux;
+        
         private void BtnPrint_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -82,7 +82,6 @@ namespace CapaDePresentacion.ViewsBodega
                 {
                     printDialog.PrintVisual(GridContenido, "Nueva solicitud");
                 }
-                
             }
             catch (Exception ex)
             {
@@ -91,6 +90,7 @@ namespace CapaDePresentacion.ViewsBodega
             }
             finally {
                 btnPrint.Visibility = Visibility.Visible;
+                
             }
             
         }

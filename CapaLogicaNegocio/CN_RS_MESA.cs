@@ -87,9 +87,9 @@ namespace CapaLogicaNegocio
         //---------------------------------------------------------------
 
         #region DATOS TABLA VISTA MANTENEDOR MESAS
-        public DataTable CargarMesas()
+        public DataTable CargarMesas(string texto)
         {
-            return objDatos.CargarMesas();
+            return objDatos.CargarMesas(texto);
         }
         #endregion
 

@@ -27,12 +27,12 @@ namespace CapaDePresentacion.ViewsAdmin
         public MantenedorMesas()
         {
             InitializeComponent();
-            CargarDatosMesas();
+            CargarDatosMesas(txtBuscar.Text.ToString());
         }
 
-        void CargarDatosMesas()
+        void CargarDatosMesas(string texto)
         {
-            GridDatos.ItemsSource = objeto_CN_RS_MESA.CargarMesas().DefaultView;
+            GridDatos.ItemsSource = objeto_CN_RS_MESA.CargarMesas(texto).DefaultView;
         }
 
 
@@ -109,6 +109,11 @@ namespace CapaDePresentacion.ViewsAdmin
             ventanaCRUDMesa.txtSillas.IsEnabled = false;
             ventanaCRUDMesa.txtDescripcion.IsEnabled = false;
             ventanaCRUDMesa.cbxEstado.IsEnabled = false;
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CargarDatosMesas(txtBuscar.Text.ToString());
         }
     }
 }
