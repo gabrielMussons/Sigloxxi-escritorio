@@ -151,6 +151,23 @@ namespace CapaDePresentacion.ViewsBodega
 
             FrameAgregarProducto.Content = ventanaReposicion;
         }
+
+        private void BtnRetirar_Click(object sender, RoutedEventArgs e)
+        {
+            String dato = (((Button)sender).CommandParameter).ToString();
+            int id_producto = int.Parse(dato);
+            FrameAgregarProducto.SetValue(Panel.ZIndexProperty, 0);
+            ventanaReposicion.txtIdProducto.IsEnabled = false;
+            ventanaReposicion.txtStockMax.IsEnabled = false;
+            ventanaReposicion.txtDescripcion.IsEnabled = false;
+            ventanaReposicion.txtStock.IsEnabled = false;
+            ventanaReposicion.id_producto = id_producto;
+            ventanaReposicion.Consultar();
+            ventanaReposicion.lblCantidad.Text = "Cantidad de egreso";
+            ventanaReposicion.Titulo.Text = "Retiro de insumos";
+
+            FrameAgregarProducto.Content = ventanaReposicion;
+        }
     }
 }
 

@@ -63,26 +63,38 @@ namespace CapaDePresentacion.ViewsBodega
         {
             try
             {
-                int total = int.Parse(txtStock.Text.ToString()) + int.Parse(txtIngreso.Text.ToString());
-                if (total <= int.Parse(txtStockMax.Text))
+                int cantidad = int.Parse(txtCantidad.Text);
+                int stock = int.Parse(txtStock.Text);
+                int stockmax = int.Parse(txtStockMax.Text);
+
+                if (lblCantidad.Text.ToString()=="Cantidad de egreso")
                 {
-                    if (int.Parse(txtIngreso.Text)>0)
+                    if (cantidad<=stock && cantidad>0)
                     {
-                        Actualizar();
-                        MessageBox.Show("Stock repuesto correctamente.");
+                        ActualizarRetiro();
+                        MessageBox.Show("Stock actualizado correctamente.");
                         Content = new MantenedorInventario();
                     }
                     else
                     {
-                        MessageBox.Show("El ingreso debe ser mayor a 0.");
+                        MessageBox.Show("La cantidad de egreso no puede ser mayor al stock ni menor a 1.");
                     }
                     
                 }
                 else
                 {
-                    MessageBox.Show("La cantidad total no puede superar el stock máximo.");
+                    if (cantidad >= 1 && (cantidad+stock)<=stockmax)
+                    {
+                        ActualizarReposicion();
+                        MessageBox.Show("Stock actualizado correctamente.");
+                        Content = new MantenedorInventario();
+                    }
+                    else
+                    {
+                        MessageBox.Show("El total no puede superar el stock máx y la cantidad de ingreso no puede ser menor a 1.");
+                    }
+                    
                 }
-               
             }
             catch (Exception ex)
             {
@@ -92,13 +104,39 @@ namespace CapaDePresentacion.ViewsBodega
 
         }
 
-        private void Actualizar()
+        private void ActualizarReposicion()
         {
             try
             {
 
-                int nuevo_stock = int.Parse(txtIngreso.Text) + int.Parse(txtStock.Text);
+                int nuevo_stock = int.Parse(txtCantidad.Text) + int.Parse(txtStock.Text);
                 objeto_CE_RS_PRODUCTO.CE_RSP_STOCK = nuevo_stock;
+                //objeto_CE_RS_PRODUCTO.CE_RSP_IMAGEN = data_imagen;
+
+                objeto_CN_RS_PRODUCTO.Actualizar(objeto_CE_RS_PRODUCTO);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        private void ActualizarRetiro()
+        {
+            try
+            {
+
+                int nuevo_stock = int.Parse(txtStock.Text)-int.Parse(txtCantidad.Text);
+                if (nuevo_stock==0)
+                {
+                    objeto_CE_RS_PRODUCTO.CE_RSP_STOCK = 0;
+                }
+                else
+                {
+                    objeto_CE_RS_PRODUCTO.CE_RSP_STOCK = nuevo_stock;
+                }
+                
                 //objeto_CE_RS_PRODUCTO.CE_RSP_IMAGEN = data_imagen;
 
                 objeto_CN_RS_PRODUCTO.Actualizar(objeto_CE_RS_PRODUCTO);

@@ -171,7 +171,7 @@
 
             <!--#region TITULO-->
             <TextBlock x:Name="Titulo"
-                       Text="Reposición producto"
+                       Text="Reposición insumo"
                        Grid.Column="1"
                        Grid.Row="1"
                        Grid.RowSpan="2"
@@ -278,9 +278,6 @@
             <!--#endregion-->
 
 
-       
-
-
             <!--#endregion-->
 
             <!--#region CONTENIDO-->
@@ -307,13 +304,14 @@
                      Grid.Column="2"
                      VerticalAlignment="Center"
                      mah:TextBoxHelper.Watermark="Descripción producto"/>
-            <TextBlock Grid.Column="1"
+            <TextBlock x:Name="lblCantidad"
+                Grid.Column="1"
                        Grid.Row="12"
                        Margin="5,0,0,0"
                        Text="Cantidad ingreso"
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"/>
-            <TextBox x:Name="txtIngreso"
+            <TextBox x:Name="txtCantidad"
                      Grid.Row="12"
                      Grid.Column="2"
                      VerticalAlignment="Center"

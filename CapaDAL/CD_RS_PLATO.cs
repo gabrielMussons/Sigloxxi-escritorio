@@ -146,7 +146,7 @@ namespace CapaDAL
 
         //---------------------------------------------------------------------
 
-        #region CARGAR DATOS VISTA MANTENEDOR MESAS
+        #region CARGAR DATOS VISTA 
         public DataTable CargarPlatos()
         {
             try

@@ -116,7 +116,11 @@ namespace CapaDAL
                 {
                     cmd.Parameters.Add("V_RSP_STOCK", OracleDbType.Int32).Value = RS_PRODUCTO.CE_RSP_STOCK;
                 }
-                
+                if (RS_PRODUCTO.CE_RSP_STOCK == 0)
+                {
+                    cmd.Parameters.Add("V_RSP_STOCK", OracleDbType.Int32).Value = RS_PRODUCTO.CE_RSP_STOCK;
+                }
+
                 cmd.ExecuteNonQuery();
                 cmd.Parameters.Clear();
                 con.CerrarConexion();

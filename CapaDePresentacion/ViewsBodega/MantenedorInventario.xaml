@@ -146,7 +146,7 @@
             <!--#region BUSCADOR-->
             <TextBlock Grid.Row="1"
                        Grid.Column="1"
-                       Text="Buscar producto"
+                       Text="Buscar insumo"
                        Foreground="Black"
                        FontSize="15"
                        HorizontalAlignment="Stretch"
@@ -163,7 +163,7 @@
                      Height="20"
                      Margin="0"
                      BorderBrush="#a5b2bd"
-                     mah:TextBoxHelper.Watermark="Ingrese ID producto" TextChanged="TxtBuscar_TextChanged"
+                     mah:TextBoxHelper.Watermark="Ingrese ID o descripcion insumo" TextChanged="TxtBuscar_TextChanged"
                      
                      
                      
@@ -204,7 +204,7 @@
                                                 Margin="0,0,10,0"
                                                 />
                     <TextBlock Grid.Column="1"
-                               Text="Nuevo producto"
+                               Text="Nuevo insumo"
                                FontWeight="Normal"
                                FontSize="12.5"
                                VerticalAlignment="Center"
@@ -249,28 +249,22 @@
                                         Width="auto"
                                         Binding="{Binding RSP_ID}"/>
                     <DataGridTextColumn Header="Descripción"
-                                        Width="*"
+                                        Width="auto"
                                         Binding="{Binding RSP_DESCRIPCION}"/>
-                    <DataGridTextColumn Header="Precio comp"
-                                        Width="*"
-                                        Binding="{Binding RSP_PCOMPRA}"/>
-                    <DataGridTextColumn Header="Precio venta"
-                                        Width="*"
-                                        Binding="{Binding RSP_PVENTA}"/>
                     <DataGridTextColumn Header="Medida"
-                                        Width="*"
+                                        Width="auto"
                                         Binding="{Binding RSUM_DESCRIPCION}"/>
                     <DataGridTextColumn Header="Stock min"
-                                        Width="*"
+                                        Width="auto"
                                         Binding="{Binding RSP_STOCK_MIN}"/>
                     <DataGridTextColumn Header="Stock max"
-                                        Width="*"
+                                        Width="auto"
                                         Binding="{Binding RSP_STOCK_MAX}"/>
                     <DataGridTextColumn Header="Stock"
                                         Width="*"
                                         Binding="{Binding RSP_STOCK}"/>
                     <DataGridTemplateColumn Header="Opciones"
-                                            Width="284"
+                                            Width="334"
                                             >
                         <DataGridTemplateColumn.CellTemplate >
                             <DataTemplate>
@@ -323,6 +317,21 @@
                                             >
                                         
                                         <iconPack:Material Kind="PenPlus"/>
+                                    </Button>
+                                    <Button x:Name="btnRetirar"
+                                            Width="50"
+                                            FontWeight="SemiBold"
+                                            Height="20"
+                                            HorizontalAlignment="Center"
+                                            Cursor="Hand" 
+                                            mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
+                                            Margin="0" 
+                                            CommandParameter="{Binding RSP_ID}" 
+                                             
+                                            ToolTip="Retirar stock" Click="BtnRetirar_Click"
+                                            >
+
+                                        <iconPack:Material Kind="PenMinus"/>
                                     </Button>
                                 </DockPanel>
                             </DataTemplate>
