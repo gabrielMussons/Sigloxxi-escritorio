@@ -240,14 +240,23 @@
     <Compile Include="ViewsBodega\CRUDInventario.xaml.cs">
       <DependentUpon>CRUDInventario.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewsBodega\GestionCarta.xaml.cs">
+      <DependentUpon>GestionCarta.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewsBodega\MantenedorControlStock.xaml.cs">
       <DependentUpon>MantenedorControlStock.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewsBodega\MantenedorInventario.xaml.cs">
       <DependentUpon>MantenedorInventario.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewsBodega\PickingCarta.xaml.cs">
+      <DependentUpon>PickingCarta.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewsBodega\ReposicionStock.xaml.cs">
       <DependentUpon>ReposicionStock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewsBodega\RetirarInsumos.xaml.cs">
+      <DependentUpon>RetirarInsumos.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewsBodega\SolicitudStock.xaml.cs">
       <DependentUpon>SolicitudStock.xaml</DependentUpon>
@@ -321,6 +330,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ViewsBodega\GestionCarta.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ViewsBodega\MantenedorControlStock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -329,7 +342,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ViewsBodega\PickingCarta.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ViewsBodega\ReposicionStock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewsBodega\RetirarInsumos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

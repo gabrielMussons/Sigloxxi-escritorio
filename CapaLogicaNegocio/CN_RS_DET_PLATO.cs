@@ -87,11 +87,21 @@ namespace CapaLogicaNegocio
 
         //---------------------------------------------------------------
 
-        #region DATOS TABLA VISTA MANTENEDOR MESAS
-        public DataTable CargarPlatos(int id_plato)
+        #region DATOS TABLA VISTA DETALLE PLATO
+        public DataTable CargarDetPlatos(int id_plato)
         {
             return objDatos.CargarDetPlato(id_plato);
         }
         #endregion
+
+        #region DATOS TABLA VISTA DETALLE PLATO CARTA
+        public DataTable CargarDetPlatoCarta(int id_plato, int cantidad_platos_carta)
+        {
+            return objDatos.CargarDetPlatoCarta(id_plato, cantidad_platos_carta);
+        }
+        #endregion
+
+        
+
     }
 }

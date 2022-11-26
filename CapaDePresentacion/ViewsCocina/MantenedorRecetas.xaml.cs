@@ -114,6 +114,9 @@ namespace CapaDePresentacion.ViewsCocina
             ventanaCRUDReceta.GridDatos.IsEnabled = false;
         }
 
-       
+        private void BtnAgregarCarta_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

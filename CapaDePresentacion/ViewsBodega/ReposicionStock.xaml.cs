@@ -38,7 +38,6 @@ namespace CapaDePresentacion.ViewsBodega
         public int id_producto;
 
         #region CONSULTAR
-
         public void Consultar()
         {
             try
@@ -73,7 +72,16 @@ namespace CapaDePresentacion.ViewsBodega
                     {
                         ActualizarRetiro();
                         MessageBox.Show("Stock actualizado correctamente.");
-                        Content = new MantenedorInventario();
+                        if (picking==true)
+                        {
+                            MenuBodega.GetInstance().Activate();
+                            RetirarInsumos.GetInstance().Close();
+                        }
+                        else
+                        {
+                            Content = new MantenedorInventario();
+                        }
+                        
                     }
                     else
                     {
@@ -122,13 +130,15 @@ namespace CapaDePresentacion.ViewsBodega
                 throw ex;
             }
         }
+
+        public bool picking = false;
         private void ActualizarRetiro()
         {
             try
             {
 
-                int nuevo_stock = int.Parse(txtStock.Text)-int.Parse(txtCantidad.Text);
-                if (nuevo_stock==0)
+                int nuevo_stock = int.Parse(txtStock.Text) - int.Parse(txtCantidad.Text);
+                if (nuevo_stock == 0)
                 {
                     objeto_CE_RS_PRODUCTO.CE_RSP_STOCK = 0;
                 }
@@ -136,10 +146,11 @@ namespace CapaDePresentacion.ViewsBodega
                 {
                     objeto_CE_RS_PRODUCTO.CE_RSP_STOCK = nuevo_stock;
                 }
-                
+
                 //objeto_CE_RS_PRODUCTO.CE_RSP_IMAGEN = data_imagen;
 
                 objeto_CN_RS_PRODUCTO.Actualizar(objeto_CE_RS_PRODUCTO);
+
 
             }
             catch (Exception ex)
@@ -147,6 +158,7 @@ namespace CapaDePresentacion.ViewsBodega
 
                 throw ex;
             }
+
         }
 
         private void TxtIngreso_TextChanged(object sender, TextChangedEventArgs e)

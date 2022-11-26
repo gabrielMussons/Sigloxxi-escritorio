@@ -261,7 +261,7 @@
                                         Width="*"
                                         Binding="{Binding RSUM_DESCRIPCION}"/>
                     <DataGridTemplateColumn Header="Opciones"
-                                            Width="233"
+                                            Width="283"
                                             >
                         <DataGridTemplateColumn.CellTemplate >
                             <DataTemplate>
@@ -303,6 +303,21 @@
                                             CommandParameter="{Binding RSPL_ID}"
                                             Click="BtnEliminar_Click"
                                         />
+                                    <Button x:Name="btnAgregarCarta"
+                                            Width="50"
+                                            FontWeight="SemiBold"
+                                            Height="20"
+                                            HorizontalAlignment="Center"
+                                            Cursor="Hand" 
+                                            mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
+                                            Margin="0" 
+                                            CommandParameter="{Binding RSP_ID}" 
+                                             
+                                            ToolTip="Agregar a la carta" Click="BtnAgregarCarta_Click"
+                                            >
+
+                                        <iconPack:Material Kind="PenPlus"/>
+                                    </Button>
 
                                 </DockPanel>
                             </DataTemplate>

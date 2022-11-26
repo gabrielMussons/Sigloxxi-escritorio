@@ -35,17 +35,17 @@ namespace CapaDePresentacion
         #region SINGLETON 
         //PATRON SINGLETON
         //1.Creamos una variable estatica de la ventana
-        public static MenuBodega ventanaMB;
+        public static MenuBodega ventana;
 
         //2.Creamos un metodo para obtener la instancia
         public static MenuBodega GetInstance()
         {
 
-            if (ventanaMB == null)
+            if (ventana == null)
             {
-                ventanaMB = new MenuBodega();
+                ventana = new MenuBodega();
             }
-            return ventanaMB;
+            return ventana;
 
         }
         #endregion
@@ -87,6 +87,16 @@ namespace CapaDePresentacion
         private void BtnControlStock_Click(object sender, RoutedEventArgs e)
         {
             DataContext = new MantenedorControlStock();
+        }
+
+        private void BtnRecetas_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = new GestionCarta();
+        }
+
+        private void WdMenuCocina_Closed(object sender, EventArgs e)
+        {
+            ventana = null;
         }
     }
 }

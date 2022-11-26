@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:iconPack="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material" 
-             x:Class="CapaDePresentacion.ViewsBodega.MantenedorInventario" 
+             x:Class="CapaDePresentacion.ViewsBodega.GestionCarta" 
              mc:Ignorable="d" 
              d:DesignHeight="565"
              d:DesignWidth="920"
@@ -134,7 +134,7 @@
             <TextBlock Grid.Row="0"
                        Grid.Column="1"
                        Grid.ColumnSpan="5"
-                       Text="Mantenedor inventario"
+                       Text="Preparar insumos carta"
                        Foreground="Black"
                        FontSize="20"
                        HorizontalAlignment="Left"
@@ -143,80 +143,7 @@
                        />
             <!--#endregion-->
 
-            <!--#region BUSCADOR-->
-            <TextBlock Grid.Row="1"
-                       Grid.Column="1"
-                       Text="Buscar insumo"
-                       Foreground="Black"
-                       FontSize="15"
-                       HorizontalAlignment="Stretch"
-                       VerticalAlignment="Center"
-                       FontWeight="Normal"
-                       Margin="0"
-                       />
-
-            <TextBox x:Name="txtBuscar"
-                     Grid.Row="1"
-                     Grid.Column="1"
-                     HorizontalAlignment="Stretch"
-                     VerticalAlignment="Bottom"
-                     Height="20"
-                     Margin="0"
-                     BorderBrush="#a5b2bd"
-                     mah:TextBoxHelper.Watermark="Ingrese ID o descripcion insumo" TextChanged="TxtBuscar_TextChanged"
-                     
-                     
-                     
-                     />
-
-            <!--#endregion-->
-
             <!--#region BOTONES-->
-
-            <!--#region AGREGAR CLIENTE-->
-            <Button x:Name="btnNuevoProducto"
-                    Grid.Column="4"
-                    Grid.Row="1"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Bottom"
-                    Cursor="Hand"
-                    Height="25"
-                    Background="#78b000"  
-                    BorderBrush="#5c880b"
-                    BorderThickness="1.3"
-                    Margin="0,0,0,0"
-                    Style="{DynamicResource BTNMENU}"
-                    Foreground="White"
-                    Padding="0" Click="BtnNuevoProducto_Click"  
-                    
-                    >
-                <!-- Color para boton agregar nuevo mas oscuro = #7fba00 o  claro = #78b000 -->
-                <Grid Margin="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <iconPack:PackIconMaterial  Kind="PlusCircle"
-                                                Height="14"
-                                                Grid.Column="0"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                Margin="0,0,10,0"
-                                                />
-                    <TextBlock Grid.Column="1"
-                               Text="Nuevo insumo"
-                               FontWeight="Normal"
-                               FontSize="12.5"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Center"
-                               Margin="0"
-                               FontFamily="Segoe UI"/>
-                </Grid>
-            </Button>
-
-
-
-            <!--#endregion-->
 
             <!--#endregion-->
 
@@ -226,7 +153,6 @@
                       Grid.Column="1"
                       Grid.RowSpan="4"
                       Grid.ColumnSpan="4"
-                      Margin="0,15,0,0"
                       AutoGenerateColumns="False"
                       Background="WhiteSmoke"
                       FontSize="14"
@@ -247,91 +173,41 @@
 
                     <DataGridTextColumn Header="ID"
                                         Width="auto"
-                                        Binding="{Binding RSP_ID}"/>
-                    <DataGridTextColumn Header="Descripción"
-                                        Width="auto"
-                                        Binding="{Binding RSP_DESCRIPCION}"/>
-                    <DataGridTextColumn Header="Medida"
-                                        Width="auto"
-                                        Binding="{Binding RSUM_DESCRIPCION}"/>
-                    <DataGridTextColumn Header="Stock min"
-                                        Width="auto"
-                                        Binding="{Binding RSP_STOCK_MIN}"/>
-                    <DataGridTextColumn Header="Stock max"
-                                        Width="auto"
-                                        Binding="{Binding RSP_STOCK_MAX}"/>
-                    <DataGridTextColumn Header="Stock"
+                                        Binding="{Binding ID_CARTA}"/>
+                    <DataGridTextColumn Header="Fecha solicitud"
                                         Width="*"
-                                        Binding="{Binding RSP_STOCK}"/>
+                                        Binding="{Binding FECHA_SOLICITUD}"/>
+                    <DataGridTextColumn Header="Observaciones"
+                                        Width="*"
+                                        Binding="{Binding OBSERVACIONES}"/>
+                    <DataGridTextColumn Header="Nombre solicitante"
+                                        Width="*"
+                                        Binding="{Binding NOMBRE_SOLIC}"/>
+                    <DataGridTextColumn Header="Estado"
+                                        Width="*"
+                                        Binding="{Binding ESTADO}"/>
                     <DataGridTemplateColumn Header="Opciones"
-                                            Width="334"
+                                            Width="75"
+                                            
                                             >
                         <DataGridTemplateColumn.CellTemplate >
                             <DataTemplate>
                                 <DockPanel >
 
-                                    <Button x:Name="btnConsultar"
-                                            Width="70"
-                                            Height="20"
-                                            FontWeight="SemiBold"
-                                            Content="Consultar" 
-                                            Cursor="Hand" 
-                                            mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
-                                            Margin="0" 
-                                            HorizontalAlignment="Center"
-                                            CommandParameter="{Binding RSP_ID}" Click="BtnConsultar_Click"
-                                        />
-                                    <Button x:Name="btnModificar"
-                                            Width="70"
-                                            Height="20"
-                                            FontWeight="SemiBold"
-                                            Content="Modificar" 
-                                            Cursor="Hand" 
-                                            HorizontalAlignment="Center"
-                                            mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
-                                            Margin="5,0,5,0" 
-                                            CommandParameter="{Binding RSP_ID}" Click="BtnModificar_Click" 
-                                        />
-                                    <Button x:Name="btnEliminar"
-                                            Width="70"
-                                            FontWeight="SemiBold"
-                                            Height="20"
-                                            HorizontalAlignment="Center"
-                                            Content="Eliminar" 
-                                            Cursor="Hand" 
-                                            mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
-                                            Margin="0" 
-                                            CommandParameter="{Binding RSP_ID}" Click="BtnEliminar_Click" 
-                                        />
-                                    <Button x:Name="btnReponer"
-                                            Width="50"
-                                            FontWeight="SemiBold"
-                                            Height="20"
-                                            HorizontalAlignment="Center"
-                                            Cursor="Hand" 
-                                            mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
-                                            Margin="0" 
-                                            CommandParameter="{Binding RSP_ID}" 
-                                            Click="BtnReponer_Click" 
-                                            ToolTip="Reponer stock"
-                                            >
 
-                                        <iconPack:Material Kind="PenPlus"/>
-                                    </Button>
-                                    <Button x:Name="btnRetirar"
+                                    <Button x:Name="btnPreparar"
                                             Width="50"
+                                            Height="30"
                                             FontWeight="SemiBold"
-                                            Height="20"
                                             HorizontalAlignment="Center"
                                             Cursor="Hand" 
                                             mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
                                             Margin="0" 
-                                            CommandParameter="{Binding RSP_ID}" 
-                                             
-                                            ToolTip="Retirar stock" Click="BtnRetirar_Click"
+                                            CommandParameter="{Binding ID_CARTA}" 
+                                            
+                                            ToolTip="Ver platos de la carta" Click="BtnPreparar_Click"
                                             >
-
-                                        <iconPack:Material Kind="PenMinus"/>
+                                        <iconPack:Material Kind="Eye"/>
                                     </Button>
                                 </DockPanel>
                             </DataTemplate>

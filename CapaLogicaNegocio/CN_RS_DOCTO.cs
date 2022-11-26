@@ -91,6 +91,12 @@ namespace CapaLogicaNegocio
             return objDatos.CargarPedidos();
         }
         #endregion
+        #region DATOS TABLA2 
+        public DataTable CargarDatosCarta()
+        {
+            return objDatos.CargarCarta();
+        }
+        #endregion
         #region ACTUALIZAR ESTADO DETALLE PEDIDO
         public void ActualizarEstadoDetPedido(int id_detalle)
         {

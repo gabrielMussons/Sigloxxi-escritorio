@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="CN_RS_BODEGA.cs" />
     <Compile Include="CN_RS_COMUNA.cs" />
+    <Compile Include="CN_RS_DET_DOCTO.cs" />
     <Compile Include="CN_RS_DET_PLATO.cs" />
     <Compile Include="CN_RS_DOCTO.cs" />
     <Compile Include="CN_RS_ENTIDAD.cs" />

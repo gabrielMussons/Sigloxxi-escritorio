@@ -16,7 +16,7 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="ToolWindow"
     AllowsTransparency="False"
-    ResizeMode="CanResize"
+    ResizeMode="CanResize" Closed="WdMenuCocina_Closed"
     >
 
     <mah:MetroWindow.Resources>
@@ -598,6 +598,48 @@
                                                                 />
                                     <TextBlock Grid.Column="1"
                                                Text="Control stock"
+                                               FontWeight="SemiBold"
+                                               FontSize="15"
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Center"/>
+                                </Grid>
+                            </Button>
+                        </ListViewItem>
+                        <!--#endregion-->
+                        <!--#region GESTION RECETAS-->
+                        <ListViewItem Height="70"
+                                      Background="Transparent" 
+                                      Padding="0"
+                                      Margin="0" 
+                                      Style="{DynamicResource LISTITEMVIEWSTYLE}">
+                            <Button x:Name="BtnRecetas"
+                                    Height="70"
+                                    Width="200"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Cursor="Hand"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Style="{DynamicResource BTNMENU}"
+                                    Margin="0"
+                                    Padding="0" 
+                                    Foreground="White" Click="BtnRecetas_Click" 
+                                    >
+                                <Grid Width="200"
+                                      Margin="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="80" />
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <iconPack:PackIconMaterial  Kind="Food"
+                                                                Width="50"
+                                                                Grid.Column="0"
+                                                                HorizontalAlignment="Center"
+                                                                VerticalAlignment="Center"
+                                                                Margin="0"
+                                                                />
+                                    <TextBlock Grid.Column="1"
+                                               Text="Recetas"
                                                FontWeight="SemiBold"
                                                FontSize="15"
                                                VerticalAlignment="Center"

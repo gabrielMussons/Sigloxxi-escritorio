@@ -79,6 +79,7 @@
     <Compile Include="CD_DET_PLATO.cs" />
     <Compile Include="CD_RS_BODEGA.cs" />
     <Compile Include="CD_RS_COMUNA.cs" />
+    <Compile Include="CD_RS_DET_DOCTO.cs" />
     <Compile Include="CD_RS_DOCTO.cs" />
     <Compile Include="CD_RS_ENTIDAD.cs" />
     <Compile Include="CD_RS_ESTADO.cs" />

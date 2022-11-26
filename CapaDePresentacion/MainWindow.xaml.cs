@@ -101,7 +101,8 @@ namespace CapaDePresentacion
                     {
                         if (tipo == "Bodega")
                         {
-                            new MenuBodega().Show();
+                            MenuBodega.GetInstance().Show();
+                            MenuBodega.GetInstance().Activate();
                             this.Close();
                         }
                         else

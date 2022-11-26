@@ -16,6 +16,7 @@ namespace CapaEntidad
         private int _CE_RS_PLATO_RSPL_ID;
         private int _CE_RS_TIPO_DOCUMENTO_RSTD_ID;
         private int _CE_RS_ESTADO_RSES_ID;
+        private int _CE_RS_DOCTO_RSD_ID;
 
         public int CE_RSDET_ID { get => _CE_RSDET_ID; set => _CE_RSDET_ID = value; }
         public int CE_RSDET_INGRESO { get => _CE_RSDET_INGRESO; set => _CE_RSDET_INGRESO = value; }
@@ -25,5 +26,6 @@ namespace CapaEntidad
         public int CE_RS_PLATO_RSPL_ID { get => _CE_RS_PLATO_RSPL_ID; set => _CE_RS_PLATO_RSPL_ID = value; }
         public int CE_RS_TIPO_DOCUMENTO_RSTD_ID { get => _CE_RS_TIPO_DOCUMENTO_RSTD_ID; set => _CE_RS_TIPO_DOCUMENTO_RSTD_ID = value; }
         public int CE_RS_ESTADO_RSES_ID { get => _CE_RS_ESTADO_RSES_ID; set => _CE_RS_ESTADO_RSES_ID = value; }
+        public int CE_RS_DOCTO_RSD_ID { get => _CE_RS_DOCTO_RSD_ID; set => _CE_RS_DOCTO_RSD_ID = value; }
     }
 }

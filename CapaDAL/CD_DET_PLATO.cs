@@ -157,6 +157,33 @@ namespace CapaDAL
         }
         #endregion
 
+        #region CARGAR DATOS LISTA
+        public DataTable CargarDetPlatoCarta(int id_plato, int cantidad_platos_carta)
+        {
+            try
+            {
+                OracleCommand cmd = new OracleCommand("select rs_producto.rsp_descripcion as PRODUCTO,(rs_det_plato.rsdpl_cantidad) * "+cantidad_platos_carta+" as CANT_SOLICITADO," +
+                    "rs_producto.rsp_stock as STOCK_ACTUAL , rs_producto.rsp_id as ID_PRODUCTO FROM RS_DET_PLATO join rs_producto on rs_det_plato.rs_producto_rsp_id = rs_producto.rsp_id " +
+                    "JOIN rs_plato on rs_det_plato.rs_plato_rspl_id = rs_plato.rspl_id where rs_det_plato.rs_plato_rspl_id ="+id_plato, con.AbrirConexion());
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                ds.Clear();
+                da.Fill(ds);
+                DataTable dt = ds.Tables[0];
+                con.CerrarConexion();
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                con.CerrarConexion();
+                throw ex;
+            }
+
+        }
+        #endregion
+
+
 
     }
 }
