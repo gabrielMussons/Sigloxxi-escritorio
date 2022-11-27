@@ -89,5 +89,10 @@ namespace CapaDePresentacion
             this.Close();
             
         }
+
+        private void BtnGestionCarta_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = new MantenedorCarta();
+        }
     }
 }

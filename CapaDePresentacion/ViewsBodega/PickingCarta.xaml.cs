@@ -162,7 +162,7 @@ namespace CapaDePresentacion.ViewsBodega
                 int id_estado = objetoCNEstado.ObtenerRSES_ID("Preparado");
                 if (objetoCNDetalleDocto.Consultar(id_detalle).CE_RS_ESTADO_RSES_ID!=id_estado)
                 {
-                    objetoCNDetalleDocto.ActualizarEstadoDetalleCarta(id_detalle, id_estado);
+                    objetoCNDetalleDocto.ActualizarEstadoDetalleDocto(id_detalle, id_estado);
                 }
                 else
                 {

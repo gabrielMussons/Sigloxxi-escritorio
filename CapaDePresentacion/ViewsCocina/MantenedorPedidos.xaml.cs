@@ -23,7 +23,12 @@ namespace CapaDePresentacion.ViewsCocina
     public partial class MantenedorPedidos : UserControl
     {
         readonly CN_RS_DOCTO objeto_CN_RS_DOCTO = new CN_RS_DOCTO();
-        
+        readonly CN_RS_DET_DOCTO objeto_CN_RS_DET_DOCTO = new CN_RS_DET_DOCTO();
+        readonly CE_RS_DET_DOCTO objeto_CE_RS_DET_DOCTO = new CE_RS_DET_DOCTO();
+        readonly CN_RS_ESTADO objeto_CN_RS_ESTADO = new CN_RS_ESTADO();
+        readonly CE_RS_ESTADO objeto_CE_RS_ESTADO = new CE_RS_ESTADO();
+
+
         public MantenedorPedidos()
         {
             InitializeComponent();
@@ -41,14 +46,30 @@ namespace CapaDePresentacion.ViewsCocina
             try
             {
                 int id_detalle = int.Parse(((Button)sender).CommandParameter.ToString());
-                Console.WriteLine(id_detalle);
-                RetrasarEstadoPedido(id_detalle);
-                CargarDatosPedidos();
+                int id_estado_detalle = objeto_CN_RS_DET_DOCTO.Consultar(id_detalle).CE_RS_ESTADO_RSES_ID;
+                var estadoObjeto = objeto_CN_RS_ESTADO.ObtenerRSES_DESCRIPCION(id_estado_detalle);
+                string estado_string = estadoObjeto.CE_RSES_DESCRIPCION;
+
+
+                if (estado_string == "En preparacion")
+                {
+                    int id_estado = objeto_CN_RS_ESTADO.ObtenerRSES_ID("En cola");
+                    objeto_CN_RS_DET_DOCTO.ActualizarEstadoDetalleDocto(id_detalle, id_estado);
+                }
+                if (estado_string == "Preparado")
+                {
+                    int id_estado = objeto_CN_RS_ESTADO.ObtenerRSES_ID("En preparacion");
+                    objeto_CN_RS_DET_DOCTO.ActualizarEstadoDetalleDocto(id_detalle, id_estado);
+                }
             }
             catch (Exception ex)
             {
 
                 throw ex;
+            }
+            finally
+            {
+                CargarDatosPedidos();
             }
         }
 
@@ -57,22 +78,48 @@ namespace CapaDePresentacion.ViewsCocina
             try
             {
                 int id_detalle = int.Parse(((Button)sender).CommandParameter.ToString());
-                Console.WriteLine(id_detalle);
-                ActualizarEstadoPedido(id_detalle);
+                int id_estado_detalle = objeto_CN_RS_DET_DOCTO.Consultar(id_detalle).CE_RS_ESTADO_RSES_ID;
+                var estadoObjeto = objeto_CN_RS_ESTADO.ObtenerRSES_DESCRIPCION(id_estado_detalle);
+                string estado_string = estadoObjeto.CE_RSES_DESCRIPCION;
+
+                if (estado_string == "En cola")
+                {
+                    int id_estado = objeto_CN_RS_ESTADO.ObtenerRSES_ID("En preparacion");
+                    objeto_CN_RS_DET_DOCTO.ActualizarEstadoDetalleDocto(id_detalle, id_estado);
+                }
+                if (estado_string == "En preparacion")
+                {
+                    int id_estado = objeto_CN_RS_ESTADO.ObtenerRSES_ID("Preparado");
+                    objeto_CN_RS_DET_DOCTO.ActualizarEstadoDetalleDocto(id_detalle, id_estado);
+                }
+                if (estado_string == "Preparado")
+                {
+                    string message = "Confirme entrega del pedido:";
+                    System.Windows.Forms.MessageBoxButtons buttons = System.Windows.Forms.MessageBoxButtons.YesNo;
+                    System.Windows.Forms.DialogResult result = System.Windows.Forms.MessageBox.Show(message, null, buttons);
+                    if (result == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        int id_estado = objeto_CN_RS_ESTADO.ObtenerRSES_ID("Entregado");
+                        objeto_CN_RS_DET_DOCTO.ActualizarEstadoDetalleDocto(id_detalle, id_estado);
+                    }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally {
                 CargarDatosPedidos();
             }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
         }
 
-        private void ActualizarEstadoPedido(int id_detalle)
+        private void ActualizarEstadoPedido(int id_detalle,int id_estado)
         {
             try
             {
-                objeto_CN_RS_DOCTO.ActualizarEstadoDetPedido(id_detalle);
+                objeto_CN_RS_DET_DOCTO.ActualizarEstadoDetalleDocto(id_detalle,id_estado);
             }
             catch (Exception ex)
             {
@@ -80,17 +127,6 @@ namespace CapaDePresentacion.ViewsCocina
                 throw ex;
             }
         }
-        private void RetrasarEstadoPedido(int id_detalle)
-        {
-            try
-            {
-                objeto_CN_RS_DOCTO.RetrasarEstadoDetPedido(id_detalle);
-            }
-            catch (Exception ex)
-            {
 
-                throw ex;
-            }
-        }
     }
 }

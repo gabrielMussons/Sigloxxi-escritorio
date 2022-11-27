@@ -534,7 +534,16 @@
             <TextBox x:Name="txtBuscarProducto"
                         Grid.Column="4"
                        Grid.Row="4"
+                     Margin="5,0"
                        mah:TextBoxHelper.Watermark="Buscar producto"
+                       HorizontalAlignment="Stretch"
+                       VerticalAlignment="Center" TextChanged="TxtBuscarProducto_TextChanged"/>
+            <TextBox x:Name="txtCantidad"
+                        Grid.Column="5"
+                     Margin="5,0"
+                       Grid.Row="4"
+                     IsEnabled="False"
+                       mah:TextBoxHelper.Watermark="Cantidad producto"
                        HorizontalAlignment="Stretch"
                        VerticalAlignment="Center" TextChanged="TxtBuscarProducto_TextChanged"/>
             <!--#endregion-->

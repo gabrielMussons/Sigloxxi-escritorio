@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CapaLogicaNegocio;
 using CapaEntidad;
+using System.Threading;
 
 namespace CapaDePresentacion.ViewsCocina
 {
@@ -228,12 +229,16 @@ namespace CapaDePresentacion.ViewsCocina
             {
                 DetalleReceta[id_producto] = DetalleReceta[id_producto]+1;
                 Console.WriteLine(DetalleReceta[id_producto]);
-                this.ToolTip = (DetalleReceta[id_producto]).ToString();  
+                this.ToolTip = (DetalleReceta[id_producto]).ToString();
+                txtCantidad.Text = (DetalleReceta[id_producto]).ToString();
+                
             }
             else
             {
                 DetalleReceta.Add(id_producto, +1);
                 Console.WriteLine(DetalleReceta[id_producto]);
+                txtCantidad.Text = (DetalleReceta[id_producto]).ToString();
+                
             }
             
         }
@@ -246,11 +251,14 @@ namespace CapaDePresentacion.ViewsCocina
                 if (DetalleReceta[id_producto] == 1)
                 {
                     DetalleReceta.Remove(id_producto);
+                    txtCantidad.Text = "0";
+
                 }
                 else
                 {
                     DetalleReceta[id_producto] = DetalleReceta[id_producto] - 1;
                     Console.WriteLine(DetalleReceta[id_producto]);
+                    txtCantidad.Text = (DetalleReceta[id_producto]).ToString();
                 }
             }
         }

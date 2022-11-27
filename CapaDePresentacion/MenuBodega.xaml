@@ -639,7 +639,7 @@
                                                                 Margin="0"
                                                                 />
                                     <TextBlock Grid.Column="1"
-                                               Text="Recetas"
+                                               Text="Carta"
                                                FontWeight="SemiBold"
                                                FontSize="15"
                                                VerticalAlignment="Center"

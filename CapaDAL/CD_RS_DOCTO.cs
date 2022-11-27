@@ -213,54 +213,7 @@ namespace CapaDAL
         }
         #endregion
 
-        #region ACTUALIZAR ESTADO DETALLE PEDIDO
-        public void CD_ACTUALIZAR_ESTADO_DET_PED(int id_detalle)
-        {
-            OracleCommand cmd = new OracleCommand
-            {
-                Connection = con.AbrirConexion(),
-                CommandText = "actualizar_estado_detalle_docto",
-                CommandType = CommandType.StoredProcedure,
-            };
-            try
-            {
-                cmd.Parameters.Add("V_RSDET_ID", id_detalle);
-                cmd.ExecuteNonQuery();
-                cmd.Parameters.Clear();
-                con.CerrarConexion();
-            }
-            catch (Exception ex)
-            {
-                cmd.Parameters.Clear();
-                con.CerrarConexion();
-                throw ex;
-            }
-        }
-        #endregion
-        #region RETRASAR ESTADO DETALLE PEDIDO
-        public void CD_RETRASAR_ESTADO_DET_PED(int id_detalle)
-        {
-            OracleCommand cmd = new OracleCommand
-            {
-                Connection = con.AbrirConexion(),
-                CommandText = "retrasar_estado_detalle_docto",
-                CommandType = CommandType.StoredProcedure,
-            };
-            try
-            {
-                cmd.Parameters.Add("V_RSDET_ID", id_detalle);
-                cmd.ExecuteNonQuery();
-                cmd.Parameters.Clear();
-                con.CerrarConexion();
-            }
-            catch (Exception ex)
-            {
-                cmd.Parameters.Clear();
-                con.CerrarConexion();
-                throw ex;
-            }
-        }
-        #endregion
+
 
     }
 }

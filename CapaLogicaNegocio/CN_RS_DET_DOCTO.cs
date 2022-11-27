@@ -23,11 +23,11 @@ namespace CapaLogicaNegocio
        
 
         #region ACTUALIZAR ESTADO DETALLE CARTA
-        public void ActualizarEstadoDetalleCarta(int id_detalle, int id_estado)
+        public void ActualizarEstadoDetalleDocto(int id_detalle, int id_estado)
         {
             try
             {
-                objDatos.CD_ACTUALIZAR_ESTADO_DET_CARTA(id_detalle,id_estado);
+                objDatos.CD_ACTUALIZAR_ESTADO_DET_DOCTO(id_detalle,id_estado);
             }
             catch (Exception ex)
             {

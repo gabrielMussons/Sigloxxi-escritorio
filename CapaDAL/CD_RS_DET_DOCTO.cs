@@ -85,12 +85,12 @@ namespace CapaDAL
 
 
         #region ACTUALIZAR ESTADO DETALLE DOCTO
-        public void CD_ACTUALIZAR_ESTADO_DET_CARTA(int id_detalle, int id_estado)
+        public void CD_ACTUALIZAR_ESTADO_DET_DOCTO(int id_detalle, int id_estado)
         {
             OracleCommand cmd = new OracleCommand
             {
                 Connection = con.AbrirConexion(),
-                CommandText = "actualizar_estado_detalle_carta",
+                CommandText = "actualizar_estado_detalle_docto",
                 CommandType = CommandType.StoredProcedure,
             };
             try
@@ -109,6 +109,7 @@ namespace CapaDAL
             }
         }
         #endregion
+
 
         #region CONSULTAR 
         public CE_RS_DET_DOCTO CD_CONSULTAR(int id)
