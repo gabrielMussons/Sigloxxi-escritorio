@@ -219,6 +219,9 @@
     <Compile Include="MenuCocina.xaml.cs">
       <DependentUpon>MenuCocina.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MenuFinanzas.xaml.cs">
+      <DependentUpon>MenuFinanzas.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewsAdmin\CRUDCliente.xaml.cs">
       <DependentUpon>CRUDCliente.xaml</DependentUpon>
     </Compile>
@@ -276,6 +279,12 @@
     <Compile Include="ViewsCocina\MantenedorRecetas.xaml.cs">
       <DependentUpon>MantenedorRecetas.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewsFinanzas\MantenedorBoletas.xaml.cs">
+      <DependentUpon>MantenedorBoletas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewsFinanzas\MantenedorGanancias.xaml.cs">
+      <DependentUpon>MantenedorGanancias.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -297,6 +306,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MenuCocina.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MenuFinanzas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -383,6 +396,14 @@
     <Page Include="ViewsCocina\MantenedorRecetas.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="ViewsFinanzas\MantenedorBoletas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewsFinanzas\MantenedorGanancias.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

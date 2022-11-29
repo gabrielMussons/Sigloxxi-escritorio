@@ -298,6 +298,33 @@ namespace CapaDAL
         }
         #endregion
 
+        #region OBTENER DATATABLE BOLETAS
+        public DataTable CargarBoletas()
+        {
+            try
+            {
+                OracleCommand cmd = new OracleCommand("Select rs_docto.rsd_id as ID_CARTA,(TO_CHAR(rs_docto.rsd_fecha_hora, 'DD-MM-YY')) as FECHA_SOLICITUD,rs_docto.rsd_obs as OBSERVACIONES," +
+                    "rs_entidad.rse_nombre as NOMBRE_SOLIC,rs_estado.rses_descripcion as ESTADO FROM RS_DOCTO JOIN RS_ENTIDAD " +
+                    "ON rs_docto.rs_entidad_rse_id = rs_entidad.rse_id JOIN RS_ESTADO on rs_docto.rs_estado_rses_id = rs_estado.rses_id JOIN RS_TIPO_DOCUMENTO " +
+                    "on rs_docto.rs_tipo_documento_rstd_id = rs_tipo_documento.rstd_id WHERE upper(rs_tipo_documento.rstd_descripcion) = 'CARTA' order by FECHA_SOLICITUD desc"
+                    /*" AND rs_docto.rsd_fecha_hora >= (TO_CHAR(SYSDATE, 'DD-MM-YY')) "*/, con.AbrirConexion());
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                ds.Clear();
+                da.Fill(ds);
+                DataTable dt = ds.Tables[0];
+                con.CerrarConexion();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                con.CerrarConexion();
+                throw ex;
+            }
+
+        }
+        #endregion
+
 
 
     }
