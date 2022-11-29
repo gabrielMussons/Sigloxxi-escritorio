@@ -146,12 +146,14 @@ namespace CapaDAL
 
         //---------------------------------------------------------------------
 
+
         #region CARGAR DATOS VISTA 
-        public DataTable CargarPlatos()
+        public DataTable CargarPlatos(string texto)
         {
             try
             {
                 OracleCommand cmd = new OracleCommand("SELECT * FROM RS_PLATO JOIN RS_UN_MEDIDA ON rs_un_medida.rsum_id = rs_plato.rs_un_medida_rsum_id " +
+                    "WHERE RSPL_ID LIKE '" + texto + "%'" + " OR RSPL_DESCRIPCION LIKE '" + texto + "%'" + 
                     "ORDER BY RSPL_ID", con.AbrirConexion());
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 DataSet ds = new DataSet();

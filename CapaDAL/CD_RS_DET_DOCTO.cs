@@ -19,6 +19,137 @@ namespace CapaDAL
         #endregion
 
         //---------------------------------------------------------------------
+        #region CREAR 
+        public void CD_INSERTAR(CE_RS_DET_DOCTO RS_DET_DOCTO)
+        {
+            OracleCommand cmd = new OracleCommand()
+            {
+                Connection = con.AbrirConexion(),
+                CommandText = "SP_INSERTAR_RS_DET_DOCTO",
+                CommandType = CommandType.StoredProcedure,
+            };
+            try
+            {
+                if (RS_DET_DOCTO.CE_RSDET_INGRESO !=0)
+                {
+                    cmd.Parameters.Add("V_RSDET_INGRESO", OracleDbType.Int32).Value = RS_DET_DOCTO.CE_RSDET_INGRESO;
+                }
+                else
+                {
+                    cmd.Parameters.Add("V_RSDET_INGRESO", OracleDbType.Int32).Value = null;
+                }
+                if (RS_DET_DOCTO.CE_RSDET_EGRESO != 0)
+                {
+                    cmd.Parameters.Add("V_RSDET_EGRESO", OracleDbType.Int32).Value = RS_DET_DOCTO.CE_RSDET_EGRESO;
+                }
+                else
+                {
+                    cmd.Parameters.Add("V_RSDET_EGRESO", OracleDbType.Int32).Value = null;
+                }
+                if (RS_DET_DOCTO.CE_RS_PRODUCTO_RSP_ID != 0)
+                {
+                    cmd.Parameters.Add("V_RS_PRODUCTO_RSP_ID", OracleDbType.Int32).Value = RS_DET_DOCTO.CE_RS_PRODUCTO_RSP_ID;
+                }
+                else
+                {
+                    cmd.Parameters.Add("V_RS_PRODUCTO_RSP_ID", OracleDbType.Int32).Value = null;
+                }
+                if (RS_DET_DOCTO.CE_RS_BODEGA_RSB_ID != 0)
+                {
+                    cmd.Parameters.Add("V_RS_BODEGA_RSB_ID", OracleDbType.Int32).Value = RS_DET_DOCTO.CE_RS_BODEGA_RSB_ID;
+                }
+                else
+                {
+                    cmd.Parameters.Add("V_RS_BODEGA_RSB_ID", OracleDbType.Int32).Value = null;
+                }
+                if (RS_DET_DOCTO.CE_RS_PLATO_RSPL_ID != 0)
+                {
+                    cmd.Parameters.Add("V_RS_PLATO_RSPL_ID", OracleDbType.Int32).Value = RS_DET_DOCTO.CE_RS_PLATO_RSPL_ID;
+                }
+                else
+                {
+                    cmd.Parameters.Add("V_RS_PLATO_RSPL_ID", OracleDbType.Int32).Value = null;
+                }
+                
+                cmd.Parameters.Add("V_RS_TIPO_DOCUMENTO_RSTD_ID", OracleDbType.Int32).Value = RS_DET_DOCTO.CE_RS_TIPO_DOCUMENTO_RSTD_ID;
+                cmd.Parameters.Add("V_RS_ESTADO_RSES_ID", OracleDbType.Int32).Value = RS_DET_DOCTO.CE_RS_ESTADO_RSES_ID;
+                cmd.Parameters.Add("V_RS_DOCTO_RSD_ID", OracleDbType.Int32).Value = RS_DET_DOCTO.CE_RS_DOCTO_RSD_ID;
+
+
+                cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
+                con.CerrarConexion();
+            }
+            catch (Exception ex)
+            {
+                cmd.Parameters.Clear();
+                con.CerrarConexion();
+                throw ex;
+            }
+        }
+        #endregion
+
+        #region CONSULTAR 
+        public CE_RS_DET_DOCTO CD_CONSULTAR(int id)
+        {
+            try
+            {
+                OracleCommand cmd = new OracleCommand("SELECT * FROM RS_DET_DOCTO WHERE RSDET_ID =" + id, con.AbrirConexion());
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                ds.Clear();
+                da.Fill(ds);
+                DataTable dt;
+                dt = ds.Tables[0];
+                DataRow row = dt.Rows[0];
+
+                ce_rs_det_docto.CE_RSDET_ID = Convert.ToInt32(row[0]);
+                if (row[1] != DBNull.Value)
+                {
+                    ce_rs_det_docto.CE_RSDET_INGRESO = Convert.ToInt32(row[1]);
+                }
+                if (row[2] != DBNull.Value)
+                {
+                    ce_rs_det_docto.CE_RSDET_EGRESO = Convert.ToInt32(row[2]);
+                }
+                if (row[3] != DBNull.Value)
+                {
+                    ce_rs_det_docto.CE_RS_PRODUCTO_RSP_ID = Convert.ToInt32(row[3]);
+                }
+                if (row[4] != DBNull.Value)
+                {
+                    ce_rs_det_docto.CE_RS_BODEGA_RSB_ID = Convert.ToInt32(row[4]);
+                }
+                if (row[5] != DBNull.Value)
+                {
+                    ce_rs_det_docto.CE_RS_PLATO_RSPL_ID = Convert.ToInt32(row[5]);
+                }
+                if (row[6] != DBNull.Value)
+                {
+                    ce_rs_det_docto.CE_RS_TIPO_DOCUMENTO_RSTD_ID = Convert.ToInt32(row[6]);
+                }
+                if (row[7] != DBNull.Value)
+                {
+                    ce_rs_det_docto.CE_RS_ESTADO_RSES_ID = Convert.ToInt32(row[7]);
+                }
+                if (row[8] != DBNull.Value)
+                {
+                    ce_rs_det_docto.CE_RS_DOCTO_RSD_ID = Convert.ToInt32(row[8]);
+                }
+
+
+                con.CerrarConexion();
+                return ce_rs_det_docto;
+            }
+            catch (Exception ex)
+            {
+                con.CerrarConexion();
+                throw ex;
+            }
+
+        }
+        #endregion
+
 
 
 
@@ -111,66 +242,6 @@ namespace CapaDAL
         #endregion
 
 
-        #region CONSULTAR 
-        public CE_RS_DET_DOCTO CD_CONSULTAR(int id)
-        {
-            try
-            {
-                OracleCommand cmd = new OracleCommand("SELECT * FROM RS_DET_DOCTO WHERE RSDET_ID =" + id, con.AbrirConexion());
-                OracleDataAdapter da = new OracleDataAdapter(cmd);
-                DataSet ds = new DataSet();
-                ds.Clear();
-                da.Fill(ds);
-                DataTable dt;
-                dt = ds.Tables[0];
-                DataRow row = dt.Rows[0];
-
-                ce_rs_det_docto.CE_RSDET_ID = Convert.ToInt32(row[0]);
-                if (row[1]!=DBNull.Value)
-                {
-                    ce_rs_det_docto.CE_RSDET_INGRESO = Convert.ToInt32(row[1]);
-                }
-                if (row[2] != DBNull.Value)
-                {
-                    ce_rs_det_docto.CE_RSDET_EGRESO = Convert.ToInt32(row[2]);
-                }
-                if (row[3] != DBNull.Value)
-                {
-                    ce_rs_det_docto.CE_RS_PRODUCTO_RSP_ID = Convert.ToInt32(row[3]);
-                }
-                if (row[4] != DBNull.Value)
-                {
-                    ce_rs_det_docto.CE_RS_BODEGA_RSB_ID = Convert.ToInt32(row[4]);
-                }
-                if (row[5] != DBNull.Value)
-                {
-                    ce_rs_det_docto.CE_RS_PLATO_RSPL_ID = Convert.ToInt32(row[5]);
-                }
-                if (row[6] != DBNull.Value)
-                {
-                    ce_rs_det_docto.CE_RS_TIPO_DOCUMENTO_RSTD_ID = Convert.ToInt32(row[6]);
-                }
-                if (row[7] != DBNull.Value)
-                {
-                    ce_rs_det_docto.CE_RS_ESTADO_RSES_ID = Convert.ToInt32(row[7]);
-                }
-                if (row[8] != DBNull.Value)
-                {
-                    ce_rs_det_docto.CE_RS_DOCTO_RSD_ID = Convert.ToInt32(row[8]);
-                }
-
-
-                con.CerrarConexion();
-                return ce_rs_det_docto;
-            }
-            catch (Exception ex)
-            {
-                con.CerrarConexion();
-                throw ex;
-            }
-
-        }
-        #endregion
 
 
     }

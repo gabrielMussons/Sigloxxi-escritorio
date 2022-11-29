@@ -657,17 +657,6 @@
                      Grid.Column="2"
                      VerticalAlignment="Center"
                      mah:TextBoxHelper.Watermark="Ingrese contraseña"/>
-            <TextBlock Grid.Column="1"
-                       Grid.Row="30"
-                       Margin="5,0,0,0"
-                       Text="Repetir contraseña"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center"/>
-            <TextBox x:Name="txtContrasenia2"
-                     Grid.Row="30"
-                     Grid.Column="2"
-                     VerticalAlignment="Center"
-                     mah:TextBoxHelper.Watermark="Repita contraseña"/>
             
 
             <!--#endregion-->

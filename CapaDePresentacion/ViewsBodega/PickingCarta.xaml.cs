@@ -114,6 +114,7 @@ namespace CapaDePresentacion.ViewsBodega
             int id_estado_preparado = objetoCNEstado.ObtenerRSES_ID("Preparado");
             cantidad_platos_detalle_carta = objetoCNDetalleDocto.ObtenerIngresoEgresoDetPlatoCarta(id_plato, id_carta).CE_RSDET_EGRESO;
             CargarDetallePlatoCarta(id_plato, cantidad_platos_detalle_carta);
+
             if (objetoCEDetalleDocto.CE_RS_ESTADO_RSES_ID == id_estado_preparado)
             {
                 GridDetallePlato.IsEnabled = false;
@@ -160,9 +161,12 @@ namespace CapaDePresentacion.ViewsBodega
                 String dato = (((Button)sender).CommandParameter).ToString();
                 int id_detalle = int.Parse(dato);
                 int id_estado = objetoCNEstado.ObtenerRSES_ID("Preparado");
+                cantidad_platos_detalle_carta = objetoCNDetalleDocto.ObtenerIngresoEgresoDetPlatoCarta(id_plato, id_carta).CE_RSDET_EGRESO;
                 if (objetoCNDetalleDocto.Consultar(id_detalle).CE_RS_ESTADO_RSES_ID!=id_estado)
                 {
                     objetoCNDetalleDocto.ActualizarEstadoDetalleDocto(id_detalle, id_estado);
+                    Content = new PickingCarta();
+                    
                 }
                 else
                 {

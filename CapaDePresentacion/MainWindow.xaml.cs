@@ -75,26 +75,29 @@ namespace CapaDePresentacion
             try
             {
                 CN_RS_USUARIO ObjetoNegocioUsuario = new CN_RS_USUARIO();
-                CN_RS_TIPO_ENTIDAD ObjNegTipoEntidad = new CN_RS_TIPO_ENTIDAD();
-                CN_RS_ENTIDAD ObjNegEntidad = new CN_RS_ENTIDAD();
+                CN_RS_TIPO_ENTIDAD ObjNegocioTipoEntidad = new CN_RS_TIPO_ENTIDAD();
+                CN_RS_ENTIDAD ObjNegocioEntidad = new CN_RS_ENTIDAD();
                 
                 usuario = ObjetoNegocioUsuario.Autenticar(user, pass);
-                entidad = ObjNegEntidad.Consultar(usuario.CE_RS_ENTIDAD_RSE_ID);
-                tipo_entidad = ObjNegTipoEntidad.ObtenerRSTE_DESCRIPCION(entidad.CE_RS_TIPO_ENTIDAD_RSTE_ID);
+                entidad = ObjNegocioEntidad.Consultar(usuario.CE_RS_ENTIDAD_RSE_ID);
+                tipo_entidad = ObjNegocioTipoEntidad.ObtenerRSTE_DESCRIPCION(entidad.CE_RS_TIPO_ENTIDAD_RSTE_ID);
 
                 string tipo = tipo_entidad.CE_RSTE_DESCRIPCION;
 
                 if (tipo=="Administrador")
                 {
-                    new MenuAdministrador().Show();
+                    MenuAdministrador.GetInstance().Show();
+                    MenuAdministrador.GetInstance().Activate();
                     this.Close();
                 }
                 else
                 {
                     if (tipo == "Cocina")
                     {
-
-                        new MenuCocina().Show();
+                        var menu_cocina = MenuCocina.GetInstance();
+                        menu_cocina.entidad = entidad;
+                        menu_cocina.Show();
+                        menu_cocina.Activate();
                         this.Close();
                     }
                     else

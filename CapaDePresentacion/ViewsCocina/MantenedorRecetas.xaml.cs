@@ -28,12 +28,12 @@ namespace CapaDePresentacion.ViewsCocina
         public MantenedorRecetas()
         {
             InitializeComponent();
-            CargarDatosPlatos();
+            CargarDatosPlatos(txtBuscar.Text);
         }
 
-        void CargarDatosPlatos()
+        void CargarDatosPlatos(string texto)
         {
-            GridDatos.ItemsSource = objeto_CN_RS_PLATO.CargarPlatos().DefaultView;
+            GridDatos.ItemsSource = objeto_CN_RS_PLATO.CargarPlatos(texto).DefaultView;
         }
 
         //---------------------------------------------------------------------------------------------------------------
@@ -117,6 +117,11 @@ namespace CapaDePresentacion.ViewsCocina
         private void BtnAgregarCarta_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void TxtBuscar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CargarDatosPlatos(txtBuscar.Text);
         }
     }
 }

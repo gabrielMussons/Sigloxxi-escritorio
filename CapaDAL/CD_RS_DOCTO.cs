@@ -31,16 +31,30 @@ namespace CapaDAL
             };
             try
             {
+                
                 cmd.Parameters.Add("V_RSD_DSCTO", OracleDbType.Int32).Value = RS_DOCTO.CE_RSD_DSCTO;
                 cmd.Parameters.Add("V_RSD_FECHA_HORA", OracleDbType.Date).Value = RS_DOCTO.CE_RSD_FECHA_HORA;
-                cmd.Parameters.Add("V_RSD_HORA_ENTREGA", OracleDbType.Date).Value = RS_DOCTO.CE_RSD_HORA_ENTREGA;
+                if (RS_DOCTO.CE_RSD_HORA_ENTREGA.ToShortDateString() == DateTime.MinValue.ToShortDateString())
+                {
+                    cmd.Parameters.Add("V_RSD_HORA_ENTREGA", OracleDbType.Date).Value = null;
+                }
+                else
+                {
+                    cmd.Parameters.Add("V_RSD_HORA_ENTREGA", OracleDbType.Date).Value = RS_DOCTO.CE_RSD_HORA_ENTREGA;
+                }
                 cmd.Parameters.Add("V_RSD_PROPINA", OracleDbType.Int32).Value = RS_DOCTO.CE_RSD_PROPINA;
                 cmd.Parameters.Add("V_RSD_TOTAL", OracleDbType.Int32).Value = RS_DOCTO.CE_RSD_TOTAL;
                 cmd.Parameters.Add("V_RSD_OBS", OracleDbType.Varchar2).Value = RS_DOCTO.CE_RSD_OBS;
                 cmd.Parameters.Add("V_RS_TIPO_DOCUMENTO_RSTD_ID", OracleDbType.Int32).Value = RS_DOCTO.CE_RS_TIPO_DOCUMENTO_RSTD_ID;
-                cmd.Parameters.Add("V_RS_DET_DOCTO_RSDET_ID", OracleDbType.Int32).Value = RS_DOCTO.CE_RS_DET_DOCTO_RSDET_ID;
                 cmd.Parameters.Add("V_RS_ENTIDAD_RSE_ID", OracleDbType.Int32).Value = RS_DOCTO.CE_RS_ENTIDAD_RSE_ID;
-                cmd.Parameters.Add("V_RS_MESA_RSM_ID", OracleDbType.Int32).Value = RS_DOCTO.CE_RS_MESA_RSM_ID;
+                if (RS_DOCTO.CE_RS_MESA_RSM_ID != 0)
+                {
+                    cmd.Parameters.Add("V_RS_MESA_RSM_ID", OracleDbType.Int32).Value = RS_DOCTO.CE_RS_MESA_RSM_ID;
+                }
+                else
+                {
+                    cmd.Parameters.Add("V_RS_MESA_RSM_ID", OracleDbType.Int32).Value = null;
+                }
                 cmd.Parameters.Add("V_RS_ESTADO_RSES_ID", OracleDbType.Int32).Value = RS_DOCTO.CE_RS_ESTADO_RSES_ID;
 
                 cmd.ExecuteNonQuery();
@@ -69,19 +83,52 @@ namespace CapaDAL
                 DataTable dt;
                 dt = ds.Tables[0];
                 DataRow row = dt.Rows[0];
-
-                ce_rs_docto.CE_RSD_ID = Convert.ToInt32(row[0]);
-                ce_rs_docto.CE_RSD_DSCTO = Convert.ToInt32(row[1]);
-                ce_rs_docto.CE_RSD_FECHA_HORA = Convert.ToDateTime(row[2]);
-                ce_rs_docto.CE_RSD_HORA_ENTREGA = Convert.ToDateTime(row[3]);
-                ce_rs_docto.CE_RSD_PROPINA = Convert.ToInt32(row[4]);
-                ce_rs_docto.CE_RSD_TOTAL = Convert.ToInt32(row[5]);
-                ce_rs_docto.CE_RSD_OBS = Convert.ToString(row[6]);
-                ce_rs_docto.CE_RS_TIPO_DOCUMENTO_RSTD_ID = Convert.ToInt32(row[7]);
-                ce_rs_docto.CE_RS_DET_DOCTO_RSDET_ID = Convert.ToInt32(row[8]);
-                ce_rs_docto.CE_RS_ENTIDAD_RSE_ID = Convert.ToInt32(row[9]);
-                ce_rs_docto.CE_RS_MESA_RSM_ID = Convert.ToInt32(row[10]);
-                ce_rs_docto.CE_RS_ESTADO_RSES_ID = Convert.ToInt32(row[7]);
+                if (row[0] != DBNull.Value)
+                {
+                    ce_rs_docto.CE_RSD_ID = Convert.ToInt32(row[0]);
+                }
+                if (row[1] != DBNull.Value)
+                {
+                    ce_rs_docto.CE_RSD_DSCTO = Convert.ToInt32(row[1]);
+                }
+                if (row[2] != DBNull.Value)
+                {
+                    ce_rs_docto.CE_RSD_FECHA_HORA = Convert.ToDateTime(row[2]);
+                }
+                if (row[3] != DBNull.Value)
+                {
+                    ce_rs_docto.CE_RSD_HORA_ENTREGA = Convert.ToDateTime(row[3]);
+                }
+                if (row[4] != DBNull.Value)
+                {
+                    ce_rs_docto.CE_RSD_PROPINA = Convert.ToInt32(row[4]);
+                }
+                if (row[5] != DBNull.Value)
+                {
+                    ce_rs_docto.CE_RSD_TOTAL = Convert.ToInt32(row[5]);
+                }
+                if (row[6] != DBNull.Value)
+                {
+                    ce_rs_docto.CE_RSD_OBS = Convert.ToString(row[6]);
+                }
+                if (row[7] != DBNull.Value)
+                {
+                    ce_rs_docto.CE_RS_TIPO_DOCUMENTO_RSTD_ID = Convert.ToInt32(row[7]);
+                }
+                if (row[8] != DBNull.Value)
+                {
+                    ce_rs_docto.CE_RS_ENTIDAD_RSE_ID = Convert.ToInt32(row[8]);
+                }
+                if (row[9] != DBNull.Value)
+                {
+                    ce_rs_docto.CE_RS_MESA_RSM_ID = Convert.ToInt32(row[9]);
+                }
+                if (row[10] != DBNull.Value)
+                {
+                    ce_rs_docto.CE_RS_ESTADO_RSES_ID = Convert.ToInt32(row[10]);
+                }
+                
+                
                 con.CerrarConexion();
                 return ce_rs_docto;
             }
@@ -105,18 +152,32 @@ namespace CapaDAL
             };
             try
             {
-                cmd.Parameters.Add("V_RSD_DSCTO", OracleDbType.Int32).Value = RS_DOCTO.CE_RSD_ID;
+                cmd.Parameters.Add("V_RSD_ID", OracleDbType.Int32).Value = RS_DOCTO.CE_RSD_ID;
                 cmd.Parameters.Add("V_RSD_DSCTO", OracleDbType.Int32).Value = RS_DOCTO.CE_RSD_DSCTO;
                 cmd.Parameters.Add("V_RSD_FECHA_HORA", OracleDbType.Date).Value = RS_DOCTO.CE_RSD_FECHA_HORA;
-                cmd.Parameters.Add("V_RSD_HORA_ENTREGA", OracleDbType.Date).Value = RS_DOCTO.CE_RSD_HORA_ENTREGA;
+                if (RS_DOCTO.CE_RSD_HORA_ENTREGA.ToShortDateString() == DateTime.MinValue.ToShortDateString())
+                {
+                    cmd.Parameters.Add("V_RSD_HORA_ENTREGA", OracleDbType.Date).Value = null;
+                }
+                else
+                {
+                    cmd.Parameters.Add("V_RSD_HORA_ENTREGA", OracleDbType.Date).Value = RS_DOCTO.CE_RSD_HORA_ENTREGA;
+                }
                 cmd.Parameters.Add("V_RSD_PROPINA", OracleDbType.Int32).Value = RS_DOCTO.CE_RSD_PROPINA;
                 cmd.Parameters.Add("V_RSD_TOTAL", OracleDbType.Int32).Value = RS_DOCTO.CE_RSD_TOTAL;
                 cmd.Parameters.Add("V_RSD_OBS", OracleDbType.Varchar2).Value = RS_DOCTO.CE_RSD_OBS;
                 cmd.Parameters.Add("V_RS_TIPO_DOCUMENTO_RSTD_ID", OracleDbType.Int32).Value = RS_DOCTO.CE_RS_TIPO_DOCUMENTO_RSTD_ID;
-                cmd.Parameters.Add("V_RS_DET_DOCTO_RSDET_ID", OracleDbType.Int32).Value = RS_DOCTO.CE_RS_DET_DOCTO_RSDET_ID;
                 cmd.Parameters.Add("V_RS_ENTIDAD_RSE_ID", OracleDbType.Int32).Value = RS_DOCTO.CE_RS_ENTIDAD_RSE_ID;
-                cmd.Parameters.Add("V_RS_MESA_RSM_ID", OracleDbType.Int32).Value = RS_DOCTO.CE_RS_MESA_RSM_ID;
+                if (RS_DOCTO.CE_RS_MESA_RSM_ID!=0)
+                {
+                    cmd.Parameters.Add("V_RS_MESA_RSM_ID", OracleDbType.Int32).Value = RS_DOCTO.CE_RS_MESA_RSM_ID;
+                }
+                else
+                {
+                    cmd.Parameters.Add("V_RS_MESA_RSM_ID", OracleDbType.Int32).Value = null;
+                }
                 cmd.Parameters.Add("V_RS_ESTADO_RSES_ID", OracleDbType.Int32).Value = RS_DOCTO.CE_RS_ESTADO_RSES_ID;
+
                 cmd.ExecuteNonQuery();
                 cmd.Parameters.Clear();
                 con.CerrarConexion();
@@ -156,8 +217,32 @@ namespace CapaDAL
         #endregion
 
         //---------------------------------------------------------------------
+        #region OBTENER ULTIMO REGISTRO
+        public CE_RS_DOCTO ObtenerUltimoRegistro() {
+            try
+            {
+                OracleCommand cmd = new OracleCommand("select rsd_id  from rs_docto where rsd_id =(select max(rsd_id)from rs_docto) ", con.AbrirConexion());
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                ds.Clear();
+                da.Fill(ds);
+                DataTable dt;
+                dt = ds.Tables[0];
+                DataRow row = dt.Rows[0];
 
-        #region OBTENER DATATABLE
+                ce_rs_docto.CE_RSD_ID = Convert.ToInt32(row[0]);
+                con.CerrarConexion();
+                return ce_rs_docto;
+            }
+            catch (Exception ex)
+            {
+                con.CerrarConexion();
+                throw ex;
+            }
+        }
+        #endregion
+
+        #region OBTENER DATATABLE PEDIDOS
         public DataTable CargarPedidos()
         {
             try
@@ -186,7 +271,7 @@ namespace CapaDAL
         }
         #endregion
 
-        #region OBTENER DATATABLE
+        #region OBTENER DATATABLE CARTA
         public DataTable CargarCarta()
         {
             try
@@ -194,8 +279,8 @@ namespace CapaDAL
                 OracleCommand cmd = new OracleCommand("Select rs_docto.rsd_id as ID_CARTA,(TO_CHAR(rs_docto.rsd_fecha_hora, 'DD-MM-YY')) as FECHA_SOLICITUD,rs_docto.rsd_obs as OBSERVACIONES," +
                     "rs_entidad.rse_nombre as NOMBRE_SOLIC,rs_estado.rses_descripcion as ESTADO FROM RS_DOCTO JOIN RS_ENTIDAD " +
                     "ON rs_docto.rs_entidad_rse_id = rs_entidad.rse_id JOIN RS_ESTADO on rs_docto.rs_estado_rses_id = rs_estado.rses_id JOIN RS_TIPO_DOCUMENTO " +
-                    "on rs_docto.rs_tipo_documento_rstd_id = rs_tipo_documento.rstd_id WHERE upper(rs_tipo_documento.rstd_descripcion) = 'CARTA' AND " +
-                    "rs_docto.rsd_fecha_hora >= (TO_CHAR(SYSDATE, 'DD-MM-YY')) ", con.AbrirConexion());
+                    "on rs_docto.rs_tipo_documento_rstd_id = rs_tipo_documento.rstd_id WHERE upper(rs_tipo_documento.rstd_descripcion) = 'CARTA' order by FECHA_SOLICITUD desc"
+                    /*" AND rs_docto.rsd_fecha_hora >= (TO_CHAR(SYSDATE, 'DD-MM-YY')) "*/, con.AbrirConexion());
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 ds.Clear();

@@ -33,6 +33,10 @@ namespace CapaDePresentacion.ViewsCocina
         readonly CN_RS_PLATO objeto_CN_RS_PLATO = new CN_RS_PLATO();
         readonly CN_RS_UN_MEDIDA objeto_CN_UN_MEDIDA = new CN_RS_UN_MEDIDA();
 
+        public CE_RS_USUARIO usuario = new CE_RS_USUARIO();
+        public CE_RS_ENTIDAD entidad = new CE_RS_ENTIDAD();
+        public CE_RS_TIPO_ENTIDAD tipo_entidad = new CE_RS_TIPO_ENTIDAD();
+
         Dictionary<int, int> DetalleReceta = new Dictionary<int, int>();
 
         public int id_plato;

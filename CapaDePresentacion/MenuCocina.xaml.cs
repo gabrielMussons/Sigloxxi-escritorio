@@ -36,17 +36,17 @@ namespace CapaDePresentacion
         #region SINGLETON 
         //PATRON SINGLETON
         //1.Creamos una variable estatica de la ventana
-        public static MenuCocina ventanaMB;
+        public static MenuCocina ventana;
 
         //2.Creamos un metodo para obtener la instancia
         public static MenuCocina GetInstance()
         {
 
-            if (ventanaMB == null)
+            if (ventana == null)
             {
-                ventanaMB = new MenuCocina();
+                ventana = new MenuCocina();
             }
-            return ventanaMB;
+            return ventana;
 
         }
         #endregion
@@ -92,7 +92,16 @@ namespace CapaDePresentacion
 
         private void BtnGestionCarta_Click(object sender, RoutedEventArgs e)
         {
-            DataContext = new MantenedorCarta();
+            MantenedorCarta ventanaMantCarta = new MantenedorCarta();
+            ventanaMantCarta.entidad = entidad;
+            DataContext = ventanaMantCarta;
+            
+
+        }
+
+        private void WdMenuCocina_Closed(object sender, EventArgs e)
+        {
+            ventana = null;
         }
     }
 }

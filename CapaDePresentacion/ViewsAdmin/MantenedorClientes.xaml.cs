@@ -131,7 +131,6 @@ namespace CapaDePresentacion.ViewsAdmin
             ventana.txtApellidoM.IsEnabled = false;
             ventana.txtApellidoP.IsEnabled = false;
             ventana.txtContrasenia.IsEnabled = false;
-            ventana.txtContrasenia2.IsEnabled = false;
             ventana.txtEmail.IsEnabled = false;
             ventana.txtTelefono.IsEnabled = false;
             ventana.cbxTipoUsuario.IsEnabled = false;
@@ -141,7 +140,6 @@ namespace CapaDePresentacion.ViewsAdmin
             ventana.cbxComuna.IsEnabled = false;
             ventana.cbxEstado.IsEnabled = false;
             ventana.txtRazonSocial.IsEnabled = false;
-            ventana.txtContrasenia2.IsEnabled = false;
             
         }
 

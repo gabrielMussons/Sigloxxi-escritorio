@@ -20,23 +20,23 @@ namespace CapaLogicaNegocio
         //DETALLE PLATO
         //---------------------------------------------------------------
 
-       
-
-        #region ACTUALIZAR ESTADO DETALLE CARTA
-        public void ActualizarEstadoDetalleDocto(int id_detalle, int id_estado)
+        #region INSERTAR 
+        public void Insertar(CE_RS_DET_DOCTO ce_rs_det_docto)
         {
+
             try
             {
-                objDatos.CD_ACTUALIZAR_ESTADO_DET_DOCTO(id_detalle,id_estado);
+                objDatos.CD_INSERTAR(ce_rs_det_docto);
             }
             catch (Exception ex)
             {
 
                 throw ex;
             }
-
         }
         #endregion
+
+
 
         #region CONSULTAR
         public CE_RS_DET_DOCTO Consultar(int id)
@@ -77,6 +77,22 @@ namespace CapaLogicaNegocio
                 throw ex;
             }
             
+        }
+        #endregion
+
+        #region ACTUALIZAR ESTADO DETALLE CARTA
+        public void ActualizarEstadoDetalleDocto(int id_detalle, int id_estado)
+        {
+            try
+            {
+                objDatos.CD_ACTUALIZAR_ESTADO_DET_DOCTO(id_detalle, id_estado);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
         }
         #endregion
 

@@ -162,7 +162,7 @@
                      Height="20"
                      Margin="0"
                      BorderBrush="#a5b2bd"
-                     mah:TextBoxHelper.Watermark="Ingrese codigo o descripción" 
+                     mah:TextBoxHelper.Watermark="Ingrese codigo o descripción" TextChanged="TxtBuscar_TextChanged" 
                      
                      
                      
@@ -172,7 +172,7 @@
 
             <!--#region BOTONES-->
 
-            <!--#region AGREGAR CLIENTE-->
+            <!--#region AGREGAR RECETA-->
             <Button x:Name="btnAgregarNuevo"
                     Grid.Column="4"
                     Grid.Row="1"

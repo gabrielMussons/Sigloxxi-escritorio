@@ -24,17 +24,17 @@ namespace CapaDePresentacion
         #region SINGLETON 
         //PATRON SINGLETON
         //1.Creamos una variable estatica de la ventana
-        public static MenuAdministrador ventanaMB;
+        public static MenuAdministrador ventana;
 
         //2.Creamos un metodo para obtener la instancia
         public static MenuAdministrador GetInstance()
         {
 
-            if (ventanaMB == null)
+            if (ventana == null)
             {
-                ventanaMB = new MenuAdministrador();
+                ventana = new MenuAdministrador();
             }
-            return ventanaMB;
+            return ventana;
 
         }
 
@@ -86,6 +86,11 @@ namespace CapaDePresentacion
             tipo_entidad = new CE_RS_TIPO_ENTIDAD();
             this.Close();
 
+        }
+
+        private void WdMenuAdministrador_Closed(object sender, System.EventArgs e)
+        {
+            ventana = null;
         }
     }
 }

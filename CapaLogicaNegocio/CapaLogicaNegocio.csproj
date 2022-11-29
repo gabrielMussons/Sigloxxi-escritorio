@@ -52,6 +52,7 @@
     <Compile Include="CN_RS_MESA.cs" />
     <Compile Include="CN_RS_PLATO.cs" />
     <Compile Include="CN_RS_PRODUCTO.cs" />
+    <Compile Include="CN_RS_TIPO_DOCUMENTO.cs" />
     <Compile Include="CN_RS_TIPO_ENTIDAD.cs" />
     <Compile Include="CN_RS_UN_MEDIDA.cs" />
     <Compile Include="CN_RS_USUARIO.cs" />

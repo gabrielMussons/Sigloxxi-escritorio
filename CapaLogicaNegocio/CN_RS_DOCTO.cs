@@ -97,12 +97,12 @@ namespace CapaLogicaNegocio
             return objDatos.CargarCarta();
         }
         #endregion
-        #region ACTUALIZAR ESTADO DETALLE PEDIDO
-        public void ActualizarEstadoDetPedido(int id_detalle)
+        #region OBTENER ULTIMO REGISTRO 
+        public CE_RS_DOCTO ObtenerUltimoRegistro()
         {
             try
             {
-                objDatos.CD_ACTUALIZAR_ESTADO_DET_PED(id_detalle);
+                return objDatos.ObtenerUltimoRegistro();
             }
             catch (Exception ex)
             {
@@ -111,19 +111,7 @@ namespace CapaLogicaNegocio
             }
         }
         #endregion
-        #region RETRASAR ESTADO DETALLE PEDIDO
-        public void RetrasarEstadoDetPedido(int id_detalle)
-        {
-            try
-            {
-                objDatos.CD_RETRASAR_ESTADO_DET_PED(id_detalle);
-            }
-            catch (Exception ex)
-            {
 
-                throw ex;
-            }
-        }
-        #endregion
+
     }
 }

@@ -16,7 +16,7 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="ToolWindow"
     AllowsTransparency="False"
-    ResizeMode="CanResize"
+    ResizeMode="CanResize" Closed="WdMenuCocina_Closed"
     >
 
     <mah:MetroWindow.Resources>
@@ -590,11 +590,12 @@
                                         <ColumnDefinition Width="80" />
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <iconPack:PackIconMaterial  Kind="food"
-                                                                Width="50"
+                                    <iconPack:PackIconMaterial  Kind="RoomService"
+                                                                Width="17"
                                                                 Grid.Column="0"
                                                                 HorizontalAlignment="Center"
                                                                 VerticalAlignment="Center"
+                                                                
                                                                 Margin="0"
                                                                 />
                                     <TextBlock x:Name="tbMenu"
@@ -637,7 +638,7 @@
                                         <ColumnDefinition Width="80" />
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <iconPack:PackIconMaterial  Kind="FileDocumentEditOutline"
+                                    <iconPack:PackIconMaterial  Kind="Food"
                                                                 Width="50"
                                                                 Grid.Column="0"
                                                                 HorizontalAlignment="Center"

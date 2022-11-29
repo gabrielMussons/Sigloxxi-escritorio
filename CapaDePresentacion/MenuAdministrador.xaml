@@ -17,7 +17,7 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="ToolWindow"
     AllowsTransparency="False"
-    ResizeMode="CanResize"
+    ResizeMode="CanResize" Closed="WdMenuAdministrador_Closed"
     >
 
     <mah:MetroWindow.Resources>

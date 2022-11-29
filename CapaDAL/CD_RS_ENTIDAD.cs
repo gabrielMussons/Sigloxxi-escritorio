@@ -86,7 +86,7 @@ namespace CapaDAL
                 ce_rs_entidad.CE_RS_TIPO_ENTIDAD_RSTE_ID = Convert.ToInt32(row[9]);
                 ce_rs_entidad.CE_RS_COMUNA_RSC_ID = Convert.ToInt32(row[10]);
                 ce_rs_entidad.CE_RS_ESTADO_RSES_ID = Convert.ToInt32(row[11]);
-                if (row[12].ToString() != "")
+                if (row[12]!= DBNull.Value)
                 {
                     ce_rs_entidad.CE_RSE_IMAGEN =(byte[])row[12];
                 }
