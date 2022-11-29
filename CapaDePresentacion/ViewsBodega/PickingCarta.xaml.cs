@@ -119,7 +119,10 @@ namespace CapaDePresentacion.ViewsBodega
             {
                 GridDetallePlato.IsEnabled = false;
                 MessageBox.Show("Los insumos ya han sido preparados.");
-                
+            }
+            else
+            {
+                GridDetallePlato.IsEnabled = true;
             }
             
         }
@@ -160,13 +163,12 @@ namespace CapaDePresentacion.ViewsBodega
             {
                 String dato = (((Button)sender).CommandParameter).ToString();
                 int id_detalle = int.Parse(dato);
+                int id_plato = objetoCNDetalleDocto.Consultar(id_detalle).CE_RS_PLATO_RSPL_ID;
                 int id_estado = objetoCNEstado.ObtenerRSES_ID("Preparado");
                 cantidad_platos_detalle_carta = objetoCNDetalleDocto.ObtenerIngresoEgresoDetPlatoCarta(id_plato, id_carta).CE_RSDET_EGRESO;
                 if (objetoCNDetalleDocto.Consultar(id_detalle).CE_RS_ESTADO_RSES_ID!=id_estado)
                 {
-                    objetoCNDetalleDocto.ActualizarEstadoDetalleDocto(id_detalle, id_estado);
-                    Content = new PickingCarta();
-                    
+                    objetoCNDetalleDocto.ActualizarEstadoDetalleDocto(id_detalle, id_estado);                    
                 }
                 else
                 {

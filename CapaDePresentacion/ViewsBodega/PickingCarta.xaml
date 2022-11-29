@@ -181,6 +181,18 @@
                        HorizontalAlignment="Left"
                        FontWeight="Normal"/>
             <!--#endregion-->
+            <Label Content="Platos"
+                   Grid.Column="1"
+                   Grid.Row="4"
+                   FontSize="19"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"/>
+            <Label Content="Insumos"
+                   Grid.Column="4"
+                   Grid.Row="4"
+                   FontSize="19"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"/>
 
             <!--#region BOTONES-->
 
@@ -385,7 +397,7 @@
                       Foreground="Black" 
                       >
                 <DataGrid.Columns >
-                    <DataGridTextColumn Header="ID"
+                    <DataGridTextColumn Header="ID ins."
                                         Width="auto"
                                         Binding="{Binding ID_PRODUCTO}"/>
                     <DataGridTextColumn Header="Producto"
