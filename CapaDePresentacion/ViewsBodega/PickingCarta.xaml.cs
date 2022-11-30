@@ -168,10 +168,12 @@ namespace CapaDePresentacion.ViewsBodega
                 cantidad_platos_detalle_carta = objetoCNDetalleDocto.ObtenerIngresoEgresoDetPlatoCarta(id_plato, id_carta).CE_RSDET_EGRESO;
                 if (objetoCNDetalleDocto.Consultar(id_detalle).CE_RS_ESTADO_RSES_ID!=id_estado)
                 {
-                    objetoCNDetalleDocto.ActualizarEstadoDetalleDocto(id_detalle, id_estado);                    
+                    objetoCNDetalleDocto.ActualizarEstadoDetalleDocto(id_detalle, id_estado);
+                    
                 }
                 else
                 {
+                    GridDetallePlato.IsEnabled = false;
                     MessageBox.Show("Los insumos ya han sido preparados.");
                 }
                 

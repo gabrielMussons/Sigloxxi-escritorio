@@ -303,17 +303,17 @@ namespace CapaDAL
         {
             try
             {
-                OracleCommand cmd = new OracleCommand("select rs_det_docto.rs_docto_rsd_id as ID_BOLETA," +
-                    " rs_docto.rsd_fecha_hora as FECHA, sum(rs_det_docto.rsdet_egreso) as CANT_ITEMS, SUM" +
-                    "(rs_plato.rspl_pventa * rs_det_docto.rsdet_egreso) as TOTAL, rs_estado.rses_descripcion as" +
-                    " ESTADO, rs_entidad.rse_nombre as NOMBRE_CLIENTE, rs_entidad.rse_ap_pat as APELLIDO_PAT," +
-                    " rs_entidad.rse_rut as RUT_CLIENTE from rs_det_docto join rs_plato on rs_det_docto.rs_plato_rspl_id " +
-                    "= rs_plato.rspl_id join rs_tipo_documento on rs_det_docto.rs_tipo_documento_rstd_id = rs_tipo_documento.rstd_id " +
-                    "join rs_docto on rs_det_docto.rs_docto_rsd_id = rs_docto.rsd_id join rs_estado on " +
-                    "rs_docto.rs_estado_rses_id = rs_estado.rses_id join rs_entidad on rs_docto.rs_entidad_rse_id = " +
-                    "rs_entidad.rse_id where upper(rs_tipo_documento.rstd_descripcion) = 'BOLETA' and rs_docto.rs_estado_rses_id = " +
-                    "1 group by rs_det_docto.rs_docto_rsd_id, rs_docto.rsd_fecha_hora, rs_estado.rses_descripcion, rs_entidad.rse_nombre, " +
-                    "rs_entidad.rse_ap_pat, rs_entidad.rse_rut ", con.AbrirConexion());
+                OracleCommand cmd = new OracleCommand("select rs_docto.rsd_id as ID_BOLETA, rs_docto.rsd_fecha_hora as FECHA," +
+                    " sum(rs_det_docto.rsdet_egreso) as CANT_ITEMS, SUM(rs_plato.rspl_pventa * rs_det_docto.rsdet_egreso) as TOTAL," +
+                    " rs_entidad.rse_nombre as NOMBRE_CLIENTE, rs_entidad.rse_ap_pat as APELLIDO_PAT, rs_entidad.rse_rut as RUT_CLIENTE," +
+                    " rs_docto.rs_mesa_rsm_id as MESA, rs_estado.rses_descripcion as ESTADO from rs_docto " +
+                    "join rs_det_docto on rs_docto.rsd_id = rs_det_docto.rs_docto_rsd_id " +
+                    "join rs_plato on rs_det_docto.rs_plato_rspl_id = rs_plato.rspl_id " +
+                    "join rs_estado on rs_docto.rs_estado_rses_id = rs_estado.rses_id " +
+                    "join rs_entidad on rs_docto.rs_entidad_rse_id = rs_entidad.rse_id" +
+                    " where rs_docto.rs_tipo_documento_rstd_id = 2 " +
+                    "group by rs_docto.rsd_id, rs_docto.rsd_fecha_hora, rs_estado.rses_descripcion, rs_entidad.rse_nombre," +
+                    " rs_entidad.rse_ap_pat, rs_entidad.rse_rut, rs_docto.rs_mesa_rsm_id order by rsd_id asc ", con.AbrirConexion());
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 ds.Clear();
@@ -337,11 +337,11 @@ namespace CapaDAL
             try
             {
                 OracleCommand cmd = new OracleCommand("select rs_det_docto.rs_docto_rsd_id as ID_BOLETA, " +
-                    "rs_plato.rspl_descripcion as PLATO, rs_det_docto.rsdet_egreso as CANTIDAD, " +
-                    "rs_plato.rspl_pventa as PRECIO_UNITARIO from rs_det_docto join rs_plato " +
-                    "on rs_det_docto.rs_plato_rspl_id = rs_plato.rspl_id join rs_tipo_documento " +
-                    "on rs_det_docto.rs_tipo_documento_rstd_id = rs_tipo_documento.rstd_id " +
-                    "where upper(rs_tipo_documento.rstd_descripcion) = 'BOLETA' and rs_det_docto.rs_docto_rsd_id = "+ id_boleta, con.AbrirConexion());
+                    "rs_plato.rspl_descripcion as PLATO, sum(rs_det_docto.rsdet_egreso) as CANTIDAD, " +
+                    "rs_plato.rspl_pventa as PRECIO_UNITARIO from rs_det_docto " +
+                    "join rs_plato on rs_det_docto.rs_plato_rspl_id = rs_plato.rspl_id " +
+                    "join rs_tipo_documento on rs_det_docto.rs_tipo_documento_rstd_id = rs_tipo_documento.rstd_id" +
+                    " where rs_det_docto.rs_docto_rsd_id = "+id_boleta+" group by rs_det_docto.rs_docto_rsd_id, rs_plato.rspl_descripcion, rs_plato.rspl_pventa ", con.AbrirConexion());
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 ds.Clear();
@@ -364,17 +364,17 @@ namespace CapaDAL
         {
             try
             {
-                OracleCommand cmd = new OracleCommand("select rs_det_docto.rs_docto_rsd_id as ID_BOLETA," +
-                    " rs_docto.rsd_fecha_hora as FECHA, sum(rs_det_docto.rsdet_egreso) as CANT_ITEMS, SUM" +
-                    "(rs_plato.rspl_pventa * rs_det_docto.rsdet_egreso) as TOTAL, rs_estado.rses_descripcion as" +
-                    " ESTADO, rs_entidad.rse_nombre as NOMBRE_CLIENTE, rs_entidad.rse_ap_pat as APELLIDO_PAT," +
-                    " rs_entidad.rse_rut as RUT_CLIENTE from rs_det_docto join rs_plato on rs_det_docto.rs_plato_rspl_id " +
-                    "= rs_plato.rspl_id join rs_tipo_documento on rs_det_docto.rs_tipo_documento_rstd_id = rs_tipo_documento.rstd_id " +
-                    "join rs_docto on rs_det_docto.rs_docto_rsd_id = rs_docto.rsd_id join rs_estado on " +
-                    "rs_docto.rs_estado_rses_id = rs_estado.rses_id join rs_entidad on rs_docto.rs_entidad_rse_id = " +
-                    "rs_entidad.rse_id where upper(rs_tipo_documento.rstd_descripcion) = 'BOLETA' and rs_docto.rsd_id ="+id_boleta +
-                    " group by rs_det_docto.rs_docto_rsd_id, rs_docto.rsd_fecha_hora, rs_estado.rses_descripcion, rs_entidad.rse_nombre, " +
-                    "rs_entidad.rse_ap_pat, rs_entidad.rse_rut ", con.AbrirConexion());
+                OracleCommand cmd = new OracleCommand("select rs_docto.rsd_id as ID_BOLETA, rs_docto.rsd_fecha_hora as FECHA," +
+                    " sum(rs_det_docto.rsdet_egreso) as CANT_ITEMS, SUM(rs_plato.rspl_pventa * rs_det_docto.rsdet_egreso) as TOTAL," +
+                    " rs_entidad.rse_nombre as NOMBRE_CLIENTE, rs_entidad.rse_ap_pat as APELLIDO_PAT, rs_entidad.rse_rut as RUT_CLIENTE," +
+                    " rs_docto.rs_mesa_rsm_id as MESA, rs_estado.rses_descripcion as ESTADO from rs_docto " +
+                    "join rs_det_docto on rs_docto.rsd_id = rs_det_docto.rs_docto_rsd_id " +
+                    "join rs_plato on rs_det_docto.rs_plato_rspl_id = rs_plato.rspl_id " +
+                    "join rs_estado on rs_docto.rs_estado_rses_id = rs_estado.rses_id " +
+                    "join rs_entidad on rs_docto.rs_entidad_rse_id = rs_entidad.rse_id" +
+                    " where rs_docto.rs_tipo_documento_rstd_id = 2 and rs_docto.rsd_id = " + id_boleta+
+                    "group by rs_docto.rsd_id, rs_docto.rsd_fecha_hora, rs_estado.rses_descripcion, rs_entidad.rse_nombre," +
+                    " rs_entidad.rse_ap_pat, rs_entidad.rse_rut, rs_docto.rs_mesa_rsm_id order by rsd_id asc", con.AbrirConexion());
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 ds.Clear();
