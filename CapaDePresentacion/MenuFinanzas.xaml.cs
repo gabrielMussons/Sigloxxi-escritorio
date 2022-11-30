@@ -94,19 +94,20 @@ namespace CapaDePresentacion
 
         }*/
 
-        private void WdMenuCocina_Closed(object sender, EventArgs e)
-        {
-            ventana = null;
-        }
 
         private void BtnBolestas_Click(object sender, RoutedEventArgs e)
         {
-            DataContext = new MantenedorGanancias();
+            DataContext = new MantenedorBoletas();
         }
 
         private void BtnGanancias_Click(object sender, RoutedEventArgs e)
         {
             DataContext = new MantenedorBoletas();
+        }
+
+        private void WdMenuCocina_Closed(object sender, EventArgs e)
+        {
+            ventana = null;
         }
     }
 }

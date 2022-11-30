@@ -279,6 +279,9 @@
     <Compile Include="ViewsCocina\MantenedorRecetas.xaml.cs">
       <DependentUpon>MantenedorRecetas.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewsFinanzas\ImprimirBoleta.xaml.cs">
+      <DependentUpon>ImprimirBoleta.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewsFinanzas\MantenedorBoletas.xaml.cs">
       <DependentUpon>MantenedorBoletas.xaml</DependentUpon>
     </Compile>
@@ -397,6 +400,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="ViewsFinanzas\ImprimirBoleta.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ViewsFinanzas\MantenedorBoletas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -464,6 +471,8 @@
       <Name>CapaLogicaNegocio</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="img\imagen_por_defecto.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

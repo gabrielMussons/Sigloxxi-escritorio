@@ -81,22 +81,44 @@ namespace CapaLogicaNegocio
                 throw ex;
             }
         }
+
+        
         #endregion
 
         //---------------------------------------------------------------
 
-        #region DATOS TABLA 
+        #region DATOS PEDIDOS 
         public DataTable CargarDatosPedidos()
         {
             return objDatos.CargarPedidos();
         }
         #endregion
-        #region DATOS TABLA2 
+        #region DATOS CARTA 
         public DataTable CargarDatosCarta()
         {
             return objDatos.CargarCarta();
         }
         #endregion
+
+        #region DATOS BOLETAS 
+        public DataTable CargarListaBoletas()
+        {
+            return objDatos.CargarBoletas();
+        }
+        #endregion
+        #region DATOS DETALE BOLETA
+        public DataTable CargarListaDetalleBoleta(int id_boleta)
+        {
+            return objDatos.CargarDetalleBoleta(id_boleta);
+        }
+        #endregion
+        #region DATOS TOTAL BOLETA
+        public DataTable CargarListaTotalBoleta(int id_boleta)
+        {
+            return objDatos.CargarTotalBoleta(id_boleta);
+        }
+        #endregion
+
         #region OBTENER ULTIMO REGISTRO 
         public CE_RS_DOCTO ObtenerUltimoRegistro()
         {

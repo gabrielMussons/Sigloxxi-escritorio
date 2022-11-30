@@ -110,7 +110,17 @@ namespace CapaDePresentacion
                         }
                         else
                         {
-                            MessageBox.Show("Usted no tiene permisos para ingresar al sistema.");
+                            if (tipo == "Finanzas")
+                            {
+                                MenuFinanzas.GetInstance().Show();
+                                MenuFinanzas.GetInstance().Activate();
+                                this.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Usted no tiene permisos para ingresar al sistema.");
+                            }
+                            
                         }
                     }
                 }

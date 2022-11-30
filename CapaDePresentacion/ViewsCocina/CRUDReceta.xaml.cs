@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using CapaLogicaNegocio;
 using CapaEntidad;
 using System.Threading;
+using Microsoft.Win32;
+using System.IO;
 
 namespace CapaDePresentacion.ViewsCocina
 {
@@ -133,7 +135,12 @@ namespace CapaDePresentacion.ViewsCocina
             txtDescripcion.Text = plato.RSPL_DESCRIPCION.ToString();
             txtObservaciones.Text = plato.RSPL_OBS.ToString();
             txtPVenta.Text = plato.RSPL_PVENTA.ToString();
-            
+            if (plato.CE_RSPL_IMAGEN != null)
+            {
+                ImageSourceConverter img = new ImageSourceConverter();
+                imagenProducto.Source = (ImageSource)img.ConvertFrom(plato.CE_RSPL_IMAGEN);
+            }
+
         }
 
         #endregion
@@ -158,6 +165,7 @@ namespace CapaDePresentacion.ViewsCocina
                 objeto_CE_RS_PLATO.RSPL_PVENTA = int.Parse(txtPVenta.Text);
                 objeto_CE_RS_PLATO.RSPL_OBS = txtObservaciones.Text.ToString();
                 objeto_CE_RS_PLATO.RS_UN_MEDIDA_RSUM_ID = objeto_CN_UN_MEDIDA.ObtenerRSUM_ID(cbxUnidadMedida.Text);
+                objeto_CE_RS_PLATO.CE_RSPL_IMAGEN = data_imagen;
                 objeto_CN_RS_PLATO.Insertar(objeto_CE_RS_PLATO);
             }
             catch (Exception ex)
@@ -200,6 +208,7 @@ namespace CapaDePresentacion.ViewsCocina
                 objeto_CE_RS_PLATO.RSPL_PVENTA = int.Parse(txtPVenta.Text);
                 objeto_CE_RS_PLATO.RSPL_OBS = txtObservaciones.Text.ToString();
                 objeto_CE_RS_PLATO.RS_UN_MEDIDA_RSUM_ID = objeto_CN_UN_MEDIDA.ObtenerRSUM_ID(cbxUnidadMedida.Text);
+                objeto_CE_RS_PLATO.CE_RSPL_IMAGEN = data_imagen;
                 objeto_CN_RS_PLATO.Actualizar(objeto_CE_RS_PLATO);
             }
             catch (Exception ex)
@@ -270,6 +279,37 @@ namespace CapaDePresentacion.ViewsCocina
         private void TxtBuscarProducto_TextChanged(object sender, TextChangedEventArgs e)
         {
             CargarDatosProductos();
+        }
+
+        #region SUBIR IMAGEN
+        byte[] data_imagen;
+        private void SubirImagen()
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == true)
+            {
+                FileStream fs = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read);
+                data_imagen = new byte[fs.Length];
+                fs.Read(data_imagen, 0, System.Convert.ToInt32(fs.Length));
+                fs.Close();
+                ImageSourceConverter imgs = new ImageSourceConverter();
+                imagenProducto.SetValue(Image.SourceProperty, imgs.ConvertFromString(ofd.FileName.ToString()));
+                fs.Dispose();
+            }
+        }
+        #endregion
+
+        private void BtnSeleccionarImagen_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                SubirImagen();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message.ToString());
+            }
         }
     }
 }

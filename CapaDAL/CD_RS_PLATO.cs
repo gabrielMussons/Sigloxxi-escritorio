@@ -35,6 +35,8 @@ namespace CapaDAL
                 cmd.Parameters.Add("V_RSPL_PVENTA", OracleDbType.Int32).Value = RS_PLATO.RSPL_PVENTA;
                 cmd.Parameters.Add("V_RSPL_OBS", OracleDbType.Varchar2).Value = RS_PLATO.RSPL_OBS;
                 cmd.Parameters.Add("V_RS_UN_MEDIDA_RSUM_ID", OracleDbType.Int32).Value = RS_PLATO.RS_UN_MEDIDA_RSUM_ID;
+                cmd.Parameters.Add("V_RSPL_IMAGEN", OracleDbType.Blob).Value = RS_PLATO.CE_RSPL_IMAGEN;
+
                 cmd.ExecuteNonQuery();
                 cmd.Parameters.Clear();
                 con.CerrarConexion();
@@ -69,14 +71,22 @@ namespace CapaDAL
                 {
                     ce_rs_plato.RSPL_OBS = Convert.ToString(row[3]);
                     ce_rs_plato.RS_UN_MEDIDA_RSUM_ID = Convert.ToInt32(row[4]);
+                    if (row[5] != DBNull.Value)
+                    {
+                        ce_rs_plato.CE_RSPL_IMAGEN = (byte[])row[5];
+                    }
                 }
                 catch (Exception)
                 {
                     ce_rs_plato.RS_UN_MEDIDA_RSUM_ID = Convert.ToInt32(row[4]);
                     ce_rs_plato.RSPL_OBS = Convert.ToString(row[3]);
-                    
+                    if (row[5] != DBNull.Value)
+                    {
+                        ce_rs_plato.CE_RSPL_IMAGEN = (byte[])row[5];
+                    }
 
                 }
+                
                 con.CerrarConexion();
                 return ce_rs_plato;
             }
@@ -105,6 +115,7 @@ namespace CapaDAL
                 cmd.Parameters.Add("V_RSPL_PVENTA", OracleDbType.Int32).Value = RS_PLATO.RSPL_PVENTA;
                 cmd.Parameters.Add("V_RSPL_OBS", OracleDbType.Varchar2).Value = RS_PLATO.RSPL_OBS;
                 cmd.Parameters.Add("V_RS_UN_MEDIDA_RSUM_ID", OracleDbType.Int32).Value = RS_PLATO.RS_UN_MEDIDA_RSUM_ID;
+                cmd.Parameters.Add("V_RSPL_IMAGEN", OracleDbType.Blob).Value = RS_PLATO.CE_RSPL_IMAGEN;
                 cmd.ExecuteNonQuery();
                 cmd.Parameters.Clear();
                 con.CerrarConexion();

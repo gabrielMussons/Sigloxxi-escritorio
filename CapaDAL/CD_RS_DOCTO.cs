@@ -303,11 +303,17 @@ namespace CapaDAL
         {
             try
             {
-                OracleCommand cmd = new OracleCommand("Select rs_docto.rsd_id as ID_CARTA,(TO_CHAR(rs_docto.rsd_fecha_hora, 'DD-MM-YY')) as FECHA_SOLICITUD,rs_docto.rsd_obs as OBSERVACIONES," +
-                    "rs_entidad.rse_nombre as NOMBRE_SOLIC,rs_estado.rses_descripcion as ESTADO FROM RS_DOCTO JOIN RS_ENTIDAD " +
-                    "ON rs_docto.rs_entidad_rse_id = rs_entidad.rse_id JOIN RS_ESTADO on rs_docto.rs_estado_rses_id = rs_estado.rses_id JOIN RS_TIPO_DOCUMENTO " +
-                    "on rs_docto.rs_tipo_documento_rstd_id = rs_tipo_documento.rstd_id WHERE upper(rs_tipo_documento.rstd_descripcion) = 'CARTA' order by FECHA_SOLICITUD desc"
-                    /*" AND rs_docto.rsd_fecha_hora >= (TO_CHAR(SYSDATE, 'DD-MM-YY')) "*/, con.AbrirConexion());
+                OracleCommand cmd = new OracleCommand("select rs_det_docto.rs_docto_rsd_id as ID_BOLETA," +
+                    " rs_docto.rsd_fecha_hora as FECHA, sum(rs_det_docto.rsdet_egreso) as CANT_ITEMS, SUM" +
+                    "(rs_plato.rspl_pventa * rs_det_docto.rsdet_egreso) as TOTAL, rs_estado.rses_descripcion as" +
+                    " ESTADO, rs_entidad.rse_nombre as NOMBRE_CLIENTE, rs_entidad.rse_ap_pat as APELLIDO_PAT," +
+                    " rs_entidad.rse_rut as RUT_CLIENTE from rs_det_docto join rs_plato on rs_det_docto.rs_plato_rspl_id " +
+                    "= rs_plato.rspl_id join rs_tipo_documento on rs_det_docto.rs_tipo_documento_rstd_id = rs_tipo_documento.rstd_id " +
+                    "join rs_docto on rs_det_docto.rs_docto_rsd_id = rs_docto.rsd_id join rs_estado on " +
+                    "rs_docto.rs_estado_rses_id = rs_estado.rses_id join rs_entidad on rs_docto.rs_entidad_rse_id = " +
+                    "rs_entidad.rse_id where upper(rs_tipo_documento.rstd_descripcion) = 'BOLETA' and rs_docto.rs_estado_rses_id = " +
+                    "1 group by rs_det_docto.rs_docto_rsd_id, rs_docto.rsd_fecha_hora, rs_estado.rses_descripcion, rs_entidad.rse_nombre, " +
+                    "rs_entidad.rse_ap_pat, rs_entidad.rse_rut ", con.AbrirConexion());
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 ds.Clear();
@@ -325,7 +331,66 @@ namespace CapaDAL
         }
         #endregion
 
+        #region OBTENER DATATABLE DETALLE BOLETAS
+        public DataTable CargarDetalleBoleta(int id_boleta)
+        {
+            try
+            {
+                OracleCommand cmd = new OracleCommand("select rs_det_docto.rs_docto_rsd_id as ID_BOLETA, " +
+                    "rs_plato.rspl_descripcion as PLATO, rs_det_docto.rsdet_egreso as CANTIDAD, " +
+                    "rs_plato.rspl_pventa as PRECIO_UNITARIO from rs_det_docto join rs_plato " +
+                    "on rs_det_docto.rs_plato_rspl_id = rs_plato.rspl_id join rs_tipo_documento " +
+                    "on rs_det_docto.rs_tipo_documento_rstd_id = rs_tipo_documento.rstd_id " +
+                    "where upper(rs_tipo_documento.rstd_descripcion) = 'BOLETA' and rs_det_docto.rs_docto_rsd_id = "+ id_boleta, con.AbrirConexion());
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                ds.Clear();
+                da.Fill(ds);
+                DataTable dt = ds.Tables[0];
+                con.CerrarConexion();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                con.CerrarConexion();
+                throw ex;
+            }
 
+        }
+        #endregion
+
+        #region OBTENER DATATABLE TOTAL BOLETA
+        public DataTable CargarTotalBoleta(int id_boleta)
+        {
+            try
+            {
+                OracleCommand cmd = new OracleCommand("select rs_det_docto.rs_docto_rsd_id as ID_BOLETA," +
+                    " rs_docto.rsd_fecha_hora as FECHA, sum(rs_det_docto.rsdet_egreso) as CANT_ITEMS, SUM" +
+                    "(rs_plato.rspl_pventa * rs_det_docto.rsdet_egreso) as TOTAL, rs_estado.rses_descripcion as" +
+                    " ESTADO, rs_entidad.rse_nombre as NOMBRE_CLIENTE, rs_entidad.rse_ap_pat as APELLIDO_PAT," +
+                    " rs_entidad.rse_rut as RUT_CLIENTE from rs_det_docto join rs_plato on rs_det_docto.rs_plato_rspl_id " +
+                    "= rs_plato.rspl_id join rs_tipo_documento on rs_det_docto.rs_tipo_documento_rstd_id = rs_tipo_documento.rstd_id " +
+                    "join rs_docto on rs_det_docto.rs_docto_rsd_id = rs_docto.rsd_id join rs_estado on " +
+                    "rs_docto.rs_estado_rses_id = rs_estado.rses_id join rs_entidad on rs_docto.rs_entidad_rse_id = " +
+                    "rs_entidad.rse_id where upper(rs_tipo_documento.rstd_descripcion) = 'BOLETA' and rs_docto.rsd_id ="+id_boleta +
+                    " group by rs_det_docto.rs_docto_rsd_id, rs_docto.rsd_fecha_hora, rs_estado.rses_descripcion, rs_entidad.rse_nombre, " +
+                    "rs_entidad.rse_ap_pat, rs_entidad.rse_rut ", con.AbrirConexion());
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                ds.Clear();
+                da.Fill(ds);
+                DataTable dt = ds.Tables[0];
+                con.CerrarConexion();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                con.CerrarConexion();
+                throw ex;
+            }
+
+        }
+        #endregion
 
     }
 }
