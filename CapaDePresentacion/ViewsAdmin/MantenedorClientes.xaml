@@ -134,7 +134,7 @@
             <TextBlock Grid.Row="0"
                        Grid.Column="1"
                        Grid.ColumnSpan="5"
-                       Text="Mantenedor clientes"
+                       Text="Mantenedor personas y usuarios"
                        Foreground="Black"
                        FontSize="20"
                        HorizontalAlignment="Left"
@@ -146,7 +146,7 @@
             <!--#region BUSCADOR-->
             <TextBlock Grid.Row="1"
                        Grid.Column="1"
-                       Text="Buscar cliente"
+                       Text="Buscar"
                        Foreground="Black"
                        FontSize="15"
                        HorizontalAlignment="Stretch"
@@ -162,7 +162,7 @@
                      Height="20"
                      Margin="0"
                      BorderBrush="#a5b2bd"
-                     mah:TextBoxHelper.Watermark="Ingrese rut" TextChanged="TxtBuscar_TextChanged"
+                     mah:TextBoxHelper.Watermark="Ingrese rut o id" TextChanged="TxtBuscar_TextChanged"
                      
                      
                      
@@ -204,7 +204,7 @@
                                                 Margin="0,0,10,0"
                                                 />
                     <TextBlock Grid.Column="1"
-                               Text="Nuevo cliente"
+                               Text="Crear nuevo"
                                FontWeight="Normal"
                                FontSize="12.5"
                                VerticalAlignment="Center"

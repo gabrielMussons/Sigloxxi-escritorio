@@ -73,7 +73,7 @@ namespace CapaDePresentacion.ViewsAdmin
             ventanaCRUDCliente.Consultar();
 
             FrameAgregarCliente.Content = ventanaCRUDCliente;
-            ventanaCRUDCliente.Titulo.Text = "Consulta cliente";
+            ventanaCRUDCliente.Titulo.Text = "Consulta";
 
             ventanaCRUDCliente.btnSeleccionarImagen.IsEnabled = false;
             ventanaCRUDCliente.BtnActualizar.IsEnabled = false;
@@ -94,7 +94,7 @@ namespace CapaDePresentacion.ViewsAdmin
             
 
             FrameAgregarCliente.SetValue(Panel.ZIndexProperty, 0);
-            ventanaCRUDCliente.Titulo.Text = "Eliminar cliente";
+            ventanaCRUDCliente.Titulo.Text = "Eliminar";
 
             ventanaCRUDCliente.BtnCrear.IsEnabled = false;
             ventanaCRUDCliente.BtnActualizar.IsEnabled = false;
@@ -112,7 +112,7 @@ namespace CapaDePresentacion.ViewsAdmin
             String ru = (((Button)sender).CommandParameter).ToString();
             int idEntidad = int.Parse(ru);
             FrameAgregarCliente.SetValue(Panel.ZIndexProperty, 0);
-            ventanaCRUDCliente.Titulo.Text = "Modificar cliente";
+            ventanaCRUDCliente.Titulo.Text = "Modificar";
 
             ventanaCRUDCliente.BtnCrear.IsEnabled = false;
             ventanaCRUDCliente.BtnEliminar.IsEnabled = false;

@@ -179,7 +179,7 @@
             
             <!--#region TITULO-->
             <TextBlock x:Name="Titulo"
-                       Text="Nuevo cliente"
+                       Text="Nuevo"
                        Grid.Column="1"
                        Grid.Row="1"
                        Grid.RowSpan="2"

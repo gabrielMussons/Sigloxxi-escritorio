@@ -164,7 +164,11 @@ namespace CapaDePresentacion.ViewsBodega
             List<string> lista = objeto_CN_RS_BODEGA.ListarRSB_DESCRIPCION();
             for (int i = 0; i < lista.Count; i++)
             {
-                cbxBodega.Items.Add(lista[i]);
+                if (lista[i].ToUpper() == "BODEGA COCINA" || lista[i].ToUpper() == "BODEGA BAR")
+                {
+                    cbxBodega.Items.Add(lista[i]);
+                }
+                
             }
         }
         #endregion

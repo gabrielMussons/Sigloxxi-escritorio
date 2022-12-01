@@ -130,7 +130,10 @@ namespace CapaDePresentacion.ViewsAdmin
             List<string> lista_estados = objeto_CN_RS_ESTADO.ListarRSES_DESCRIPCION();
             for (int i = 0; i < lista_estados.Count; i++)
             {
-                cbxEstado.Items.Add(lista_estados[i]);
+                if (lista_estados[i].ToUpper()=="FUERA DE SERVICIO" || lista_estados[i].ToUpper()== "SOLICITADO" )
+                {
+                    cbxEstado.Items.Add(lista_estados[i]);
+                }
             }
         }
         #endregion

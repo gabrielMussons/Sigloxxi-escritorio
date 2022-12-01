@@ -102,7 +102,7 @@ namespace CapaDePresentacion
 
         private void BtnGanancias_Click(object sender, RoutedEventArgs e)
         {
-            DataContext = new MantenedorBoletas();
+            DataContext = new MantenedorGanancias();
         }
 
         private void WdMenuCocina_Closed(object sender, EventArgs e)

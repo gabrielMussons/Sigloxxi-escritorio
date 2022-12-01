@@ -679,7 +679,7 @@
                   Margin="80,35,0,0" 
                   PreviewMouseLeftButtonDown="GridContent_PreviewMouseLeftButtonDown">
                 <Border Background="GhostWhite"/>
-                <TextBlock Text="Menú cocina"
+                <TextBlock Text="Menú Cocina"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
                            FontSize="50"/>

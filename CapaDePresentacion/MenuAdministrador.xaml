@@ -554,7 +554,7 @@
                                                                 Margin="0"
                                                                 />
                                     <TextBlock Grid.Column="1"
-                                               Text="Clientes"
+                                               Text="Personas"
                                                FontWeight="SemiBold"
                                                FontSize="15"
                                                VerticalAlignment="Center"
@@ -720,7 +720,7 @@
                   Margin="80,35,0,0" 
                   PreviewMouseLeftButtonDown="GridContent_PreviewMouseLeftButtonDown">
                 <Border Background="GhostWhite"/>
-                <TextBlock Text="Mantenedor Admin"
+                <TextBlock Text="Mantenedor Administrador"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
                            FontSize="50"/>

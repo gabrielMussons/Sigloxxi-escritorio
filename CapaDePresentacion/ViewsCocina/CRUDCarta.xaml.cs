@@ -157,13 +157,17 @@ namespace CapaDePresentacion.ViewsCocina
 
         #endregion
 
-        #region CARGAR CBX 
+        #region CARGAR CBX ESTADO
         private void CargarCbxEstado()
         {
             List<string> lista = objeto_CN_RS_ESTADO.ListarRSES_DESCRIPCION();
             for (int i = 0; i < lista.Count; i++)
             {
-                cbxEstado.Items.Add(lista[i]);
+                if (lista[i].ToUpper() == "SOLICITADO" )
+                {
+                    cbxEstado.Items.Add(lista[i]);
+                }
+                
             }
         }
         #endregion

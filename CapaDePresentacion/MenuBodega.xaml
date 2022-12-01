@@ -284,7 +284,7 @@
                     </Grid.ColumnDefinitions>
 
                     <!--#region TITLE-->
-                    <TextBlock Text="Menú cocina"
+                    <TextBlock Text="Menú bodega"
                                Grid.Column="0"
                                Foreground="White"
                                HorizontalAlignment="Left"
@@ -546,7 +546,7 @@
                                         <ColumnDefinition Width="80" />
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <iconPack:PackIconMaterial  Kind="FileDocumentEdit"
+                                    <iconPack:PackIconMaterial  Kind="StoreCheck"
                                                                 Width="50"
                                                                 Grid.Column="0"
                                                                 HorizontalAlignment="Center"
@@ -665,7 +665,7 @@
                   Margin="80,35,0,0" 
                   PreviewMouseLeftButtonDown="GridContent_PreviewMouseLeftButtonDown">
                 <Border Background="GhostWhite"/>
-                <TextBlock Text="Menú bodega"
+                <TextBlock Text="Menú Bodega"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
                            FontSize="50"/>

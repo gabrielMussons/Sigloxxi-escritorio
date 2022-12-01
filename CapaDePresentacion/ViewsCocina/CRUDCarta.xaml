@@ -533,7 +533,7 @@
                       HorizontalAlignment="Stretch"
                       Padding="0"
                       Margin="0"
-                      mah:TextBoxHelper.Watermark="Seleccione unidad de medida"
+                      mah:TextBoxHelper.Watermark="Seleccione estado"
                       />
             <TextBox x:Name="txtBuscarPlato"
                         Grid.Column="4"

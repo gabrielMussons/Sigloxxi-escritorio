@@ -136,6 +136,7 @@ namespace CapaDePresentacion.ViewsAdmin
             }
         }
         #endregion
+
         bool tieneUsuario;
         #region CONSULTAR
         public void Consultar()
@@ -210,7 +211,11 @@ namespace CapaDePresentacion.ViewsAdmin
             List<string> lista = objeto_CN_RS_ESTADO.ListarRSES_DESCRIPCION();
             for (int i = 0; i < lista.Count; i++)
             {
-                cbxEstado.Items.Add(lista[i]);
+                if (lista[i].ToUpper()=="VIGENTE"|| lista[i].ToUpper() == "NULO" )
+                {
+                    cbxEstado.Items.Add(lista[i]);
+                }
+                
             }
         }
         #endregion
