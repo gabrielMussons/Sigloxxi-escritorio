@@ -24,6 +24,7 @@ namespace CapaDePresentacion.ViewsBodega
     {
         CN_RS_DOCTO objetoCnDocto = new CN_RS_DOCTO();
         PickingCarta ventanaPickingCarta = new PickingCarta();
+        
 
 
         public GestionCarta()
@@ -60,6 +61,42 @@ namespace CapaDePresentacion.ViewsBodega
                 throw ex;
             }
 
+
+        }
+
+        private void BtnChek_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                String dato = (((Button)sender).CommandParameter).ToString();
+                int id_carta = int.Parse(dato);
+                var carta = objetoCnDocto.Consultar(id_carta);
+                CN_RS_ESTADO objetoCNEstado = new CN_RS_ESTADO();
+                
+                int id_estado = objetoCNEstado.ObtenerRSES_ID("Preparado");
+                if (true)
+                {
+
+                }
+                if (carta.CE_RS_ESTADO_RSES_ID == id_estado)
+                {
+                    MessageBox.Show("Carta ya ah sido preparada.");
+                }
+                else
+                {
+                    carta.CE_RS_ESTADO_RSES_ID = id_estado;
+                    objetoCnDocto.Actualizar(carta);
+                    MessageBox.Show("Carta preparada.");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally {
+                CargarListaCarta();
+            }
 
         }
     }

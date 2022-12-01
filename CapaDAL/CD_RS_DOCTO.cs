@@ -247,14 +247,14 @@ namespace CapaDAL
         {
             try
             {
-                OracleCommand cmd = new OracleCommand("select rs_docto.rsd_id as NRO_BOLETA, rs_plato.rspl_descripcion as PLATO," +
-                    " rs_entidad.rse_nombre as CLIENTE, rs_docto.rs_mesa_rsm_id as MESA, rs_estado.rses_descripcion as ESTADO, " +
-                    "rs_det_docto.rsdet_id as ID_DETALLE from rs_docto join rs_entidad on rs_docto.rs_entidad_rse_id = rs_entidad.rse_id " +
-                    "join rs_det_docto on rs_docto.rsd_id = rs_det_docto.rs_docto_rsd_id " +
-                    "join rs_plato on rs_det_docto.rs_plato_rspl_id = rs_plato.rspl_id " +
-                    "join rs_estado on rs_det_docto.rs_estado_rses_id = rs_estado.rses_id " +
-                    "where (rs_det_docto.rs_estado_rses_id = 61 or rs_det_docto.rs_estado_rses_id = 62 or rs_det_docto.rs_estado_rses_id = 63)" +
-                    " and rs_docto.rs_tipo_documento_rstd_id = 2 order by rs_det_docto.rs_estado_rses_id desc ", con.AbrirConexion());
+                OracleCommand cmd = new OracleCommand("select rs_det_docto.rs_docto_rsd_id as NRO_BOLETA," +
+                    " rs_plato.rspl_descripcion as PLATO, rs_det_docto.rsdet_egreso as CANTIDAD, rs_entidad.rse_nombre as CLIENTE," +
+                    " rs_docto.rs_mesa_rsm_id as MESA, rs_estado.rses_descripcion as ESTADO, rs_det_docto.rsdet_id as ID_DETALLE" +
+                    " from rs_docto join rs_entidad on rs_docto.rs_entidad_rse_id = rs_entidad.rse_id join rs_det_docto on rs_docto.rsd_id = rs_det_docto.rs_docto_rsd_id " +
+                    "join rs_plato on rs_det_docto.rs_plato_rspl_id = rs_plato.rspl_id join rs_estado on rs_det_docto.rs_estado_rses_id = rs_estado.rses_id " +
+                    "join rs_tipo_documento on rs_docto.rs_tipo_documento_rstd_id = rs_tipo_documento.rstd_id" +
+                    " where (UPPER(rs_estado.rses_descripcion) = 'EN COLA' or UPPER(rs_estado.rses_descripcion) = 'EN PREPARACION' or UPPER(rs_estado.rses_descripcion) = 'PREPARADO') " +
+                    "and UPPER(rs_tipo_documento.rstd_descripcion) = 'BOLETA' and rs_det_docto.rs_tipo_documento_rstd_id = 21 and rs_docto.rs_estado_rses_id = 1 order by  rs_det_docto.rs_estado_rses_id desc ", con.AbrirConexion());
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 ds.Clear();
