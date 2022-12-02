@@ -144,7 +144,7 @@
                        FontWeight="Normal"
                        />
             <!--#endregion-->
-            <Label Content="Seleccione una opción:"
+            <Label Content="Seleccione una opción para el reporte:"
                    Grid.Row="1"
                    Grid.Column="1"
                    HorizontalAlignment="Left"
@@ -166,13 +166,13 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <RadioButton
+                <RadioButton x:Name="rbtDia"
                 Grid.Column="0"
                     Padding="0"
                 Grid.Row="0"
                     Background="Transparent"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center"/>
+                VerticalAlignment="Center" Checked="RbtDia_Checked"/>
 
                 <Label Content="Día"
                    Grid.Row="1"
@@ -181,12 +181,13 @@
                    VerticalAlignment="Center"
                    />
                 <RadioButton
+                    x:Name="rdbMes"
                 Grid.Column="1"
                 Grid.Row="0"
                 Background="Transparent"
                 HorizontalAlignment="Center"
                 Padding="0"
-                VerticalAlignment="Center"/>
+                VerticalAlignment="Center" Checked="RdbMes_Checked"/>
 
                 <Label Content="Mes"
                    Grid.Row="1"
@@ -195,12 +196,13 @@
                    VerticalAlignment="Center"
                    />
                 <RadioButton
+                    x:Name="rbtAnio"
                 Grid.Column="2"
                 Grid.Row="0"
                     Padding="0"
                     Background="Transparent"
                 HorizontalAlignment="Center"
-                VerticalAlignment="Center"/>
+                VerticalAlignment="Center" Checked="RbtAnio_Checked"/>
 
                 <Label Content="Año"
                    Grid.Row="1"
@@ -210,48 +212,31 @@
                    />
             </Grid>
             
-            <Label x:Name="lblInstrucciones1"
+            <Label 
                    Grid.Row="2"
                    Grid.Column="1"
-                   Content="Ingrese:"
+                   Content="Ingrese fecha:"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Center"/>
-            <Label x:Name="lblInstrucciones2"
-                   Grid.Row="3"
-                   Grid.Column="1"
-                   Content="Ingrese:"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Center"/>
-            <Label x:Name="lblInstrucciones3"
+            <Label x:Name="lblInstrucciones"
                    Grid.Row="2"
                    Margin="0,5"
                    Grid.Column="2"
-                   Content="Ejemplo"
+                   Content="Seleccione fecha que desea consultar:"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Top"/>
-            <TextBox  x:Name="txtDato"
-                      Grid.Column="2"
-                      Grid.Row="2"
-                      Margin="0,5"
-                      VerticalAlignment="Bottom"/>
-            <Label x:Name="lblInstrucciones4"
-                   Grid.Row="3"
-                   Margin="0,5"
-                   Grid.Column="2"
-                   Content="Ejemplo"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Top"/>
-            <TextBox  x:Name="txtDato2"
-                      Grid.Column="2"
-                      Grid.Row="3"
-                      Margin="0,5"
-                      VerticalAlignment="Bottom"/>
+           
+            <DatePicker x:Name="dpFecha"
+                        Grid.Column="2"
+                        Grid.Row="2"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Stretch" SelectedDateChanged="DpFecha_SelectedDateChanged"/>
 
 
 
 
-            <!--#region DATAGRID-->
-            <DataGrid x:Name="GridDatos"
+            <!--#region DATAGRID DIA -->
+            <DataGrid x:Name="GridDatosDia"
                       Grid.Row="4"
                       Grid.Column="1"
                       Grid.ColumnSpan="4"
@@ -271,27 +256,23 @@
                       BorderBrush="#a5b2bd"
                       BorderThickness="1"
                       Foreground="Black" 
+                      Visibility="Hidden"
                       >
                 <DataGrid.Columns >
 
-                    <DataGridTextColumn Header="Nro boleta"
-                                        Width="*"
-                                        Binding="{Binding ID_BOLETA}"/>
                     <DataGridTextColumn Header="Fecha"
                                         Width="*"
                                         Binding="{Binding FECHA}"/>
-                    <DataGridTextColumn Header="Cant items"
+                    <DataGridTextColumn Header="Total boletas"
                                         Width="*"
-                                        Binding="{Binding CANT_ITEMS}"/>
-                    <DataGridTextColumn Header="Total $"
+                                        Binding="{Binding TOTAL_BOLETAS}"/>
+                    <DataGridTextColumn Header="Total items"
                                         Width="*"
-                                        Binding="{Binding TOTAL}"/>
-                    <DataGridTextColumn Header="Estado"
+                                        Binding="{Binding TOTAL_ITEMS}"/>
+                    <DataGridTextColumn Header="Total ventas"
                                         Width="*"
-                                        Binding="{Binding ESTADO}"/>
-                    <DataGridTextColumn Header="Nombre cliente"
-                                        Width="*"
-                                        Binding="{Binding NOMBRE_CLIENTE}"/>
+                                        Binding="{Binding TOTAL_VENTAS}"/>
+                    
                     <DataGridTemplateColumn Header="Opciones"
                                             Width="233"
                                             >
@@ -309,7 +290,149 @@
                                             Margin="0" 
                                             HorizontalAlignment="Center"
                                             
-                                            CommandParameter="{Binding ID_BOLETA}" Click="BtnImprimir_Click"
+                                            CommandParameter="{Binding ID_BOLETA}" 
+                                        >
+                                        <iconPack:Material  Kind="Printer"/>
+                                    </Button>
+                                </DockPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+
+
+            </DataGrid>
+            <!--#endregion-->
+
+
+            <!--#region DATAGRID MES -->
+            <DataGrid x:Name="GriDatosMes"
+                      Grid.Row="4"
+                      Grid.Column="1"
+                      Grid.ColumnSpan="4"
+                      AutoGenerateColumns="False"
+                      Background="WhiteSmoke"
+                      FontSize="14"
+                      Height="auto"
+                      CanUserSortColumns="True"
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False"
+                      CanUserResizeColumns="True"
+                      CanUserResizeRows="False"
+                      HeadersVisibility="Column"
+                      GridLinesVisibility="All"
+                      VerticalGridLinesBrush="LightGray"
+                      HorizontalGridLinesBrush="LightGray"
+                      BorderBrush="#a5b2bd"
+                      BorderThickness="1"
+                      Foreground="Black" 
+                      Visibility="Hidden"
+                      >
+                <DataGrid.Columns >
+
+                    <DataGridTextColumn Header="Mes"
+                                        Width="*"
+                                        Binding="{Binding MES}"/>
+                    <DataGridTextColumn Header="Año"
+                                        Width="*"
+                                        Binding="{Binding ANIO}"/>
+                    <DataGridTextColumn Header="Total boletas"
+                                        Width="*"
+                                        Binding="{Binding TOTAL_BOLETAS}"/>
+                    <DataGridTextColumn Header="Total items"
+                                        Width="*"
+                                        Binding="{Binding TOTAL_ITEMS}"/>
+                    <DataGridTextColumn Header="Total ventas"
+                                        Width="*"
+                                        Binding="{Binding TOTAL_VENTAS}"/>
+
+                    <DataGridTemplateColumn Header="Opciones"
+                                            Width="233"
+                                            >
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate>
+                                <DockPanel >
+
+                                    <Button x:Name="btnImprimir"
+                                            Width="70"
+                                            Height="20"
+                                            FontWeight="SemiBold"
+                                            
+                                            Cursor="Hand" 
+                                            mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
+                                            Margin="0" 
+                                            HorizontalAlignment="Center"
+                                            
+                                            CommandParameter="{Binding ID_BOLETA}" 
+                                        >
+                                        <iconPack:Material  Kind="Printer"/>
+                                    </Button>
+                                </DockPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+
+
+            </DataGrid>
+            <!--#endregion-->
+
+
+            <!--#region DATAGRID AÑO -->
+            <DataGrid x:Name="GriDatosAnio"
+                      Grid.Row="4"
+                      Grid.Column="1"
+                      Grid.ColumnSpan="4"
+                      AutoGenerateColumns="False"
+                      Background="WhiteSmoke"
+                      FontSize="14"
+                      Height="auto"
+                      CanUserSortColumns="True"
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False"
+                      CanUserResizeColumns="True"
+                      CanUserResizeRows="False"
+                      HeadersVisibility="Column"
+                      GridLinesVisibility="All"
+                      VerticalGridLinesBrush="LightGray"
+                      HorizontalGridLinesBrush="LightGray"
+                      BorderBrush="#a5b2bd"
+                      BorderThickness="1"
+                      Foreground="Black" 
+                      Visibility="Hidden"
+                      >
+                <DataGrid.Columns >
+                    <DataGridTextColumn Header="Año"
+                                        Width="*"
+                                        Binding="{Binding ANIO}"/>
+                    <DataGridTextColumn Header="Total boletas"
+                                        Width="*"
+                                        Binding="{Binding TOTAL_BOLETAS}"/>
+                    <DataGridTextColumn Header="Total items"
+                                        Width="*"
+                                        Binding="{Binding TOTAL_ITEMS}"/>
+                    <DataGridTextColumn Header="Total ventas"
+                                        Width="*"
+                                        Binding="{Binding TOTAL_VENTAS}"/>
+
+                    <DataGridTemplateColumn Header="Opciones"
+                                            Width="233"
+                                            >
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate>
+                                <DockPanel >
+
+                                    <Button x:Name="btnImprimir"
+                                            Width="70"
+                                            Height="20"
+                                            FontWeight="SemiBold"
+                                            
+                                            Cursor="Hand" 
+                                            mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
+                                            Margin="0" 
+                                            HorizontalAlignment="Center"
+                                            
+                                            CommandParameter="{Binding ID_BOLETA}" 
                                         >
                                         <iconPack:Material  Kind="Printer"/>
                                     </Button>

@@ -118,6 +118,25 @@ namespace CapaLogicaNegocio
             return objDatos.CargarTotalBoleta(id_boleta);
         }
         #endregion
+        #region DATOS VENTAS DIA
+        public DataTable CargarDTTotalVentasDia(string fecha)
+        {
+            return objDatos.CargarDTTotlaVentasDia(fecha);
+        }
+        #endregion
+        #region DATOS VENTAS MES
+        public DataTable CargarDTTotalVentasMes(string fecha)
+        {
+            return objDatos.CargarDTTotlaVentasMes(fecha);
+        }
+        #endregion
+        #region DATOS VENTAS AÑO
+        public DataTable CargarDTTotalVentasAnio(string fecha)
+        {
+            return objDatos.CargarDTTotlaVentasAnio(fecha);
+        }
+        #endregion
+
 
         #region OBTENER ULTIMO REGISTRO 
         public CE_RS_DOCTO ObtenerUltimoRegistro()
