@@ -160,19 +160,18 @@
 
             <!--#region  COLS AND ROWS-->
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="110"/>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="10"/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
-                <ColumnDefinition Width="30"/>
+                
+                <ColumnDefinition Width="25"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="10"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="30"/>
@@ -189,6 +188,11 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+                
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="30"/>
@@ -269,7 +273,7 @@
 
             <Button x:Name="BtnCrear"
                     Grid.Column="5"
-                    Grid.Row="18"
+                    Grid.Row="24"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Center"
                     Cursor="Hand"
@@ -316,8 +320,8 @@
             <!--#region IMAGEN-->
             <Border 
                     Grid.Column="2"
-                    Grid.Row="16"
-                    Grid.RowSpan="9"
+                    Grid.Row="17"
+                    Grid.RowSpan="10"
                     Grid.ColumnSpan="1"
                     Margin="0"
                     Width="auto"
@@ -336,7 +340,7 @@
 
             <Button x:Name="btnSeleccionarImagen"
                     Grid.Column="2"
-                    Grid.Row="26"
+                    Grid.Row="28"
                     Grid.ColumnSpan="1"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Center"
@@ -382,7 +386,7 @@
             <!--#region BOTON ACTUALIZAR-->
             <Button x:Name="BtnActualizar"
                     Grid.Column="5"
-                    Grid.Row="20"
+                    Grid.Row="26"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Center"
                     Cursor="Hand"
@@ -425,7 +429,7 @@
             <!--#region BOTON ELIMINAR-->
             <Button x:Name="BtnEliminar"
                     Grid.Column="5"
-                    Grid.Row="22"
+                    Grid.Row="28"
                     HorizontalAlignment="Stretch"
                     VerticalAlignment="Center"
                     Cursor="Hand"
@@ -603,26 +607,33 @@
                       />
             <TextBox x:Name="txtBuscarProducto"
                         Grid.Column="4"
-                       Grid.Row="4"
-                     Margin="5,0"
+                       Grid.Row="2"
+                     Margin="0,0,5,0"
                        mah:TextBoxHelper.Watermark="Buscar producto"
                        HorizontalAlignment="Stretch"
                        VerticalAlignment="Center" TextChanged="TxtBuscarProducto_TextChanged"/>
             <TextBox x:Name="txtCantidad"
                         Grid.Column="5"
                      Margin="5,0"
-                       Grid.Row="4"
+                       Grid.Row="2"
                      IsEnabled="False"
-                       mah:TextBoxHelper.Watermark="Cantidad producto"
-                       HorizontalAlignment="Stretch"
+                       mah:TextBoxHelper.Watermark="Cantidad actual"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center" TextChanged="TxtBuscarProducto_TextChanged"/>
+            <TextBox x:Name="txtCantidad2"
+                        Grid.Column="5"
+                     Margin="5,0"
+                       Grid.Row="2"
+                       mah:TextBoxHelper.Watermark="Nueva cantidad"
+                       HorizontalAlignment="Right"
                        VerticalAlignment="Center" TextChanged="TxtBuscarProducto_TextChanged"/>
             <!--#endregion-->
             
             <!--#region DATAGRID-->
             <DataGrid x:Name="GridDatos"
-                      Grid.Row="6"
+                      Grid.Row="4"
                       Grid.Column="4"
-                      Grid.RowSpan="9"
+                      Grid.RowSpan="7"
                       Grid.ColumnSpan="2"
                       Margin="0,2"
                       AutoGenerateColumns="False"
@@ -658,6 +669,106 @@
                         <DataGridTemplateColumn.CellTemplate >
                             <DataTemplate>
                                 <DockPanel >
+                                    <Button x:Name="btnConsultarCant"
+                                            Width="auto"
+                                            Height="auto"
+                                            FontWeight="SemiBold"
+                                            ToolTip="Consultar cantidad"
+                                            Cursor="Hand" 
+                                            mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
+                                            Margin="0" 
+                                            HorizontalAlignment="Center"
+                                            CommandParameter="{Binding RSP_ID}" 
+                                            Click="BtnConsultarCant_Click">
+                                        <iconPack:Material Kind="EyeCircle"/>
+                                    </Button>
+                                    <Button x:Name="btnAgregarProducto"
+                                            Width="auto"
+                                            Height="auto"
+                                            FontWeight="SemiBold"
+                                            Cursor="Hand" 
+                                            ToolTip="Modificar cantidad"
+                                            mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
+                                            Margin="0" 
+                                            HorizontalAlignment="Center"
+                                            CommandParameter="{Binding RSP_ID}" 
+                                            Click="BtnAgregarProducto_Click">
+                                        <iconPack:Material Kind="PencilCircle" />
+                                    </Button>
+                                    
+                                </DockPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+
+
+            </DataGrid>
+            <!--#endregion-->
+
+            <Label Content="Detalle plato"
+                   Grid.Row="12"
+                   Grid.Column="4"
+                   FontSize="16"
+                   HorizontalAlignment="Stretch"
+                   VerticalAlignment="Bottom"/>
+
+            <!--#region DATAGRID-->
+            <DataGrid x:Name="GridDatos2"
+                      Grid.Row="14"
+                      Grid.Column="4"
+                      Grid.RowSpan="8"
+                      Grid.ColumnSpan="2"
+                      Margin="0,2"
+                      AutoGenerateColumns="False"
+                      Background="WhiteSmoke"
+                      FontSize="14"
+                      CanUserSortColumns="True"
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False"
+                      CanUserResizeColumns="True"
+                      CanUserResizeRows="False"
+                      HeadersVisibility="Column"
+                      GridLinesVisibility="All"
+                      VerticalGridLinesBrush="LightGray"
+                      HorizontalGridLinesBrush="LightGray"
+                      BorderBrush="#a5b2bd"
+                      BorderThickness="1"
+                      Foreground="Black" 
+                      >
+                <DataGrid.Columns >
+
+                    <DataGridTextColumn Header="ID det."
+                                        Width="auto"
+                                        Binding="{Binding ID_DETALLE}"/>
+                    <DataGridTextColumn Header="Insumo"
+                                        Width="*"
+                                        Binding="{Binding INSUMO}"/>
+                    <DataGridTextColumn Header="Cantidad"
+                                        Width="*"
+                                        Binding="{Binding CANTIDAD}"/>
+                    <DataGridTextColumn Header="Medida"
+                                        Width="*"
+                                        Binding="{Binding MEDIDA}"/>
+                    <DataGridTemplateColumn Header="Opciones"
+                                            Width="80"
+                                            >
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <DockPanel >
+                                    <Button x:Name="btnConsultarCant"
+                                            Width="auto"
+                                            Height="auto"
+                                            FontWeight="SemiBold"
+                                            
+                                            Cursor="Hand" 
+                                            mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
+                                            Margin="0" 
+                                            HorizontalAlignment="Center"
+                                            CommandParameter="{Binding RSP_ID}" 
+                                            >
+                                        <iconPack:Material Kind="MinusCircle"/>
+                                    </Button>
                                     <Button x:Name="btnAgregarProducto"
                                             Width="auto"
                                             Height="auto"
@@ -670,19 +781,7 @@
                                             Click="BtnAgregarProducto_Click">
                                         <iconPack:Material Kind="PlusCircle" />
                                     </Button>
-                                    <Button x:Name="btnEliminarProducto"
-                                            Width="auto"
-                                            Height="auto"
-                                            FontWeight="SemiBold"
-                                            
-                                            Cursor="Hand" 
-                                            mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
-                                            Margin="0" 
-                                            HorizontalAlignment="Center"
-                                            CommandParameter="{Binding RSP_ID}" 
-                                            Click="BtnEliminarProducto_Click">
-                                        <iconPack:Material Kind="MinusCircle"/>
-                                    </Button>
+                                    
                                 </DockPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

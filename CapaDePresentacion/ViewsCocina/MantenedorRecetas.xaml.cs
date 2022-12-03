@@ -64,7 +64,7 @@ namespace CapaDePresentacion.ViewsCocina
             DeshabilitarInput();
 
             ventanaCRUDReceta.id_plato = id_plato;
-
+            ventanaCRUDReceta.GridDatos2.Columns[4].Visibility = Visibility.Hidden;
             ventanaCRUDReceta.Consultar();
 
             FrameGestionReceta.Content = ventanaCRUDReceta;

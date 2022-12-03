@@ -34,6 +34,8 @@ namespace CapaDePresentacion.ViewsCocina
         readonly CN_RS_DET_PLATO objeto_CN_RS_DET_PLATO = new CN_RS_DET_PLATO();
         readonly CN_RS_PLATO objeto_CN_RS_PLATO = new CN_RS_PLATO();
         readonly CN_RS_UN_MEDIDA objeto_CN_UN_MEDIDA = new CN_RS_UN_MEDIDA();
+        readonly CN_RS_PRODUCTO obj_CN_RS_PRODUCTO = new CN_RS_PRODUCTO();
+        readonly CE_RS_PRODUCTO obj_CE_RS_PRODUCTO = new CE_RS_PRODUCTO();
 
         public CE_RS_USUARIO usuario = new CE_RS_USUARIO();
         public CE_RS_ENTIDAD entidad = new CE_RS_ENTIDAD();
@@ -115,13 +117,30 @@ namespace CapaDePresentacion.ViewsCocina
 
         //--------------------------------------------------------------------
 
-        #region CARGAR DATOS GRID
+        #region CARGAR DATOS GRID PRODUCTO
         void CargarDatosProductos()
         {
-            CN_RS_PRODUCTO obj_CN_RS_PRODUCTO = new CN_RS_PRODUCTO();
+            
             GridDatos.ItemsSource = obj_CN_RS_PRODUCTO.CargarListaProducto(txtBuscarProducto.Text.ToString()).DefaultView;
         }
-        #endregion
+        #endregion 
+        #region CARGAR DATOS GRID DETALLE
+        void CargarDetPlato(int id_plato)
+        {
+            try
+            {
+                GridDatos2.ItemsSource = objeto_CN_RS_DET_PLATO.CargarDetPlatos(id_plato).DefaultView;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
+        }
+        #endregion 
+
+
 
         #region CONSULTAR
         public void Consultar()
@@ -135,6 +154,7 @@ namespace CapaDePresentacion.ViewsCocina
             txtDescripcion.Text = plato.RSPL_DESCRIPCION.ToString();
             txtObservaciones.Text = plato.RSPL_OBS.ToString();
             txtPVenta.Text = plato.RSPL_PVENTA.ToString();
+            CargarDetPlato(plato.RSPL_ID);
             if (plato.CE_RSPL_IMAGEN != null)
             {
                 ImageSourceConverter img = new ImageSourceConverter();
@@ -237,42 +257,52 @@ namespace CapaDePresentacion.ViewsCocina
 
         private void BtnAgregarProducto_Click(object sender, RoutedEventArgs e)
         {
+            
             int id_producto = int.Parse(((Button)sender).CommandParameter.ToString());
-            if (DetalleReceta.ContainsKey(id_producto))
+            if (txtCantidad2.Text!="")
             {
-                DetalleReceta[id_producto] = DetalleReceta[id_producto]+1;
-                Console.WriteLine(DetalleReceta[id_producto]);
-                this.ToolTip = (DetalleReceta[id_producto]).ToString();
-                txtCantidad.Text = (DetalleReceta[id_producto]).ToString();
-                
+                if (DetalleReceta.ContainsKey(id_producto))
+                {
+                    if (int.Parse(txtCantidad2.Text)==0)
+                    {
+                        DetalleReceta.Remove(id_producto);
+                        txtCantidad.Text = "0";
+                        txtCantidad2.Text = "";
+                    }
+                    else
+                    {
+                        if (int.Parse(txtCantidad2.Text)>=1)
+                        {
+                            DetalleReceta[id_producto] = int.Parse(txtCantidad2.Text);
+                            txtCantidad.Text = (DetalleReceta[id_producto]).ToString();
+                            txtCantidad2.Text = "";
+                        }
+                    }
+                    
+                }
+                else
+                {
+                    DetalleReceta.Add(id_producto, int.Parse(txtCantidad2.Text));
+                    txtCantidad.Text = (DetalleReceta[id_producto]).ToString();
+                    txtCantidad2.Text = "";
+                }
             }
             else
             {
-                DetalleReceta.Add(id_producto, +1);
-                Console.WriteLine(DetalleReceta[id_producto]);
-                txtCantidad.Text = (DetalleReceta[id_producto]).ToString();
-                
+                MessageBox.Show("Debe ingresar la cantidad deseada.");
             }
-            
         }
 
-        private void BtnEliminarProducto_Click(object sender, RoutedEventArgs e)
+        private void BtnConsultarCant_Click(object sender, RoutedEventArgs e)
         {
             int id_producto = int.Parse(((Button)sender).CommandParameter.ToString());
             if (DetalleReceta.ContainsKey(id_producto))
             {
-                if (DetalleReceta[id_producto] == 1)
-                {
-                    DetalleReceta.Remove(id_producto);
-                    txtCantidad.Text = "0";
-
-                }
-                else
-                {
-                    DetalleReceta[id_producto] = DetalleReceta[id_producto] - 1;
-                    Console.WriteLine(DetalleReceta[id_producto]);
-                    txtCantidad.Text = (DetalleReceta[id_producto]).ToString();
-                }
+                txtCantidad.Text = (DetalleReceta[id_producto]).ToString();
+            }
+            else
+            {
+                txtCantidad.Text = "0";
             }
         }
 

@@ -132,13 +132,22 @@ namespace CapaDAL
 
         //---------------------------------------------------------------------
 
-        #region CARGAR DATOS LISTA
+        #region CARGAR DATOS DETALLE PLATO FILTRADO SEGUN ID
         public DataTable CargarDetPlato(int id_plato)
         {
             try
             {
-                OracleCommand cmd = new OracleCommand("SELECT * FROM RS_DET_PLATO" +
-                    "WHERE RS_PLATO_RSPL_ID = "+id_plato+" ORDER BY RSDPL_ID", con.AbrirConexion());
+                OracleCommand cmd = new OracleCommand("" +
+                    "select " +
+                    "rs_det_plato.rsdpl_id as ID_DETALLE," +
+                    "rs_producto.rsp_descripcion as INSUMO," +
+                    "rs_producto.rsp_pcompra as P_COMPRA," +
+                    "rs_det_plato.rsdpl_cantidad as CANTIDAD," +
+                    "rs_un_medida.rsum_descripcion as MEDIDA" +
+                    " from rs_det_plato " +
+                    "join rs_producto on rs_producto.rsp_id = rs_det_plato.rs_producto_rsp_id " +
+                    "join rs_un_medida on rs_producto.rs_un_medida_rsum_id = rs_un_medida.rsum_id " +
+                    "where rs_plato_rspl_id = "+id_plato, con.AbrirConexion());
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 ds.Clear();

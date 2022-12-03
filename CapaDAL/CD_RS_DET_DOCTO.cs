@@ -30,22 +30,8 @@ namespace CapaDAL
             };
             try
             {
-                if (RS_DET_DOCTO.CE_RSDET_INGRESO !=0)
-                {
-                    cmd.Parameters.Add("V_RSDET_INGRESO", OracleDbType.Int32).Value = RS_DET_DOCTO.CE_RSDET_INGRESO;
-                }
-                else
-                {
-                    cmd.Parameters.Add("V_RSDET_INGRESO", OracleDbType.Int32).Value = null;
-                }
-                if (RS_DET_DOCTO.CE_RSDET_EGRESO != 0)
-                {
-                    cmd.Parameters.Add("V_RSDET_EGRESO", OracleDbType.Int32).Value = RS_DET_DOCTO.CE_RSDET_EGRESO;
-                }
-                else
-                {
-                    cmd.Parameters.Add("V_RSDET_EGRESO", OracleDbType.Int32).Value = null;
-                }
+                cmd.Parameters.Add("V_RSDET_INGRESO", OracleDbType.Int32).Value = RS_DET_DOCTO.CE_RSDET_INGRESO;
+                cmd.Parameters.Add("V_RSDET_EGRESO", OracleDbType.Int32).Value = RS_DET_DOCTO.CE_RSDET_EGRESO;
                 if (RS_DET_DOCTO.CE_RS_PRODUCTO_RSP_ID != 0)
                 {
                     cmd.Parameters.Add("V_RS_PRODUCTO_RSP_ID", OracleDbType.Int32).Value = RS_DET_DOCTO.CE_RS_PRODUCTO_RSP_ID;
@@ -74,8 +60,6 @@ namespace CapaDAL
                 cmd.Parameters.Add("V_RS_TIPO_DOCUMENTO_RSTD_ID", OracleDbType.Int32).Value = RS_DET_DOCTO.CE_RS_TIPO_DOCUMENTO_RSTD_ID;
                 cmd.Parameters.Add("V_RS_ESTADO_RSES_ID", OracleDbType.Int32).Value = RS_DET_DOCTO.CE_RS_ESTADO_RSES_ID;
                 cmd.Parameters.Add("V_RS_DOCTO_RSD_ID", OracleDbType.Int32).Value = RS_DET_DOCTO.CE_RS_DOCTO_RSD_ID;
-
-
                 cmd.ExecuteNonQuery();
                 cmd.Parameters.Clear();
                 con.CerrarConexion();
@@ -150,7 +134,88 @@ namespace CapaDAL
         }
         #endregion
 
+        #region ACTUALIZAR
+        public void CD_ACTUALIZAR(CE_RS_DET_DOCTO RS_DET_DOCTO)
+        {
+            OracleCommand cmd = new OracleCommand()
+            {
+                Connection = con.AbrirConexion(),
+                CommandText = "SP_ACTUALIZAR_RS_DET_DOCTO",
+                CommandType = CommandType.StoredProcedure,
+            };
+            try
+            {
+                cmd.Parameters.Add("V_RSDET_ID", OracleDbType.Int32).Value = RS_DET_DOCTO.CE_RSDET_ID;
+                cmd.Parameters.Add("V_RSDET_INGRESO", OracleDbType.Int32).Value = RS_DET_DOCTO.CE_RSDET_INGRESO;
+                cmd.Parameters.Add("V_RSDET_EGRESO", OracleDbType.Int32).Value = RS_DET_DOCTO.CE_RSDET_EGRESO;
+                if (RS_DET_DOCTO.CE_RS_PRODUCTO_RSP_ID != 0)
+                {
+                    cmd.Parameters.Add("V_RS_PRODUCTO_RSP_ID", OracleDbType.Int32).Value = RS_DET_DOCTO.CE_RS_PRODUCTO_RSP_ID;
+                }
+                else
+                {
+                    cmd.Parameters.Add("V_RS_PRODUCTO_RSP_ID", OracleDbType.Int32).Value = null;
+                }
 
+                if (RS_DET_DOCTO.CE_RS_BODEGA_RSB_ID != 0)
+                {
+                    cmd.Parameters.Add("V_RS_BODEGA_RSB_ID", OracleDbType.Int32).Value = RS_DET_DOCTO.CE_RS_BODEGA_RSB_ID;
+                }
+                else
+                {
+                    cmd.Parameters.Add("V_RS_BODEGA_RSB_ID", OracleDbType.Int32).Value = null;
+                }
+                if (RS_DET_DOCTO.CE_RS_PLATO_RSPL_ID != 0)
+                {
+                    cmd.Parameters.Add("V_RS_PLATO_RSPL_ID", OracleDbType.Int32).Value = RS_DET_DOCTO.CE_RS_PLATO_RSPL_ID;
+                }
+                else
+                {
+                    cmd.Parameters.Add("V_RS_PLATO_RSPL_ID", OracleDbType.Int32).Value = null;
+                }
+                
+                cmd.Parameters.Add("V_RS_TIPO_DOCUMENTO_RSTD_ID", OracleDbType.Int32).Value = RS_DET_DOCTO.CE_RS_TIPO_DOCUMENTO_RSTD_ID;
+                cmd.Parameters.Add("V_RS_ESTADO_RSES_ID", OracleDbType.Int32).Value = RS_DET_DOCTO.CE_RS_ESTADO_RSES_ID;
+                cmd.Parameters.Add("V_RS_DOCTO_RSD_ID", OracleDbType.Int32).Value = RS_DET_DOCTO.CE_RS_DOCTO_RSD_ID;
+
+
+                cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
+                con.CerrarConexion();
+            }
+            catch (Exception ex)
+            {
+                cmd.Parameters.Clear();
+                con.CerrarConexion();
+                throw ex;
+            }
+        }
+        #endregion
+
+        #region ELIMINAR
+        public void CD_ELIMINAR(CE_RS_DET_DOCTO RS_DET_DOCTO)
+        {
+            OracleCommand cmd = new OracleCommand
+            {
+                Connection = con.AbrirConexion(),
+                CommandText = "SP_ELIMINAR_RS_DET_DOCTO",
+                CommandType = CommandType.StoredProcedure,
+            };
+            try
+            {
+                cmd.Parameters.Add("V_RSDET_ID", RS_DET_DOCTO.CE_RSDET_ID);
+                cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
+                con.CerrarConexion();
+            }
+            catch (Exception ex)
+            {
+                cmd.Parameters.Clear();
+                con.CerrarConexion();
+                throw ex;
+            }
+        }
+        #endregion
 
 
         //---------------------------------------------------------------------
