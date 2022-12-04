@@ -88,9 +88,9 @@ namespace CapaDePresentacion.ViewsCocina
                 if (DetalleReceta.Count != 0)
                 {
                     CrearDetalle(DetalleReceta, txtDescripcion.Text);
-                    Actualizar();                    
+                    MessageBox.Show("Productos nuevos agregados a la receta.");
                     CargarDetPlato(id_plato);
-                    MessageBox.Show("Actualizado");
+                    DetalleReceta.Clear();
                     BtnAgregarNuevos.Visibility = Visibility.Visible;
                     BtnAgregarNuevos.IsEnabled = true;
                     txtBuscarProducto.IsEnabled = false;
@@ -101,31 +101,21 @@ namespace CapaDePresentacion.ViewsCocina
                     txtCantidad2.Visibility = Visibility.Hidden;
                     GridDatos.IsEnabled = false;
                     GridDatos2.IsEnabled = true;
+                    txtCantidad3.IsEnabled = true;
+                    txtCantidad3.Visibility = Visibility.Visible;
                 }
                 else
                 {
-                    MessageBox.Show("No se agregó ningun producto al detalle de la receta");
                     Actualizar();
-                    BtnAgregarNuevos.Visibility = Visibility.Visible;
-                    BtnAgregarNuevos.IsEnabled = true;
-                    txtBuscarProducto.IsEnabled = false;
-                    txtBuscarProducto.Visibility = Visibility.Hidden;
-                    txtCantidad.IsEnabled = false;
-                    txtCantidad.Visibility = Visibility.Hidden;
-                    txtCantidad2.IsEnabled = false;
-                    txtCantidad2.Visibility = Visibility.Hidden;
-                    GridDatos.IsEnabled = false;
-                    GridDatos2.IsEnabled = true;
+                    MessageBox.Show("Plato actualizado.");
+                    Content = new MantenedorRecetas();
                 }
-                
             }
             catch (Exception ex)
             {
-
+                Content = new MantenedorRecetas();
                 MessageBox.Show(ex.Message.ToString());
-            }
-
-
+            }           
         }
 
         #endregion
@@ -148,7 +138,9 @@ namespace CapaDePresentacion.ViewsCocina
         #endregion
 
         #region BOTON SUBIR IMAGEN
+
         byte[] data_imagen;
+
         private void SubirImagen()
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -181,6 +173,9 @@ namespace CapaDePresentacion.ViewsCocina
         #region BTN AGREGAR NUEVO DETALLE
         private void BtnAgregarNuevos_Click(object sender, RoutedEventArgs e)
         {
+            DetalleReceta.Clear();
+            txtCantidad3.IsEnabled = false;
+            txtCantidad3.Visibility = Visibility.Hidden;
             BtnAgregarNuevos.Visibility = Visibility.Hidden;
             BtnAgregarNuevos.IsEnabled = false;
             txtBuscarProducto.IsEnabled = true;
@@ -329,7 +324,15 @@ namespace CapaDePresentacion.ViewsCocina
                 objeto_CE_RS_PLATO.RSPL_PVENTA = int.Parse(txtPVenta.Text);
                 objeto_CE_RS_PLATO.RSPL_OBS = txtObservaciones.Text.ToString();
                 objeto_CE_RS_PLATO.RS_UN_MEDIDA_RSUM_ID = objeto_CN_UN_MEDIDA.ObtenerRSUM_ID(cbxUnidadMedida.Text);
-                objeto_CE_RS_PLATO.CE_RSPL_IMAGEN = data_imagen;
+                if (data_imagen==null)
+                {
+                    objeto_CE_RS_PLATO.CE_RSPL_IMAGEN = objeto_CN_RS_PLATO.Consultar(id_plato).CE_RSPL_IMAGEN;
+                }
+                else
+                {
+                    objeto_CE_RS_PLATO.CE_RSPL_IMAGEN = data_imagen;
+                }
+                
                 objeto_CN_RS_PLATO.Actualizar(objeto_CE_RS_PLATO);
                 
             }
@@ -440,6 +443,67 @@ namespace CapaDePresentacion.ViewsCocina
         }
         #endregion
 
-       
+        #region BTN GRID MODIFICAR DETALLE PLATO
+        private void btnModificarDet_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int id_det = int.Parse(((Button)sender).CommandParameter.ToString());
+
+                if (txtCantidad3.Text != "")
+                {
+                    if (int.Parse(txtCantidad3.Text) >= 1)
+                    {
+                        var det = objeto_CN_RS_DET_PLATO.Consultar(id_det);
+                        det.RSDPL_CANTIDAD = int.Parse(txtCantidad3.Text);
+                        objeto_CN_RS_DET_PLATO.Actualizar(det);
+                        
+                        MessageBox.Show("Detalle modificado.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("El valor debe ser igual o mayor a 1, si desea puede eliminar esta producto de la lista.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Debe ingresar un valor.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Content = new MantenedorRecetas();
+            }
+            finally {
+                CargarDetPlato(id_plato);
+            }
+        }
+        #endregion
+
+        #region BTN GRID ELIMINAR DETALLE PLATO
+        private void btnEliminarDet_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int id_det = int.Parse(((Button)sender).CommandParameter.ToString());
+                objeto_CE_RS_DET_PLATO.RSDPL_ID = id_det;
+                objeto_CN_RS_DET_PLATO.Eliminar(objeto_CE_RS_DET_PLATO);
+                MessageBox.Show("Producto eliminado de la receta.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Content = new MantenedorRecetas();
+            }
+            finally
+            {
+                CargarDetPlato(id_plato);
+            }
+        }
+        #endregion
+
+
+
     }
 }

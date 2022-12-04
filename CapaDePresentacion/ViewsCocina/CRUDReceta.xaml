@@ -632,7 +632,15 @@
                        mah:TextBoxHelper.Watermark="Nueva cantidad"
                        HorizontalAlignment="Right"
                        VerticalAlignment="Center" TextChanged="TxtBuscarProducto_TextChanged"/>
-            
+            <TextBox x:Name="txtCantidad3"
+                        Grid.Column="5"
+                     Margin="0"
+                       Grid.Row="12"
+                       mah:TextBoxHelper.Watermark="Nueva cantidad"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center" 
+                     />
+
             <Button x:Name="BtnAgregarNuevos"
                     Grid.Column="4"
                     Grid.Row="2"
@@ -804,29 +812,31 @@
                         <DataGridTemplateColumn.CellTemplate >
                             <DataTemplate >
                                 <DockPanel >
-                                    <Button x:Name="btnModificar"
+                                    <Button x:Name="btnModificarDet"
                                             Width="auto"
                                             Height="auto"
                                             FontWeight="SemiBold"
-                                            
+                                            ToolTip="Modificar cantidad"
                                             Cursor="Hand" 
                                             mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
                                             Margin="0" 
                                             HorizontalAlignment="Center"
+                                            Click="btnModificarDet_Click"
                                             CommandParameter="{Binding ID_DETALLE}" 
                                             >
                                         <iconPack:Material Kind="PencilCircle"/>
                                     </Button>
-                                    <Button x:Name="btnAgregarProducto"
+                                    <Button x:Name="btnEliminarDet"
                                             Width="auto"
                                             Height="auto"
+                                            ToolTip="Eliminar"
                                             FontWeight="SemiBold"
                                             Cursor="Hand" 
                                             mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
                                             Margin="0" 
                                             HorizontalAlignment="Center"
                                             CommandParameter="{Binding ID_DETALLE}" 
-                                            Click="BtnAgregarProducto_Click">
+                                            Click="btnEliminarDet_Click">
                                         <iconPack:Material Kind="DeleteCircle" />
                                     </Button>
                                     
