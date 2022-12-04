@@ -101,7 +101,20 @@ namespace CapaLogicaNegocio
         }
         #endregion
 
-        
+        #region CONSULTAR 
+        public CE_RS_DET_PLATO ConsultarProductoDetPlato(int id_plato, int id_producto)
+        {
+            try
+            {
+                return objDatos.ConsultarProductoDetPlato(id_plato,id_producto);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion
+
 
     }
 }

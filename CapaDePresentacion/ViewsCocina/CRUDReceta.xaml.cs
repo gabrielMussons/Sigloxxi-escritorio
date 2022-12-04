@@ -59,7 +59,7 @@ namespace CapaDePresentacion.ViewsCocina
         }
         #endregion
 
-        //--------------------------------------------------------------------
+        //-------------------BOTONES--VISTA-------------------------------------------------
 
         #region BOTON CREAR
         private void BtnCrear_Click(object sender, RoutedEventArgs e)
@@ -85,14 +85,46 @@ namespace CapaDePresentacion.ViewsCocina
         {
             try
             {
-                Actualizar();
-                Content = new MantenedorRecetas();
+                if (DetalleReceta.Count != 0)
+                {
+                    CrearDetalle(DetalleReceta, txtDescripcion.Text);
+                    Actualizar();                    
+                    CargarDetPlato(id_plato);
+                    MessageBox.Show("Actualizado");
+                    BtnAgregarNuevos.Visibility = Visibility.Visible;
+                    BtnAgregarNuevos.IsEnabled = true;
+                    txtBuscarProducto.IsEnabled = false;
+                    txtBuscarProducto.Visibility = Visibility.Hidden;
+                    txtCantidad.IsEnabled = false;
+                    txtCantidad.Visibility = Visibility.Hidden;
+                    txtCantidad2.IsEnabled = false;
+                    txtCantidad2.Visibility = Visibility.Hidden;
+                    GridDatos.IsEnabled = false;
+                    GridDatos2.IsEnabled = true;
+                }
+                else
+                {
+                    MessageBox.Show("No se agregó ningun producto al detalle de la receta");
+                    Actualizar();
+                    BtnAgregarNuevos.Visibility = Visibility.Visible;
+                    BtnAgregarNuevos.IsEnabled = true;
+                    txtBuscarProducto.IsEnabled = false;
+                    txtBuscarProducto.Visibility = Visibility.Hidden;
+                    txtCantidad.IsEnabled = false;
+                    txtCantidad.Visibility = Visibility.Hidden;
+                    txtCantidad2.IsEnabled = false;
+                    txtCantidad2.Visibility = Visibility.Hidden;
+                    GridDatos.IsEnabled = false;
+                    GridDatos2.IsEnabled = true;
+                }
+                
             }
             catch (Exception ex)
             {
 
                 MessageBox.Show(ex.Message.ToString());
             }
+
 
         }
 
@@ -115,7 +147,54 @@ namespace CapaDePresentacion.ViewsCocina
 
         #endregion
 
-        //--------------------------------------------------------------------
+        #region BOTON SUBIR IMAGEN
+        byte[] data_imagen;
+        private void SubirImagen()
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == true)
+            {
+                FileStream fs = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read);
+                data_imagen = new byte[fs.Length];
+                fs.Read(data_imagen, 0, System.Convert.ToInt32(fs.Length));
+                fs.Close();
+                ImageSourceConverter imgs = new ImageSourceConverter();
+                imagenProducto.SetValue(Image.SourceProperty, imgs.ConvertFromString(ofd.FileName.ToString()));
+                fs.Dispose();
+            }
+        }
+
+        private void BtnSeleccionarImagen_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                SubirImagen();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
+        #endregion
+
+        #region BTN AGREGAR NUEVO DETALLE
+        private void BtnAgregarNuevos_Click(object sender, RoutedEventArgs e)
+        {
+            BtnAgregarNuevos.Visibility = Visibility.Hidden;
+            BtnAgregarNuevos.IsEnabled = false;
+            txtBuscarProducto.IsEnabled = true;
+            txtBuscarProducto.Visibility = Visibility.Visible;
+            txtCantidad.IsEnabled = true;
+            txtCantidad.Visibility = Visibility.Visible;
+            txtCantidad2.IsEnabled = true;
+            txtCantidad2.Visibility = Visibility.Visible;
+            GridDatos.IsEnabled = true;
+            GridDatos2.IsEnabled = false;
+        }
+        #endregion
+
+        //----------------CARGAR--DATOS--EN--ELEMENTOS----------------------------------------------------
 
         #region CARGAR DATOS GRID PRODUCTO
         void CargarDatosProductos()
@@ -124,6 +203,7 @@ namespace CapaDePresentacion.ViewsCocina
             GridDatos.ItemsSource = obj_CN_RS_PRODUCTO.CargarListaProducto(txtBuscarProducto.Text.ToString()).DefaultView;
         }
         #endregion 
+
         #region CARGAR DATOS GRID DETALLE
         void CargarDetPlato(int id_plato)
         {
@@ -138,9 +218,20 @@ namespace CapaDePresentacion.ViewsCocina
             }
             
         }
-        #endregion 
+        #endregion
 
+        #region CARGAR CBX 
+        private void CargarCbxUnidadMedida()
+        {
+            List<string> lista = objeto_CN_UN_MEDIDA.ListarRSUM_DESCRIPCION();
+            for (int i = 0; i < lista.Count; i++)
+            {
+                cbxUnidadMedida.Items.Add(lista[i]);
+            }
+        }
+        #endregion
 
+        //-------------------CRUD-----------------------------------------------------
 
         #region CONSULTAR
         public void Consultar()
@@ -164,18 +255,7 @@ namespace CapaDePresentacion.ViewsCocina
         }
 
         #endregion
-
-        #region CARGAR CBX 
-        private void CargarCbxUnidadMedida()
-        {
-            List<string> lista = objeto_CN_UN_MEDIDA.ListarRSUM_DESCRIPCION();
-            for (int i = 0; i < lista.Count; i++)
-            {
-                cbxUnidadMedida.Items.Add(lista[i]);
-            }
-        }
-        #endregion
-
+       
         #region CREAR
         private void Crear()
         {
@@ -193,6 +273,26 @@ namespace CapaDePresentacion.ViewsCocina
 
                 throw ex;
             }
+        }
+        #endregion
+
+        #region CONSULTAR DETALLE PLATO
+        public bool ExisteProductoEnDetallePlato(int id_plato,int id_producto)
+        {
+            
+            try
+            {
+                var det = objeto_CN_RS_DET_PLATO.ConsultarProductoDetPlato(id_plato, id_producto);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+                
+            }
+            
+            
+
         }
         #endregion
 
@@ -223,6 +323,7 @@ namespace CapaDePresentacion.ViewsCocina
         {
             try
             {
+
                 objeto_CE_RS_PLATO.RSPL_ID = id_plato;
                 objeto_CE_RS_PLATO.RSPL_DESCRIPCION = txtDescripcion.Text.ToString();
                 objeto_CE_RS_PLATO.RSPL_PVENTA = int.Parse(txtPVenta.Text);
@@ -230,6 +331,7 @@ namespace CapaDePresentacion.ViewsCocina
                 objeto_CE_RS_PLATO.RS_UN_MEDIDA_RSUM_ID = objeto_CN_UN_MEDIDA.ObtenerRSUM_ID(cbxUnidadMedida.Text);
                 objeto_CE_RS_PLATO.CE_RSPL_IMAGEN = data_imagen;
                 objeto_CN_RS_PLATO.Actualizar(objeto_CE_RS_PLATO);
+                
             }
             catch (Exception ex)
             {
@@ -254,45 +356,69 @@ namespace CapaDePresentacion.ViewsCocina
         }
         #endregion
 
+        //------------------ELEMENTOS--GRIDS---------------------------------------------------------
 
+        #region BTN GRID AGREGAR PRODUCTO
         private void BtnAgregarProducto_Click(object sender, RoutedEventArgs e)
         {
-            
+
             int id_producto = int.Parse(((Button)sender).CommandParameter.ToString());
-            if (txtCantidad2.Text!="")
+
+            if (txtCantidad2.Text != "")
             {
-                if (DetalleReceta.ContainsKey(id_producto))
+                if (ExisteProductoEnDetallePlato(id_plato, id_producto) == false)
                 {
-                    if (int.Parse(txtCantidad2.Text)==0)
+                    if (DetalleReceta.ContainsKey(id_producto))
                     {
-                        DetalleReceta.Remove(id_producto);
-                        txtCantidad.Text = "0";
-                        txtCantidad2.Text = "";
+                        if (int.Parse(txtCantidad2.Text) == 0)
+                        {
+                            DetalleReceta.Remove(id_producto);
+                            txtCantidad.Text = "0";
+                            txtCantidad2.Text = "";
+                        }
+                        else
+                        {
+                            if (int.Parse(txtCantidad2.Text) >= 1)
+                            {
+                                DetalleReceta[id_producto] = int.Parse(txtCantidad2.Text);
+                                txtCantidad.Text = (DetalleReceta[id_producto]).ToString();
+                                txtCantidad2.Text = "";
+                            }
+                        }
+
                     }
                     else
                     {
-                        if (int.Parse(txtCantidad2.Text)>=1)
+                        if (int.Parse(txtCantidad2.Text) <= 0)
                         {
-                            DetalleReceta[id_producto] = int.Parse(txtCantidad2.Text);
+                            txtCantidad.Text = "0";
+                            txtCantidad2.Text = "";
+                        }
+                        else
+                        {
+                            DetalleReceta.Add(id_producto, int.Parse(txtCantidad2.Text));
                             txtCantidad.Text = (DetalleReceta[id_producto]).ToString();
                             txtCantidad2.Text = "";
                         }
                     }
-                    
                 }
                 else
                 {
-                    DetalleReceta.Add(id_producto, int.Parse(txtCantidad2.Text));
-                    txtCantidad.Text = (DetalleReceta[id_producto]).ToString();
-                    txtCantidad2.Text = "";
+                    MessageBox.Show("Producto ya existe en la receta.");
                 }
+
             }
             else
             {
                 MessageBox.Show("Debe ingresar la cantidad deseada.");
             }
+            CargarDetPlato(id_plato);
+
         }
 
+        #endregion
+
+        #region BTN GRID CONSULTAR CANT PRODUCTO
         private void BtnConsultarCant_Click(object sender, RoutedEventArgs e)
         {
             int id_producto = int.Parse(((Button)sender).CommandParameter.ToString());
@@ -305,41 +431,15 @@ namespace CapaDePresentacion.ViewsCocina
                 txtCantidad.Text = "0";
             }
         }
+        #endregion
 
+        #region BUSCAR PRODUCTO TEXT CHANGED
         private void TxtBuscarProducto_TextChanged(object sender, TextChangedEventArgs e)
         {
             CargarDatosProductos();
         }
-
-        #region SUBIR IMAGEN
-        byte[] data_imagen;
-        private void SubirImagen()
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            if (ofd.ShowDialog() == true)
-            {
-                FileStream fs = new FileStream(ofd.FileName, FileMode.Open, FileAccess.Read);
-                data_imagen = new byte[fs.Length];
-                fs.Read(data_imagen, 0, System.Convert.ToInt32(fs.Length));
-                fs.Close();
-                ImageSourceConverter imgs = new ImageSourceConverter();
-                imagenProducto.SetValue(Image.SourceProperty, imgs.ConvertFromString(ofd.FileName.ToString()));
-                fs.Dispose();
-            }
-        }
         #endregion
 
-        private void BtnSeleccionarImagen_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                SubirImagen();
-            }
-            catch (Exception ex)
-            {
-
-                MessageBox.Show(ex.Message.ToString());
-            }
-        }
+       
     }
 }

@@ -192,6 +192,37 @@ namespace CapaDAL
         }
         #endregion
 
+        #region CONSULTAR PRODUCTO DET PLATO SEGUN ID PLATO Y ID PRODUCTO
+        public CE_RS_DET_PLATO ConsultarProductoDetPlato(int id_plato, int id_producto)
+        {
+            try
+            {
+                OracleCommand cmd = new OracleCommand("" +
+                    "select * " +
+                    "from rs_det_plato where rs_plato_rspl_id = "+id_plato +
+                    " and rs_producto_rsp_id = "+id_producto, con.AbrirConexion());
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                ds.Clear();
+                da.Fill(ds);
+                DataTable dt;
+                dt = ds.Tables[0];
+                DataRow row = dt.Rows[0];
+
+                ce_rs_det_plato.RSDPL_ID = Convert.ToInt32(row[0]);
+                ce_rs_det_plato.RSDPL_CANTIDAD = Convert.ToInt32(row[1]);
+                ce_rs_det_plato.RS_PRODUCTO_RSP_ID = Convert.ToInt32(row[2]);
+                ce_rs_det_plato.RS_PLATO_RSPL_ID = Convert.ToInt32(row[3]);
+                con.CerrarConexion();
+                return ce_rs_det_plato;
+            }
+            catch (Exception ex)
+            {
+                con.CerrarConexion();
+                throw ex;
+            }
+        }
+        #endregion
 
 
     }

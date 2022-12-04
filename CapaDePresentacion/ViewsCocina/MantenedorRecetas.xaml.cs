@@ -45,9 +45,13 @@ namespace CapaDePresentacion.ViewsCocina
 
             ventanaCRUDReceta.BtnEliminar.IsEnabled = false;
             ventanaCRUDReceta.BtnActualizar.IsEnabled = false;
-
+            ventanaCRUDReceta.GridDatos2.IsEnabled = false;
+            ventanaCRUDReceta.GridDatos2.Visibility = Visibility.Hidden;
+            ventanaCRUDReceta.lblDetallePlato.Visibility = Visibility.Hidden;
             FrameGestionReceta.Content = ventanaCRUDReceta;
+
             btnAgregarNuevo.IsEnabled = false;
+            
         }
         
         private void BtnConsultar_Click(object sender, RoutedEventArgs e)
