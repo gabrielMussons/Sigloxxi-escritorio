@@ -31,7 +31,7 @@ namespace CapaDAL
             };
             try
             {
-                cmd.Parameters.Add("V_RSDPL_CANTIDAD", OracleDbType.Int32).Value = RS_DET_PLATO.RSDPL_CANTIDAD;
+                cmd.Parameters.Add("V_RSDPL_CANTIDAD", OracleDbType.Double).Value = RS_DET_PLATO.RSDPL_CANTIDAD;
                 cmd.Parameters.Add("V_RS_PRODUCTO_RSP_ID", OracleDbType.Int32).Value = RS_DET_PLATO.RS_PRODUCTO_RSP_ID;
                 cmd.Parameters.Add("V_RS_PLATO_RSPL_ID", OracleDbType.Int32).Value = RS_DET_PLATO.RS_PLATO_RSPL_ID;
                 cmd.ExecuteNonQuery();
@@ -62,7 +62,7 @@ namespace CapaDAL
                 DataRow row = dt.Rows[0];
 
                 ce_rs_det_plato.RSDPL_ID = Convert.ToInt32(row[0]);
-                ce_rs_det_plato.RSDPL_CANTIDAD = Convert.ToInt32(row[1]);
+                ce_rs_det_plato.RSDPL_CANTIDAD = (Convert.ToDouble(row[1]));
                 ce_rs_det_plato.RS_PRODUCTO_RSP_ID = Convert.ToInt32(row[2]);
                 ce_rs_det_plato.RS_PLATO_RSPL_ID = Convert.ToInt32(row[3]);
                 con.CerrarConexion();
@@ -89,7 +89,7 @@ namespace CapaDAL
             try
             {
                 cmd.Parameters.Add("V_RSDPL_ID", OracleDbType.Int32).Value = RS_DET_PLATO.RSDPL_ID;
-                cmd.Parameters.Add("V_RSDPL_CANTIDAD", OracleDbType.Int32).Value = RS_DET_PLATO.RSDPL_CANTIDAD;
+                cmd.Parameters.Add("V_RSDPL_CANTIDAD", OracleDbType.Double).Value = RS_DET_PLATO.RSDPL_CANTIDAD;
                 cmd.Parameters.Add("V_RS_PRODUCTO_RSP_ID", OracleDbType.Int32).Value = RS_DET_PLATO.RS_PRODUCTO_RSP_ID;
                 cmd.Parameters.Add("V_RS_PLATO_RSPL_ID", OracleDbType.Int32).Value = RS_DET_PLATO.RS_PLATO_RSPL_ID;
                 cmd.ExecuteNonQuery();

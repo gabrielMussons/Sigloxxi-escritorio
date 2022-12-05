@@ -22,8 +22,8 @@ namespace CapaDePresentacion.ViewsCocina
     /// </summary>
     public partial class MantenedorRecetas : UserControl
     {
-        readonly CN_RS_PLATO objeto_CN_RS_PLATO = new CN_RS_PLATO();
-        readonly CRUDReceta ventanaCRUDReceta = new CRUDReceta();
+        CN_RS_PLATO objeto_CN_RS_PLATO = new CN_RS_PLATO();
+        CRUDReceta ventanaCRUDReceta = new CRUDReceta();
 
         public MantenedorRecetas()
         {
@@ -35,78 +35,57 @@ namespace CapaDePresentacion.ViewsCocina
         {
             GridDatos.ItemsSource = objeto_CN_RS_PLATO.CargarPlatos(texto).DefaultView;
         }
-
         //---------------------------------------------------------------------------------------------------------------
-
-
         private void BtnAgregarNuevo_Click(object sender, RoutedEventArgs e)
         {
             FrameGestionReceta.SetValue(Panel.ZIndexProperty, 0);
-
             ventanaCRUDReceta.BtnEliminar.IsEnabled = false;
             ventanaCRUDReceta.BtnActualizar.IsEnabled = false;
             ventanaCRUDReceta.GridDatos2.IsEnabled = false;
             ventanaCRUDReceta.GridDatos2.Visibility = Visibility.Hidden;
             ventanaCRUDReceta.lblDetallePlato.Visibility = Visibility.Hidden;
+            ventanaCRUDReceta.txtCantidad3.Visibility = Visibility.Hidden;
             FrameGestionReceta.Content = ventanaCRUDReceta;
-
             btnAgregarNuevo.IsEnabled = false;
             
         }
-        
         private void BtnConsultar_Click(object sender, RoutedEventArgs e)
         {
             int id_plato = int.Parse(((Button)sender).CommandParameter.ToString());
             FrameGestionReceta.SetValue(Panel.ZIndexProperty, 0);
             ventanaCRUDReceta.Titulo.Text = "Consulta plato";
-
             ventanaCRUDReceta.BtnCrear.IsEnabled = false;
             ventanaCRUDReceta.BtnActualizar.IsEnabled = false;
             ventanaCRUDReceta.BtnEliminar.IsEnabled = false;
-            //ventanaCRUDReceta.btnSeleccionarImagen.IsEnabled = false;
-
             DeshabilitarInput();
-
             ventanaCRUDReceta.id_plato = id_plato;
             ventanaCRUDReceta.GridDatos2.Columns[4].Visibility = Visibility.Hidden;
             ventanaCRUDReceta.Consultar();
-
             FrameGestionReceta.Content = ventanaCRUDReceta;
         }
-
         private void BtnEliminar_Click(object sender, RoutedEventArgs e)
         {
             int id_plato = int.Parse(((Button)sender).CommandParameter.ToString());
-
             FrameGestionReceta.SetValue(Panel.ZIndexProperty, 0);
             ventanaCRUDReceta.Titulo.Text = "Eliminar receta";
-
             ventanaCRUDReceta.BtnCrear.IsEnabled = false;
             ventanaCRUDReceta.BtnActualizar.IsEnabled = false;
-            //ventanaCRUDReceta.btnSeleccionarImagen.IsEnabled = false;
-
             DeshabilitarInput();
-
             ventanaCRUDReceta.id_plato = id_plato;
             ventanaCRUDReceta.Consultar();
             FrameGestionReceta.Content = ventanaCRUDReceta;
 
         }
-
         private void BtnModificar_Click(object sender, RoutedEventArgs e)
         {
             int id_plato = int.Parse(((Button)sender).CommandParameter.ToString());
-
             FrameGestionReceta.SetValue(Panel.ZIndexProperty, 0);
             ventanaCRUDReceta.Titulo.Text = "Modificar receta";
-
             ventanaCRUDReceta.BtnCrear.IsEnabled = false;
             ventanaCRUDReceta.BtnEliminar.IsEnabled = false;
-
             ventanaCRUDReceta.id_plato = id_plato;
             ventanaCRUDReceta.Consultar();
             FrameGestionReceta.Content = ventanaCRUDReceta;
-
         }
         private void DeshabilitarInput()
         {
@@ -117,12 +96,6 @@ namespace CapaDePresentacion.ViewsCocina
             ventanaCRUDReceta.cbxUnidadMedida.IsEnabled = false;
             ventanaCRUDReceta.GridDatos.IsEnabled = false;
         }
-
-        private void BtnAgregarCarta_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void TxtBuscar_TextChanged(object sender, TextChangedEventArgs e)
         {
             CargarDatosPlatos(txtBuscar.Text);
