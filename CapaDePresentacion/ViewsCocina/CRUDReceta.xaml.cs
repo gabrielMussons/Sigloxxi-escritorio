@@ -85,7 +85,8 @@ namespace CapaDePresentacion.ViewsCocina
                 if (DetalleReceta.Count != 0)
                 {
                     CrearDetalle(DetalleReceta, txtDescripcion.Text);
-                    MessageBox.Show("Productos nuevos agregados a la receta.");
+                    Actualizar();
+                    MessageBox.Show("Plato actualizado,productos nuevos agregados a la receta.");
                     CargarDetPlato(id_plato);
                     DetalleReceta.Clear();
                     ControlesModoDet();

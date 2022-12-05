@@ -76,8 +76,7 @@ namespace CapaDePresentacion.ViewsFinanzas
             }
             else
             {
-                string fecha1=fecha.Remove(0, 3);
-                
+                string fecha1 = dpFecha.SelectedDate.Value.ToString("MM/yyyy");
                 CargarDTMes(fecha1);
             }
 
@@ -92,7 +91,7 @@ namespace CapaDePresentacion.ViewsFinanzas
             }
             if (rdbMes.IsChecked == true)
             {
-                string fecha1 = fecha.Remove(0, 3);
+                string fecha1 = dpFecha.SelectedDate.Value.ToString("MM/yyyy");
                 CargarDTMes(fecha1);
             }
             if (rbtAnio.IsChecked == true)

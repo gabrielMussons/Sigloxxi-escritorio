@@ -413,24 +413,30 @@ namespace CapaDAL
             try
             {
                 OracleCommand cmd = new OracleCommand(
-                    "select rs_docto.rsd_fecha_hora as FECHA," +
-                    "(select " +
-                        "count(COUNT(rs_docto.rsd_id)) " +
-                        "from rs_det_docto " +
-                        "join rs_docto on rs_det_docto.rs_docto_rsd_id = rs_docto.rsd_id " +
+                    "select " +
+                    "rs_docto.rsd_fecha_hora as FECHA," +
+                    "(select    " +
+                        "count(COUNT(rs_docto.rsd_id))    " +
+                        "from rs_det_docto    " +
+                        "join rs_docto on rs_det_docto.rs_docto_rsd_id = rs_docto.rsd_id    " +
                         "where rs_docto.rs_tipo_documento_rstd_id = 2    " +
                         "and rs_docto.rs_estado_rses_id = 3    " +
-                        "and rs_docto.rsd_fecha_hora like '"+fecha+"' " +
-                        "and rs_det_docto.rs_tipo_documento_rstd_id = 21    " +
-                        "group by rs_docto.rsd_fecha_hora, rs_docto.rsd_id) as TOTAL_BOLETAS," +
-                    "sum(rs_det_docto.rsdet_egreso) as TOTAL_ITEMS,sum(rs_plato.rspl_pventa) as TOTAL_VENTAS " +
-                    "from rs_det_docto " +
-                    "join rs_docto on rs_det_docto.rs_docto_rsd_id = rs_docto.rsd_id  " +
+                        "and rs_docto.rsd_fecha_hora like '"+fecha+"'    " +
+                        "and rs_det_docto.rs_tipo_documento_rstd_id = 21" +
+                        " group by rs_docto.rsd_fecha_hora, rs_docto.rsd_id) as TOTAL_BOLETAS," +
+                    "sum(rs_det_docto.rsdet_egreso) as TOTAL_ITEMS," +
+                    "sum(rs_plato.rspl_pventa * rs_det_docto.rsdet_egreso) as TOTAL_VENTAS," +
+                    "sum((rs_producto.rsp_pcompra * rs_det_plato.rsdpl_cantidad) * rs_det_docto.rsdet_egreso) as COSTO_PLATOS," +
+                    "sum(rs_plato.rspl_pventa * rs_det_docto.rsdet_egreso) - sum((rs_producto.rsp_pcompra * rs_det_plato.rsdpl_cantidad) * rs_det_docto.rsdet_egreso) as GANANCIAS" +
+                    " from rs_det_docto " +
+                    "join rs_docto on rs_det_docto.rs_docto_rsd_id = rs_docto.rsd_id " +
                     "join rs_plato on rs_det_docto.rs_plato_rspl_id = rs_plato.rspl_id " +
+                    "join rs_det_plato on rs_plato.rspl_id = rs_det_plato.rs_plato_rspl_id " +
+                    "join rs_producto on rs_producto.rsp_id = rs_det_plato.rs_producto_rsp_id " +
                     "where " +
                     "rs_docto.rs_tipo_documento_rstd_id = 2 " +
                     "and rs_docto.rs_estado_rses_id = 3 " +
-                    "and rs_docto.rsd_fecha_hora like '"+fecha+"' " +
+                    "and rs_docto.rsd_fecha_hora like '" + fecha + "' " +
                     "and rs_det_docto.rs_tipo_documento_rstd_id = 21 " +
                     "group by rs_docto.rsd_fecha_hora ", con.AbrirConexion());
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
@@ -456,29 +462,33 @@ namespace CapaDAL
             try
             {
                 OracleCommand cmd = new OracleCommand(
-                    "select TO_CHAR(rs_docto.rsd_fecha_hora, 'Month') as MES," +
-                    "TO_CHAR(rs_docto.rsd_fecha_hora, 'YYYY') as ANIO, " +
-                    "(select    " +
-                        "count(COUNT(rs_docto.rsd_id))    " +
-                        "from rs_det_docto     " +
-                        "join rs_docto on rs_det_docto.rs_docto_rsd_id = rs_docto.rsd_id     " +
-                        "where rs_docto.rs_tipo_documento_rstd_id = 2     " +
-                        "and rs_docto.rs_estado_rses_id = 3     " +
-                        "and rs_docto.rsd_fecha_hora like '%/"+fecha+"'     " +
-                        "and rs_det_docto.rs_tipo_documento_rstd_id = 21     " +
-                        "group by rs_docto.rsd_fecha_hora, rs_docto.rsd_id) as TOTAL_BOLETAS," +
+                    "select " +
+                    "TO_CHAR(rs_docto.rsd_fecha_hora, 'Month') as MES," +
+                    "TO_CHAR(rs_docto.rsd_fecha_hora, 'YYYY') as ANIO," +
+                    "(select" +
+                        " count(COUNT(rs_docto.rsd_id))" +
+                        " from rs_det_docto" +
+                        " join rs_docto on rs_det_docto.rs_docto_rsd_id = rs_docto.rsd_id" +
+                        " where rs_docto.rs_tipo_documento_rstd_id = 2" +
+                        " and rs_docto.rs_estado_rses_id = 3" +
+                        " and TO_CHAR(rs_docto.rsd_fecha_hora,'MM/YYYY') like '"+fecha+"'" +
+                        " and rs_det_docto.rs_tipo_documento_rstd_id = 21" +
+                        " group by rs_docto.rsd_fecha_hora, rs_docto.rsd_id) as TOTAL_BOLETAS," +
                     "sum(rs_det_docto.rsdet_egreso) as TOTAL_ITEMS," +
-                    "sum(rs_plato.rspl_pventa) as TOTAL_VENTAS " +
-                    "from rs_docto " +
-                    "join rs_det_docto on rs_docto.rsd_id = rs_det_docto.rs_docto_rsd_id " +
+                    "sum(rs_plato.rspl_pventa * rs_det_docto.rsdet_egreso) as TOTAL_VENTAS," +
+                    "sum((rs_producto.rsp_pcompra * rs_det_plato.rsdpl_cantidad) * rs_det_docto.rsdet_egreso) as COSTO_PLATOS," +
+                    "sum(rs_plato.rspl_pventa * rs_det_docto.rsdet_egreso) - sum((rs_producto.rsp_pcompra * rs_det_plato.rsdpl_cantidad) * rs_det_docto.rsdet_egreso) as GANANCIAS" +
+                    " from rs_det_docto " +
+                    "join rs_docto on rs_det_docto.rs_docto_rsd_id = rs_docto.rsd_id " +
                     "join rs_plato on rs_det_docto.rs_plato_rspl_id = rs_plato.rspl_id " +
+                    "join rs_det_plato on rs_plato.rspl_id = rs_det_plato.rs_plato_rspl_id " +
+                    "join rs_producto on rs_producto.rsp_id = rs_det_plato.rs_producto_rsp_id " +
                     "where rs_docto.rs_tipo_documento_rstd_id = 2 " +
                     "and rs_docto.rs_estado_rses_id = 3 " +
-                    "and rs_docto.rsd_fecha_hora like '%/"+fecha+"' " +
+                    "and TO_CHAR(rs_docto.rsd_fecha_hora,'MM/YYYY') like '" + fecha+"' " +
                     "and rs_det_docto.rs_tipo_documento_rstd_id = 21 " +
-                    "group by " +
-                    "TO_CHAR(rs_docto.rsd_fecha_hora, 'Month')," +
-                    " TO_CHAR(rs_docto.rsd_fecha_hora, 'YYYY') ", con.AbrirConexion());
+                    "group by TO_CHAR(rs_docto.rsd_fecha_hora, 'Month'), " +
+                    "TO_CHAR(rs_docto.rsd_fecha_hora, 'YYYY') ", con.AbrirConexion());
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 ds.Clear();
@@ -504,27 +514,30 @@ namespace CapaDAL
             {
                 OracleCommand cmd = new OracleCommand(
                     "select " +
-                    "TO_CHAR(rs_docto.rsd_fecha_hora, 'YYYY') as ANIO, " +
-                    "(select    " +
-                        "count(COUNT(rs_docto.rsd_id))    " +
-                        "from rs_det_docto     " +
-                        "join rs_docto on rs_det_docto.rs_docto_rsd_id = rs_docto.rsd_id     " +
-                        "where rs_docto.rs_tipo_documento_rstd_id = 2     " +
-                        "and rs_docto.rs_estado_rses_id = 3     " +
-                        "and TO_CHAR(rs_docto.rsd_fecha_hora,'YYYY')  like '" + fecha + "'     " +
-                        "and rs_det_docto.rs_tipo_documento_rstd_id = 21     " +
-                        "group by rs_docto.rsd_fecha_hora, rs_docto.rsd_id) as TOTAL_BOLETAS," +
+                    "TO_CHAR(rs_docto.rsd_fecha_hora, 'YYYY') as ANIO," +
+                    "(select" +
+                        " count(COUNT(rs_docto.rsd_id)) " +
+                        " from rs_det_docto " +
+                        " join rs_docto on rs_det_docto.rs_docto_rsd_id = rs_docto.rsd_id " +
+                        " where rs_docto.rs_tipo_documento_rstd_id = 2 " +
+                        " and rs_docto.rs_estado_rses_id = 3 " +
+                        " and TO_CHAR(rs_docto.rsd_fecha_hora, 'YYYY') like '"+fecha+"' " +
+                        " and rs_det_docto.rs_tipo_documento_rstd_id = 21 " +
+                        " group by rs_docto.rsd_fecha_hora, rs_docto.rsd_id) as TOTAL_BOLETAS," +
                     "sum(rs_det_docto.rsdet_egreso) as TOTAL_ITEMS," +
-                    "sum(rs_plato.rspl_pventa) as TOTAL_VENTAS " +
-                    "from rs_docto " +
-                    "join rs_det_docto on rs_docto.rsd_id = rs_det_docto.rs_docto_rsd_id " +
+                    "sum(rs_plato.rspl_pventa * rs_det_docto.rsdet_egreso) as TOTAL_VENTAS," +
+                    "sum((rs_producto.rsp_pcompra * rs_det_plato.rsdpl_cantidad) * rs_det_docto.rsdet_egreso) as COSTO_PLATOS," +
+                    "sum(rs_plato.rspl_pventa * rs_det_docto.rsdet_egreso) - sum((rs_producto.rsp_pcompra * rs_det_plato.rsdpl_cantidad) * rs_det_docto.rsdet_egreso) as GANANCIAS " +
+                    "from rs_det_docto " +
+                    "join rs_docto on rs_det_docto.rs_docto_rsd_id = rs_docto.rsd_id " +
                     "join rs_plato on rs_det_docto.rs_plato_rspl_id = rs_plato.rspl_id " +
+                    "join rs_det_plato on rs_plato.rspl_id = rs_det_plato.rs_plato_rspl_id " +
+                    "join rs_producto on rs_producto.rsp_id = rs_det_plato.rs_producto_rsp_id " +
                     "where rs_docto.rs_tipo_documento_rstd_id = 2 " +
                     "and rs_docto.rs_estado_rses_id = 3 " +
-                    "and TO_CHAR(rs_docto.rsd_fecha_hora,'YYYY') like '" + fecha + "' " +
+                    "and TO_CHAR(rs_docto.rsd_fecha_hora,'YYYY') like '"+fecha+"' " +
                     "and rs_det_docto.rs_tipo_documento_rstd_id = 21 " +
-                    "group by " +
-                    " TO_CHAR(rs_docto.rsd_fecha_hora, 'YYYY') ", con.AbrirConexion());
+                    "group by TO_CHAR(rs_docto.rsd_fecha_hora, 'YYYY') ", con.AbrirConexion());
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 ds.Clear();

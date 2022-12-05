@@ -272,6 +272,12 @@
                     <DataGridTextColumn Header="Total ventas"
                                         Width="*"
                                         Binding="{Binding TOTAL_VENTAS}"/>
+                    <DataGridTextColumn Header="Costo platos"
+                                        Width="*"
+                                        Binding="{Binding COSTO_PLATOS}"/>
+                    <DataGridTextColumn Header="Ganancias"
+                                        Width="*"
+                                        Binding="{Binding GANANCIAS}"/>
                     
                     <DataGridTemplateColumn Header="Opciones"
                                             Width="233"
@@ -345,7 +351,12 @@
                     <DataGridTextColumn Header="Total ventas"
                                         Width="*"
                                         Binding="{Binding TOTAL_VENTAS}"/>
-
+                    <DataGridTextColumn Header="Costo platos"
+                                        Width="*"
+                                        Binding="{Binding COSTO_PLATOS}"/>
+                    <DataGridTextColumn Header="Ganancias"
+                                        Width="*"
+                                        Binding="{Binding GANANCIAS}"/>
                     <DataGridTemplateColumn Header="Opciones"
                                             Width="233"
                                             >
@@ -414,6 +425,12 @@
                     <DataGridTextColumn Header="Total ventas"
                                         Width="*"
                                         Binding="{Binding TOTAL_VENTAS}"/>
+                    <DataGridTextColumn Header="Costo platos"
+                                        Width="*"
+                                        Binding="{Binding COSTO_PLATOS}"/>
+                    <DataGridTextColumn Header="Ganancias"
+                                        Width="*"
+                                        Binding="{Binding GANANCIAS}"/>
 
                     <DataGridTemplateColumn Header="Opciones"
                                             Width="233"
