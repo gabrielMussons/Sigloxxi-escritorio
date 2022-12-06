@@ -57,7 +57,6 @@ namespace CapaDePresentacion.ViewsAdmin
             ventanaCRUDMesa.BtnCrear.IsEnabled = false;
             ventanaCRUDMesa.BtnActualizar.IsEnabled = false;
             ventanaCRUDMesa.BtnEliminar.IsEnabled = false;
-            ventanaCRUDMesa.btnSeleccionarImagen.IsEnabled = false;
 
             DeshabilitarInput();
 
@@ -77,7 +76,6 @@ namespace CapaDePresentacion.ViewsAdmin
 
             ventanaCRUDMesa.BtnCrear.IsEnabled = false;
             ventanaCRUDMesa.BtnActualizar.IsEnabled = false;
-            ventanaCRUDMesa.btnSeleccionarImagen.IsEnabled = false;
 
             DeshabilitarInput();
 

@@ -821,7 +821,7 @@
                                             mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
                                             Margin="0" 
                                             HorizontalAlignment="Center"
-                                            Click="btnModificarDet_Click"
+                                            Click="BtnModificarDet_Click"
                                             CommandParameter="{Binding ID_DETALLE}" 
                                             >
                                         <iconPack:Material Kind="PencilCircle"/>
@@ -836,7 +836,7 @@
                                             Margin="0" 
                                             HorizontalAlignment="Center"
                                             CommandParameter="{Binding ID_DETALLE}" 
-                                            Click="btnEliminarDet_Click">
+                                            Click="BtnEliminarDet_Click">
                                         <iconPack:Material Kind="DeleteCircle" />
                                     </Button>
                                     

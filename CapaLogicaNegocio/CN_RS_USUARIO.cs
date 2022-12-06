@@ -49,7 +49,32 @@ namespace CapaLogicaNegocio
         #region AUTENTICAR RS_USUARIO
         public CE_RS_USUARIO Autenticar(string user, string pass)
         {
-            return objDAL.CD_AUTENTICAR(user,pass);
+            try
+            {
+                return objDAL.CD_AUTENTICAR(user, pass);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
+        }
+        #endregion
+
+        #region EXISTE USUARIO
+        public bool ExisteUsuario(string usuario)
+        {
+            try
+            {
+                return objDAL.ExisteUsuario(usuario);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
         }
         #endregion
     }

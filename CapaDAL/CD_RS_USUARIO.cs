@@ -79,7 +79,6 @@ namespace CapaDAL
         }
         #endregion
 
-
         #region ACTUALIZAR RS_USUARIO
         public void CD_ACTUALIZAR(CE_RS_USUARIO RS_USUARIO)
         {
@@ -168,18 +167,28 @@ namespace CapaDAL
         {
             try
             {
+                
                 OracleCommand cmd = new OracleCommand("SELECT * FROM RS_USUARIO WHERE RSU_USUARIO = '"+user+"' AND RSU_PASS = '"+pass+"'", con.AbrirConexion());
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
-                DataSet ds = new DataSet();
-                ds.Clear();
-                da.Fill(ds);
-                DataTable dt;
-                dt = ds.Tables[0];
-                DataRow row = dt.Rows[0];
-                ce_rs_usuario.CE_RS_ENTIDAD_RSE_ID = Convert.ToInt32(row[0]);
-                ce_rs_usuario.CE_RSU_USUARIO = Convert.ToString(row[1]);
-                ce_rs_usuario.CE_RSU_PASS = Convert.ToString(row[2]);
-                ce_rs_usuario.CE_RS_ENTIDAD_RSE_ID = Convert.ToInt32(row[3]);
+                try
+                {
+                    DataSet ds = new DataSet();
+                    ds.Clear();
+                    da.Fill(ds);
+                    DataTable dt;
+                    dt = ds.Tables[0];
+                    DataRow row = dt.Rows[0];
+                    ce_rs_usuario.CE_RS_ENTIDAD_RSE_ID = Convert.ToInt32(row[0]);
+                    ce_rs_usuario.CE_RSU_USUARIO = Convert.ToString(row[1]);
+                    ce_rs_usuario.CE_RSU_PASS = Convert.ToString(row[2]);
+                    ce_rs_usuario.CE_RS_ENTIDAD_RSE_ID = Convert.ToInt32(row[3]);
+                }
+                catch (Exception )
+                {
+
+                    throw new Exception("Credenciales incorrectas.");
+                }
+                
             }
             catch (Exception ex)
             {
@@ -192,6 +201,39 @@ namespace CapaDAL
         }
         #endregion
 
+
+        #region CONSULTAR NOMBRE USUARIO
+        public bool ExisteUsuario(string usuario)
+        {
+            try
+            {
+                OracleCommand cmd = new OracleCommand("select * from rs_usuario where rsu_usuario = '"+usuario+"'", con.AbrirConexion());
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                ds.Clear();
+                da.Fill(ds);
+                DataTable dt;
+                dt = ds.Tables[0];
+                DataRow row = dt.Rows[0];
+                string usuarioDevuelto = Convert.ToString(row[1]);
+                con.CerrarConexion();
+                if (usuarioDevuelto==usuario)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception )
+            {
+                con.CerrarConexion();
+                return false;
+            }
+
+        }
+        #endregion
 
 
 

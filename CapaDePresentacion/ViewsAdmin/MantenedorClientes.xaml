@@ -263,55 +263,61 @@
                     <DataGridTextColumn Header="Correo"
                                         Width="*"
                                         Binding="{Binding RSE_EMAIL}"/>
-                    <DataGridTextColumn Header="Dirección"
+                    <DataGridTextColumn Header="Tipo"
                                         Width="*"
-                                        Binding="{Binding RSE_DIRECCION}"/>
+                                        Binding="{Binding RSTE_DESCRIPCION}"/>
                     <DataGridTextColumn Header="Usuario"
                                         Width="*"
                                         Binding="{Binding RSU_USUARIO}"/>
                     <DataGridTemplateColumn Header="Opciones"
-                                            Width="233"
+                                            Width="107"
                                             >
                         <DataGridTemplateColumn.CellTemplate >
                             <DataTemplate>
                                 <DockPanel >
-                                    
+
                                     <Button x:Name="btnConsultar"
-                                            Width="70"
-                                            Height="20"
+                                            Width="auto"
+                                            Height="auto"
                                             FontWeight="SemiBold"
-                                            Content="Consultar" 
                                             Cursor="Hand" 
                                             mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
                                             Margin="0" 
                                             HorizontalAlignment="Center"
                                             Click="BtnConsultar_Click"
+                                            ToolTip="Consultar"
                                             CommandParameter="{Binding RSE_ID}"
-                                        />
+                                        >
+                                        <iconPack:Material Kind="EyeCircle"/>
+                                    </Button>
                                     <Button x:Name="btnModificar"
-                                            Width="70"
-                                            Height="20"
+                                            Width="auto"
+                                            Height="auto"
                                             FontWeight="SemiBold"
-                                            Content="Modificar" 
                                             Cursor="Hand" 
                                             HorizontalAlignment="Center"
                                             mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
                                             Margin="5,0,5,0" 
                                             CommandParameter="{Binding RSE_ID}"
+                                            ToolTip="Modificar"
                                             Click="BtnModificar_Click"
-                                        />
+                                        >
+                                        <iconPack:Material Kind="PencilCircle"/>
+                                    </Button>
                                     <Button x:Name="btnEliminar"
-                                            Width="70"
+                                            Width="auto"
                                             FontWeight="SemiBold"
-                                            Height="20"
+                                            Height="auto"
                                             HorizontalAlignment="Center"
-                                            Content="Eliminar" 
                                             Cursor="Hand" 
+                                            ToolTip="Eliminar"
                                             mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
                                             Margin="0" 
                                             CommandParameter="{Binding RSE_ID}"
                                             Click="BtnEliminar_Click"
-                                        />
+                                        >
+                                        <iconPack:Material Kind="DeleteCircle"/>
+                                    </Button>
                                 
                                 </DockPanel>
                             </DataTemplate>

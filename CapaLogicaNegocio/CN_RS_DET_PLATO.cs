@@ -53,7 +53,7 @@ namespace CapaLogicaNegocio
         }
         #endregion
 
-        #region ELIMINAR RS_MESA
+        #region ELIMINAR DETPLATO
         public void Eliminar(CE_RS_DET_PLATO det_plato)
         {
 

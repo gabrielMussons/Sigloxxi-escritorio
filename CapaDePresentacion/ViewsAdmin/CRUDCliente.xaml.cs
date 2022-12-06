@@ -39,9 +39,10 @@ namespace CapaDePresentacion.ViewsAdmin
             InitializeComponent();
             CargarCbxTipoUsuario();
             CargarCbxEstado();
-            CargarCbxComuna();            
+            CargarCbxComuna();
         }
         //------------------------------------------------------------------------
+
         private void BtnRegresar_Click(object sender, RoutedEventArgs e)
         {
             Content = new MantenedorClientes();
@@ -51,24 +52,41 @@ namespace CapaDePresentacion.ViewsAdmin
         {
             try
             {
-                Crear();
-                MessageBox.Show("Registrado correctamente");
-                Content = new MantenedorClientes();
+                bool val = ValidacionCampos();
+                if (val==true)
+                {
+                    if (ExisteUsuario(txtUsuario.Text) == true)
+                    {
+                        MessageBox.Show("Nombre de usuario ocupado :( ");
+                    }
+                    else
+                    {
+                        Crear();
+                        MessageBox.Show("Registrado correctamente");
+                        Content = new MantenedorClientes();
+                    }
+                }
+                
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
             }
-            
+
         }
 
         private void BtnActualizar_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                Actualizar();
-                MessageBox.Show("Actualizado correctamente");
-                Content = new MantenedorClientes();
+                bool val = ValidacionCampos();
+                if (val == true)
+                {
+                    Actualizar();
+                    MessageBox.Show("Actualizado correctamente");
+                    Content = new MantenedorClientes();
+                }
+                
             }
             catch (Exception ex)
             {
@@ -97,7 +115,7 @@ namespace CapaDePresentacion.ViewsAdmin
             try
             {
                 EliminarUsuario();
-                               
+
             }
             catch (Exception ex)
             {
@@ -119,7 +137,8 @@ namespace CapaDePresentacion.ViewsAdmin
             }
         }
 
-        //-------------------------------------------------------------------------------------------------
+        //------------------------------------------------------------------------------------------
+
         #region SUBIR IMAGEN
         private void SubirImagen()
         {
@@ -144,7 +163,7 @@ namespace CapaDePresentacion.ViewsAdmin
             try
             {
                 var x = objeto_CN_RS_ENTIDAD.Consultar(rse_id);
-                
+
 
                 var estado = objeto_CN_RS_ESTADO.ObtenerRSES_DESCRIPCION(x.CE_RS_ESTADO_RSES_ID);
                 var comuna = objeto_CN_RS_COMUNA.ObtenerRSC_DESCRIPCION(x.CE_RS_COMUNA_RSC_ID);
@@ -168,15 +187,15 @@ namespace CapaDePresentacion.ViewsAdmin
                     txtUsuario.Text = usuario.CE_RSU_USUARIO.ToString();
                     txtContrasenia.Text = usuario.CE_RSU_PASS.ToString();
                     tieneUsuario = true;
-                    
+
                 }
-                catch (Exception ex)
+                catch (Exception )
                 {
                     tieneUsuario = false;
                     BtnEliminarUsuario.IsEnabled = false;
-                    throw ex;
+                    MessageBox.Show("Persona no registra usuario.");
                 }
-               
+
                 if (x.CE_RSE_IMAGEN != null)
                 {
                     ImageSourceConverter img = new ImageSourceConverter();
@@ -188,8 +207,8 @@ namespace CapaDePresentacion.ViewsAdmin
 
                 MessageBox.Show(ex.Message.ToString());
             }
-            
-            
+
+
         }
 
         #endregion
@@ -211,11 +230,11 @@ namespace CapaDePresentacion.ViewsAdmin
             List<string> lista = objeto_CN_RS_ESTADO.ListarRSES_DESCRIPCION();
             for (int i = 0; i < lista.Count; i++)
             {
-                if (lista[i].ToUpper()=="VIGENTE"|| lista[i].ToUpper() == "NULO" )
+                if (lista[i].ToUpper() == "VIGENTE" || lista[i].ToUpper() == "NULO")
                 {
                     cbxEstado.Items.Add(lista[i]);
                 }
-                
+
             }
         }
         #endregion
@@ -230,6 +249,7 @@ namespace CapaDePresentacion.ViewsAdmin
             }
         }
         #endregion
+
         //------------------------------------------------------------------------------------------
         #region CREAR
         private void Crear()
@@ -252,7 +272,7 @@ namespace CapaDePresentacion.ViewsAdmin
                 objeto_CE_RS_ENTIDAD.CE_RS_ESTADO_RSES_ID = estado;
                 objeto_CE_RS_ENTIDAD.CE_RS_COMUNA_RSC_ID = comuna;
                 objeto_CE_RS_ENTIDAD.CE_RSE_IMAGEN = data_imagen;
-                
+
                 objeto_CN_RS_ENTIDAD.Insertar(objeto_CE_RS_ENTIDAD);
                 try
                 {
@@ -260,12 +280,12 @@ namespace CapaDePresentacion.ViewsAdmin
                     objeto_CE_RS_USUARIO.CE_RSU_PASS = txtContrasenia.Text;
                     objeto_CE_RS_USUARIO.CE_RS_ENTIDAD_RSE_ID = objeto_CN_RS_ENTIDAD.ObtenerRSE_ID(txtRut.Text);
 
-                    objeto_CN_RS_USUARIO.Insertar(objeto_CE_RS_USUARIO);                    
+                    objeto_CN_RS_USUARIO.Insertar(objeto_CE_RS_USUARIO);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     objeto_CN_RS_ENTIDAD.Eliminar(objeto_CE_RS_ENTIDAD);
-                    throw ex;
+                    throw new Exception("Error al crear.");
                 }
             }
             catch (Exception ex)
@@ -276,13 +296,59 @@ namespace CapaDePresentacion.ViewsAdmin
         }
         #endregion
 
+
         #region ACTUALIZAR
         private void Actualizar()
         {
-            
+
             try
             {
-                
+
+
+                if (tieneUsuario == true)
+                {
+                    var usuario = objeto_CN_RS_USUARIO.Consultar(rse_id);
+                    string nombreUsuario = usuario.CE_RSU_USUARIO;
+                    string contrasenia = usuario.CE_RSU_PASS;
+                    if (txtUsuario.Text != nombreUsuario || txtContrasenia.Text != contrasenia)
+                    {
+                        if (objeto_CN_RS_USUARIO.ExisteUsuario(txtUsuario.Text) == true)
+                        {
+
+                            throw new Exception("Ese nombre de usuario ya esta ocupado :(");
+                        }
+                        else
+                        {
+                            objeto_CE_RS_USUARIO.CE_RSU_PASS = txtContrasenia.Text;
+                            objeto_CE_RS_USUARIO.CE_RSU_USUARIO = txtUsuario.Text;
+                            objeto_CE_RS_USUARIO.CE_RS_ENTIDAD_RSE_ID = rse_id;
+
+                            objeto_CN_RS_USUARIO.Actualizar(objeto_CE_RS_USUARIO);
+                            MessageBox.Show("Usuario actualizado.");
+
+                        }
+
+
+                    }
+                }
+                else
+                {
+                    if (objeto_CN_RS_USUARIO.ExisteUsuario(txtUsuario.Text) == true)
+                    {
+                        throw new Exception("Ese nombre de usuario ya esta ocupado :(");
+                    }
+                    else
+                    {
+                        objeto_CE_RS_USUARIO.CE_RSU_PASS = txtContrasenia.Text;
+                        objeto_CE_RS_USUARIO.CE_RSU_USUARIO = txtUsuario.Text;
+                        objeto_CE_RS_USUARIO.CE_RS_ENTIDAD_RSE_ID = rse_id;
+                        objeto_CN_RS_USUARIO.Insertar(objeto_CE_RS_USUARIO);
+                        MessageBox.Show("Usuario creado.");
+
+                    }
+                }
+
+
                 int estado = objeto_CN_RS_ESTADO.ObtenerRSES_ID(cbxEstado.Text);
                 int tipoEntidad = objeto_CN_RS_TIPO_ENTIDAD.ObtenerRSTE_ID(cbxTipoUsuario.Text);
                 int comuna = objeto_CN_RS_COMUNA.ObtenerRSC_ID(cbxComuna.Text);
@@ -301,28 +367,7 @@ namespace CapaDePresentacion.ViewsAdmin
                 objeto_CE_RS_ENTIDAD.CE_RS_COMUNA_RSC_ID = comuna;
                 objeto_CE_RS_ENTIDAD.CE_RSE_IMAGEN = data_imagen;
 
-                objeto_CE_RS_USUARIO.CE_RSU_PASS = txtContrasenia.Text;
-                objeto_CE_RS_USUARIO.CE_RSU_USUARIO = txtUsuario.Text;
-                objeto_CE_RS_USUARIO.CE_RS_ENTIDAD_RSE_ID = rse_id;
-
                 objeto_CN_RS_ENTIDAD.Actualizar(objeto_CE_RS_ENTIDAD);
-                try
-                {
-                    if (tieneUsuario==true)
-                    {
-                        objeto_CN_RS_USUARIO.Actualizar(objeto_CE_RS_USUARIO);
-                    }
-                    else
-                    {
-                        objeto_CN_RS_USUARIO.Insertar(objeto_CE_RS_USUARIO);
-                    }
-                                 
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                
             }
             catch (Exception ex)
             {
@@ -335,17 +380,17 @@ namespace CapaDePresentacion.ViewsAdmin
         #region ELIMINAR
         private void EliminarCliente()
         {
-            if (txtUsuario.Text != "" )
+            if (txtUsuario.Text != "")
             {
                 throw new Exception("No se puede eliminar, registra usuario en el sistema.");
             }
             else
             {
-                string message = "Se eliminaran las reservas asociadas."+Environment.NewLine+" Desea seguir ?";
+                string message = "Se eliminaran las reservas asociadas." + Environment.NewLine + " Desea seguir ?";
                 System.Windows.Forms.MessageBoxButtons buttons = System.Windows.Forms.MessageBoxButtons.YesNo;
-                System.Windows.Forms.DialogResult result = System.Windows.Forms.MessageBox.Show(message, null,buttons);
+                System.Windows.Forms.DialogResult result = System.Windows.Forms.MessageBox.Show(message, null, buttons);
                 if (result == System.Windows.Forms.DialogResult.Yes)
-                {                    
+                {
                     try
                     {
                         try
@@ -355,23 +400,23 @@ namespace CapaDePresentacion.ViewsAdmin
                         catch (Exception ex)
                         {
 
-                            throw new Exception("No se pueden liberar reservas asociadas.",ex);
-                        } 
-                        
+                            throw new Exception("No se pueden liberar reservas asociadas.", ex);
+                        }
+
                         objeto_CE_RS_ENTIDAD.CE_RSE_ID = rse_id;
                         objeto_CN_RS_ENTIDAD.Eliminar(objeto_CE_RS_ENTIDAD);
                     }
                     catch (Exception)
                     {
                         throw new Exception("No se puede eliminar, registra documentos en el sistema.");
-                        
-                    }                    
+
+                    }
                 }
                 else
                 {
                     MessageBox.Show("No se ah podido eliminado.");
                 }
-                
+
             }
         }
         #endregion
@@ -379,7 +424,7 @@ namespace CapaDePresentacion.ViewsAdmin
         #region ELIMINAR USUARIO
         private void EliminarUsuario()
         {
-            if (txtUsuario.Text!="")
+            if (txtUsuario.Text != "")
             {
                 try
                 {
@@ -389,7 +434,7 @@ namespace CapaDePresentacion.ViewsAdmin
                     txtContrasenia.Text = "";
                     MessageBox.Show("Usuario eliminado correctamente.");
                     BtnEliminarUsuario.IsEnabled = false;
-                } 
+                }
                 catch (Exception ex)
                 {
 
@@ -400,9 +445,165 @@ namespace CapaDePresentacion.ViewsAdmin
             {
                 MessageBox.Show("No registra usuario.");
             }
-           
+
         }
         #endregion
+
+        private bool ExisteUsuario(string usuario)
+        {
+            return objeto_CN_RS_USUARIO.ExisteUsuario(usuario);
+        }
+
+        private bool ValidacionCampos() {
+            try
+            {
+                if (txtApellidoM.Text != "" || txtApellidoP.Text != "" || txtContrasenia.Text != "" || txtDireccion.Text != "" || txtEmail.Text != "" || txtNombre.Text != "" || txtRut.Text != "" || txtTelefono.Text != "" || txtUsuario.Text != "")
+                {
+                    if (ValidarRut(txtRut.Text) == true)
+                    {
+                        if (int.TryParse(txtTelefono.Text, out int x))
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            throw new Exception("Campo telefono debe ser numérico.");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Rut invalido");
+                    }
+
+                }
+                else
+                {
+                    throw new Exception("Debe llenar los campos.");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
+        }
+
+        public string QuitarEspaciosString(string cadenaEntrada)
+        {
+            try
+            {
+                if (cadenaEntrada.ToString()=="")
+                {
+
+                    throw new Exception("Debe ingresar un dato.");
+                }
+                else
+                {
+                    string cadenaSalida = "";
+                    int contador = 0;
+                    foreach (char x in cadenaEntrada)
+                    {
+                        contador = contador + 1;
+                        if (x != ' ')
+                        {
+                            char nuevochar = x;
+                            cadenaSalida = cadenaSalida + nuevochar;
+                        }
+
+                    }
+                    return cadenaSalida;
+                }
+                
+                
+            }
+            catch (Exception ex)
+            {
+
+                throw ex ;
+            }
+            
+            
+        }
+
+        public bool ValidarRut(string rutEntrada)
+        {
+            try
+            {
+                try
+                {
+                    QuitarEspaciosString(rutEntrada);
+                }
+                catch (Exception)
+                {
+
+                    throw new Exception("Debe ingresar rut.");
+                }
+                
+                string rut_string = rutEntrada.Substring(0, rutEntrada.Length - 2);
+                string dv = rutEntrada.Substring(rutEntrada.Length - 1, 1);
+                string guion = rutEntrada.Substring(rutEntrada.Length - 2, 1);
+                string dv_string;
+
+                if (guion == "-")
+                {
+                    if (int.TryParse(rut_string, out int rut_int))
+                    {
+                        if (rut_int.ToString().Length == 7 || rut_int.ToString().Length == 8)
+                        {
+                            if (int.TryParse(dv, out int dv_int) == true)
+                            {
+                                if (dv_int >= 0 && dv_int <= 9)
+                                {
+                                    return true;
+                                }
+                                else
+                                {
+                                    throw new Exception("Digito verificador invalido.");
+                                }
+                            }
+
+                            else
+                            {
+                                dv_string = (dv.ToString()).ToUpper();
+                                if (dv_string == "K")
+                                {
+                                    return true;
+
+                                }
+                                else
+                                {
+                                    throw new Exception("Digito verificador invalido.");
+
+                                }
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception("Rut invalido , rut no puede contener meno de 7 y mas de 8 digitos.");
+                        }
+
+                    }
+                    else
+                    {
+                        throw new Exception("Rut mal ingresado.");
+                    }
+
+                }
+                else
+                {
+                    throw new Exception("Debe separar rut y dv por mediode un guión.");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
+
+        }
+
 
 
     }

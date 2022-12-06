@@ -152,6 +152,7 @@ namespace CapaDAL
             try
             {                
                 cmd.Parameters.Add("v_rse_id", ce_rs_entidad.CE_RSE_ID);
+                cmd.Parameters.Add("v_rse_rut", ce_rs_entidad.CE_RSE_RUT);
                 cmd.ExecuteNonQuery();
                 cmd.Parameters.Clear();
                 con.CerrarConexion();
@@ -173,6 +174,7 @@ namespace CapaDAL
         {
             try
             {
+
                 OracleCommand cmd = new OracleCommand("SELECT * FROM RS_ENTIDAD JOIN RS_TIPO_ENTIDAD ON " +
                     "rs_tipo_entidad.rste_id = rs_entidad.rs_tipo_entidad_rste_id JOIN RS_COMUNA ON rs_comuna.rsc_id = rs_entidad.rs_comuna_rsc_id " +
                     "JOIN RS_ESTADO ON rs_estado.rses_id = rs_entidad.rs_estado_rses_id " +

@@ -361,52 +361,6 @@
             </Button>
             <!--#endregion-->
 
-            <!--#region BOTON SELECCIONAR IMAGEN-->
-            <Button x:Name="btnSeleccionarImagen"
-                    Grid.Column="4"
-                    Grid.Row="14"
-                    Grid.ColumnSpan="2"
-                    HorizontalAlignment="Stretch"
-                    VerticalAlignment="Center"
-                    Cursor="Hand"
-                    Visibility="Visible" 
-                    Height="25"
-                    Background="Gray"  
-                    BorderBrush="#666666 "
-                    BorderThickness="1.3"
-                    Margin="0"
-                    Width="220"
-                    Style="{DynamicResource BTNMENU}"
-                    Foreground="White"
-                    Padding="0" 
-                    
-                    >
-                <!-- Color para boton agregar nuevo mas oscuro = #7fba00 o  claro = #78b000 -->
-                <Grid Margin="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <iconPack:PackIconMaterial  Kind="Upload"
-                                                Height="14"
-                                                Grid.Column="0"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                Margin="10,0"
-                                                />
-                    <TextBlock Grid.Column="1"
-                               Text="Seleccionar imagen"
-                               FontWeight="Normal"
-                               FontSize="12.5"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Center"
-                               Margin="0"
-                               FontFamily="Segoe UI"/>
-                </Grid>
-            </Button>
-
-            <!--#endregion-->
-
             <!--#endregion-->
 
             <!--#region CONTENIDO-->
@@ -479,36 +433,6 @@
             
 
 
-            <!--#region IMAGEN-->
-            <Border 
-                    Grid.Column="4"
-                    Grid.Row="4"
-                    Grid.RowSpan="9"
-                    Grid.ColumnSpan="2"
-                    Margin="0"
-                    HorizontalAlignment="Center"
-                    BorderBrush="DarkGray"
-                    BorderThickness="1"
-                
-                    Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
-                <!--<Image 
-                       x:Name="imagenCliente"
-                       Source="/img/profileImage.png"
-                       />-->
-                <iconPack:PackIconMaterial  Kind="Camera"
-                                            Grid.Column="0"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            Height="auto"
-                                            Width="auto"
-                                            Padding="45"
-                                            Foreground="White"
-                                            Background="#876eb0"
-                                                />
-            </Border>
-            <!--#endregion-->
-
-           
             <!--#endregion-->
 
         </Grid>

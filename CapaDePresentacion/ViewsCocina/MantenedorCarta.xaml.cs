@@ -69,26 +69,31 @@ namespace CapaDePresentacion.ViewsCocina
             ventanaCRUDCarta.BtnActualizar.IsEnabled = false;
             ventanaCRUDCarta.BtnEliminar.IsEnabled = false;
             DeshabilitarInput();
-            
 
+            ventanaCRUDCarta.Titulo.Text = "Consulta plato";
+            ventanaCRUDCarta.BtnCrear.IsEnabled = false;
+            ventanaCRUDCarta.BtnActualizar.IsEnabled = false;
+            ventanaCRUDCarta.BtnEliminar.IsEnabled = false;
+            DeshabilitarInput();
             ventanaCRUDCarta.id_carta = id_carta;
-
+            ventanaCRUDCarta.GridDatos2.Columns[3].Visibility = Visibility.Hidden;
+            ventanaCRUDCarta.txtCantidad3.Visibility = Visibility.Visible;
             ventanaCRUDCarta.Consultar();
-
             FrameAgregarCarta.Content = ventanaCRUDCarta;
+
+
         }
 
         private void BtnEliminar_Click(object sender, RoutedEventArgs e)
         {
             int id_carta = int.Parse(((Button)sender).CommandParameter.ToString());
-
             FrameAgregarCarta.SetValue(Panel.ZIndexProperty, 0);
             ventanaCRUDCarta.Titulo.Text = "Eliminar carta";
 
             ventanaCRUDCarta.BtnCrear.IsEnabled = false;
             ventanaCRUDCarta.BtnActualizar.IsEnabled = false;
-            //ventanaCRUDReceta.btnSeleccionarImagen.IsEnabled = false;
-
+            ventanaCRUDCarta.GridDatos2.Columns[3].Visibility = Visibility.Hidden;
+            ventanaCRUDCarta.txtCantidad3.Visibility = Visibility.Visible;
             DeshabilitarInput();
 
             ventanaCRUDCarta.id_carta = id_carta;
@@ -103,12 +108,13 @@ namespace CapaDePresentacion.ViewsCocina
 
             FrameAgregarCarta.SetValue(Panel.ZIndexProperty, 0);
             ventanaCRUDCarta.Titulo.Text = "Modificar carta";
-
             ventanaCRUDCarta.BtnCrear.IsEnabled = false;
             ventanaCRUDCarta.BtnEliminar.IsEnabled = false;
-
-            ventanaCRUDCarta.id_carta = id_carta;
+            
+            ventanaCRUDCarta.txtCantidad.Visibility = Visibility.Hidden;
+            ventanaCRUDCarta.txtCantidad2.Visibility = Visibility.Hidden;
             ventanaCRUDCarta.id_entidad = entidad.CE_RSE_ID;
+            ventanaCRUDCarta.id_carta = id_carta;
             ventanaCRUDCarta.Consultar();
             FrameAgregarCarta.Content = ventanaCRUDCarta;
 
@@ -121,7 +127,7 @@ namespace CapaDePresentacion.ViewsCocina
             ventanaCRUDCarta.txtObservaciones.IsEnabled = false;
             ventanaCRUDCarta.cbxEstado.IsEnabled = false;
             ventanaCRUDCarta.GridDatos.IsEnabled = false;
-            ventanaCRUDCarta.txtCantidadPlatos.IsEnabled = false;
+            ventanaCRUDCarta.txtCantidad.IsEnabled = false;
             ventanaCRUDCarta.txtBuscarPlato.IsEnabled = false;
             ventanaCRUDCarta.GridDatos.IsEnabled = false;
         }

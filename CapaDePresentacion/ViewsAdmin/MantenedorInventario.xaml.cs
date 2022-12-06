@@ -91,7 +91,6 @@ namespace CapaDePresentacion.ViewsAdmin
             FrameAgregarProducto.Content = ventanaCRUDInventario;
             ventanaCRUDInventario.Titulo.Text = "Consulta producto";
 
-            ventanaCRUDInventario.btnSeleccionarImagen.IsEnabled = false;
             ventanaCRUDInventario.BtnActualizar.IsEnabled = false;
             ventanaCRUDInventario.BtnEliminar.IsEnabled = false;
             ventanaCRUDInventario.BtnCrear.IsEnabled = false;
@@ -124,7 +123,6 @@ namespace CapaDePresentacion.ViewsAdmin
             ventanaCRUDInventario.Titulo.Text = "Eliminar producto";
             ventanaCRUDInventario.BtnCrear.IsEnabled = false;
             ventanaCRUDInventario.BtnActualizar.IsEnabled = false;
-            ventanaCRUDInventario.btnSeleccionarImagen.IsEnabled = false;
             InhabilitarCamposCRUD(ventanaCRUDInventario);
             ventanaCRUDInventario.id_producto = id_producto;
             ventanaCRUDInventario.Consultar();

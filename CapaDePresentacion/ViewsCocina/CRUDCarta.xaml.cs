@@ -63,6 +63,28 @@ namespace CapaDePresentacion.ViewsCocina
         }
         #endregion
 
+        #region CARGAR DATOS GRID DETALLE CARTA
+        void CargarDetCarta(int id_carta)
+        {
+            try
+            {
+                GridDatos2.ItemsSource = objeto_CN_RS_DET_DOCTO.CargarDetalleCarta(id_carta).DefaultView;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+        #endregion
+
+        #region CARGAR DATOS GRID
+        void CargarDatosPlatos()
+        {
+            GridDatos.ItemsSource = objeto_CN_RS_PLATO.CargarPlatos(txtBuscarPlato.Text.ToString()).DefaultView;
+        }
+        #endregion
         //--------------------------------------------------------------------
 
         #region BOTON CREAR
@@ -71,16 +93,7 @@ namespace CapaDePresentacion.ViewsCocina
             try
             {
                 Crear();
-                try
-                {
-                    CrearDetalle(DetalleCarta);
-                }
-                catch (Exception ex)
-                {
-                    objeto_CE_RS_DOCTO.CE_RSD_ID = objeto_CN_RS_DOCTO.ObtenerUltimoRegistro().CE_RSD_ID;
-                    objeto_CN_RS_DOCTO.Eliminar(objeto_CE_RS_DOCTO);
-                    throw ex;
-                }
+                CrearDetalle(DetalleCarta);
                 Content = new MantenedorCarta();
             }
             catch (Exception ex)
@@ -98,12 +111,26 @@ namespace CapaDePresentacion.ViewsCocina
         {
             try
             {
-                Actualizar();
-                Content = new MantenedorCarta();
+                if (DetalleCarta.Count != 0)
+                {
+                    CrearDetalle(DetalleCarta);
+                    Actualizar();
+                    MessageBox.Show("Carta actualizada,platos nuevos agregados.");
+                    CargarDetCarta(id_carta);
+                    DetalleCarta.Clear();
+                    ControlesModoDet();
+
+                }
+                else
+                {
+                    Actualizar();
+                    MessageBox.Show("Carta actualizada.");
+                    Content = new MantenedorCarta();
+                }
             }
             catch (Exception ex)
             {
-
+                Content = new MantenedorCarta();
                 MessageBox.Show(ex.Message.ToString());
             }
 
@@ -130,13 +157,6 @@ namespace CapaDePresentacion.ViewsCocina
 
         //--------------------------------------------------------------------
 
-        #region CARGAR DATOS GRID
-        void CargarDatosPlatos()
-        {
-            
-            GridDatos.ItemsSource = objeto_CN_RS_PLATO.CargarPlatos(txtBuscarPlato.Text.ToString()).DefaultView;
-        }
-        #endregion
 
         #region CONSULTAR
         public void Consultar()
@@ -153,6 +173,7 @@ namespace CapaDePresentacion.ViewsCocina
             txtNombreSolicitante.Text = nombre_solicitante;
             txtObservaciones.Text = carta.CE_RSD_OBS.ToString();
             cbxEstado.Text = estado;
+            CargarDetCarta(carta.CE_RSD_ID);
         }
 
         #endregion
@@ -192,6 +213,26 @@ namespace CapaDePresentacion.ViewsCocina
         }
         #endregion
 
+        #region CONSULTAR DETALLE CARTA
+        public bool ExistePlatoEnDetalleCarta(int id_carta, int id_plato)
+        {
+
+            try
+            {
+                var det = objeto_CN_RS_DET_DOCTO.ConsultarPlatoDetCarta(id_carta, id_plato);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+
+            }
+
+
+
+        }
+        #endregion
+
         #region CREAR DETALLE
         private void CrearDetalle(Dictionary<int, int> Detalle)
         {
@@ -203,7 +244,7 @@ namespace CapaDePresentacion.ViewsCocina
                     objeto_CE_RS_DET_DOCTO.CE_RS_PLATO_RSPL_ID = plato.Key;
                     objeto_CE_RS_DET_DOCTO.CE_RS_TIPO_DOCUMENTO_RSTD_ID = objeto_CN_RS_TIPO_DOCUMENTO.ObtenerRSTD_ID("Carta");
                     objeto_CE_RS_DET_DOCTO.CE_RS_ESTADO_RSES_ID = objeto_CN_RS_ESTADO.ObtenerRSES_ID("Solicitado");
-                    objeto_CE_RS_DET_DOCTO.CE_RS_DOCTO_RSD_ID = objeto_CN_RS_DOCTO.ObtenerUltimoRegistro().CE_RSD_ID;
+                    objeto_CE_RS_DET_DOCTO.CE_RS_DOCTO_RSD_ID = id_carta;
 
                     objeto_CN_RS_DET_DOCTO.Insertar(objeto_CE_RS_DET_DOCTO);
                 }
@@ -255,50 +296,200 @@ namespace CapaDePresentacion.ViewsCocina
         #endregion
 
 
+        //------------------ELEMENTOS--GRIDS---------------------------------------------------------
+
+
+       
+
+        #region BTN GRID AGREGAR PRODUCTO
         private void BtnAgregarProducto_Click(object sender, RoutedEventArgs e)
         {
-            int id_plato = int.Parse(((Button)sender).CommandParameter.ToString());
-            if (DetalleCarta.ContainsKey(id_plato))
+            if (txtCantidad2.Text != "")
             {
-                DetalleCarta[id_plato] = DetalleCarta[id_plato] + 1;
-                Console.WriteLine(DetalleCarta[id_plato]);
-                this.ToolTip = (DetalleCarta[id_plato]).ToString();
-                txtCantidadPlatos.Text = (DetalleCarta[id_plato]).ToString();
-
-            }
-            else
-            {
-                DetalleCarta.Add(id_plato, +1);
-                Console.WriteLine(DetalleCarta[id_plato]);
-                txtCantidadPlatos.Text = (DetalleCarta[id_plato]).ToString();
-
-            }
-
-        }
-
-        private void BtnEliminarProducto_Click(object sender, RoutedEventArgs e)
-        {
-            int id_plato = int.Parse(((Button)sender).CommandParameter.ToString());
-            if (DetalleCarta.ContainsKey(id_plato))
-            {
-                if (DetalleCarta[id_plato] == 1)
+                if (int.TryParse(txtCantidad2.Text, out int cantidad))
                 {
-                    DetalleCarta.Remove(id_plato);
-                    txtCantidadPlatos.Text = "0";
+                    int id_plato = int.Parse(((Button)sender).CommandParameter.ToString());
+                    if (ExistePlatoEnDetalleCarta(id_carta, id_plato) == false)
+                    {
+                        if (DetalleCarta.ContainsKey(id_plato))
+                        {
+                            if (cantidad <= 0)
+                            {
+                                DetalleCarta.Remove(id_plato);
+                                txtCantidad.Text = "0";
+                                txtCantidad2.Text = "";
+                            }
+                            else
+                            {
+                                DetalleCarta[id_plato] = cantidad;
+                                txtCantidad.Text = (DetalleCarta[id_plato]).ToString();
+                                txtCantidad2.Text = "";
+                            }
 
+                        }
+                        else
+                        {
+                            if (cantidad <= 0)
+                            {
+                                txtCantidad.Text = "0";
+                                txtCantidad2.Text = "";
+                            }
+                            else
+                            {
+                                DetalleCarta.Add(id_plato, cantidad);
+                                txtCantidad.Text = (DetalleCarta[id_plato]).ToString();
+                                txtCantidad2.Text = "";
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Producto ya existe en la receta.");
+                    }
                 }
                 else
                 {
-                    DetalleCarta[id_plato] = DetalleCarta[id_plato] - 1;
-                    Console.WriteLine(DetalleCarta[id_plato]);
-                    txtCantidadPlatos.Text = (DetalleCarta[id_plato]).ToString();
+                    MessageBox.Show("Solo puedes ingresar numeros enteros y decimales , estos deben separarse con una coma. Ej:(2,25)");
                 }
             }
+            else
+            {
+                MessageBox.Show("Debes ingresar la cantidad deseada.");
+            }
         }
+
+        #endregion
+
+        #region BTN GRID CONSULTAR CANT PRODUCTO
+        private void BtnConsultarCant_Click(object sender, RoutedEventArgs e)
+        {
+            int id_plato = int.Parse(((Button)sender).CommandParameter.ToString());
+            if (DetalleCarta.ContainsKey(id_plato))
+            {
+                txtCantidad.Text = (DetalleCarta[id_plato]).ToString();
+            }
+            else
+            {
+                txtCantidad.Text = "0";
+            }
+        }
+        #endregion
+
+        #region BTN GRID MODIFICAR DETALLE PLATO
+        private void BtnModificarDet_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+
+                if (txtCantidad3.Text != "")
+                {
+                    int id_det = int.Parse(((Button)sender).CommandParameter.ToString());
+                    if ((txtCantidad3.Text).Contains(".") == false && int.TryParse(txtCantidad3.Text, out int cantidad) == true)
+                    {
+                        if (cantidad > 0)
+                        {
+                            var det = objeto_CN_RS_DET_DOCTO.Consultar(id_det);
+                            det.CE_RSDET_EGRESO = cantidad;
+                            objeto_CN_RS_DET_DOCTO.Actualizar(det);
+                            CargarDetCarta(id_carta);
+                            txtCantidad3.Text = "";
+                            MessageBox.Show("Detalle modificado.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("El valor debe ser mayor a 0, si desea puede eliminar este producto de la lista.");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Solo puede ingresar numeros enteros.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Debe ingresar un valor.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion
+
+        #region BTN GRID ELIMINAR DETALLE PLATO
+        private void BtnEliminarDet_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                int id_det = int.Parse(((Button)sender).CommandParameter.ToString());
+                objeto_CE_RS_DET_DOCTO.CE_RSDET_ID = id_det;
+                objeto_CN_RS_DET_DOCTO.Eliminar(objeto_CE_RS_DET_DOCTO);
+                MessageBox.Show("Plato eliminado de la carta.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Content = new MantenedorRecetas();
+            }
+            finally
+            {
+                CargarDetCarta(id_carta);
+            }
+        }
+        #endregion
+
+
+
 
         private void TxtBuscarProducto_TextChanged(object sender, TextChangedEventArgs e)
         {
             CargarDatosPlatos();
         }
+
+
+
+        private void BtnAgregarNuevos_Click(object sender, RoutedEventArgs e)
+        {
+            ControlesModoPlatos();
+        }
+
+
+        private void ControlesModoDet()
+        {
+            BtnAgregarNuevos.Visibility = Visibility.Visible;
+            BtnAgregarNuevos.IsEnabled = true;
+            txtBuscarPlato.IsEnabled = false;
+            txtBuscarPlato.Visibility = Visibility.Hidden;
+            txtCantidad.IsEnabled = false;
+            txtCantidad.Visibility = Visibility.Hidden;
+            txtCantidad2.IsEnabled = false;
+            txtCantidad2.Visibility = Visibility.Hidden;
+            GridDatos.IsEnabled = false;
+            GridDatos2.IsEnabled = true;
+            txtCantidad3.IsEnabled = true;
+            txtCantidad3.Visibility = Visibility.Visible;
+            txtCantidad.Text = "";
+            txtCantidad2.Text = "";
+        }
+
+        private void ControlesModoPlatos()
+        {
+            DetalleCarta.Clear();
+            txtCantidad3.IsEnabled = false;
+            txtCantidad3.Visibility = Visibility.Hidden;
+            BtnAgregarNuevos.Visibility = Visibility.Hidden;
+            BtnAgregarNuevos.IsEnabled = false;
+            txtBuscarPlato.IsEnabled = true;
+            txtBuscarPlato.Visibility = Visibility.Visible;
+            txtCantidad.IsEnabled = true;
+            txtCantidad.Visibility = Visibility.Visible;
+            txtCantidad2.IsEnabled = true;
+            txtCantidad2.Visibility = Visibility.Visible;
+            GridDatos.IsEnabled = true;
+            GridDatos2.IsEnabled = false;
+            txtCantidad3.Text = "";
+        }
+
     }
 }

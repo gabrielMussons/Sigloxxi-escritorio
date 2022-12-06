@@ -36,7 +36,37 @@ namespace CapaLogicaNegocio
         }
         #endregion
 
+        #region ACTUALIZAR 
+        public void Actualizar(CE_RS_DET_DOCTO det_docto)
+        {
+            try
+            {
+                objDatos.CD_ACTUALIZAR(det_docto);
+            }
+            catch (Exception ex)
+            {
 
+                throw ex;
+            }
+
+        }
+        #endregion
+
+        #region ELIMINAR DET DOCTO
+        public void Eliminar(CE_RS_DET_DOCTO det_docto)
+        {
+
+            try
+            {
+                objDatos.CD_ELIMINAR(det_docto);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        #endregion
 
         #region CONSULTAR
         public CE_RS_DET_DOCTO Consultar(int id)
@@ -95,6 +125,21 @@ namespace CapaLogicaNegocio
 
         }
         #endregion
+
+        #region CONSULTAR 
+        public CE_RS_DET_DOCTO ConsultarPlatoDetCarta(int id_carta, int id_plato)
+        {
+            try
+            {
+                return objDatos.ConsultarPlatoDetCarta(id_carta, id_plato);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion
+
 
 
     }

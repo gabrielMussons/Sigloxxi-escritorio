@@ -68,6 +68,7 @@ namespace CapaDePresentacion.ViewsCocina
             int id_plato = int.Parse(((Button)sender).CommandParameter.ToString());
             FrameGestionReceta.SetValue(Panel.ZIndexProperty, 0);
             ventanaCRUDReceta.Titulo.Text = "Eliminar receta";
+
             ventanaCRUDReceta.BtnCrear.IsEnabled = false;
             ventanaCRUDReceta.BtnActualizar.IsEnabled = false;
             DeshabilitarInput();

@@ -183,6 +183,9 @@
                     <DataGridTextColumn Header="Orden"
                                         Width="*"
                                         Binding="{Binding PLATO}"/>
+                    <DataGridTextColumn Header="Cantidad"
+                                        Width="70"
+                                        Binding="{Binding CANTIDAD}"/>
                     <DataGridTextColumn Header="Cliente"
                                         Width="*"
                                         Binding="{Binding CLIENTE}"/>
@@ -190,6 +193,7 @@
                     <DataGridTextColumn Header="Mesa"
                                         Width="*"
                                         Binding="{Binding MESA}"/>
+                    
                     <DataGridTextColumn Header="Estado"
                                         Width="*"
                                         Binding="{Binding ESTADO}"/>

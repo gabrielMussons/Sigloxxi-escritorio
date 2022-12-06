@@ -342,8 +342,7 @@ namespace CapaDePresentacion.ViewsCocina
         {
             if (txtCantidad2.Text != "")
             {
-                double cantidad;
-                if ((txtCantidad2.Text).Contains(".")==false && double.TryParse(txtCantidad2.Text,out cantidad)==true)
+                if ((txtCantidad2.Text).Contains(".") == false && double.TryParse(txtCantidad2.Text, out double cantidad) == true)
                 {
                     int id_producto = int.Parse(((Button)sender).CommandParameter.ToString());
                     if (ExisteProductoEnDetallePlato(id_plato, id_producto) == false)
@@ -412,15 +411,8 @@ namespace CapaDePresentacion.ViewsCocina
         }
         #endregion
 
-        #region BUSCAR PRODUCTO TEXT CHANGED
-        private void TxtBuscarProducto_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            CargarDatosProductos();
-        }
-        #endregion
-
         #region BTN GRID MODIFICAR DETALLE PLATO
-        private void btnModificarDet_Click(object sender, RoutedEventArgs e)
+        private void BtnModificarDet_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -428,8 +420,7 @@ namespace CapaDePresentacion.ViewsCocina
                 if (txtCantidad3.Text != "")
                 {
                     int id_det = int.Parse(((Button)sender).CommandParameter.ToString());
-                    double cantidad;                    
-                    if ((txtCantidad3.Text).Contains(".") == false && double.TryParse(txtCantidad3.Text, out cantidad) == true)
+                    if ((txtCantidad3.Text).Contains(".") == false && double.TryParse(txtCantidad3.Text, out double cantidad) == true)
                     {
                         if (cantidad > 0)
                         {
@@ -463,7 +454,7 @@ namespace CapaDePresentacion.ViewsCocina
         #endregion
 
         #region BTN GRID ELIMINAR DETALLE PLATO
-        private void btnEliminarDet_Click(object sender, RoutedEventArgs e)
+        private void BtnEliminarDet_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -520,6 +511,12 @@ namespace CapaDePresentacion.ViewsCocina
             txtCantidad3.Text = "";
         }
 
+        #region BUSCAR PRODUCTO TEXT CHANGED
+        private void TxtBuscarProducto_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CargarDatosProductos();
+        }
+        #endregion 
 
     }
 }
