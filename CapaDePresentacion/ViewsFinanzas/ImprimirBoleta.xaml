@@ -54,7 +54,16 @@
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <!--#endregion-->
-
+        <Label x:Name="lblEstado"
+            Content="Estado boleta:"
+               Grid.Row="10"
+               Grid.Column="2"
+               Grid.ColumnSpan="4"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               FontSize="15"
+               FontFamily="Arial">
+        </Label>
         <Label Content="Restaurant Siglo XXI"
                Grid.Row="1"
                Grid.Column="2"

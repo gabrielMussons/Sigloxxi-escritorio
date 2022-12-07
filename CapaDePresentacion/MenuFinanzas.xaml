@@ -554,7 +554,7 @@
                                                                 Margin="0"
                                                                 />
                                     <TextBlock Grid.Column="1"
-                                               Text="Ganancias"
+                                               Text="Ventas"
                                                FontWeight="SemiBold"
                                                FontSize="15"
                                                VerticalAlignment="Center"

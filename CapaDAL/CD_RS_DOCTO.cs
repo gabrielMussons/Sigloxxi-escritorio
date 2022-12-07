@@ -221,7 +221,7 @@ namespace CapaDAL
         public CE_RS_DOCTO ObtenerUltimoRegistro() {
             try
             {
-                OracleCommand cmd = new OracleCommand("select rsd_id  from rs_docto where rsd_id =(select max(rsd_id)from rs_docto) ", con.AbrirConexion());
+                OracleCommand cmd = new OracleCommand("select rsd_id  from rs_docto where rsd_id =(select max(rsd_id)from rs_docto) and RS_TIPO_DOCUMENTO_RSTD_ID=43 ", con.AbrirConexion());
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 ds.Clear();

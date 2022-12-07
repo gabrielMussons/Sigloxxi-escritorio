@@ -31,6 +31,7 @@ namespace CapaDePresentacion.ViewsCocina
         {
             InitializeComponent();
             CargarDatosCarta();
+            entidad=MenuCocina.GetInstance().entidad;
         }
 
         void CargarDatosCarta()
@@ -76,6 +77,7 @@ namespace CapaDePresentacion.ViewsCocina
             ventanaCRUDCarta.BtnEliminar.IsEnabled = false;
             DeshabilitarInput();
             ventanaCRUDCarta.id_carta = id_carta;
+            ventanaCRUDCarta.id_entidad = entidad.CE_RSE_ID;
             ventanaCRUDCarta.GridDatos2.Columns[3].Visibility = Visibility.Hidden;
             ventanaCRUDCarta.txtCantidad3.Visibility = Visibility.Visible;
             ventanaCRUDCarta.Consultar();
@@ -94,6 +96,7 @@ namespace CapaDePresentacion.ViewsCocina
             ventanaCRUDCarta.BtnActualizar.IsEnabled = false;
             ventanaCRUDCarta.GridDatos2.Columns[3].Visibility = Visibility.Hidden;
             ventanaCRUDCarta.txtCantidad3.Visibility = Visibility.Visible;
+            ventanaCRUDCarta.id_entidad = entidad.CE_RSE_ID;
             DeshabilitarInput();
 
             ventanaCRUDCarta.id_carta = id_carta;

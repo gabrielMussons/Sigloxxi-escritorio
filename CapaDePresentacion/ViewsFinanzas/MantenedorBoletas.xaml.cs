@@ -26,6 +26,8 @@ namespace CapaDePresentacion.ViewsFinanzas
 
         readonly CN_RS_DOCTO objeto_CN_RS_DOCTO = new CN_RS_DOCTO();
         readonly CN_RS_ENTIDAD objeto_CN_RS_ENTIDAD = new CN_RS_ENTIDAD();
+        readonly CN_RS_ESTADO objeto_CN_RS_ESTADO = new CN_RS_ESTADO();
+
 
 
         public MantenedorBoletas()
@@ -71,6 +73,7 @@ namespace CapaDePresentacion.ViewsFinanzas
             string apellido = cliente.CE_RSE_AP_PAT;
             string fecha=documento.CE_RSD_FECHA_HORA.ToShortDateString();
             ventana.lblCliente.Content ="Cliente: "+nombre.ToUpper() +" "+ apellido.ToUpper();
+            ventana.lblEstado.Content = "Estado boleta:" + objeto_CN_RS_ESTADO.ObtenerRSES_DESCRIPCION(objeto_CN_RS_DOCTO.Consultar(id_boleta).CE_RS_ESTADO_RSES_ID).CE_RSES_DESCRIPCION;
             ventana.lblFecha.Content = "Fecha emisión : " + fecha;
             ventana.Show();
             ventana.Activate();

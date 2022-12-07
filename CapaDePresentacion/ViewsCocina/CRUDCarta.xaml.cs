@@ -93,13 +93,22 @@ namespace CapaDePresentacion.ViewsCocina
             try
             {
                 Crear();
-                CrearDetalle(DetalleCarta);
-                Content = new MantenedorCarta();
+                try
+                {
+                    CrearDetalle(DetalleCarta);
+                    Content = new MantenedorCarta();
+                }
+                catch (Exception)
+                {
+                    objeto_CN_RS_DOCTO.Eliminar(objeto_CN_RS_DOCTO.ObtenerUltimoRegistro());
+                }
+                
             }
             catch (Exception ex)
             {
 
                 MessageBox.Show(ex.Message.ToString());
+                Content = new MantenedorCarta();
             }
 
         }
@@ -244,7 +253,16 @@ namespace CapaDePresentacion.ViewsCocina
                     objeto_CE_RS_DET_DOCTO.CE_RS_PLATO_RSPL_ID = plato.Key;
                     objeto_CE_RS_DET_DOCTO.CE_RS_TIPO_DOCUMENTO_RSTD_ID = objeto_CN_RS_TIPO_DOCUMENTO.ObtenerRSTD_ID("Carta");
                     objeto_CE_RS_DET_DOCTO.CE_RS_ESTADO_RSES_ID = objeto_CN_RS_ESTADO.ObtenerRSES_ID("Solicitado");
-                    objeto_CE_RS_DET_DOCTO.CE_RS_DOCTO_RSD_ID = id_carta;
+                    if (id_carta>0)
+                    {
+                        objeto_CE_RS_DET_DOCTO.CE_RS_DOCTO_RSD_ID = id_carta;
+                    }
+                    else
+                    {
+                        
+                        objeto_CE_RS_DET_DOCTO.CE_RS_DOCTO_RSD_ID = objeto_CN_RS_DOCTO.ObtenerUltimoRegistro().CE_RSD_ID;
+                    }
+                    
 
                     objeto_CN_RS_DET_DOCTO.Insertar(objeto_CE_RS_DET_DOCTO);
                 }

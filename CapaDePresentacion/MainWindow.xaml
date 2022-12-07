@@ -27,7 +27,7 @@
                      mah:TextBoxHelper.IsSpellCheckContextMenuEnabled="False" 
                      mah:ControlsHelper.FocusBorderBrush="#FF212121"/>
                      
-            <TextBox  x:Name="txtPass" 
+            <PasswordBox  x:Name="txtPass" 
                           Height="23"  
                           Margin="10" 
                           mah:TextBoxHelper.Watermark="Ingrese Contraseña" />

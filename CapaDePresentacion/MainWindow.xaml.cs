@@ -55,10 +55,10 @@ namespace CapaDePresentacion
 
         private void BtnIniciarSesion_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine(txtPass.Text);
+            Console.WriteLine(txtPass.Password.ToString());
             try
             {
-                Autenticar(txtUsuario.Text, txtPass.Text);
+                Autenticar(txtUsuario.Text, txtPass.Password.ToString());
             }
             catch (Exception ex)
             {

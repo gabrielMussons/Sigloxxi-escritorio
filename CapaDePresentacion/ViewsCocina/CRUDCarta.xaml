@@ -346,7 +346,7 @@
                                                 />
                     <TextBlock x:Name="txtBtnCrear"
                                Grid.Column="1"
-                               Text="Crear receta"
+                               Text="Crear carta"
                                FontWeight="Normal"
                                FontSize="12.5"
                                VerticalAlignment="Center"
@@ -390,7 +390,7 @@
                                                 />
                     <TextBlock x:Name="txtBotonActualizar"
                                Grid.Column="1"
-                               Text="Actualizar receta"
+                               Text="Actualizar carta"
                                FontWeight="Normal"
                                FontSize="12.5"
                                VerticalAlignment="Center"
@@ -433,7 +433,7 @@
                                                 />
                     <TextBlock x:Name="txtBotonEliminar"
                                Grid.Column="1"
-                               Text="Eliminar receta "
+                               Text="Eliminar carta "
                                FontWeight="Normal"
                                FontSize="12.5"
                                VerticalAlignment="Center"
