@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:iconPack="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material" 
-             x:Class="CapaDePresentacion.ViewsFinanzas.MantenedorGanancias" 
+             x:Class="CapaDePresentacion.ViewsAdmin.MantenedorReportes" 
              mc:Ignorable="d" 
              d:DesignHeight="565"
              d:DesignWidth="920"
@@ -136,7 +136,7 @@
             <TextBlock Grid.Row="0"
                        Grid.Column="1"
                        Grid.ColumnSpan="5"
-                       Text="Ventas"
+                       Text="Reportes"
                        Foreground="Black"
                        FontSize="20"
                        HorizontalAlignment="Left"
@@ -150,7 +150,7 @@
                    HorizontalAlignment="Left"
                    VerticalAlignment="Center"
                    />
-            
+
             <Grid x:Name="GridRadioButtonsOptions"
               Grid.Column="2"
               Grid.ColumnSpan="1"
@@ -211,7 +211,7 @@
                    VerticalAlignment="Center"
                    />
             </Grid>
-            
+
             <Label 
                    Grid.Row="2"
                    Grid.Column="1"
@@ -225,7 +225,7 @@
                    Content="Seleccione fecha que desea consultar:"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Top"/>
-           
+
             <DatePicker x:Name="dpFecha"
                         Grid.Column="2"
                         Grid.Row="2"
@@ -272,8 +272,8 @@
                     <DataGridTextColumn Header="Total ventas"
                                         Width="*"
                                         Binding="{Binding TOTAL_VENTAS}"/>
-                    
-                    
+
+
                     <DataGridTemplateColumn Header="Opciones"
                                             Width="233"
                                             >
@@ -414,7 +414,7 @@
                     <DataGridTextColumn Header="Total ventas"
                                         Width="*"
                                         Binding="{Binding TOTAL_VENTAS}"/>
-                    
+
 
                     <DataGridTemplateColumn Header="Opciones"
                                             Width="233"

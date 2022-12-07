@@ -248,13 +248,16 @@ namespace CapaDAL
             try
             {
                 OracleCommand cmd = new OracleCommand("select rs_det_docto.rs_docto_rsd_id as NRO_BOLETA," +
-                    " rs_plato.rspl_descripcion as PLATO, rs_det_docto.rsdet_egreso as CANTIDAD, rs_entidad.rse_nombre as CLIENTE," +
-                    " rs_docto.rs_mesa_rsm_id as MESA, rs_estado.rses_descripcion as ESTADO, rs_det_docto.rsdet_id as ID_DETALLE" +
+                    " rs_plato.rspl_descripcion as PLATO, rs_det_docto.rsdet_egreso as CANTIDAD," +
+                    " rs_entidad.rse_nombre as CLIENTE," +
+                    " rs_docto.rs_mesa_rsm_id as MESA, rs_estado.rses_descripcion as ESTADO," +
+                    " rs_det_docto.rsdet_id as ID_DETALLE" +
                     " from rs_docto join rs_entidad on rs_docto.rs_entidad_rse_id = rs_entidad.rse_id join rs_det_docto on rs_docto.rsd_id = rs_det_docto.rs_docto_rsd_id " +
                     "join rs_plato on rs_det_docto.rs_plato_rspl_id = rs_plato.rspl_id join rs_estado on rs_det_docto.rs_estado_rses_id = rs_estado.rses_id " +
                     "join rs_tipo_documento on rs_docto.rs_tipo_documento_rstd_id = rs_tipo_documento.rstd_id" +
                     " where (UPPER(rs_estado.rses_descripcion) = 'EN COLA' or UPPER(rs_estado.rses_descripcion) = 'EN PREPARACION' or UPPER(rs_estado.rses_descripcion) = 'PREPARADO') " +
-                    "and UPPER(rs_tipo_documento.rstd_descripcion) = 'BOLETA' and rs_det_docto.rs_tipo_documento_rstd_id = 21 and rs_docto.rs_estado_rses_id = 1 order by  rs_det_docto.rs_estado_rses_id desc ", con.AbrirConexion());
+                    "and UPPER(rs_tipo_documento.rstd_descripcion) = 'BOLETA' and rs_det_docto.rs_tipo_documento_rstd_id = 21 " +
+                    " and TO_CHAR(rs_docto.rsd_fecha_hora,'DD/MM/YY')=TO_CHAR(SYSDATE,'DD/MM/YY') order by  rs_det_docto.rs_estado_rses_id desc ", con.AbrirConexion());
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 DataSet ds = new DataSet();
                 ds.Clear();
@@ -308,7 +311,7 @@ namespace CapaDAL
             try
             {
                 OracleCommand cmd = new OracleCommand("select rs_docto.rsd_id as ID_BOLETA," +
-                    " rs_docto.rsd_fecha_hora as FECHA," +
+                    " TO_CHAR(rs_docto.rsd_fecha_hora,'DD/MM/YY') as FECHA," +
                     " sum(rs_det_docto.rsdet_egreso) as CANT_ITEMS," +
                     " SUM(rs_plato.rspl_pventa * rs_det_docto.rsdet_egreso) as TOTAL," +
                     " rs_entidad.rse_nombre as NOMBRE_CLIENTE, " +
@@ -414,7 +417,7 @@ namespace CapaDAL
             {
                 OracleCommand cmd = new OracleCommand(
                     "select " +
-                    "rs_docto.rsd_fecha_hora as FECHA," +
+                    "TO_CHAR(rs_docto.rsd_fecha_hora,'DD/MM/YY') as FECHA," +
                     "(select    " +
                         "count(COUNT(rs_docto.rsd_id))    " +
                         "from rs_det_docto    " +
@@ -425,14 +428,10 @@ namespace CapaDAL
                         "and rs_det_docto.rs_tipo_documento_rstd_id = 21" +
                         " group by rs_docto.rsd_fecha_hora, rs_docto.rsd_id) as TOTAL_BOLETAS," +
                     "sum(rs_det_docto.rsdet_egreso) as TOTAL_ITEMS," +
-                    "sum(rs_plato.rspl_pventa * rs_det_docto.rsdet_egreso) as TOTAL_VENTAS," +
-                    "sum((rs_producto.rsp_pcompra * rs_det_plato.rsdpl_cantidad) * rs_det_docto.rsdet_egreso) as COSTO_PLATOS," +
-                    "sum(rs_plato.rspl_pventa * rs_det_docto.rsdet_egreso) - sum((rs_producto.rsp_pcompra * rs_det_plato.rsdpl_cantidad) * rs_det_docto.rsdet_egreso) as GANANCIAS" +
+                    "sum(rs_plato.rspl_pventa * rs_det_docto.rsdet_egreso) as TOTAL_VENTAS " +
                     " from rs_det_docto " +
                     "join rs_docto on rs_det_docto.rs_docto_rsd_id = rs_docto.rsd_id " +
                     "join rs_plato on rs_det_docto.rs_plato_rspl_id = rs_plato.rspl_id " +
-                    "join rs_det_plato on rs_plato.rspl_id = rs_det_plato.rs_plato_rspl_id " +
-                    "join rs_producto on rs_producto.rsp_id = rs_det_plato.rs_producto_rsp_id " +
                     "where " +
                     "rs_docto.rs_tipo_documento_rstd_id = 2 " +
                     "and rs_docto.rs_estado_rses_id = 3 " +
@@ -475,14 +474,10 @@ namespace CapaDAL
                         " and rs_det_docto.rs_tipo_documento_rstd_id = 21" +
                         " group by rs_docto.rsd_fecha_hora, rs_docto.rsd_id) as TOTAL_BOLETAS," +
                     "sum(rs_det_docto.rsdet_egreso) as TOTAL_ITEMS," +
-                    "sum(rs_plato.rspl_pventa * rs_det_docto.rsdet_egreso) as TOTAL_VENTAS," +
-                    "sum((rs_producto.rsp_pcompra * rs_det_plato.rsdpl_cantidad) * rs_det_docto.rsdet_egreso) as COSTO_PLATOS," +
-                    "sum(rs_plato.rspl_pventa * rs_det_docto.rsdet_egreso) - sum((rs_producto.rsp_pcompra * rs_det_plato.rsdpl_cantidad) * rs_det_docto.rsdet_egreso) as GANANCIAS" +
+                    "sum(rs_plato.rspl_pventa * rs_det_docto.rsdet_egreso) as TOTAL_VENTAS" +
                     " from rs_det_docto " +
                     "join rs_docto on rs_det_docto.rs_docto_rsd_id = rs_docto.rsd_id " +
                     "join rs_plato on rs_det_docto.rs_plato_rspl_id = rs_plato.rspl_id " +
-                    "join rs_det_plato on rs_plato.rspl_id = rs_det_plato.rs_plato_rspl_id " +
-                    "join rs_producto on rs_producto.rsp_id = rs_det_plato.rs_producto_rsp_id " +
                     "where rs_docto.rs_tipo_documento_rstd_id = 2 " +
                     "and rs_docto.rs_estado_rses_id = 3 " +
                     "and TO_CHAR(rs_docto.rsd_fecha_hora,'MM/YYYY') like '" + fecha+"' " +
@@ -525,14 +520,10 @@ namespace CapaDAL
                         " and rs_det_docto.rs_tipo_documento_rstd_id = 21 " +
                         " group by rs_docto.rsd_fecha_hora, rs_docto.rsd_id) as TOTAL_BOLETAS," +
                     "sum(rs_det_docto.rsdet_egreso) as TOTAL_ITEMS," +
-                    "sum(rs_plato.rspl_pventa * rs_det_docto.rsdet_egreso) as TOTAL_VENTAS," +
-                    "sum((rs_producto.rsp_pcompra * rs_det_plato.rsdpl_cantidad) * rs_det_docto.rsdet_egreso) as COSTO_PLATOS," +
-                    "sum(rs_plato.rspl_pventa * rs_det_docto.rsdet_egreso) - sum((rs_producto.rsp_pcompra * rs_det_plato.rsdpl_cantidad) * rs_det_docto.rsdet_egreso) as GANANCIAS " +
+                    "sum(rs_plato.rspl_pventa * rs_det_docto.rsdet_egreso) as TOTAL_VENTAS " +
                     "from rs_det_docto " +
                     "join rs_docto on rs_det_docto.rs_docto_rsd_id = rs_docto.rsd_id " +
                     "join rs_plato on rs_det_docto.rs_plato_rspl_id = rs_plato.rspl_id " +
-                    "join rs_det_plato on rs_plato.rspl_id = rs_det_plato.rs_plato_rspl_id " +
-                    "join rs_producto on rs_producto.rsp_id = rs_det_plato.rs_producto_rsp_id " +
                     "where rs_docto.rs_tipo_documento_rstd_id = 2 " +
                     "and rs_docto.rs_estado_rses_id = 3 " +
                     "and TO_CHAR(rs_docto.rsd_fecha_hora,'YYYY') like '"+fecha+"' " +

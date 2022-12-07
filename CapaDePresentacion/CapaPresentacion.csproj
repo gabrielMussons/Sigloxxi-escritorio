@@ -240,6 +240,9 @@
     <Compile Include="ViewsAdmin\MantenedorMesas.xaml.cs">
       <DependentUpon>MantenedorMesas.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewsAdmin\MantenedorReportes.xaml.cs">
+      <DependentUpon>MantenedorReportes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewsBodega\CRUDInventario.xaml.cs">
       <DependentUpon>CRUDInventario.xaml</DependentUpon>
     </Compile>
@@ -345,6 +348,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ViewsAdmin\MantenedorMesas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewsAdmin\MantenedorReportes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
