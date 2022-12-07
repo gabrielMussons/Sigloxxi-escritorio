@@ -501,7 +501,6 @@ namespace CapaDAL
         }
         #endregion
 
-
         #region OBTENER TOTAL DE VENTAS AÑO
         public DataTable CargarDTTotlaVentasAnio(string fecha)
         {
@@ -545,6 +544,111 @@ namespace CapaDAL
 
         }
         #endregion
+
+        #region REPORTE DE CLIENTE BOLETAS
+        public DataTable CargarReporteClienteBoletas(string formato, string fecha)
+        {
+            try
+            {
+                OracleCommand cmd = new OracleCommand(
+                    "select " +
+                    "TO_CHAR(rsd_fecha_hora, '"+formato+"') as FECHA, " +
+                    "(rs_entidad.rse_nombre) as NOMBRE, " +
+                    "(rs_entidad.rse_ap_pat) as AP_PAT, COUNT(rs_docto.rsd_id) as BOLETAS" +
+                    " from rs_docto " +
+                    "join rs_entidad on rs_docto.rs_entidad_rse_id = rs_entidad.rse_id " +
+                    "where rs_docto.rs_tipo_documento_rstd_id = 2 " +
+                    "and rs_docto.rs_estado_rses_id = 3 and TO_CHAR(rs_docto.rsd_fecha_hora, '" + formato + "') = '"+fecha+"' " +
+                    "group by (rs_entidad.rse_ap_pat), (rs_entidad.rse_nombre), " +
+                    "TO_CHAR(rsd_fecha_hora, '" + formato + "') order by COUNT(rs_docto.rsd_id) desc ", con.AbrirConexion());
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                ds.Clear();
+                da.Fill(ds);
+                DataTable dt = ds.Tables[0];
+                con.CerrarConexion();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                con.CerrarConexion();
+                throw ex;
+            }
+
+        }
+        #endregion
+
+        #region REPORTE DE PLATO BOLETAS
+        public DataTable CargarReportePlatoBoletas(string formato,string fecha)
+        {
+            try
+            {
+                OracleCommand cmd = new OracleCommand(
+                    "select " +
+                    "TO_CHAR(rs_docto.rsd_fecha_hora, '"+formato+"') as FECHA," +
+                    " rs_plato.rspl_descripcion as PLATO, sum(rs_det_docto.rsdet_egreso) as VENDIDOS" +
+                    " from rs_det_docto " +
+                    "join rs_plato on rs_det_docto.rs_plato_rspl_id = rs_plato.rspl_id" +
+                    " join rs_docto on rs_det_docto.rs_docto_rsd_id = rs_docto.rsd_id " +
+                    "where " +
+                    "rs_docto.rs_tipo_documento_rstd_id = 2 " +
+                    "and rs_docto.rs_estado_rses_id = 3 and TO_CHAR(rs_docto.rsd_fecha_hora, '"+formato+"') = '"+fecha+"' " +
+                    "group by rs_plato.rspl_descripcion, TO_CHAR(rs_docto.rsd_fecha_hora, '"+formato+"') " +
+                    "order by sum(rs_det_docto.rsdet_egreso)desc ", con.AbrirConexion());
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                ds.Clear();
+                da.Fill(ds);
+                DataTable dt = ds.Tables[0];
+                con.CerrarConexion();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                con.CerrarConexion();
+                throw ex;
+            }
+
+        }
+        #endregion
+
+        #region REPORTE DE DIAS BOLETAS
+        public DataTable CargarReporteDiasBoletas(string formato, string fecha)
+        {
+            try
+            {
+                OracleCommand cmd = new OracleCommand(
+                    "select " +
+                    "(TO_CHAR(rs_docto.rsd_fecha_hora, '"+formato+"')) as FECHA," +
+                    "(TO_CHAR(rs_docto.rsd_fecha_hora, 'Day')) as DIA," +
+                    "(COUNT(TO_CHAR(rs_docto.rsd_fecha_hora, 'Day'))) as BOLETAS" +
+                    " from rs_docto " +
+                    "where rs_docto.rs_tipo_documento_rstd_id = 2 " +
+                    "and rs_docto.rs_estado_rses_id = 3 " +
+                    "and TO_CHAR(rs_docto.rsd_fecha_hora, '"+formato+"') = '"+fecha+"' " +
+                    "group by" +
+                    "(TO_CHAR(rs_docto.rsd_fecha_hora, 'Day'))," +
+                    "(TO_CHAR(rs_docto.rsd_fecha_hora, '"+formato+"')) " +
+                    "order by" +
+                    "(COUNT(TO_CHAR(rs_docto.rsd_fecha_hora, 'Day')))desc ", con.AbrirConexion());
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                ds.Clear();
+                da.Fill(ds);
+                DataTable dt = ds.Tables[0];
+                con.CerrarConexion();
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                con.CerrarConexion();
+                throw ex;
+            }
+
+        }
+        #endregion
+        
+        
 
 
     }

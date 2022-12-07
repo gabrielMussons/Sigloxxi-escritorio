@@ -114,20 +114,18 @@
                 <ColumnDefinition Width="30"/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition Width="20"/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="30"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition />
                 <RowDefinition Height="auto"/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="auto"/>
+                
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             <!--#endregion-->
@@ -150,6 +148,91 @@
                    HorizontalAlignment="Left"
                    VerticalAlignment="Center"
                    />
+            <Label Content="Objeto de medición:"
+                   Grid.Row="1"
+                   Grid.Column="4"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   />
+            
+            
+            <Grid x:Name="GridRadioButtonsOption2"
+              Grid.Column="5"
+              Grid.Row="1"
+                  Grid.RowSpan="2"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="btnCliente"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Width="auto"
+                    Height="auto"
+                        ToolTip="Clientes"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center" Click="BtnCliente_Click"
+                    >
+                    <iconPack:Material Kind="AccountCircle"/>
+                </Button>
+                <Button x:Name="btnVentas"
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Width="auto"
+                        ToolTip="Ventas"
+                    Height="auto"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center" Click="BtnVentas_Click"
+                    >
+                    <iconPack:Material Kind="Cash"/>
+                </Button>
+                <Button x:Name="btnPlatos"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Width="auto"
+                        ToolTip="Platos"
+                    Height="auto"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center" Click="BtnPlatos_Click"
+                    >
+                    <iconPack:Material Kind="Food"/>
+                </Button>
+                <Button x:Name="btnDias"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Width="auto"
+                        ToolTip="Días"
+                    Height="auto"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center" Click="BtnDias_Click"
+                    >
+                    <iconPack:Material Kind="Calendar"/>
+                </Button>
+
+
+
+            </Grid>
+            <Button x:Name="btnPrint"
+                    Grid.Row="4"
+                    Grid.Column="5"
+                    Width="auto"
+                        ToolTip="Imprimir"
+                    Height="auto"
+                    Background="LightBlue"
+                    HorizontalAlignment="Right"
+                    BorderBrush="Gray"
+                    BorderThickness="1"
+                    VerticalAlignment="Center" Click="BtnPrint_Click" 
+                    >
+                <iconPack:Material Kind="Printer"/>
+            </Button>
 
             <Grid x:Name="GridRadioButtonsOptions"
               Grid.Column="2"
@@ -274,31 +357,7 @@
                                         Binding="{Binding TOTAL_VENTAS}"/>
 
 
-                    <DataGridTemplateColumn Header="Opciones"
-                                            Width="233"
-                                            >
-                        <DataGridTemplateColumn.CellTemplate >
-                            <DataTemplate>
-                                <DockPanel >
-
-                                    <Button x:Name="btnImprimir"
-                                            Width="70"
-                                            Height="20"
-                                            FontWeight="SemiBold"
-                                            
-                                            Cursor="Hand" 
-                                            mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
-                                            Margin="0" 
-                                            HorizontalAlignment="Center"
-                                            
-                                            CommandParameter="{Binding ID_BOLETA}" 
-                                        >
-                                        <iconPack:Material  Kind="Printer"/>
-                                    </Button>
-                                </DockPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                    
                 </DataGrid.Columns>
 
 
@@ -346,31 +405,9 @@
                     <DataGridTextColumn Header="Total ventas"
                                         Width="*"
                                         Binding="{Binding TOTAL_VENTAS}"/>
-                    <DataGridTemplateColumn Header="Opciones"
-                                            Width="233"
-                                            >
-                        <DataGridTemplateColumn.CellTemplate >
-                            <DataTemplate>
-                                <DockPanel >
-
-                                    <Button x:Name="btnImprimir"
-                                            Width="70"
-                                            Height="20"
-                                            FontWeight="SemiBold"
-                                            
-                                            Cursor="Hand" 
-                                            mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
-                                            Margin="0" 
-                                            HorizontalAlignment="Center"
-                                            
-                                            CommandParameter="{Binding ID_BOLETA}" 
-                                        >
-                                        <iconPack:Material  Kind="Printer"/>
-                                    </Button>
-                                </DockPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                    
+                    
+                    
                 </DataGrid.Columns>
 
 
@@ -416,31 +453,131 @@
                                         Binding="{Binding TOTAL_VENTAS}"/>
 
 
-                    <DataGridTemplateColumn Header="Opciones"
-                                            Width="233"
-                                            >
-                        <DataGridTemplateColumn.CellTemplate >
-                            <DataTemplate>
-                                <DockPanel >
+                    
+                </DataGrid.Columns>
 
-                                    <Button x:Name="btnImprimir"
-                                            Width="70"
-                                            Height="20"
-                                            FontWeight="SemiBold"
-                                            
-                                            Cursor="Hand" 
-                                            mah:ControlsHelper.FocusBorderBrush="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" 
-                                            Margin="0" 
-                                            HorizontalAlignment="Center"
-                                            
-                                            CommandParameter="{Binding ID_BOLETA}" 
-                                        >
-                                        <iconPack:Material  Kind="Printer"/>
-                                    </Button>
-                                </DockPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+
+            </DataGrid>
+            <!--#endregion-->
+
+
+            <!--#region DATAGRID Platos -->
+            <DataGrid x:Name="GriDatosPlatos"
+                      Grid.Row="4"
+                      Grid.Column="1"
+                      Grid.ColumnSpan="4"
+                      AutoGenerateColumns="False"
+                      Background="WhiteSmoke"
+                      FontSize="14"
+                      Height="auto"
+                      CanUserSortColumns="True"
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False"
+                      CanUserResizeColumns="True"
+                      CanUserResizeRows="False"
+                      HeadersVisibility="Column"
+                      GridLinesVisibility="All"
+                      VerticalGridLinesBrush="LightGray"
+                      HorizontalGridLinesBrush="LightGray"
+                      BorderBrush="#a5b2bd"
+                      BorderThickness="1"
+                      Foreground="Black" 
+                      Visibility="Hidden"
+                      >
+                <DataGrid.Columns >
+                    <DataGridTextColumn Header="Fecha"
+                                        Width="*"
+                                        Binding="{Binding FECHA}"/>
+                    <DataGridTextColumn Header="Plato"
+                                        Width="*"
+                                        Binding="{Binding PLATO}"/>
+                    <DataGridTextColumn Header="Vendidos"
+                                        Width="*"
+                                        Binding="{Binding VENDIDOS}"/>
+                    
+
+                </DataGrid.Columns>
+
+
+            </DataGrid>
+            <!--#endregion-->
+
+            <!--#region DATAGRID Dias Boletas -->
+            <DataGrid x:Name="GriDatosDiasBoletas"
+                      Grid.Row="4"
+                      Grid.Column="1"
+                      Grid.ColumnSpan="4"
+                      AutoGenerateColumns="False"
+                      Background="WhiteSmoke"
+                      FontSize="14"
+                      Height="auto"
+                      CanUserSortColumns="True"
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False"
+                      CanUserResizeColumns="True"
+                      CanUserResizeRows="False"
+                      HeadersVisibility="Column"
+                      GridLinesVisibility="All"
+                      VerticalGridLinesBrush="LightGray"
+                      HorizontalGridLinesBrush="LightGray"
+                      BorderBrush="#a5b2bd"
+                      BorderThickness="1"
+                      Foreground="Black" 
+                      Visibility="Hidden"
+                      >
+                <DataGrid.Columns >
+                    <DataGridTextColumn Header="Fecha"
+                                        Width="*"
+                                        Binding="{Binding FECHA}"/>
+                    <DataGridTextColumn Header="Día"
+                                        Width="*"
+                                        Binding="{Binding DIA}"/>
+                    <DataGridTextColumn Header="Boletas"
+                                        Width="*"
+                                        Binding="{Binding BOLETAS}"/>
+                   
+                </DataGrid.Columns>
+
+
+            </DataGrid>
+            <!--#endregion-->
+            <!--#region DATAGRID Clientes Boletas -->
+            <DataGrid x:Name="GriDatosClientesBoletas"
+                      Grid.Row="4"
+                      Grid.Column="1"
+                      Grid.ColumnSpan="4"
+                      AutoGenerateColumns="False"
+                      Background="WhiteSmoke"
+                      FontSize="14"
+                      Height="auto"
+                      CanUserSortColumns="True"
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False"
+                      CanUserResizeColumns="True"
+                      CanUserResizeRows="False"
+                      HeadersVisibility="Column"
+                      GridLinesVisibility="All"
+                      VerticalGridLinesBrush="LightGray"
+                      HorizontalGridLinesBrush="LightGray"
+                      BorderBrush="#a5b2bd"
+                      BorderThickness="1"
+                      Foreground="Black" 
+                      Visibility="Hidden"
+                      >
+                <DataGrid.Columns >
+                    <DataGridTextColumn Header="Fecha"
+                                        Width="*"
+                                        Binding="{Binding FECHA}"/>
+                    <DataGridTextColumn Header="Nombre cliente"
+                                        Width="*"
+                                        Binding="{Binding NOMBRE}"/>
+                    <DataGridTextColumn Header="Ap paterno"
+                                        Width="*"
+                                        Binding="{Binding AP_PAT}"/>
+                    <DataGridTextColumn Header="Boletas"
+                                        Width="*"
+                                        Binding="{Binding BOLETAS}"/>
+
                 </DataGrid.Columns>
 
 

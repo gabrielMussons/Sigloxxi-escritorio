@@ -92,5 +92,10 @@ namespace CapaDePresentacion
         {
             ventana = null;
         }
+
+        private void BtnGenerarReportes_Click(object sender, RoutedEventArgs e)
+        {
+            DataContext = new MantenedorReportes();
+        }
     }
 }

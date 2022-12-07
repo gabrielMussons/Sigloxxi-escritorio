@@ -136,6 +136,24 @@ namespace CapaLogicaNegocio
             return objDatos.CargarDTTotlaVentasAnio(fecha);
         }
         #endregion
+        #region REPORTE PLATOS BOLETAS
+        public DataTable CargarReportePlatosBoletas(string formato_fecha, string fecha)
+        {
+            return objDatos.CargarReportePlatoBoletas(formato_fecha, fecha);
+        }
+        #endregion
+        #region REPORTE DIAS BOLETAS
+        public DataTable CargarReporteDiasBoletas(string formato_fecha, string fecha)
+        {
+            return objDatos.CargarReporteDiasBoletas(formato_fecha, fecha);
+        }
+        #endregion
+        #region REPORTE CLIENTES BOLETAS
+        public DataTable CargarReporteClientesBoletas(string formato_fecha, string fecha)
+        {
+            return objDatos.CargarReporteClienteBoletas(formato_fecha, fecha);
+        }
+        #endregion
 
 
         #region OBTENER ULTIMO REGISTRO 
