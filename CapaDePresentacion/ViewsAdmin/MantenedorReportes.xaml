@@ -148,7 +148,8 @@
                    HorizontalAlignment="Left"
                    VerticalAlignment="Center"
                    />
-            <Label Content="Objeto de medición:"
+            <Label x:Name="lblObjetivo"
+                    Content="Objeto de medición:"
                    Grid.Row="1"
                    Grid.Column="4"
                    HorizontalAlignment="Left"

@@ -190,9 +190,7 @@
                                         Width="*"
                                         Binding="{Binding CLIENTE}"/>
                     
-                    <DataGridTextColumn Header="Mesa"
-                                        Width="*"
-                                        Binding="{Binding MESA}"/>
+                    
                     
                     <DataGridTextColumn Header="Estado"
                                         Width="*"

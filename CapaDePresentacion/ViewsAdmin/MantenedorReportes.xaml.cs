@@ -524,6 +524,7 @@ namespace CapaDePresentacion.ViewsAdmin
                 btnDias.Visibility = Visibility.Hidden;
                 btnPlatos.Visibility = Visibility.Hidden;
                 btnVentas.Visibility = Visibility.Hidden;
+                lblObjetivo.Content = "Objeto de medición: "+objeto;
                 
                 PrintDialog printDialog = new PrintDialog();
                 if (printDialog.ShowDialog() == true)

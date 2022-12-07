@@ -95,6 +95,7 @@ namespace CapaDePresentacion
                     if (tipo == "Cocina")
                     {
                         var menu_cocina = MenuCocina.GetInstance();
+                        
                         menu_cocina.entidad = entidad;
                         menu_cocina.usuario = usuario;
                         menu_cocina.tipo_entidad = tipo_entidad;
@@ -106,8 +107,12 @@ namespace CapaDePresentacion
                     {
                         if (tipo == "Bodega")
                         {
-                            MenuBodega.GetInstance().Show();
-                            MenuBodega.GetInstance().Activate();
+                            var menu_cocina = MenuCocina.GetInstance();
+                            menu_cocina.entidad = entidad;
+                            menu_cocina.usuario = usuario;
+                            menu_cocina.tipo_entidad = tipo_entidad;
+                            menu_cocina.Show();
+                            menu_cocina.Activate();
                             this.Close();
                         }
                         else

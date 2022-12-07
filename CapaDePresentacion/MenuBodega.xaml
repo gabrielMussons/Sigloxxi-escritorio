@@ -665,7 +665,8 @@
                   Margin="80,35,0,0" 
                   PreviewMouseLeftButtonDown="GridContent_PreviewMouseLeftButtonDown">
                 <Border Background="GhostWhite"/>
-                <TextBlock Text="Menú Bodega"
+                <TextBlock  x:Name="txtTituloMenu"
+                    Text="Menú Bodega"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
                            FontSize="50"/>
